@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="logincheck.php" method="post" id="form">
+      帳號 :
+      <input type="text" name="uid" id="uid" placeholder="請輸入帳號"required /><span
+        id="check"
+      ></span
+      ><br />
+      密碼 :
+      <input type="text" name="pwd" id="pwd" placeholder="請輸入密碼" required/><br />
+      <input type="submit" value="登入" />
+      <a href="register.html">註冊</a>
+    </form>
+  </body>
+  <script>
+    window.onload = function () {
+      const inputUid = document.getElementById("uid");
+      inputUid.onblur = function (e) {
+        fetch(`Uidcheck.php?uid=${inputUid.value}`)
+          .then(function (response) {
+            // console.log(response);
+            return response.text();
+          })
+          .then(function (data) {
+            console.log(data);
+            check.innerHTML = data;
+          });
+      };
+    };
+  </script>
+</html>
