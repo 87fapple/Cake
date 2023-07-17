@@ -1,15 +1,14 @@
 <?php
-require ('db2.php');
+require ('../db2.php');
 
-$cname = $_REQUEST['cname'];
-$uid = $_REQUEST['uid'];
-$pwd = $_REQUEST['pwd'];
+$uname = $_REQUEST['uname'];
 $email = $_REQUEST['email'];
+$pwd = $_REQUEST['pwd'];
 $tel = $_REQUEST['tel'];
 
-$sql = "insert into userinfo (uid,cname,pwd,email,tel) values(?,?,?,?,?)";
+$sql = "insert into userinfo (uname,pwd,email,tel) values(?,?,?,?)";
 $stmt = $mysqli->prepare($sql);
-$stmt->bind_param('sssss', $uid, $cname,$pwd, $email, $tel);
+$stmt->bind_param('ssss',  $uname,$pwd, $email, $tel);
 $stmt->execute();
 
 

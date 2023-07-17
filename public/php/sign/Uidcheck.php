@@ -1,5 +1,5 @@
 <?php
-require('db2.php');
+require('../db2.php');
 $email = $_REQUEST['email'];
 $sql="SELECT count(email) FROM userinfo WHERE email = ?";
 $stmt = $mysqli->prepare($sql);

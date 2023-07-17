@@ -1,13 +1,13 @@
 <?php session_start(); ?>
 <?php
-require('db2.php');
+require('../db2.php');
 
 $email = $_REQUEST['email'];
 $pwd = $_REQUEST['pwd'];
 
-$sql = 'select count(*) from userinfo where uid = ? AND pwd =?';
+$sql = 'select count(*) from userinfo where email = ? AND pwd =?';
 $stmt = $mysqli->prepare($sql);
-$stmt->bind_param('ss', $uid, $pwd);
+$stmt->bind_param('ss', $email, $pwd);
 $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_row();
