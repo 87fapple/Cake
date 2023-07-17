@@ -14,7 +14,7 @@
     height: 600px;
     position: relative;
     top: -4px;
-    background-image: url(/Cake/image/mainImg/mainImg2.jpg);
+    background-image: url(./mainImg2.jpg);
     background-color: #00FFFF;
 }
 
@@ -138,7 +138,7 @@
 }
 
 .expTitle {
-    width: 16%;
+    width: 200px;
     text-align: center;
     background-color: red;
     position: absolute;
