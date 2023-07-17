@@ -1,0 +1,104 @@
+.detailContainer {
+    padding-top: 128px;
+    position: relative;
+}
+
+.productBlock {
+    width: 70%;
+    height: 480px;
+    background-color: #5f5f5f;
+    margin: 0 15%;
+}
+
+.productContent {
+    width: 40%;
+    position: relative;
+    bottom: 90%;
+    left: 55%;
+    background-color: #f5f5f5;
+}
+
+.productContent h1 {
+    padding: 16px 24px;
+    font-size: 36px;
+    white-space: nowrap;
+}
+
+.productContent ul {
+    margin: 24px 36px;
+}
+
+.productContent li {
+    list-style: none;
+    padding: 8px;
+    font-size: 24px;
+}
+
+.productContent a {
+    margin-left: 65%;
+}
+
+.bookingBtn {
+    padding: 12px 36px;
+    background-color: #aa0000;
+    border: 0px;
+    color: #ffffff;
+    font-size: 24px;
+    white-space: nowrap;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.bookingBtn:hover {
+    cursor: pointer;
+    background-color: #ee0000;
+}
+
+.detailBlock {
+    width: 70%;
+    margin: 64px auto;
+}
+
+.detailNavbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #FFFFFF;
+    background-color: #123456;
+}
+
+.detailNavbar li {
+    font-size: 24px;
+    list-style: none;
+}
+
+.detailNavbar a {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px 16px;
+}
+
+.detailNavbar a:hover {
+    background-color: #5f5f5f;
+    cursor: pointer;
+}
+
+.detailContent {
+    margin: 32px;
+    background-color: #654321;
+}
+
+.detailContent h1 {
+    padding: 24px;
+}
+
+.detailContent p {
+    font-size: 18px;
+    padding: 0 48px 16px; 
+}
+
+.detailContent a {
+    position: relative;
+    left: 45%;
+}

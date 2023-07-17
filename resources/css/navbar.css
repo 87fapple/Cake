@@ -1,0 +1,114 @@
+/* Navber */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333333;
+    color: #FFFFFF;
+    z-index: 10;
+}
+
+.navbarTitle {
+    margin: 12px 16px 8px 16px;
+}
+
+.navbarTitle img {
+    width: 40px;
+    height: 40px;
+}
+
+.navbarTitle img:hover {
+    cursor: pointer;
+    filter: contrast(120%);
+}
+
+.navbarLink {
+    height: 100%;
+}
+
+.navbarLink ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.navbarLink li {
+    list-style: none;
+}
+
+.navbarLink li a {
+    display: block;
+    text-decoration: none;
+    color: #FFFFFF;
+    padding: 18px;
+}
+
+.navbarLink li:hover {
+    cursor: pointer;
+    background-color: #555555;
+    font-size: larger;
+}
+
+.hambuger {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 36px;
+    height: 24px;
+    padding: 4px;
+}
+
+.hambuger .bar {
+    height: 4px;
+    width: 100%;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+}
+
+.hambuger:hover {
+    background-color: #000000;
+    cursor: pointer;
+}
+
+@media (max-width: 720px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hambuger {
+        display: flex;
+    }
+
+    .navbarLink {
+        display: none;
+        width: 100%;
+    }
+
+    .navbarLink ul {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .navbarLink ul li {
+        text-align: center;
+    }
+
+    .navbarLink ul li a {
+        padding: 8px 16px;
+    }
+
+    .navbarLink.active {
+        display: flex;
+    }
+}
