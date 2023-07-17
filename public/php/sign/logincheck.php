@@ -2,7 +2,7 @@
 <?php
 require('db2.php');
 
-$uid = $_REQUEST['uid'];
+$email = $_REQUEST['email'];
 $pwd = $_REQUEST['pwd'];
 
 $sql = 'select count(*) from userinfo where uid = ? AND pwd =?';

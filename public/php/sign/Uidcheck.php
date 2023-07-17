@@ -1,13 +1,13 @@
 <?php
 require('db2.php');
-$uid = $_REQUEST['uid'];
-$sql="SELECT count(uid) FROM userinfo WHERE uid = ?";
-
+$email = $_REQUEST['email'];
+$sql="SELECT count(email) FROM userinfo WHERE email = ?";
 $stmt = $mysqli->prepare($sql);
-$stmt->bind_param('s',$uid);
+$stmt->bind_param('s',$email);
 $stmt->execute();
 $result = $stmt->get_result();
 $row =$result->fetch_row();
+
 $count = intval($row[0]);
 
 if($count > 0){

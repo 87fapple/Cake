@@ -7,8 +7,8 @@
   </head>
   <body>
     <form action="logincheck.php" method="post" id="form">
-      帳號 :
-      <input type="text" name="uid" id="uid" placeholder="請輸入帳號"required /><span
+      信箱 :
+      <input type="text" name="email" id="email" placeholder="請輸入帳號"required /><span
         id="check"
       ></span
       ><br />
@@ -20,9 +20,9 @@
   </body>
   <script>
     window.onload = function () {
-      const inputUid = document.getElementById("uid");
+      const inputUid = document.getElementById("email");
       inputUid.onblur = function (e) {
-        fetch(`Uidcheck.php?uid=${inputUid.value}`)
+        fetch(`Uidcheck.php?email=${inputUid.value}`)
           .then(function (response) {
             // console.log(response);
             return response.text();
