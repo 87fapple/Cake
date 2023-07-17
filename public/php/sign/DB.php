@@ -4,10 +4,10 @@ class DB {
     function __construct() {
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
-        $host = "localhost";
+        $host = "127.0.0.1:33306";
         $user = "root";
         $pwd  = "";
-        $db   = "AddressBook";
+        $db   = "cake";
 
         DB::$mysqli = new mysqli($host, $user, $pwd, $db);
     }
