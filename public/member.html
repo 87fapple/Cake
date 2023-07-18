@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/Cake/resources/css/nav_input_css.css">
+    <link rel="stylesheet" href="/Cake/resources/css/member.css">
+</head>
+
+<body>
+    <div class="topnav">
+        <a href="/Cake/public/login.html">登入/註冊</a>
+        <a href="/Cake/public/Q&A.html">常見問題</a>
+        <a href="/Cake/public/Detail.html">商品介紹</a>
+        <a href="/Cake/public/reserve.html">預約課程</a>
+        <a href="/Cake/public/locations.html">分店資訊</a>
+    </div>
+
+    <div name="selectarea" id="sel">
+        <div href="#changeData" class="selectarea"> <a href="./admin.html">更改會員資料</a></div>
+        <div href="#reserveHistory" class="selectarea"><a href="./history.html">預約紀錄</a></div>
+        <p id="hiuser"> 您好，<span>使用者</span></p>
+    </div>
+
+
+    <div id="contents">
+        <div id="modify">
+            <h1>更改會員資料</h1>
+        </div>
+
+        <div class="container">
+            <form action="/action_page.php">
+                <label for="nickname">暱稱</label>
+                <input type="text" id="nickname" name="nickname" placeholder="更改暱稱">
+                <br>
+                <label for="newemailadd">信箱</label>
+                <input type="email" id="newemailadd" name="newemailadd" placeholder="更改信箱">
+                <br>
+                <label for="newphone">手機號碼</label>
+                <input type="phone" id="newphone" name="newphone" placeholder="更改手機號碼">
+                <br>
+                <label for="newpwd">密碼</label>
+                <input type="password" id="newpwd" name="newpwd" placeholder="更改密碼">
+                <br>
+                <label for="cfrpwd">確認密碼</label>
+                <input type="password" id="cfrpwd" name="cfrpwd" placeholder="再次輸入密碼">
+                <br>
+            </form>
+        </div>
+        <br>
+        <input type="submit" value="確認更改" class="comfirmbtn">
+        <br>
+    </div>
+</body>
+
+</html>

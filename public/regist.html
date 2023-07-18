@@ -1,56 +1,64 @@
 <!DOCTYPE html>
 <html>
-  <head>
-<link rel="stylesheet" href="../resources/css/regist.css">
-  </head>
+
+<head>
+  <link rel="stylesheet" href="/Cake/resources/css/regist.css">
+  <link rel="stylesheet" href="/Cake/resources/css/nav_input_css.css">
+</head>
+
 <body>
+  <div class="topnav">
+    <a href="/Cake/public/login.html">登入/註冊</a>
+    <a href="/Cake/public/Q&A.html">常見問題</a>
+    <a href="/Cake/public/Detail.html">商品介紹</a>
+    <a href="/Cake/public/reserve.html">預約課程</a>
+    <a href="/Cake/public/locations.html">分店資訊</a>
+  </div>
 
-<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">註冊</button>
+  <div id="id01" class="modal">
+    <form class="modal-content" action="/action_page.php">
+      <div class="container">
+        <h1>會員註冊</h1>
+        <p>請填寫下列資訊以加入會員：</p>
+        <hr>
+        <label for="email"><b>電子信箱</b></label>
+        <input type="text" placeholder="請輸入電子信箱" name="email" required>
 
-<div id="id01" class="modal">
-  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-  <form class="modal-content" action="/action_page.php">
-    <div class="container">
-      <h1>會員註冊</h1>
-      <p>請填寫下列資訊以加入會員：</p>
-      <hr>
-      <label for="email"><b>電子信箱</b></label>
-      <input type="text" placeholder="請輸入電子信箱" name="email" required>
+        <label for="text"><b>會員暱稱</b></label>
+        <input type="text" placeholder="請輸入會員暱稱" name="username" required>
 
-      <label for="phone"><b>手機號碼</b></label>
-      <input type="phone" placeholder="請輸入手機號碼" name="phone" required>
+        <label for="phone"><b>手機號碼</b></label>
+        <input type="phone" placeholder="請輸入手機號碼" name="phone" required>
 
-      <label for="psw"><b>密碼</b></label>
-      <input type="password" placeholder="請輸入密碼" name="psw" required>
+        <label for="psw"><b>密碼</b></label>
+        <input type="password" placeholder="請輸入密碼" name="psw" required>
 
-      <label for="psw-repeat"><b>確認密碼</b></label>
-      <input type="password" placeholder="請再次輸入密碼" name="psw-repeat" required>
-      
-      <label>
-        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> 記住我
-      </label>
+        <label for="psw-repeat"><b>確認密碼</b></label>
+        <input type="password" placeholder="請再次輸入密碼" name="psw-repeat" required>
 
-      <p>註冊會員即同意本店 <a href="#" style="color:dodgerblue">使用者及個資聲明</a>。</p>
 
-      <div class="clearfix">
-        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">取消</button>
-        <button type="submit" class="signupbtn">註冊</button>
+
+        <p>註冊會員即同意本店 <a href="#" style="color:dodgerblue">使用者及個資聲明</a>。</p>
+
+        <div class="clearfix">
+          <button type="submit" class="signupbtn">註冊</button>
+        </div>
       </div>
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
 
-<script>
-// Get the modal
-var modal = document.getElementById('id01');
+  <script>
+    // Get the modal
+    var modal = document.getElementById('id01');
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-</script>
+// window.onclick = function(event) {
+//   if (event.target == modal) {
+//     modal.style.display = "none";
+//   }
+// }
+  </script>
 
 </body>
+
 </html>
