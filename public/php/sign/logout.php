@@ -1,4 +1,11 @@
+<?php session_start(); ?>
 <?php
+
+session_destroy();
+setcookie('token', '', -1);
+setcookie('welcome', '', -1);
+
+
 require ('../db.php');
 $token = $_COOKIE['token'];
 

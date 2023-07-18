@@ -1,5 +1,6 @@
 <?php session_start(); ?>
 <?php
+
 require('../db2.php');
 
 $email = $_REQUEST['email'];
@@ -12,11 +13,11 @@ $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 $token = $row['token'];
-$nextPage = $row['result'];
 
-if ($nextPage === 'history.html') {
-    header("Location:/Cake/public/history.html");
-} else {
-    header("Location:error.html");
+$nextPage = $row['result'];
+if ($nextPage === '/Cake/public/history.php') {
+    setcookie('token', $token,time() +120,"/");
+    setcookie('welcome',$nextPage,time() +120,"/");
 }
+header("Location:{$nextPage}");
 ?>
