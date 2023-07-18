@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/Cake/resources/css/nav_input_css.css">
+    <link rel="stylesheet" href="/Cake/resources/css/admin.css">
+</head>
+
+<body>
+    <div class="topnav">
+        <a href="#logout">登出</a>
+        <a href="/Cake/public/Q&A.html">常見問題</a>
+        <a href="/Cake/public/Detail.html">商品介紹</a>
+        <a href="/Cake/public/reserve.html">預約課程</a>
+        <a href="/Cake/public/locations.html">分店資訊</a>
+    </div>
+    <div name="selectarea" id="sel">
+        <div href="#changeToppic" class="selectarea">修改首頁輪播</div>
+        <div href="#addProduct" class="selectarea">新增產品</div>
+        <div href="#modifyProduct" class="selectarea">修改產品資訊</div>
+        <div href="#allreserve" class="selectarea">顧客預約總覽</div>
+        <p id="hiadmin"> 您好，<span>管理員</span></p>
+    </div>
+
+    <h2>修改輪播圖</h2>
+
+    <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'group1')">草莓</button>
+        <button class="tablinks" onclick="openCity(event, 'group2')">芒果</button>
+        <button class="tablinks" onclick="openCity(event, 'group3')">葡萄</button>
+        <button class="tablinks" onclick="openCity(event, 'group4')">水蜜桃</button>
+    </div>
+
+    <div id="group1" class="tabcontent">
+
+        更改輪播群組標題：<input type="text" name="" id="">
+        <p>請選擇四張圖片：</p>
+        <input type="file" name="" id="">
+        <input type="file" name="" id="">
+        <br>
+        <input type="file" name="" id="">
+        <input type="file" name="" id="">
+    </div>
+
+    <div id="group2" class="tabcontent">
+
+        更改輪播群組標題：<input type="text" name="" id="">
+        <p>請選擇四張圖片：</p>
+        <input type="file" name="" id="">
+        <input type="file" name="" id="">
+        <br>
+        <input type="file" name="" id="">
+        <input type="file" name="" id="">
+    </div>
+
+    <div id="group3" class="tabcontent">
+
+        更改輪播群組標題：<input type="text" name="" id="">
+        <p>請選擇四張圖片：</p>
+        <input type="file" name="" id="">
+        <input type="file" name="" id="">
+        <br>
+        <input type="file" name="" id="">
+        <input type="file" name="" id="">
+    </div>
+
+    <div id="group4" class="tabcontent">
+
+        更改輪播群組標題：<input type="text" name="" id="">
+        <p>請選擇四張圖片：</p>
+        <input type="file" name="" id="">
+        <input type="file" name="" id="">
+        <br>
+        <input type="file" name="" id="">
+        <input type="file" name="" id="">
+    </div>
+
+
+
+    <div>
+
+        <h3>近期推薦</h3>
+        <div id="osusume">
+            推薦內文：<br>
+            <input type="text" name="" id="osususmetext">
+            <div id="newfilepic">
+                <input type="file" name="" id="">
+            </div>
+        </div>
+    </div>
+
+    <input type="submit" name="" id="checked" value="儲存變更">
+
+
+    <script>
+        function openCity(evt, groupName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(groupName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</body>
+
+</html>
