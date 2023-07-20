@@ -18,28 +18,27 @@ require('../BDB.php');
     <!-- <link rel="stylesheet" href="../resources/css/nav_input_css.css"> -->
 
     <script>
-        $(function () {
+        $(function() {
             $("#datepicker").datepicker({
                 minDate: new Date(),
-                format: 'yyyy-mm-dd',
-                onSelect: function () {
-                    var dateObject = $(this).datepicker('getDate');
-                    alert(dateObject);
-                }
+                dateFormat: 'yy-mm-dd',
             });
-
+            $("#datepicker").on("change", function() {
+                var fromdate = $(this).val();
+                // alert(fromdate);
+            });
         });
 
-        window.onload = function (e) {
+        window.onload = function(e) {
             e.preventDefault();
             fetch('store_sql.php')
-                .then(function (response) {
+                .then(function(response) {
                     return response.json();
                 })
-                .then(function (data) {
+                .then(function(data) {
                     // console.log(data);
                     let view = '<option style="display: none;">請選擇分店</option>';
-                    data.forEach(function (e2) {
+                    data.forEach(function(e2) {
                         // console.log(e);
                         view += `
                             <option value="${e2.sid}">${e2.location}</option>
@@ -48,22 +47,22 @@ require('../BDB.php');
                     document.getElementById("location").innerHTML = view
                 })
 
-            document.getElementById("location").onchange = function (e) {
+            document.getElementById("location").onchange = function(e) {
                 var options = $("#location option:selected");
                 var optsVal = options.val();
                 // alert(options.val());
 
                 fetch(`storeToCake_sql.php?sid=${optsVal}`, {
-                    method: "POST",
-                    // body : JSON.stringify({cid: options.val()})
-                })
-                    .then(function (response) {
+                        method: "POST",
+                        // body : JSON.stringify({cid: options.val()})
+                    })
+                    .then(function(response) {
                         return response.json();
                     })
-                    .then(function (data) {
+                    .then(function(data) {
                         console.log(data);
                         let view = '<option style="display: none;">請選擇產品</option>';
-                        data.forEach(function (e2) {
+                        data.forEach(function(e2) {
                             // console.log(e);
                             view += `
                             <option value="${e2.cid}">${e2.cName}</option>
@@ -125,11 +124,6 @@ require('../BDB.php');
                     <br>
                     <br>
                     <button value="11:00">11:00</button>
-                    <button value="13:00">13:00</button>
-                    <button value="15:00">15:00</button>
-                    <button value="17:00">17:00</button>
-                    <button value="19:00">19:00</button>
-                    <button value="21:00">21:00</button>
                 </div>
             </div>
             <br>
