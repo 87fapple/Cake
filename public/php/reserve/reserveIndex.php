@@ -23,8 +23,36 @@ require('../BDB.php');
                 minDate: new Date(),
                 dateFormat: 'yy-mm-dd',
             });
-            $("#datepicker").on("change", function() {
+            $("#datepicker").on("change", function(e) {
+                e.preventDefault();
+                var optionsLocation = $("#location option:selected");
+                var optionsPerson = $("#person option:selected");
+                var optsLocalVal = optionsLocation.val();
+                var optsPersonVal = optionsPerson.val();
                 var fromdate = $(this).val();
+
+                fetch(`storeToTime.php?sid=${optsLocalVal}&fDate=${fromdate}&peopleNum=${optsPersonVal}`)
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(data) {
+                        console.log(data);
+                        let viewTime = '';
+                        data.forEach(function(e2) {
+                            // console.log(e);
+                            if (typeof(e2.sequel) !== 'undefined') {
+                                viewTime += `
+                                    <button type="button" value="${e2.sequel}">${e2.sequel}</button>
+                                 `
+                            }else {
+                                viewTime = `
+                                    <button type="button" value="${e2}">${e2}</button>
+                                 `
+                            }
+
+                        })
+                        document.getElementById("timezone").innerHTML = viewTime
+                    })
                 // alert(fromdate);
             });
         });
@@ -52,15 +80,12 @@ require('../BDB.php');
                 var optsVal = options.val();
                 // alert(options.val());
 
-                fetch(`storeToCake_sql.php?sid=${optsVal}`, {
-                        method: "POST",
-                        // body : JSON.stringify({cid: options.val()})
-                    })
+                fetch(`storeToCake_sql.php?sid=${optsVal}`)
                     .then(function(response) {
                         return response.json();
                     })
                     .then(function(data) {
-                        console.log(data);
+                        // console.log(data);
                         let view = '<option style="display: none;">請選擇產品</option>';
                         data.forEach(function(e2) {
                             // console.log(e);
@@ -86,7 +111,7 @@ require('../BDB.php');
 
     <h3>預約</h3>
     <div class="container">
-        <form action="/action_page.php">
+        <form action="./reserveProduct.php" method="POST">
             <label for="location">預約分店：</label>
             <select id="location" name="location">
             </select>
@@ -123,7 +148,8 @@ require('../BDB.php');
                 <div id="timeselectzone">請選擇時段：
                     <br>
                     <br>
-                    <button value="11:00">11:00</button>
+                    <div id="timezone">
+                    </div>
                 </div>
             </div>
             <br>

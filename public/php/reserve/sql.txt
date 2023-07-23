@@ -1,0 +1,21 @@
+
+--取得未滿人數時間區間 v1.0--
+DROP PROCEDURE IF EXISTS getTime;
+DELIMITER $$
+
+CREATE PROCEDURE getTime(fSid INT, dateInfo VARCHAR(20), peopleNum INT, fReserveDate VARCHAR(20))
+BEGIN
+    DECLARE x INT DEFAULT 0;
+    DECLARE y INT DEFAULT 0;
+
+    SELECT SUM(people) INTO x FROM orders WHERE sid = fSid AND reserveTime = dateInfo AND reserveDate = fReserveDate;
+    SELECT person INTO y FROM store WHERE sid = fSid;
+
+    IF (COALESCE(x, 0) + peopleNum <= y) THEN
+        SELECT dateInfo AS sequel;
+    ELSE
+        SELECT "剩餘人數不足" AS sequel;
+    END IF;
+END $$
+
+DELIMITER ;
