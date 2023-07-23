@@ -22,7 +22,7 @@ $token = $_COOKIE['token'];
 
     <body>
         <div class="topnav">
-            <a href="#logout">登出</a>
+            <a href="./php/sign/logout.php">登出</a>
             <a href="Q&A.html">常見問題</a>
             <a href="Detail.html">商品介紹</a>
             <a href="reserve.html">預約課程</a>
