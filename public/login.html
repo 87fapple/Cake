@@ -1,62 +1,99 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../resources/css/login.css" />
+    <link rel="stylesheet" href="../resources/css/nav_input_css.css" />
+  </head>
+  <body>
+    <div class="topnav">
+      <a href="login.html">登入/註冊</a>
+      <a href="Q&A.html">常見問題</a>
+      <a href="Detail.html">商品介紹</a>
+      <a href="reserve.html">預約課程</a>
+      <a href="locations.html">分店資訊</a>
+    </div>
+    <div id="id01" class="modal">
+      <form class="modal-content" action="" method="post" id="form">
+        <div class="imgcontainer">
+          <img src="" alt="Avatar" class="avatar" />
+        </div>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../resources/css/login.css">
-  <link rel="stylesheet" href="../resources/css/nav_input_css.css">
-</head>
+        <div class="container">
+          <label for="email"><b>電子郵件</b></label>
+          <input
+            type="email"
+            placeholder="請輸入會員電子郵件"
+            name="email"
+            id="email"
+            required
+          />
 
-<body>
-  <div class="topnav">
-    <a href="login.html">登入/註冊</a>
-    <a href="Q&A.html">常見問題</a>
-    <a href="Detail.html">商品介紹</a>
-    <a href="reserve.html">預約課程</a>
-    <a href="locations.html">分店資訊</a>
-  </div>
-  <div id="id01" class="modal">
+          <label for="psw"><b>密碼</b></label>
+          <input
+            type="password"
+            placeholder="請輸入密碼"
+            name="pwd"
+            id="pwd"
+            required
+          />
 
-    <form class="modal-content" action="php/sign/logincheck.php" method="post">
-    <div class="imgcontainer">
-      
-      <img src="" alt="Avatar" class="avatar">
+          <span id="check"></span><br />
+
+          <button class="tosignup" id="login">登入</button>
+          <button class="toregist" id="toregist">
+            <a href="regist.html" class="toregist">點此註冊</a>
+          </button>
+          <button class="toforget" id="toforget">
+            <a href="forgetPassword.html" class="toforget">忘記密碼</a>
+          </button>
+          <br />
+          <label>
+            <input type="checkbox" checked="checked" name="remember" /><span
+              >記住我</span
+            >
+          </label>
+        </div>
+      </form>
     </div>
 
-      <div class="container">
-        <label for="email"><b>電子郵件</b></label>
-        <input type="email" placeholder="請輸入會員電子郵件" name="email" required>
+    <script>
+      // Get the modal
+      // var modal = document.getElementById("id01");
 
-        <label for="psw"><b>密碼</b></label>
-        <input type="password" placeholder="請輸入密碼" name="pwd" required>
+      // When the user clicks anywhere outside of the modal, close it
+      // window.onclick = function(event) {
+      //     if (event.target == modal) {
+      //         modal.style.display = "none";
+      //     }
+      // }
 
-        <button type="submit" class="tosignup">登入</a></button>
-        <button type="button" class="toregist" id="toregist"><a href="regist.html" class="toregist">點此註冊</a></button>
-        <button type="button" class="toforget" id="toforget"><a href="forgetPassword.html" class="toforget">忘記密碼</a></button>
-        <br>
-        <label>
-
-          <input type="checkbox" checked="checked" name="remember"><span>記住我</span>
-        </label>
-      </div>
-
-    </form>
-  </div>
-
-  <script>
-    // Get the modal
-    var modal = document.getElementById('id01');
-
-// When the user clicks anywhere outside of the modal, close it
-// window.onclick = function(event) {
-//     if (event.target == modal) {
-//         modal.style.display = "none";
-//     }
-// }
-
-  </script>
-
-</body>
-
+      const form = document.getElementById("form");
+      const loginPwd = document.getElementById("pwd");
+      const loginEmail = document.getElementById("email");
+      const logincheck = document.getElementById("login");
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+      });
+      logincheck.onclick = function (e) {
+        console.log(123);
+        fetch(
+          `php/sign/logincheck.php?email=${loginEmail.value}&pwd=${loginPwd.value}`
+        )
+          .then(function (response) {
+            // console.log(response);
+            return response.text();
+          })
+          .then(function (data) {
+            if (data == 100) {
+            location.replace("/Cake/public/history.php");
+            } else {
+              console.log(data);
+              check.innerHTML = data;
+            }
+          });
+      };
+    </script>
+  </body>
 </html>

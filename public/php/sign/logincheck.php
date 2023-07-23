@@ -3,8 +3,9 @@
 
 require('../db2.php');
 
-$email = $_REQUEST['email'];
-$pwd = $_REQUEST['pwd'];
+$email = $_GET['email'];
+$pwd = $_GET['pwd'];
+
 
 $sql = 'call login(?,?)';
 $stmt = $mysqli->prepare($sql);
@@ -16,8 +17,14 @@ $token = $row['token'];
 
 $nextPage = $row['result'];
 if ($nextPage === '/Cake/public/history.php') {
-    setcookie('token', $token,time() +120,"/");
-    setcookie('welcome',$nextPage,time() +120,"/");
+    setcookie('token', $token, time() + 1200, "/");
+    setcookie('welcome', $nextPage, time() + 1200, "/");
+    echo 100;
+    // header("Location:{$nextPage}");
+    
+} else {
+    header('Content-Type: text/html; charset=utf-8');
+    echo "<span style=color:red;>帳號或密碼輸入錯誤 </span>";
 }
-header("Location:{$nextPage}");
+
 ?>

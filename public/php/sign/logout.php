@@ -2,13 +2,12 @@
 <?php
 
 session_destroy();
-setcookie('token', '', -1);
-setcookie('welcome', '', -1);
+setcookie('token', '',time() -1, "/");
+setcookie('welcome', '',time() -1, "/");
 
 
 require('../db2.php');
 $token = $_COOKIE['token'];
-echo $token;
 
 $sql = 'call logout(?)';
 $stmt = $mysqli->prepare($sql);
