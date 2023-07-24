@@ -2,25 +2,43 @@
 <html>
 
 <head>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/Cake/resources/css/Cake/resources/css/login.css">
-  <link rel="stylesheet" href="/Cake/resources/css/nav_input_css.css">
+  <link rel="stylesheet" href="../resources/css/navbar.css">
+  <link rel="stylesheet" href="../resources/css/login.css">
+  <link rel="stylesheet" href="../resources/css/footer.css">
 </head>
 
 <body>
-  <div class="topnav">
-    <a href="/Cake/public/login.html">登入/註冊</a>
-    <a href="/Cake/public/Q&A.html">常見問題</a>
-    <a href="/Cake/public/Detail.html">商品介紹</a>
-    <a href="/Cake/public/reserve.html">預約課程</a>
-    <a href="/Cake/public/locations.html">分店資訊</a>
-  </div>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbarTitle">
+      <a href="../public/mainpage.html">
+        <img src="../image/icon-noBorder-whiteFont.png">
+      </a>
+    </div>
+    <div class="hambuger">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+    <div class="navbarLink">
+      <ul>
+        <li><a href="../pubilc/menu.html">產品介紹</a></li>
+        <li><a href="../public/locations.html">分店資訊</a></li>
+        <li><a href="../public/reserve.html">預約課程</a></li>
+        <li><a href="../public/Q&A.html">常見問題</a></li>
+        <li><a href="../public/login.html">登入會員</a></li>
+      </ul>
+    </div>
+  </nav>
   <div id="id01" class="modal">
 
-    <form class="modal-content" action="/action_page.php" method="post">
+    <form class="modal-content" action="php/sign/logincheck.php" method="post">
+      <h2>會員登入</h2>
+     
       <div class="imgcontainer">
-
-        <img src="/t4wjtsfomziet7ry7jdo4euusoehzt.jpg" alt="Avatar" class="avatar">
+        <img src="../image/icon-noBorder-whiteFont.png" alt="Avatar" class="avatar">
       </div>
 
       <div class="container">
@@ -28,11 +46,12 @@
         <input type="email" placeholder="請輸入會員電子郵件" name="email" required>
 
         <label for="psw"><b>密碼</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
+        <input type="password" placeholder="請輸入密碼" name="pwd" required>
 
-        <button type="submit" class="tosignup"><a href="/會員後台.html" class="tosignup">登入</a></button>
-        <button type="button" class="toregist" id="toregist"><a href="/regist.html" class="toregist">點此註冊</a></button>
-        <button type="button" class="toforget" id="toforget"><a href="/忘記密碼頁面.html" class="toforget">忘記密碼</a></button>
+        <button type="submit" class="tosignup">登入</a></button>
+        <button type="button" class="toregist" id="toregist"><a href="regist.html" class="toregist">點此註冊</a></button>
+        <button type="button" class="toforget" id="toforget"><a href="forgetPassword.html"
+            class="toforget">忘記密碼</a></button>
         <br>
         <label>
 
@@ -43,19 +62,36 @@
     </form>
   </div>
 
-  <script>
-    // Get the modal
-    var modal = document.getElementById('id01');
-
-// When the user clicks anywhere outside of the modal, close it
-// window.onclick = function(event) {
-//     if (event.target == modal) {
-//         modal.style.display = "none";
-//     }
-// }
-
-  </script>
-
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footerContainer">
+      <div class="footerRow">
+        <div class="footerCol">
+          <h4>DIY蛋糕</h4>
+          <ul>
+            <li><a href="">關於我們</a></li>
+            <li><a href="">常見問題</a></li>
+          </ul>
+        </div>
+        <div class="footerCol">
+          <h4>服務內容</h4>
+          <ul>
+            <li><a href="">立即預約</a></li>
+            <li><a href="">產品介紹</a></li>
+          </ul>
+        </div>
+        <div class="footerCol">
+          <h4>聯絡我們</h4>
+          <div class="socialLinks">
+            <a href=""><i class="fab fa-facebook-f"></i></a>
+            <a href=""><i class="fab fa-twitter"></i></a>
+            <a href=""><i class="fab fa-instagram"></i></a>
+            <a href=""><i class="fab fa-line"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 </body>
 
 </html>

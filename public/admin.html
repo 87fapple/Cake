@@ -4,36 +4,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/Cake/resources/css/nav_input_css.css">
-    <link rel="stylesheet" href="/Cake/resources/css/admin.css">
+    <title>會員後台</title>
+    <link rel="stylesheet" href="../resources/css/admin.css">
+    <link rel="stylesheet" href="../resources/css/navbar.css">
+    <link rel="stylesheet" href="../resources/css/footer.css">
 </head>
 
 <body>
-    <div class="topnav">
-        <a href="#logout">登出</a>
-        <a href="/Cake/public/Q&A.html">常見問題</a>
-        <a href="/Cake/public/Detail.html">商品介紹</a>
-        <a href="/Cake/public/reserve.html">預約課程</a>
-        <a href="/Cake/public/locations.html">分店資訊</a>
-    </div>
-    <div name="selectarea" id="sel">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbarTitle">
+            <a href="../public/mainpage.html">
+                <img src="../image/icon-noBorder-whiteFont.png">
+            </a>
+        </div>
+        <div class="hambuger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="navbarLink">
+            <ul>
+                <li><a href="../pubilc/menu.html">產品介紹</a></li>
+                <li><a href="../public/locations.html">分店資訊</a></li>
+                <li><a href="../public/reserve.html">預約課程</a></li>
+                <li><a href="../public/Q&A.html">常見問題</a></li>
+                <li><a href="../public/login.html">登入會員</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div name="selecttop" id="sel">
         <div href="#changeToppic" class="selectarea">修改首頁輪播</div>
         <div href="#addProduct" class="selectarea">新增產品</div>
         <div href="#modifyProduct" class="selectarea">修改產品資訊</div>
         <div href="#allreserve" class="selectarea">顧客預約總覽</div>
-        <p id="hiadmin"> 您好，<span>管理員</span></p>
+        <div class="selectarea"> 您好，<span>管理員</span></div>
     </div>
 
     <h2>修改輪播圖</h2>
 
     <div class="tab">
-        <button class="tablinks" onclick="openCity(event, 'group1')">草莓</button>
-        <button class="tablinks" onclick="openCity(event, 'group2')">芒果</button>
-        <button class="tablinks" onclick="openCity(event, 'group3')">葡萄</button>
-        <button class="tablinks" onclick="openCity(event, 'group4')">水蜜桃</button>
+        <button class="tablinks" onclick="opengroup(event, 'group1')" id="defaultOpen">草莓</button>
+        <button class="tablinks" onclick="opengroup(event, 'group2')">芒果</button>
+        <button class="tablinks" onclick="opengroup(event, 'group3')">葡萄</button>
+        <button class="tablinks" onclick="opengroup(event, 'group4')">水蜜桃</button>
     </div>
-
+    <!--  -->
     <div id="group1" class="tabcontent">
 
         更改輪播群組標題：<input type="text" name="" id="">
@@ -47,7 +63,7 @@
 
     <div id="group2" class="tabcontent">
 
-        更改輪播群組標題：<input type="text" name="" id="">
+        更改輪播群組標題1：<input type="text" name="" id="">
         <p>請選擇四張圖片：</p>
         <input type="file" name="" id="">
         <input type="file" name="" id="">
@@ -58,7 +74,7 @@
 
     <div id="group3" class="tabcontent">
 
-        更改輪播群組標題：<input type="text" name="" id="">
+        更改輪播群組標題2：<input type="text" name="" id="">
         <p>請選擇四張圖片：</p>
         <input type="file" name="" id="">
         <input type="file" name="" id="">
@@ -69,7 +85,7 @@
 
     <div id="group4" class="tabcontent">
 
-        更改輪播群組標題：<input type="text" name="" id="">
+        更改輪播群組標題3：<input type="text" name="" id="">
         <p>請選擇四張圖片：</p>
         <input type="file" name="" id="">
         <input type="file" name="" id="">
@@ -82,21 +98,56 @@
 
     <div>
 
-        <h3>近期推薦</h3>
+        <h2>近期推薦</h2>
         <div id="osusume">
             推薦內文：<br>
-            <input type="text" name="" id="osususmetext">
+            <textarea id="osususmetext"></textarea>
             <div id="newfilepic">
                 <input type="file" name="" id="">
             </div>
         </div>
     </div>
+    <br>
+    <br>
 
     <input type="submit" name="" id="checked" value="儲存變更">
+    <br>
+    <br>
 
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footerContainer">
+            <div class="footerRow">
+                <div class="footerCol">
+                    <h4>DIY蛋糕</h4>
+                    <ul>
+                        <li><a href="">關於我們</a></li>
+                        <li><a href="">常見問題</a></li>
+                    </ul>
+                </div>
+                <div class="footerCol">
+                    <h4>服務內容</h4>
+                    <ul>
+                        <li><a href="">立即預約</a></li>
+                        <li><a href="">產品介紹</a></li>
+                    </ul>
+                </div>
+                <div class="footerCol">
+                    <h4>聯絡我們</h4>
+                    <div class="socialLinks">
+                        <a href=""><i class="fab fa-facebook-f"></i></a>
+                        <a href=""><i class="fab fa-twitter"></i></a>
+                        <a href=""><i class="fab fa-instagram"></i></a>
+                        <a href=""><i class="fab fa-line"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        function openCity(evt, groupName) {
+        function opengroup(evt, groupName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tabcontent");
             for (i = 0; i < tabcontent.length; i++) {
@@ -109,7 +160,11 @@
             document.getElementById(groupName).style.display = "block";
             evt.currentTarget.className += " active";
         }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
     </script>
+
 </body>
 
 </html>

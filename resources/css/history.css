@@ -2,32 +2,31 @@
     display: flex;
     margin-left: auto;
     margin-right: auto;
-    border: #3a0071 solid 2px;
+    
     flex-direction: row;
     justify-content: center;
     margin: 2rem 10rem;
     padding: 2rem;
 }
 
-#hiuser {
-    border: #45a049 solid 2px;
-    margin: auto 6rem;
-}
-
 .selectarea {
-    border: #6ce39e solid 2px;
+    background-color: #ffe495c4;
     width: 9rem;
     display: block;
     margin-left: 3rem;
+    border-radius: 3px;
     text-align: center;
     font-size: large;
 }
 
-div>h1 {
+div>h2 {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    
+    color: #7a5500;
+    background-color:  #ffb01e;
+    width: 30rem;
+    background: radial-gradient(circle, #ffb01e, #ffb01e, #ffffff);
 }
 
 table {
@@ -38,21 +37,47 @@ table {
 
 #button {
     text-align: center;
-    border: #6ce39e 5px dotted;
+    border-radius: 3px;
+    background-color: rgb(255, 153, 153)8 ;
 }
-th {
-    background-color: #45a049;
+.mainTable>th {
+    background-color: #ffb700;
     width: 6rem;
     height: 3rem;
 }
-td {
-    background-color: #d9ffdb;
+.mainTable>td {
+    background-color: #ffebc0;
     width: 6rem;
     height: 3rem;
 }
 
 #products {
-    width: 20rem;
+    width: 20rem ;
     word-wrap:break-word;
+    
 }
 
+/* admin_reserveHistory Part */
+#sel {
+    display: flex;
+    margin-left: 6rem;
+    margin-right: 6rem;
+    margin-top: 6rem;
+    background-color: #ffbf00;
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 3px;
+    padding: 2rem;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+   
+}
+
+.column {
+    margin:0 10rem;
+    
+    font-size: large;
+}

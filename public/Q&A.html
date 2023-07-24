@@ -2,21 +2,38 @@
 <html>
 
 <head>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/Cake/resources/css/nav_input_css.css">
-  <link rel="stylesheet" href="/Cake/resources/css/QA.css">
+  <link rel="stylesheet" href="../resources/css/QA.css">
+  <link rel="stylesheet" href="../resources/css/navbar.css">
+  <link rel="stylesheet" href="../resources/css/footer.css">
 </head>
 
 <body>
-  <div class="topnav">
-    <a href="/Cake/public/login.html">登入/註冊</a>
-    <a href="/Cake/public/Q&A.html">常見問題</a>
-    <a href="/Cake/public/Detail.html">商品介紹</a>
-    <a href="/Cake/public/reserve.html">預約課程</a>
-    <a href="/Cake/public/locations.html">分店資訊</a>
-
-  </div>
-  <img src="/11111.jpg" alt="" style="width: 100%;">
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbarTitle">
+      <a href="../public/mainpage.html">
+        <img src="../image/icon-noBorder-whiteFont.png">
+      </a>
+    </div>
+    <div class="hambuger">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+    <div class="navbarLink">
+      <ul>
+        <li><a href="../pubilc/menu.html">產品介紹</a></li>
+        <li><a href="../public/locations.html">分店資訊</a></li>
+        <li><a href="../public/reserve.html">預約課程</a></li>
+        <li><a href="../public/Q&A.html">常見問題</a></li>
+        <li><a href="../public/login.html">登入會員</a></li>
+      </ul>
+    </div>
+  </nav>
+  <img src="../image/icon-noBorder-whiteFont.png" alt="" id="mainPic">
+  <br>
   <div class="qaarea">
     <h2>常見問題</h2>
 
@@ -45,6 +62,43 @@
       <p>可以的，若兩人想只做一份甜點，請於預約表單上選擇陪同人數，將酌收陪同費用，請注意。</p>
     </div>
   </div>
+  <br>
+  <br>
+  <br>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footerContainer">
+      <div class="footerRow">
+        <div class="footerCol">
+          <h4>DIY蛋糕</h4>
+          <ul>
+            <li><a href="">關於我們</a></li>
+            <li><a href="">常見問題</a></li>
+          </ul>
+        </div>
+        <div class="footerCol">
+          <h4>服務內容</h4>
+          <ul>
+            <li><a href="">立即預約</a></li>
+            <li><a href="">產品介紹</a></li>
+          </ul>
+        </div>
+        <div class="footerCol">
+          <h4>聯絡我們</h4>
+          <div class="socialLinks">
+            <a href=""><i class="fab fa-facebook-f"></i></a>
+            <a href=""><i class="fab fa-twitter"></i></a>
+            <a href=""><i class="fab fa-instagram"></i></a>
+            <a href=""><i class="fab fa-line"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+
+
   <script>
     var acc = document.getElementsByClassName("accordion");
     var i;

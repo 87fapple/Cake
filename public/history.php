@@ -1,28 +1,28 @@
+<?php session_start(); ?>
+<?php
+if (!$_COOKIE['token']) {
+    header('Location: /Cake/public/login.html');
+    die();
+}
+require('php/db2.php');
+$token = $_COOKIE['token'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>預約紀錄</title>
     <link rel="stylesheet" href="../resources/css/navbar.css">
     <link rel="stylesheet" href="../resources/css/history.css">
     <link rel="stylesheet" href="../resources/css/footer.css">
-
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script>
-        $(function () {
-            $("#datepicker").datepicker();
-        });
-    </script>
 </head>
 
 <body>
 
-
-    <!-- Navbar -->
+    <body>
+         <!-- Navbar -->
     <nav class="navbar">
         <div class="navbarTitle">
             <a href="../public/mainpage.html">
@@ -51,67 +51,45 @@
         <div href="#addProduct" class="selectarea">新增產品</div>
         <div href="#modifyProduct" class="selectarea">修改產品資訊</div>
         <div href="#allreserve" class="selectarea">顧客預約總覽</div>
-        <div class="selectarea"> 您好，<span>管理員</span></div>
+        <div class="selectarea"> 您好，<span>使用者</span></div>
     </div>
 
-    <div id="">
         <div id="">
-            <h2>預約總覽</h2>
-        </div>
-
-        <div class="row">
-            <div class="column">
-                <label for="change_cName" class="selectcake">選擇分店：</label>
-                <select name="change_cName" id="change_cName" class="selectcake">
-                    <option value="">皮卡丘</option>
-                    <option value="">小火龍</option>
-                    <option value="">廟挖馬</option>
-                </select>
+            <div id="">
+                <h2>預約紀錄</hㄉ>
             </div>
 
-            <div class="column">
-                <label for="selectDate" class="selectDate">選擇日期：</label>
-                <input type="text" id="datepicker">
-                </select>
-            </div>
-        </div>
+            <table>
+                <tr class="mainTable">
+                    <th>日期</th>
+                    <th>分店</th>
+                    <th>時段</th>
+                    <th>產品</th>
+                    <th>總人數</th>
+                    <th>是否取消</th>
+                </tr>
 
-        <br>
-        <br>
-        <table>
-            <tr class="mainTable">
-                <th>日期</th>
-                <th>分店</th>
-                <th>時段</th>
-                <th id="products">產品</th>
-                <th>總人數</th>
-                <th>會員名稱</th>
-                <th>訂單狀況</th>
-            </tr>
+                <tr class="mainTable">
+                    <td>2023/7/6</td>
+                    <td>皮卡丘店</td>
+                    <td>13:00-15:00</td>
+                    <td id="products">小火龍餅乾X2、皮卡丘蛋糕X1</td>
+                    <td>3人</td>
+                    <td id="button"><button>取消預約</button></td>
+                </tr>
 
-            <tr class="mainTable">
-                <td>2023/7/6</td>
-                <td>皮卡丘店</td>
-                <td>13:00-15:00</td>
-                <td>小火龍餅乾X2、皮卡丘蛋糕X1</td>
-                <td>3人</td>
-                <td>海盜浣熊</td>
-                <td>已完成</td>
+                <tr class="mainTable">
+                    <td>2023/7/6</td>
+                    <td>皮卡丘店</td>
+                    <td>13:00-15:00</td>
+                    <td id="products">小火龍餅乾</td>
+                    <td>1人</td>
+                    <td>已取消</td>
+                </tr>
+            </table>
 
-            </tr>
 
-            <tr class="mainTable">
-                <td>2023/7/6</td>
-                <td>皮卡丘店</td>
-                <td>13:00-15:00</td>
-                <td>小火龍餅乾</td>
-                <td>1人</td>
-                <td>福利浣熊</td>
-                <td>已取消</td>
-            </tr>
-        </table>
-
-        <br>
+            <br>
         <br>
         <br>
         <!-- Footer -->
@@ -144,8 +122,6 @@
                 </div>
             </div>
         </footer>
-
-
-</body>
+    </body>
 
 </html>

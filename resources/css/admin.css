@@ -1,28 +1,37 @@
 .selectarea {
-    border: #6ce39e solid 2px;
+    background-color: #ffe495c4;
     width: 9rem;
     display: block;
     margin-left: 3rem;
+    border-radius: 3px;
     text-align: center;
     font-size: large;
 }
 
+.selectarea:hover {
+    color: #7c0027;
+    cursor: pointer;
+}
+
 #sel {
     display: flex;
-    margin-left: auto;
-    margin-right: auto;
-    border: #3a0071 solid 2px;
+    margin-left: 6rem;
+    margin-right: 6rem;
+    margin-top: 6rem;
+    background-color: #ffbf00;
     flex-direction: row;
     justify-content: center;
-    margin: 2rem 10rem;
+    border-radius: 3px;
     padding: 2rem;
 }
 
-#hiadmin {
+
+
+/* #hiadmin {
     border: #45a049 solid 2px;
     margin: auto 6rem;
     width: 10rem;
-}
+} */
 
 #changeToppic {
     display: flex;
@@ -36,7 +45,7 @@ body {
 .tab {
     overflow: hidden;
     border: 1px solid #ccc;
-    background-color: #f1f1f1;
+    background-color: #ffbf00;
     width: 800px;
     margin-right: auto;
     margin-left: auto;
@@ -49,52 +58,57 @@ body {
     border: none;
     outline: none;
     cursor: pointer;
-    padding: 14px 16px;
+    padding: 14px 40px;
     transition: 0.3s;
     font-size: 17px;
 }
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-    background-color: #ddd;
+    background-color: #ffc71f;
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
-    background-color: #ccc;
+    background-color: #e7a201;
 }
 
 /* Style the tab content */
 .tabcontent {
     display: none;
-    padding: 6px 12px;
+    padding: 20px 12px;
     border: 1px solid #ccc;
     border-top: none;
     width: 775px;
     margin-right: auto;
     margin-left: auto;
+    border-radius: 3px;
 }
 
 
 
-h2, h3 {
+h2 {
     text-align: center;
+    color: #b08522;
 }
 
 #osusume {
-    width: 800px;
+    
     display: flex;
     margin-right: auto;
     margin-left: auto;
     border: 1px solid #ccc;
+    padding: 1rem;
+    width: 775px;
 }
 #newfilepic {
-    border: 1px solid #f60000;
+    margin-left: 3rem;
+    padding: auto;
 }
 
 #osususmetext {
-    margin: 10px;
-    height: 10rem;
+    width: 15rem;
+    height: 5rem;
     word-wrap: break-word;
 }
 
@@ -102,4 +116,8 @@ h2, h3 {
     display: flex;
     margin-left: auto;
     margin-right: auto;
+    font-size: larger;
+    background-color: #ffbf00;
+    border: #efa907 3px solid;
+    border-radius: 3px;
 }

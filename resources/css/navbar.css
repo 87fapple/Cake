@@ -8,10 +8,11 @@ body {
     width: 100%;
     display: flex;
     position: fixed;
+    top: 0;
     justify-content: space-between;
     align-items: center;
-    background-color: #333333;
-    color: #FFFFFF;
+    background-color: #575757;
+    color: #ffffff;
     z-index: 10;
 }
 
@@ -20,8 +21,8 @@ body {
 }
 
 .navbarTitle img {
-    width: 40px;
-    height: 40px;
+    width: 30%;
+    /* height: 40px; */
 }
 
 .navbarTitle img:hover {
@@ -31,6 +32,7 @@ body {
 
 .navbarLink {
     height: 100%;
+    font-weight: bold;
 }
 
 .navbarLink ul {
@@ -41,19 +43,23 @@ body {
 
 .navbarLink li {
     list-style: none;
+    width: 100px;
 }
 
 .navbarLink li a {
     display: block;
     text-decoration: none;
-    color: #FFFFFF;
+    color: #ffbf00;
     padding: 18px;
 }
 
-.navbarLink li:hover {
+.navbarLink a:hover {
     cursor: pointer;
     background-color: #555555;
-    font-size: larger;
+    /* font-size: larger; */
+    color: rgb(255, 255, 255);
+    transition: 0.8s;
+    -webkit-transition: 0.8s;
 }
 
 .hambuger {
@@ -79,6 +85,9 @@ body {
     background-color: #000000;
     cursor: pointer;
 }
+
+
+
 
 @media (max-width: 720px) {
     .navbar {
