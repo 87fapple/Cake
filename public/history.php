@@ -22,6 +22,7 @@ $token = $_COOKIE['token'];
 <body>
 
     <body>
+<<<<<<< HEAD
          <!-- Navbar -->
     <nav class="navbar">
         <div class="navbarTitle">
@@ -61,6 +62,30 @@ $token = $_COOKIE['token'];
 
             <table>
                 <tr class="mainTable">
+=======
+        <div class="topnav">
+            <a href="./php/sign/logout.php">登出</a>
+            <a href="Q&A.html">常見問題</a>
+            <a href="Detail.html">商品介紹</a>
+            <a href="reserve.html">預約課程</a>
+            <a href="locations.html">分店資訊</a>
+        </div>
+
+        <div name="selectarea" id="sel">
+            <div href="#changeData" class="selectarea">更改會員資料</div>
+            <div href="#reserveHistory" class="selectarea">預約紀錄</div>
+            <p id="hiuser"> 您好，<span>使用者</span></p>
+        </div>
+
+
+        <div id="">
+            <div id="">
+                <h1>預約紀錄</h1>
+            </div>
+
+            <table>
+                <tr>
+>>>>>>> 78e2e5f95c914f4734adb857abd3156339a022ec
                     <th>日期</th>
                     <th>分店</th>
                     <th>時段</th>
@@ -69,7 +94,11 @@ $token = $_COOKIE['token'];
                     <th>是否取消</th>
                 </tr>
 
+<<<<<<< HEAD
                 <tr class="mainTable">
+=======
+                <tr>
+>>>>>>> 78e2e5f95c914f4734adb857abd3156339a022ec
                     <td>2023/7/6</td>
                     <td>皮卡丘店</td>
                     <td>13:00-15:00</td>
@@ -78,7 +107,11 @@ $token = $_COOKIE['token'];
                     <td id="button"><button>取消預約</button></td>
                 </tr>
 
+<<<<<<< HEAD
                 <tr class="mainTable">
+=======
+                <tr>
+>>>>>>> 78e2e5f95c914f4734adb857abd3156339a022ec
                     <td>2023/7/6</td>
                     <td>皮卡丘店</td>
                     <td>13:00-15:00</td>
@@ -87,6 +120,7 @@ $token = $_COOKIE['token'];
                     <td>已取消</td>
                 </tr>
             </table>
+<<<<<<< HEAD
 
 
             <br>
@@ -122,6 +156,8 @@ $token = $_COOKIE['token'];
                 </div>
             </div>
         </footer>
+=======
+>>>>>>> 78e2e5f95c914f4734adb857abd3156339a022ec
     </body>
 
 </html>
