@@ -1,97 +1,146 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../resources/css/navbar.css" />
+    <link rel="stylesheet" href="../resources/css/login.css" />
+    <link rel="stylesheet" href="../resources/css/footer.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="../resources/css/navbar.css">
-  <link rel="stylesheet" href="../resources/css/login.css">
-  <link rel="stylesheet" href="../resources/css/footer.css">
-</head>
-
-<body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="navbarTitle">
-      <a href="../public/mainpage.html">
-        <img src="../image/icon-noBorder-whiteFont.png">
-      </a>
-    </div>
-    <div class="hambuger">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </div>
-    <div class="navbarLink">
-      <ul>
-        <li><a href="../pubilc/menu.html">產品介紹</a></li>
-        <li><a href="../public/locations.html">分店資訊</a></li>
-        <li><a href="../public/reserve.html">預約課程</a></li>
-        <li><a href="../public/Q&A.html">常見問題</a></li>
-        <li><a href="../public/login.html">登入會員</a></li>
-      </ul>
-    </div>
-  </nav>
-  <div id="id01" class="modal">
-
-    <form class="modal-content" action="php/sign/logincheck.php" method="post">
-      <h2>會員登入</h2>
-     
-      <div class="imgcontainer">
-        <img src="../image/icon-noBorder-whiteFont.png" alt="Avatar" class="avatar">
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="navbarTitle">
+        <a href="../public/mainpage.html">
+          <img src="../image/icon-noBorder-whiteFont.png" />
+        </a>
       </div>
-
-      <div class="container">
-        <label for="email"><b>電子郵件</b></label>
-        <input type="email" placeholder="請輸入會員電子郵件" name="email" required>
-
-        <label for="psw"><b>密碼</b></label>
-        <input type="password" placeholder="請輸入密碼" name="pwd" required>
-
-        <button type="submit" class="tosignup">登入</a></button>
-        <button type="button" class="toregist" id="toregist"><a href="regist.html" class="toregist">點此註冊</a></button>
-        <button type="button" class="toforget" id="toforget"><a href="forgetPassword.html"
-            class="toforget">忘記密碼</a></button>
-        <br>
-        <label>
-
-          <input type="checkbox" checked="checked" name="remember"><span>記住我</span>
-        </label>
+      <div class="hambuger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
       </div>
+      <div class="navbarLink">
+        <ul>
+          <li><a href="../pubilc/menu.html">產品介紹</a></li>
+          <li><a href="../public/locations.html">分店資訊</a></li>
+          <li><a href="../public/reserve.html">預約課程</a></li>
+          <li><a href="../public/Q&A.html">常見問題</a></li>
+          <li><a href="../public/login.html">登入會員</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div id="id01" class="modal">
+      <form
+        class="modal-content"
+        action="php/sign/logincheck.php"
+        method="post"
+        id="form"
+      >
+        <h2>會員登入</h2>
 
-    </form>
-  </div>
+        <div class="imgcontainer">
+          <img
+            src="../image/icon-noBorder-whiteFont.png"
+            alt="Avatar"
+            class="avatar"
+          />
+        </div>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footerContainer">
-      <div class="footerRow">
-        <div class="footerCol">
-          <h4>DIY蛋糕</h4>
-          <ul>
-            <li><a href="">關於我們</a></li>
-            <li><a href="">常見問題</a></li>
-          </ul>
+        <div class="container">
+          <label for="email"><b>電子郵件</b></label>
+          <input
+            type="email"
+            placeholder="請輸入會員電子郵件"
+            name="email"
+            id="email"
+            required
+          />
+
+          <label for="psw"><b>密碼</b></label>
+          <input
+            type="password"
+            placeholder="請輸入密碼"
+            name="pwd"
+            id="pwd"
+            required
+          />
+          <span id="check"></span><br />
+
+          <button class="tosignup" id="login">登入</button>
+          <button type="button" class="toregist" id="toregist">
+            <a href="regist.html" class="toregist">點此註冊</a>
+          </button>
+          <button type="button" class="toforget" id="toforget">
+            <a href="forgetPassword.html" class="toforget">忘記密碼</a>
+          </button>
+          <br />
+          <label>
+            <input type="checkbox" checked="checked" name="remember" /><span
+              >記住我</span
+            >
+          </label>
+    </div>
+
         </div>
-        <div class="footerCol">
-          <h4>服務內容</h4>
-          <ul>
-            <li><a href="">立即預約</a></li>
-            <li><a href="">產品介紹</a></li>
-          </ul>
-        </div>
-        <div class="footerCol">
-          <h4>聯絡我們</h4>
-          <div class="socialLinks">
-            <a href=""><i class="fab fa-facebook-f"></i></a>
-            <a href=""><i class="fab fa-twitter"></i></a>
-            <a href=""><i class="fab fa-instagram"></i></a>
-            <a href=""><i class="fab fa-line"></i></a>
+      </form>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footerContainer">
+        <div class="footerRow">
+          <div class="footerCol">
+            <h4>DIY蛋糕</h4>
+            <ul>
+              <li><a href="">關於我們</a></li>
+              <li><a href="">常見問題</a></li>
+            </ul>
+          </div>
+          <div class="footerCol">
+            <h4>服務內容</h4>
+            <ul>
+              <li><a href="">立即預約</a></li>
+              <li><a href="">產品介紹</a></li>
+            </ul>
+          </div>
+          <div class="footerCol">
+            <h4>聯絡我們</h4>
+            <div class="socialLinks">
+              <a href=""><i class="fab fa-facebook-f"></i></a>
+              <a href=""><i class="fab fa-twitter"></i></a>
+              <a href=""><i class="fab fa-instagram"></i></a>
+              <a href=""><i class="fab fa-line"></i></a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </footer>
-</body>
-
+    </footer>
+  </body>
+  <script>
+    const form = document.getElementById("form");
+    const loginPwd = document.getElementById("pwd");
+    const loginEmail = document.getElementById("email");
+    const logincheck = document.getElementById("login");
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+    });
+    logincheck.onclick = function (e) {
+      // console.log(123);
+      fetch(
+        `php/sign/logincheck.php?email=${loginEmail.value}&pwd=${loginPwd.value}`
+      )
+        .then(function (response) {
+          // console.log(response);
+          return response.text();
+        })
+        .then(function (data) {
+          if (data == 100) {
+            location.replace("/Cake/public/history.php");
+          } else {
+            console.log(data);
+            check.innerHTML = data;
+          }
+        });
+    };
+  </script>
 </html>

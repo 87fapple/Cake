@@ -14,5 +14,5 @@ $stmt = $mysqli->prepare($sql);
 $stmt->bind_param('ssss',  $uname,$pwd1, $email, $phone);
 $stmt->execute();
 
-
+header('location:/Cake/public/login.html');
 ?>
