@@ -22,41 +22,41 @@ $token = $_COOKIE['token'];
 <body>
 
     <body>
-         <!-- Navbar -->
-    <nav class="navbar">
-        <div class="navbarTitle">
-            <a href="../public/mainpage.html">
-                <img src="../image/icon-noBorder-whiteFont.png">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="navbarTitle">
+                <a href="../public/mainpage.html">
+                    <img src="../image/icon-noBorder-whiteFont.png">
 
-            </a>
-        </div>
-        <div class="hambuger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
-        <div class="navbarLink">
-            <ul>
-                <li><a href="../pubilc/menu.html">產品介紹</a></li>
-                <li><a href="../public/locations.html">分店資訊</a></li>
-                <li><a href="../public/reserve.html">預約課程</a></li>
-                <li><a href="../public/Q&A.html">常見問題</a></li>
-                <li><a href="../public/login.html">登入會員</a></li>
-            </ul>
-        </div>
-    </nav>
+                </a>
+            </div>
+            <div class="hambuger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <div class="navbarLink">
+                <ul>
+                    <li><a href="../pubilc/menu.html">產品介紹</a></li>
+                    <li><a href="../public/locations.html">分店資訊</a></li>
+                    <li><a href="../public/reserve.html">預約課程</a></li>
+                    <li><a href="../public/Q&A.html">常見問題</a></li>
+                    <li><a href="../public/logout.html">登出</a></li>
+                </ul>
+            </div>
+        </nav>
 
-    <div name="selecttop" id="sel">
-        <div href="#changeToppic" class="selectarea">修改首頁輪播</div>
-        <div href="#addProduct" class="selectarea">新增產品</div>
-        <div href="#modifyProduct" class="selectarea">修改產品資訊</div>
-        <div href="#allreserve" class="selectarea">顧客預約總覽</div>
-        <div class="selectarea"> 您好，<span>使用者</span></div>
-    </div>
+        <div name="selecttop" id="sel">
+            <div href="#changeToppic" class="selectarea">修改首頁輪播</div>
+            <div href="#addProduct" class="selectarea">新增產品</div>
+            <div href="#modifyProduct" class="selectarea">修改產品資訊</div>
+            <div href="#allreserve" class="selectarea">顧客預約總覽</div>
+            <div class="selectarea"> 您好，<span>使用者</span></div>
+        </div>
 
         <div id="">
             <div id="">
-                <h2>預約紀錄</hㄉ>
+                <h2>預約紀錄</h2>
             </div>
 
             <table>
@@ -90,38 +90,38 @@ $token = $_COOKIE['token'];
 
 
             <br>
-        <br>
-        <br>
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footerContainer">
-                <div class="footerRow">
-                    <div class="footerCol">
-                        <h4>DIY蛋糕</h4>
-                        <ul>
-                            <li><a href="">關於我們</a></li>
-                            <li><a href="">常見問題</a></li>
-                        </ul>
-                    </div>
-                    <div class="footerCol">
-                        <h4>服務內容</h4>
-                        <ul>
-                            <li><a href="">立即預約</a></li>
-                            <li><a href="">產品介紹</a></li>
-                        </ul>
-                    </div>
-                    <div class="footerCol">
-                        <h4>聯絡我們</h4>
-                        <div class="socialLinks">
-                            <a href=""><i class="fab fa-facebook-f"></i></a>
-                            <a href=""><i class="fab fa-twitter"></i></a>
-                            <a href=""><i class="fab fa-instagram"></i></a>
-                            <a href=""><i class="fab fa-line"></i></a>
+            <br>
+            <br>
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footerContainer">
+                    <div class="footerRow">
+                        <div class="footerCol">
+                            <h4>DIY蛋糕</h4>
+                            <ul>
+                                <li><a href="">關於我們</a></li>
+                                <li><a href="">常見問題</a></li>
+                            </ul>
+                        </div>
+                        <div class="footerCol">
+                            <h4>服務內容</h4>
+                            <ul>
+                                <li><a href="">立即預約</a></li>
+                                <li><a href="">產品介紹</a></li>
+                            </ul>
+                        </div>
+                        <div class="footerCol">
+                            <h4>聯絡我們</h4>
+                            <div class="socialLinks">
+                                <a href=""><i class="fab fa-facebook-f"></i></a>
+                                <a href=""><i class="fab fa-twitter"></i></a>
+                                <a href=""><i class="fab fa-instagram"></i></a>
+                                <a href=""><i class="fab fa-line"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </footer>
+            </footer>
     </body>
 
 </html>
