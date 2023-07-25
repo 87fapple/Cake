@@ -17,10 +17,40 @@ require('../BDB.php');
     <!-- <link rel="stylesheet" href="jqueryui/style.css"> -->
     <!-- <link rel="stylesheet" href="../resources/css/nav_input_css.css"> -->
 
+    <style>
+        input[type="radio"] {
+            display: none;
+        }
+
+        /* 自定义样式来模拟按钮 */
+        .radio-button-base,
+        .radio-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #222222;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .radio-button {
+            cursor: pointer;
+        }
+
+        /* 修改选中状态时的样式 */
+        input[type="radio"][name='timeOption']:checked {
+            background-color: #007BFF;
+        }
+    </style>
+
     <script>
         $(function() {
+            const currentDate = new Date();
+            currentDate.setDate(currentDate.getDate() + 1);
+            const nextDate = currentDate;
+
             $("#datepicker").datepicker({
-                minDate: new Date(),
+                minDate: nextDate,
                 dateFormat: 'yy-mm-dd',
             });
             $("#datepicker").on("change", function(e) {
@@ -30,6 +60,9 @@ require('../BDB.php');
                 var optsLocalVal = optionsLocation.val();
                 var optsPersonVal = optionsPerson.val();
                 var fromdate = $(this).val();
+                const selectedDay = $("#datepicker").datepicker("getDate");
+                const formattedDate = $.datepicker.formatDate('yy-mm-dd', selectedDay);
+                $("#selectedDate").val(formattedDate);
 
                 fetch(`storeToTime.php?sid=${optsLocalVal}&fDate=${fromdate}&peopleNum=${optsPersonVal}`)
                     .then(function(response) {
@@ -39,14 +72,16 @@ require('../BDB.php');
                         console.log(data);
                         let viewTime = '';
                         data.forEach(function(e2) {
-                            // console.log(e);
                             if (typeof(e2.sequel) !== 'undefined') {
                                 viewTime += `
-                                    <button type="button" value="${e2.sequel}">${e2.sequel}</button>
+                                <label>
+                                    <input type="radio" name="timeOption" value="${e2.sequel}">
+                                    <span class="radio-button">${e2.sequel}</span>
+                                </label>
                                  `
-                            }else {
+                            } else {
                                 viewTime = `
-                                    <button type="button" value="${e2}">${e2}</button>
+                                    <button type="radio" value="${e2}">${e2}</button>
                                  `
                             }
 
@@ -78,7 +113,6 @@ require('../BDB.php');
             document.getElementById("location").onchange = function(e) {
                 var options = $("#location option:selected");
                 var optsVal = options.val();
-                // alert(options.val());
 
                 fetch(`storeToCake_sql.php?sid=${optsVal}`)
                     .then(function(response) {
@@ -96,6 +130,20 @@ require('../BDB.php');
                         document.getElementById("cakeName").innerHTML = view
                     })
             }
+
+            submitBTN.onclick = function(e) {
+                fetch('createOrder.php', {
+                        method: "POST",
+                        body: new FormData(form)
+                    })
+                    .then(function(response) {
+                        return response.text();
+                    })
+                    .then(function(data) {
+                        console.log(data);
+                    })
+
+            }
         }
     </script>
 </head>
@@ -111,7 +159,8 @@ require('../BDB.php');
 
     <h3>預約</h3>
     <div class="container">
-        <form action="./reserveProduct.php" method="POST">
+        <!-- <form action="./reserveProduct.php" method="POST"> -->
+        <form id="form">
             <label for="location">預約分店：</label>
             <select id="location" name="location">
             </select>
@@ -144,19 +193,19 @@ require('../BDB.php');
                     <br>
                     <br>
                     <div id="datepicker"></div>
+                    <input type="hidden" id="selectedDate" name="selectedDate">
                 </div>
                 <div id="timeselectzone">請選擇時段：
                     <br>
                     <br>
                     <div id="timezone">
+                        <span class="radio-button-base">請先選擇日期</span>
                     </div>
                 </div>
-            </div>
-            <br>
+                <br>
 
-
-            <br>
-            <input type="submit" value="確認預約" id="submitBTN">
+                <br>
+                <input type="button" value="確認預約" id="submitBTN">
         </form>
     </div>
     <script>
