@@ -38,13 +38,13 @@ require('../BDB.php');
         }
 
         /* 修改选中状态时的样式 */
-        input[type="radio"][name='timeOption']:checked {
+        input[type="radio"]:checked+span {
             background-color: #007BFF;
         }
     </style>
 
     <script>
-        $(function() {
+        $(function () {
             const currentDate = new Date();
             currentDate.setDate(currentDate.getDate() + 1);
             const nextDate = currentDate;
@@ -53,7 +53,7 @@ require('../BDB.php');
                 minDate: nextDate,
                 dateFormat: 'yy-mm-dd',
             });
-            $("#datepicker").on("change", function(e) {
+            $("#datepicker").on("change", function (e) {
                 e.preventDefault();
                 var optionsLocation = $("#location option:selected");
                 var optionsPerson = $("#person option:selected");
@@ -65,14 +65,14 @@ require('../BDB.php');
                 $("#selectedDate").val(formattedDate);
 
                 fetch(`storeToTime.php?sid=${optsLocalVal}&fDate=${fromdate}&peopleNum=${optsPersonVal}`)
-                    .then(function(response) {
+                    .then(function (response) {
                         return response.json();
                     })
-                    .then(function(data) {
+                    .then(function (data) {
                         console.log(data);
                         let viewTime = '';
-                        data.forEach(function(e2) {
-                            if (typeof(e2.sequel) !== 'undefined') {
+                        data.forEach(function (e2) {
+                            if (typeof (e2.sequel) !== 'undefined') {
                                 viewTime += `
                                 <label>
                                     <input type="radio" name="timeOption" value="${e2.sequel}">
@@ -92,16 +92,16 @@ require('../BDB.php');
             });
         });
 
-        window.onload = function(e) {
+        window.onload = function (e) {
             e.preventDefault();
             fetch('store_sql.php')
-                .then(function(response) {
+                .then(function (response) {
                     return response.json();
                 })
-                .then(function(data) {
+                .then(function (data) {
                     // console.log(data);
                     let view = '<option style="display: none;">請選擇分店</option>';
-                    data.forEach(function(e2) {
+                    data.forEach(function (e2) {
                         // console.log(e);
                         view += `
                             <option value="${e2.sid}">${e2.location}</option>
@@ -110,18 +110,18 @@ require('../BDB.php');
                     document.getElementById("location").innerHTML = view
                 })
 
-            document.getElementById("location").onchange = function(e) {
+            document.getElementById("location").onchange = function (e) {
                 var options = $("#location option:selected");
                 var optsVal = options.val();
 
                 fetch(`storeToCake_sql.php?sid=${optsVal}`)
-                    .then(function(response) {
+                    .then(function (response) {
                         return response.json();
                     })
-                    .then(function(data) {
+                    .then(function (data) {
                         // console.log(data);
                         let view = '<option style="display: none;">請選擇產品</option>';
-                        data.forEach(function(e2) {
+                        data.forEach(function (e2) {
                             // console.log(e);
                             view += `
                             <option value="${e2.cid}">${e2.cName}</option>
@@ -131,20 +131,23 @@ require('../BDB.php');
                     })
             }
 
-            submitBTN.onclick = function(e) {
+            submitBTN.onclick = function (e) {
                 fetch('createOrder.php', {
-                        method: "POST",
-                        body: new FormData(form)
-                    })
-                    .then(function(response) {
+                    method: "POST",
+                    body: new FormData(form)
+                })
+                    .then(function (response) {
                         return response.text();
                     })
-                    .then(function(data) {
+                    .then(function (data) {
+                        let view = '';
                         console.log(data);
+                        view = `<div>錯誤</div>`;
                     })
-
+                    $("#submitBTN").append(view);
             }
         }
+
     </script>
 </head>
 
@@ -172,20 +175,6 @@ require('../BDB.php');
                 <option value="3">三位</option>
                 <option value="4">四位</option>
             </select>
-
-            <label for="cakeName">選擇產品</label>
-            <select id="cakeName" name="cakeName">
-                <option>請先選擇店家</option>
-            </select>
-            <!-- <div id="addnewdiv">
-                <label for="addCakeName">選擇產品</label>
-                <select id="addCakeName" name="addCakeName">
-                    <option value="皮卡蛋糕">皮卡蛋糕</option>
-                    <option value="小火龍餅乾">小火龍餅乾</option>
-                    <option value="廟挖馬卡龍">廟挖馬卡龍</option>
-                </select>
-            </div> -->
-            <div>注意：產品數目少於人數時，將酌收陪同費120元/人。</div>
             <br><br>
             <div id="timeselect">
                 <div id="datezone">
@@ -199,6 +188,7 @@ require('../BDB.php');
                     <br>
                     <br>
                     <div id="timezone">
+                        <input type="hidden" name="timeOption">
                         <span class="radio-button-base">請先選擇日期</span>
                     </div>
                 </div>
