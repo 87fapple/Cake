@@ -6,22 +6,24 @@ body {
     box-sizing: border-box;
 }
 
-div>h1 {
+h2 {
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    
-}
+   background-color: #e7b81f;
+    color: #85600a;
+    margin: 0;
+    padding: 1.5rem;
+  }
 
 #contents {
     width: 50%;
+    margin-top: 2rem;
     margin-left: auto;
     margin-right: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 2rem;
-    border: grey dotted 3px;
+    
+    border: #e7b81f solid 3px;
     
 }
 
@@ -41,7 +43,7 @@ input[type=email] {
     font-size: large;
 }
 
-input[type=submit] {
+/* input[type=submit] {
     background-color: #04AA6D;
     color: white;
     padding: 12px 20px;
@@ -50,51 +52,56 @@ input[type=submit] {
     cursor: pointer;
     height: 3rem;
 
-}
+} */
 
 input[type=submit]:hover {
-    background-color: #45a049;
+    opacity: 0.8;
 }
 
 .container {
     border-radius: 5px;
-    /* background-color: #bd0000; */
-    padding: 20px;
-    height: 30rem;
+    padding: 1rem 2.5rem;
+
 }
 
 .selectarea {
-    border: #6ce39e solid 2px;
+    background-color: #ffe495c4;
     width: 9rem;
     display: block;
     margin-left: 3rem;
+    border-radius: 3px;
     text-align: center;
     font-size: large;
 }
 
-#modify {
-    border: black 2px solid;
+.selectarea:hover {
+    color: #7c0027;
+    cursor: pointer;
 }
 
 #sel {
     display: flex;
-    margin-left: auto;
-    margin-right: auto;
-    border: #3a0071 solid 2px;
+    margin-left: 6rem;
+    margin-right: 6rem;
+    margin-top: 6rem;
+    background-color: #ffbf00;
     flex-direction: row;
     justify-content: center;
-    margin: 2rem 10rem;
+    border-radius: 3px;
     padding: 2rem;
 }
 
 
-#hiuser {
-    border: #45a049 solid 2px;
-    margin: auto 6rem;
-}
-
-.comfirmbtn {
-    margin: 0rem 0;
-    font-size: large;
-    width: 98%;
+.comfirmbtn {   
+        background-color: #ffb12b;
+        color: rgb(0, 0, 0);
+        font-size: large;
+        padding: 14px 20px;
+        margin-left: 25%;
+        margin-right: 25%;
+        border: none;
+        cursor: pointer;
+        width: 50%;
+        opacity: 0.9;
+        text-align: center;
 }

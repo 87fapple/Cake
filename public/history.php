@@ -13,36 +13,54 @@ $token = $_COOKIE['token'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/Cake/resources/css/nav_input_css.css">
-    <link rel="stylesheet" href="/Cake/resources/css/history.css">
+    <title>預約紀錄</title>
+    <link rel="stylesheet" href="../resources/css/navbar.css">
+    <link rel="stylesheet" href="../resources/css/history.css">
+    <link rel="stylesheet" href="../resources/css/footer.css">
 </head>
 
 <body>
 
     <body>
-        <div class="topnav">
-            <a href="#logout">登出</a>
-            <a href="Q&A.html">常見問題</a>
-            <a href="Detail.html">商品介紹</a>
-            <a href="reserve.html">預約課程</a>
-            <a href="locations.html">分店資訊</a>
-        </div>
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="navbarTitle">
+                <a href="../public/mainpage.html">
+                    <img src="../image/icon-noBorder-whiteFont.png">
 
-        <div name="selectarea" id="sel">
-            <div href="#changeData" class="selectarea">更改會員資料</div>
-            <div href="#reserveHistory" class="selectarea">預約紀錄</div>
-            <p id="hiuser"> 您好，<span>使用者</span></p>
-        </div>
+                </a>
+            </div>
+            <div class="hambuger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <div class="navbarLink">
+                <ul>
+                    <li><a href="../pubilc/menu.html">產品介紹</a></li>
+                    <li><a href="../public/locations.html">分店資訊</a></li>
+                    <li><a href="../public/reserve.html">預約課程</a></li>
+                    <li><a href="../public/Q&A.html">常見問題</a></li>
+                    <li><a href="../public/logout.html">登出</a></li>
+                </ul>
+            </div>
+        </nav>
 
+        <div name="selecttop" id="sel">
+            <div href="#changeToppic" class="selectarea">修改首頁輪播</div>
+            <div href="#addProduct" class="selectarea">新增產品</div>
+            <div href="#modifyProduct" class="selectarea">修改產品資訊</div>
+            <div href="#allreserve" class="selectarea">顧客預約總覽</div>
+            <div class="selectarea"> 您好，<span>使用者</span></div>
+        </div>
 
         <div id="">
             <div id="">
-                <h1>預約紀錄</h1>
+                <h2>預約紀錄</h2>
             </div>
 
             <table>
-                <tr>
+                <tr class="mainTable">
                     <th>日期</th>
                     <th>分店</th>
                     <th>時段</th>
@@ -51,7 +69,7 @@ $token = $_COOKIE['token'];
                     <th>是否取消</th>
                 </tr>
 
-                <tr>
+                <tr class="mainTable">
                     <td>2023/7/6</td>
                     <td>皮卡丘店</td>
                     <td>13:00-15:00</td>
@@ -60,7 +78,7 @@ $token = $_COOKIE['token'];
                     <td id="button"><button>取消預約</button></td>
                 </tr>
 
-                <tr>
+                <tr class="mainTable">
                     <td>2023/7/6</td>
                     <td>皮卡丘店</td>
                     <td>13:00-15:00</td>
@@ -69,6 +87,41 @@ $token = $_COOKIE['token'];
                     <td>已取消</td>
                 </tr>
             </table>
+
+
+            <br>
+            <br>
+            <br>
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footerContainer">
+                    <div class="footerRow">
+                        <div class="footerCol">
+                            <h4>DIY蛋糕</h4>
+                            <ul>
+                                <li><a href="">關於我們</a></li>
+                                <li><a href="">常見問題</a></li>
+                            </ul>
+                        </div>
+                        <div class="footerCol">
+                            <h4>服務內容</h4>
+                            <ul>
+                                <li><a href="">立即預約</a></li>
+                                <li><a href="">產品介紹</a></li>
+                            </ul>
+                        </div>
+                        <div class="footerCol">
+                            <h4>聯絡我們</h4>
+                            <div class="socialLinks">
+                                <a href=""><i class="fab fa-facebook-f"></i></a>
+                                <a href=""><i class="fab fa-twitter"></i></a>
+                                <a href=""><i class="fab fa-instagram"></i></a>
+                                <a href=""><i class="fab fa-line"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
     </body>
 
 </html>

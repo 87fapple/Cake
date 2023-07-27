@@ -6,6 +6,8 @@ body {
   box-sizing: border-box;
 }
 
+
+
 /* Full-width input fields */
 input[type=text],
 input[type=password],
@@ -21,21 +23,21 @@ input[type=phone] {
 /* Add a background color when the inputs get focus */
 input[type=text]:focus,
 input[type=password]:focus {
-  background-color: #ddd;
+  background-color: #fff7f3;
   outline: none;
 }
 
 
 .signupbtn {
-  background-color: #04AA6D;
-  color: white;
+  background-color: #ffb12b;
+  color: rgb(0, 0, 0);
   font-size: large;
   padding: 14px 20px;
-  margin-left: 14rem;
-  margin-right: 14rem;
+  margin-left: 25%;
+  margin-right: 25%;
   border: none;
   cursor: pointer;
-  width: 100%;
+  width: 50%;
   opacity: 0.9;
   text-align: center;
   
@@ -43,18 +45,6 @@ input[type=password]:focus {
 
 button:hover {
   opacity: 1;
-}
-
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn,
-.signupbtn {
-  float: left;
-  width: 50%;
-}
-
-/* Add padding to container elements */
-.container {
-  padding: 16px;
 }
 
 /* The Modal (background) */
@@ -68,30 +58,37 @@ button:hover {
 /* Modal Content/Box */
 .modal-content {
   
-  margin: 2% auto 15% auto;
-  border: 1px solid #ff0202;
+  margin: 6% auto 15% auto;
+  border: 2px solid #e7b81f;
+  background-color: #ffe6c4;
   width: 50%;
-  height: 800px;
+  padding-bottom: 3rem;
 
 }
 
 /* Style the horizontal ruler */
 hr {
-  border: 1px solid #f1f1f1;
+  border: 1px solid #ca9b00;
   margin-bottom: 25px;
+  width: 90%;
 }
 
-h1 {
+h2 {
   text-align: center;
+ background-color: #e7b81f;
+  color: #85600a;
+  margin: 0;
+  padding: 1.5rem;
 }
 
-
+.scd-container {
+  padding: 1.5rem;
+}
 
 
 /* Change styles for cancel button and signup button on extra small screens */
 @media screen and (max-width: 300px) {
 
-  .cancelbtn,
   .signupbtn {
     width: 100%;
   }

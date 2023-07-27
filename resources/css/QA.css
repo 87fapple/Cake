@@ -2,14 +2,10 @@
     width: 60%;
     margin-left: auto;
     margin-right: auto;
-  }
+}
 
-  .qaarea>h2 {
-    text-align: center;
-  }
-
-  .accordion {
-    background-color: #eee;
+.accordion {
+    background-color: #ffd26a;
     color: #444;
     cursor: pointer;
     padding: 18px;
@@ -17,18 +13,34 @@
     border: none;
     text-align: left;
     outline: none;
-    font-size: 15px;
+    font-size: large;
     transition: 0.4s;
-  }
+    font-weight: bold;
+    border-radius: 3px;
+    margin-top: 5px;
+}
 
-  .active,
+.active,
   .accordion:hover {
-    background-color: #ccc;
-  }
+    background-color: #ffdb87;
+}
 
-  .panel {
+.panel {
     padding: 0 18px;
     display: none;
-    background-color: white;
+    border: #ffe29dde solid 3px;
     overflow: hidden;
-  }
+}
+
+h2 {
+  color: #7a5500;
+  background-color:  #ffa51e;
+  padding: 0.5rem;
+  border-radius: 3px;
+  text-align: center;
+}
+
+#mainPic {
+    margin-top: 5rem;
+    width: 100%;
+}
