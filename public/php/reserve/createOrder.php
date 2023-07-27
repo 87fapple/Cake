@@ -1,5 +1,5 @@
 <?php
-require_once('../BDB.php');
+require_once('../DB.php');
 
 $sid = $_REQUEST["location"];
 $peopleNum = $_REQUEST["person"];

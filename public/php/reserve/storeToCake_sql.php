@@ -1,5 +1,5 @@
 <?php
-require('../BDB.php');
+require_once('../DB.php');
 
 $indexInfo = $_REQUEST["indexInfo"];
 

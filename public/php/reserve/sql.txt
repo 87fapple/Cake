@@ -14,7 +14,7 @@ BEGIN
     IF (COALESCE(x, 0) + peopleNum <= y) THEN
         SELECT dateInfo AS sequel;
     ELSE
-        SELECT "剩餘人數不足" AS sequel;
+        select "fail" as sequel;
     END IF;
 END $$
 

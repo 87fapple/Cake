@@ -1,5 +1,5 @@
 <?php
-require('../BDB.php');
+require('../DB.php');
 ?>
 
 
