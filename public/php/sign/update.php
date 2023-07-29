@@ -1,7 +1,7 @@
 <?php session_start(); ?>
 <?php
 if (!$_COOKIE['token']) {
-    header('Location: login.php');
+    header('Location: /Cake/public/login.php');
     die();
 }
 

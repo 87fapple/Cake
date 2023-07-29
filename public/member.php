@@ -54,7 +54,7 @@ echo $uName;
         <li><a href="../public/locations.html">分店資訊</a></li>
         <li><a href="../public/reserve.html">預約課程</a></li>
         <li><a href="../public/Q&A.html">常見問題</a></li>
-        <li><a href="../public/login.html">登入會員</a></li>
+        <li><a href="php/sign/logout.php">登出</a></li>
       </ul>
     </div>
   </nav>
