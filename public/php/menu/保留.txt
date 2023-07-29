@@ -1,0 +1,14 @@
+// `
+// <div class="menuInfoDiv" id="menuInfo">
+//     <a href=""><img src="/Cake/image/menuImg/menuInfo1.jpg"></a>
+//     <div class="menuInfoContent" id="menuInfoContent">
+//         <ul class="menuInfo" id="menuInfo">
+//             <li>名稱：{$row['cName']}</li>
+//             <li>時間：2小時</li>
+//             <li>難度：{$row['level']}</li>
+//             <li>價格：{$row['price']}</li>
+//         </ul>
+//     </div>
+// </div>
+//     {$row['cid']}, {$row['cName']}<br>
+// `;

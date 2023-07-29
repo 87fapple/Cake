@@ -1,6 +1,8 @@
 <?php
-require_once('../DB.php');
+require_once('../db2.php');
 
+$sql = 'select * from cake';
+$result = $mysqli->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,10 +12,11 @@ require_once('../DB.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
-    <link rel="stylesheet" href="../resources/css/navbar.css">
-    <link rel="stylesheet" href="../resources/css/footer.css">
-    <link rel="stylesheet" href="../resources/css/topBtn.css">
-    <link rel="stylesheet" href="../resources/css/menuStyle.css">
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../../../resources/css/navbar.css">
+    <link rel="stylesheet" href="../../../resources/css/footer.css">
+    <link rel="stylesheet" href="../../../resources/css/topBtn.css">
+    <link rel="stylesheet" href="../../../resources/css/menuStyle.css">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
@@ -55,28 +58,25 @@ require_once('../DB.php');
         </div>
         <!-- Menu Info -->
         <div class="menuBlock2">
-            <div class="menuInfoDiv" id="menuInfo">
-                <a href=""><img src="/Cake/image/menuImg/menuInfo1.jpg"></a>
-                <div class="menuInfoContent" id="menuInfoContent">
-                    <ul class="menuInfo" id="menuInfo">
-                        <li>名稱</li>
-                        <li>時間</li>
-                        <li>難度</li>
-                        <li>價格</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="menuInfoDiv" id="menuInfo">
-                <a href=""><img src="/Cake/image/menuImg/menuInfo1.jpg"></a>
-                <div class="menuInfoContent" id="menuInfoContent">
-                    <ul class="menuInfo" id="menuInfo">
-                        <li>名稱</li>
-                        <li>時間</li>
-                        <li>難度</li>
-                        <li>價格</li>
-                    </ul>
-                </div>
-            </div>
+            <?php
+                while($row = $result->fetch_assoc()){
+                    echo 
+                        "
+                        <div class=\"menuInfoDiv\" id=\"menuInfo\">
+                            <a href=\"\"><img src=\"/Cake/image/menuImg/menuInfo1.jpg\"></a>
+                            <div class=\"menuInfoContent\" id=\"menuInfoContent\">
+                                <ul class=\"menuInfo\" id=\"menuInfo\">
+                                    <li>名稱：{$row['cName']}</li>
+                                    <li>時間：2hr</li>
+                                    <li>難度：{$row['level']}</li>
+                                    <li>價格：{$row['price']}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        ";
+                }
+            ?>
+            
         </div>
     </main>
 
@@ -114,7 +114,7 @@ require_once('../DB.php');
 
 
 </body>
-<script src="/Cake/resources/js/navbar.js"></script>
-<script src="/Cake/resources/js/topBtn.js"></script>
+<script src="../resources/js/navbar.js"></script>
+<script src="../resources/js/topBtn.js"></script>
 
 </html>
