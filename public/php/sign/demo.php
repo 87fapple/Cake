@@ -3,7 +3,7 @@
 
 require('../db2.php');
 
-$token = '4732438d-2c8a-11ee-83bb-0242ac110004';
+// $token = '4732438d-2c8a-11ee-83bb-0242ac110004';
 
 $sql = "select orders.uid,orders.people,orders.reserveDate,orders.reserveTime,store.location ,cake.cName 
 from orders 
@@ -14,14 +14,11 @@ inner join storetocake on storetocake.cid = orderlist.cid
 inner join store on store.sid = storetocake.sid
 where token = '4732438d-2c8a-11ee-83bb-0242ac110004' 
 ";
+
 $stmt = $mysqli->prepare($sql);
 // $stmt->bind_param('s', $token);
 $stmt->execute();
 $result = $stmt->get_result();
-// $row = $result->fetch_assoc();
-
-
-// $cName=$row[0]['cName'];
 
 
 ?>
