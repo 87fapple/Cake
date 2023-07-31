@@ -63,7 +63,8 @@ $result = $mysqli->query($sql);
                 <input type="checkbox" name="cookie" id="cookie">
                 <label for="cookie">餅乾</label>
             </div>
-            <button onclick="sortCakes()">按價格排序</button>
+            <button onclick="priceSortAsc()">按價格排序低到高</button>
+            <button onclick="priceSortDesc()">按價格排序高到低</button>
         </div>
         <!-- Menu Info -->
         <div class="menuBlock2">
@@ -124,8 +125,16 @@ $result = $mysqli->query($sql);
 <script src="../resources/js/topBtn.js"></script>
     <!-- 價格排序ajax -->
     <script>
-    function sortCakes() {
-        fetch('php/pricesort.php')
+    function priceSortAsc() {
+        fetch('php/menu/priceasc.php')
+            .then(response => response.json())
+            .then(sortedCakes => {
+                renderCakes(sortedCakes);
+            })
+            .catch(error => console.error('请求失败：', error));
+    }
+    function priceSortDesc() {
+        fetch('php/menu/pricedesc.php')
             .then(response => response.json())
             .then(sortedCakes => {
                 renderCakes(sortedCakes);
