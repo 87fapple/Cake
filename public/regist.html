@@ -6,9 +6,16 @@
   <link rel="stylesheet" href="../resources/css/navbar.css">
   <link rel="stylesheet" href="../resources/css/regist.css">
   <link rel="stylesheet" href="../resources/css/footer.css">
+  <link rel="stylesheet" href="../resources/css/topBtn.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
 </head>
 
 <body>
+  <!-- Back-to-Top Button -->
+  <button onclick="topFunction()" class="topBtn" id="topBtn"></button>
+
   <!-- Navbar -->
   <nav class="navbar">
     <div class="navbarTitle">
@@ -23,7 +30,7 @@
     </div>
     <div class="navbarLink">
       <ul>
-        <li><a href="../pubilc/menu.html">產品介紹</a></li>
+        <li><a href="../public/menu.html">產品介紹</a></li>
         <li><a href="../public/locations.html">分店資訊</a></li>
         <li><a href="../public/reserve.html">預約課程</a></li>
         <li><a href="../public/Q&A.html">常見問題</a></li>
@@ -36,33 +43,33 @@
     <form class="modal-content" action="php/sign/register.php">
       <div class="container">
         <h2>會員註冊</h2>
-        
+
         <div class="scd-container">
           <p>請填寫下列資訊以加入會員：</p>
-        <hr>
-        <span style="color: red">*</span>
-        <label for="email"><b>電子信箱</b></label>
-        <input type="text" placeholder="請輸入電子信箱" name="email" required>
-        <span style="color: red">*</span>
-        <label for="text"><b>會員暱稱</b></label>
-        <input type="text" placeholder="請輸入會員暱稱" name="uname" required>
-        <span style="color: red">*</span>
-        <label for="phone"><b>手機號碼</b></label>
-        <input type="phone" placeholder="請輸入手機號碼" name="phone" required>
-        <span style="color: red">*</span>
-        <label for="psw"><b>密碼</b></label>
-        <input type="password" placeholder="請輸入密碼" name="pwd1" required>
-        <span style="color: red">*</span>
-        <label for="psw-repeat"><b>確認密碼</b></label>
-        <input type="password" placeholder="請再次輸入密碼" name="pwd2" required>
+          <hr>
+          <span style="color: red">*</span>
+          <label for="email"><b>電子信箱</b></label>
+          <input type="text" placeholder="請輸入電子信箱" name="email" required>
+          <span style="color: red">*</span>
+          <label for="text"><b>會員暱稱</b></label>
+          <input type="text" placeholder="請輸入會員暱稱" name="uname" required>
+          <span style="color: red">*</span>
+          <label for="phone"><b>手機號碼</b></label>
+          <input type="phone" placeholder="請輸入手機號碼" name="phone" required>
+          <span style="color: red">*</span>
+          <label for="psw"><b>密碼</b></label>
+          <input type="password" placeholder="請輸入密碼" name="pwd1" required>
+          <span style="color: red">*</span>
+          <label for="psw-repeat"><b>確認密碼</b></label>
+          <input type="password" placeholder="請再次輸入密碼" name="pwd2" required>
 
 
 
-        <p><span style="color: red">*</span>註冊會員即同意本店 <a href="#" style="color:dodgerblue">使用者及個資聲明</a>。</p>
-      </div>
-        
-          <button type="submit" class="signupbtn">註冊</button>
-        
+          <p><span style="color: red">*</span>註冊會員即同意本店 <a href="#" style="color:dodgerblue">使用者及個資聲明</a>。</p>
+        </div>
+
+        <button type="submit" class="signupbtn">註冊</button>
+
       </div>
     </form>
   </div>
@@ -99,5 +106,5 @@
   </footer>
 
 </body>
-
+<script src="../resources/js/topBtn.js"></script>
 </html>

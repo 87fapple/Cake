@@ -13,6 +13,7 @@ h2 {
 
 /* Full-width input fields */
 input[type=email],
+input[type=tel],
 input[type=password] {
   width: 100%;
   padding: 12px 20px;
@@ -155,7 +156,7 @@ span.psw {
   border: 1px solid #ccc;
   background-color:#fff5d6c4;
   width: 60%;
-  margin: 8% auto 15% auto;
+  margin: 8% auto 8% auto;
   height: 330px; 
 }
 

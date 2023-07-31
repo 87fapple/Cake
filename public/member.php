@@ -30,11 +30,18 @@ echo $uName;
   <link rel="stylesheet" href="../resources/css/navbar.css">
   <link rel="stylesheet" href="../resources/css/member.css">
   <link rel="stylesheet" href="../resources/css/footer.css">
+  <link rel="stylesheet" href="../resources/css/topBtn.css">
+  <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
 
 
 </head>
 
 <body>
+  <!-- Back-to-Top Button -->
+  <button onclick="topFunction()" class="topBtn" id="topBtn"></button>
+
   <!-- Navbar -->
   <nav class="navbar">
     <div class="navbarTitle">
@@ -50,7 +57,7 @@ echo $uName;
     </div>
     <div class="navbarLink">
       <ul>
-        <li><a href="../pubilc/menu.html">產品介紹</a></li>
+        <li><a href="../public/menu.html">產品介紹</a></li>
         <li><a href="../public/locations.html">分店資訊</a></li>
         <li><a href="../public/reserve.html">預約課程</a></li>
         <li><a href="../public/Q&A.html">常見問題</a></li>
@@ -126,5 +133,5 @@ echo $uName;
     </div>
   </footer>
 </body>
-
+<script src="../resources/js/topBtn.js"></script>
 </html>
