@@ -127,7 +127,8 @@ $result = $mysqli->query($sql);
     function sortCakes() {
         fetch('php/pricesort.php')
             .then(response => response.json())
-            .then(sortedCakes => {
+            .then(
+                sortedCakes => {
                 renderCakes(sortedCakes);
             })
             .catch(error => console.error('请求失败：', error));

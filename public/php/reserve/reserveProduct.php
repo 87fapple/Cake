@@ -2,15 +2,15 @@
 <?php
 require_once('../DB.php');
 
-if (isset($_COOKIE["oToken"])){
+if (isset($_COOKIE["oToken"])) {
     $oToken = $_COOKIE["oToken"];
 }
 
 $cInfo = [];
 
-DB::select('select * from orders where oToken = ?', function($rows) use (&$cInfo){
+DB::select("select * from orders where oToken = 'b2729291-2f66-11ee-b7cc-0242ac110004'", function ($rows) use (&$cInfo) {
     $cInfo[] = $rows[0];
-}, [$oToken]);
+});
 
 var_dump($cInfo[0]);
 ?>
@@ -23,7 +23,6 @@ var_dump($cInfo[0]);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <!-- <link rel="stylesheet" href="../resources/css/預約表單.css"> -->
@@ -31,15 +30,14 @@ var_dump($cInfo[0]);
     <!-- <link rel="stylesheet" href="../resources/css/nav_input_css.css"> -->
     <script>
         $(function () {
-            fetch(`storeToCake_sql.php`,  )
+            fetch(`storeToCake_sql.php?indexInfo=<?= $cInfo[0]["sid"] ?>`,)
                 .then(function (response) {
                     return response.json();
                 })
                 .then(function (data) {
-                    // console.log(data);
-                    let view = '';
+                    console.log(data);
+                    let view = '<option style="display: none;">請選擇產品</option>';
                     data.forEach(function (e2) {
-                        // console.log(e);
                         view += `
                             <option value="${e2.cid}">${e2.cName}</option>
                         `
@@ -50,21 +48,21 @@ var_dump($cInfo[0]);
 
         window.onload = function (e) {
             e.preventDefault();
-            fetch(`storeToCake_sql.php`)
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (data) {
-                    // console.log(data);
-                    let view = '';
-                    data.forEach(function (e2) {
-                        // console.log(e);
-                        view += `
-                            <option value="${e2.cid}">${e2.cName}</option>
-                        `
-                    })
-                    document.getElementById("cakeName").innerHTML = view
-                })
+            // fetch(`storeToCake_sql.php`)
+            //     .then(function (response) {
+            //         return response.json();
+            //     })
+            //     .then(function (data) {
+            //         // console.log(data);
+            //         let view = '';
+            //         data.forEach(function (e2) {
+            //             // console.log(e);
+            //             view += `
+            //                 <option value="${e2.cid}">${e2.cName}</option>
+            //             `
+            //         })
+            //         document.getElementById("cakeName").innerHTML = view
+            //     })
         }
     </script>
 </head>
@@ -82,13 +80,18 @@ var_dump($cInfo[0]);
     <div class="container">
         <form action="/action_page.php">
             <div>目前預定人數
-                <input type="text" value="<?= $cInfo[0]["people"]  ?>">
+                <input type="text" value="<?= $cInfo[0]["people"] ?>">
+                <label for="makeNum">製作份數</label>
+                <select id="makeNum" name="makeNum">
+                    <option style="display: none;">請選擇製作份數</option>
+                    <option >一份</option>
+                    <option >兩份</option>
+                </select>
+                <span>陪同人數:</span><input type="text" disabled value="2">
             </div>
-            <span>製作份數:</span><input type="text">
             <div>
                 <label for="cakeName">選擇產品</label>
                 <select id="cakeName" name="cakeName">
-                    <option style="display: none;">請選擇產品</option>
                 </select>
                 <label for="num">份數</label>
                 <select id="num" name="num">
@@ -110,8 +113,6 @@ var_dump($cInfo[0]);
                 <select id="num" name="num">
                     <option value="1">一位</option>
                     <option value="2">兩位</option>
-                    <option value="3">三位</option>
-                    <option value="4">四位</option>
                 </select>
             </div> -->
             <br>
