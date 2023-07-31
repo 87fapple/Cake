@@ -1,16 +1,24 @@
+/* 選擇按鈕CSS-s */
 .selectarea {
-    background-color: #ffe495c4;
-    width: 9rem;
+    background-color: #ffbf00;
+    width: 11rem;
+    padding: 5px;
     display: block;
     margin-left: 3rem;
-    border-radius: 3px;
+    border-radius: 20px;
     text-align: center;
     font-size: large;
+    border: #b98500 solid 2px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
 }
 
 .selectarea:hover {
-    color: #7c0027;
+    background-color: #ff8a60c4;
+    border: #f79a64c4 solid 2px;
     cursor: pointer;
+    /* box-shadow: 0px 0px 7px rgb(154, 95, 0); */
 }
 
 #sel {
@@ -18,19 +26,21 @@
     margin-left: 6rem;
     margin-right: 6rem;
     margin-top: 6rem;
-    background-color: #ffbf00;
+    /* background-color: #ffbf00; */
     flex-direction: row;
     justify-content: center;
     border-radius: 3px;
     padding: 2rem;
 }
+/* 選擇按鈕CSS-e */
+
 
 h2 {
     color: #7a5500;
-    background-color:  #ffa51e;
-    padding: 1rem;
+    background-color:  #ffbf00;
+    padding: 1.1rem;
     margin: 0;
-    border-radius: 3px;
+    border-radius: 20px;
     text-align: center;
 }
 
@@ -39,10 +49,11 @@ h2 {
     height: 670px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 2rem;
-    border: solid 5px rgb(255, 166, 0);
+    margin-top: 1rem;
+    border: solid 1px #ccc;
     font-size: large;
-    border-radius: 3px;
+    border-radius: 20px;
+    padding: 1rem;
 }
 
 * {
@@ -63,20 +74,7 @@ textarea {
     margin-bottom: 16px;
     resize: vertical;
     font-size: large;
-}
-
-input[type=submit] {
-    background-color: #04AA6D;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: large;
-}
-
-input[type=submit]:hover {
-    background-color: #45a049;
+    
 }
 
 .container {
@@ -90,16 +88,18 @@ select {
 }
 
 .r1 {
-    border: #ffaa49 solid 2px;
-    background-color:#ffe495c4;
+    /* border: #00ff3c solid 2px; */
+    border-radius: 15px;
+    background-color:#fff5d6c4;
     width: 22rem;
     position: relative;
     float: left;
     height: 500px; 
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
     margin-left: 3.5rem;
+    margin-bottom: 1rem;
     padding: 1rem 2rem;
-    
+    font-weight: bold;
 }
 
 #checked {
@@ -109,7 +109,8 @@ select {
     font-size: larger;
     background-color: #ffbf00;
     border: #efa907 3px solid;
-    border-radius: 3px;
+    padding: 0.8rem 1rem;
+    border-radius: 20px;
     color: black;
 }
 
@@ -135,8 +136,6 @@ div>h2 {
     position: relative;
     top: -1rem;
 }  
-
-
   /* Clear floats after the columns */
   .row:after {
     content: "";
