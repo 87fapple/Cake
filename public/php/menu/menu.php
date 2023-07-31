@@ -1,5 +1,5 @@
 <?php
-require_once('../db2.php');
+require_once('php/db2.php');
 
 $sql = 'select * from cake';
 $result = $mysqli->query($sql);
@@ -12,11 +12,10 @@ $result = $mysqli->query($sql);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
-    <link rel="stylesheet" href="">
-    <link rel="stylesheet" href="../../../resources/css/navbar.css">
-    <link rel="stylesheet" href="../../../resources/css/footer.css">
-    <link rel="stylesheet" href="../../../resources/css/topBtn.css">
-    <link rel="stylesheet" href="../../../resources/css/menuStyle.css">
+    <link rel="stylesheet" href="../resources/css/navbar.css">
+    <link rel="stylesheet" href="../resources/css/footer.css">
+    <link rel="stylesheet" href="../resources/css/topBtn.css">
+    <link rel="stylesheet" href="../resources/css/menuStyle.css">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
@@ -29,7 +28,7 @@ $result = $mysqli->query($sql);
     <!-- Navbar -->
     <nav class="navbar">
         <div class="navbarTitle">
-            <a href="/Cake/public/mainpage.html"><img src="/Cake/image/icon.png"></a>
+            <a href="../public/mainpage.html"><img src="../image/icon-noBorder-whiteFont.png"></a>
         </div>
         <div class="hambuger">
             <span class="bar"></span>
@@ -38,9 +37,11 @@ $result = $mysqli->query($sql);
         </div>
         <div class="navbarLink">
             <ul>
-                <li><a href="">關於我們</a></li>
-                <li><a href="">產品介紹</a></li>
-                <li><a href="">登入會員</a></li>
+                <li><a href="../public/menu.html">產品介紹</a></li>
+                <li><a href="../public/locations.html">分店資訊</a></li>
+                <li><a href="../public/reserve.html">預約課程</a></li>
+                <li><a href="../public/Q&A.html">常見問題</a></li>
+                <li><a href="../public/login.html">登入會員</a></li>
             </ul>
         </div>
     </nav>
@@ -49,34 +50,41 @@ $result = $mysqli->query($sql);
     <main class="menu">
         <!-- Welcome img and title -->
         <div class="menuBlock1">
-            <img src="/Cake/image/menuImg/menuWelcomeImg.jpg">
+            <img src="../image/menuImg/menuWelcomeImg.jpg">
             <p>所有產品</p>
         </div>
         <!-- Type Navbar -->
-        <div class="typeNavbar" id="typeNavbar">
-            dropdwon menu or checkbox or what?
+        <div class="kindNavbar" id="kindNavbar">
+            <div>
+                <input type="checkbox" name="cake" id="cake">    
+                <label for="cake">蛋糕</label>
+            </div>
+            <div>
+                <input type="checkbox" name="cookie" id="cookie">
+                <label for="cookie">餅乾</label>
+            </div>
+            <button onclick="sortCakes()">按價格排序</button>
         </div>
         <!-- Menu Info -->
         <div class="menuBlock2">
-            <?php
-                while($row = $result->fetch_assoc()){
-                    echo 
-                        "
-                        <div class=\"menuInfoDiv\" id=\"menuInfo\">
-                            <a href=\"\"><img src=\"/Cake/image/menuImg/menuInfo1.jpg\"></a>
-                            <div class=\"menuInfoContent\" id=\"menuInfoContent\">
-                                <ul class=\"menuInfo\" id=\"menuInfo\">
-                                    <li>名稱：{$row['cName']}</li>
-                                    <li>時間：2hr</li>
-                                    <li>難度：{$row['level']}</li>
-                                    <li>價格：{$row['price']}</li>
-                                </ul>
-                            </div>
+        <?php
+            while($row = $result->fetch_assoc()){
+                echo 
+                    "
+                    <div class=\"menuInfoDiv\" id=\"menuInfo\">
+                        <a href=\"\"><img src=\"../image/menuImg/menuInfo1.jpg\"></a>
+                        <div class=\"menuInfoContent\" id=\"menuInfoContent\">
+                            <ul class=\"menuInfo\" id=\"menuInfo\">
+                                <li>名稱：{$row['cName']}</li>
+                                <li>時間：2hr</li>
+                                <li>難度：{$row['level']}</li>
+                                <li>價格：{$row['price']}</li>
+                            </ul>
                         </div>
-                        ";
-                }
-            ?>
-            
+                    </div>
+                    ";
+            }
+        ?>
         </div>
     </main>
 
@@ -111,10 +119,40 @@ $result = $mysqli->query($sql);
         </div>
     </footer>
 
-
-
 </body>
 <script src="../resources/js/navbar.js"></script>
 <script src="../resources/js/topBtn.js"></script>
+    <!-- 價格排序ajax -->
+    <script>
+    function sortCakes() {
+        fetch('php/pricesort.php')
+            .then(response => response.json())
+            .then(sortedCakes => {
+                renderCakes(sortedCakes);
+            })
+            .catch(error => console.error('请求失败：', error));
+    }
+
+    function renderCakes(cakes) {
+        var menuBlock2 = document.querySelector('.menuBlock2');
+        menuBlock2.innerHTML = '';
+
+        cakes.forEach(cake => {
+            menuBlock2.innerHTML += `
+                <div class="menuInfoDiv" id="menuInfo">
+                    <a href=""><img src="../image/menuImg/menuInfo1.jpg"></a>
+                    <div class="menuInfoContent" id="menuInfoContent">
+                        <ul class="menuInfo" id="menuInfo">
+                            <li>名稱：${cake.cName}</li>
+                            <li>時間：2hr</li>
+                            <li>難度：${cake.level}</li>
+                            <li>價格：${cake.price}</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+        });
+    }
+    </script>
 
 </html>
