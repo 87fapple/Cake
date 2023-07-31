@@ -1,3 +1,7 @@
+<?php
+require_once('../DB.php');
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +26,7 @@
     <!-- Navbar -->
     <nav class="navbar">
         <div class="navbarTitle">
-            <a href="../public/mainpage.html"><img src="../image/icon-noBorder-whiteFont.png"></a>
+            <a href="/Cake/public/mainpage.html"><img src="/Cake/image/icon.png"></a>
         </div>
         <div class="hambuger">
             <span class="bar"></span>
@@ -31,11 +35,9 @@
         </div>
         <div class="navbarLink">
             <ul>
-                <li><a href="../public/menu.html">產品介紹</a></li>
-                <li><a href="../public/locations.html">分店資訊</a></li>
-                <li><a href="../public/reserve.html">預約課程</a></li>
-                <li><a href="../public/Q&A.html">常見問題</a></li>
-                <li><a href="../public/login.html">登入會員</a></li>
+                <li><a href="">關於我們</a></li>
+                <li><a href="">產品介紹</a></li>
+                <li><a href="">登入會員</a></li>
             </ul>
         </div>
     </nav>
@@ -44,24 +46,17 @@
     <main class="menu">
         <!-- Welcome img and title -->
         <div class="menuBlock1">
-            <img src="../image/menuImg/menuWelcomeImg.jpg">
+            <img src="/Cake/image/menuImg/menuWelcomeImg.jpg">
             <p>所有產品</p>
         </div>
         <!-- Type Navbar -->
-        <div class="kindNavbar" id="kindNavbar">
-            <div>
-                <input type="checkbox" name="cake" id="cake">    
-                <label for="cake">蛋糕</label>
-            </div>
-            <div>
-                <input type="checkbox" name="cookie" id="cookie">
-                <label for="cookie">餅乾</label>
-            </div>
+        <div class="typeNavbar" id="typeNavbar">
+            dropdwon menu or checkbox or what?
         </div>
         <!-- Menu Info -->
         <div class="menuBlock2">
             <div class="menuInfoDiv" id="menuInfo">
-                <a href=""><img src="../image/menuImg/menuInfo1.jpg"></a>
+                <a href=""><img src="/Cake/image/menuImg/menuInfo1.jpg"></a>
                 <div class="menuInfoContent" id="menuInfoContent">
                     <ul class="menuInfo" id="menuInfo">
                         <li>名稱</li>
@@ -72,7 +67,7 @@
                 </div>
             </div>
             <div class="menuInfoDiv" id="menuInfo">
-                <a href=""><img src="../image/menuImg/menuInfo1.jpg"></a>
+                <a href=""><img src="/Cake/image/menuImg/menuInfo1.jpg"></a>
                 <div class="menuInfoContent" id="menuInfoContent">
                     <ul class="menuInfo" id="menuInfo">
                         <li>名稱</li>
@@ -119,7 +114,7 @@
 
 
 </body>
-<script src="../resources/js/navbar.js"></script>
-<script src="../resources/js/topBtn.js"></script>
+<script src="/Cake/resources/js/navbar.js"></script>
+<script src="/Cake/resources/js/topBtn.js"></script>
 
 </html>

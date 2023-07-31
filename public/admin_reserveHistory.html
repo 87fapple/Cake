@@ -12,7 +12,20 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script>
+    <script src="https://kit.fontawesome.com/6c4c2bf9f6.js" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+    <link rel="stylesheet" href="/history.css">
+
+    <link rel="stylesheet" href="/navbar.css">
+    <link rel="stylesheet" href="/footer.css">
+   <script>
         $(function () {
             $("#datepicker").datepicker();
         });
@@ -21,17 +34,6 @@
 
 <body>
 
-<<<<<<< HEAD
-=======
-    <body>
-        <div class="topnav">
-            <a href="#logout">登出</a>
-            <a href="Q&A.html">常見問題</a>
-            <a href="Detail.html">商品介紹</a>
-            <a href="reserve.html">預約課程</a>
-            <a href="locations.html">分店資訊</a>
-        </div>
->>>>>>> 78e2e5f95c914f4734adb857abd3156339a022ec
 
     <!-- Navbar -->
     <nav class="navbar">
@@ -58,10 +60,15 @@
     </nav>
 
     <div name="selecttop" id="sel">
-        <div href="#changeToppic" class="selectarea">修改首頁輪播</div>
-        <div href="#addProduct" class="selectarea">新增產品</div>
-        <div href="#modifyProduct" class="selectarea">修改產品資訊</div>
-        <div href="#allreserve" class="selectarea">顧客預約總覽</div>
+        <a href="../pubilc/admin.html" class="selectarea"><i style='font-size:24px'
+                class='fas'>&#xf1b0;</i>&nbsp修改首頁輪播</a>
+        <a href="../pubilc/admin_addProduct.html" class="selectarea"><i style='font-size:24px'
+                class='fas'>&#xf1b0;</i>&nbsp新增產品</a>
+        <a href="../pubilc/admin_changeProduct.html" class="selectarea"><i style='font-size:24px'
+                class='fas'>&#xf1b0;</i>&nbsp修改產品資訊
+        </a>
+        <a href="../pubilc/admin_reserveHistory.html" class="selectarea"><i style='font-size:24px'
+                class='fas'>&#xf1b0;</i>&nbsp顧客預約總覽</a>
         <div class="selectarea"> 您好，<span>管理員</span></div>
     </div>
 
