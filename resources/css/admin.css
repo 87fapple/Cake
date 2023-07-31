@@ -1,16 +1,50 @@
+.modArea {
+    display: inline-block;
+    width: 40%;
+    height: 400px;
+
+    margin-left: 9rem;
+    margin-right: 1rem;
+}
+
+.modArea2 {
+    display: inline-block;
+    position: relative;
+    top: -35px;
+    width: 40%;
+    height: 400px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.modArea2_cont {
+    border: 1px solid #ccc;
+    padding-top: 1.5rem;
+    padding-bottom: 3.7rem;
+    margin: 0;
+}
+
+/* 選擇按鈕CSS-s */
 .selectarea {
-    background-color: #ffe495c4;
-    width: 9rem;
+    background-color: #ffbf00;
+    width: 11rem;
+    padding: 5px;
     display: block;
     margin-left: 3rem;
-    border-radius: 3px;
+    border-radius: 20px;
     text-align: center;
     font-size: large;
+    border: #b98500 solid 2px;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 .selectarea:hover {
-    color: #7c0027;
+    background-color: #ff8a60c4;
+    border: #f79a64c4 solid 2px;
     cursor: pointer;
+    /* box-shadow: 0px 0px 7px rgb(154, 95, 0); */
 }
 
 #sel {
@@ -18,20 +52,14 @@
     margin-left: 6rem;
     margin-right: 6rem;
     margin-top: 6rem;
-    background-color: #ffbf00;
+    /* background-color: #ffbf00; */
     flex-direction: row;
     justify-content: center;
     border-radius: 3px;
     padding: 2rem;
 }
+/* 選擇按鈕CSS-e */
 
-
-
-/* #hiadmin {
-    border: #45a049 solid 2px;
-    margin: auto 6rem;
-    width: 10rem;
-} */
 
 #changeToppic {
     display: flex;
@@ -44,9 +72,9 @@ body {
 /* Style the tab */
 .tab {
     overflow: hidden;
-    border: 1px solid #ccc;
+    border-radius: 10px;
     background-color: #ffbf00;
-    width: 800px;
+    width: 500px;
     margin-right: auto;
     margin-left: auto;
 }
@@ -61,6 +89,7 @@ body {
     padding: 14px 40px;
     transition: 0.3s;
     font-size: 17px;
+    font-weight: bold;
 }
 
 /* Change background color of buttons on hover */
@@ -76,24 +105,32 @@ body {
 /* Style the tab content */
 .tabcontent {
     display: none;
-    padding: 20px 12px;
+    padding: 20px 16px;
     border: 1px solid #ccc;
+    border-radius: 10px;
     border-top: none;
-    width: 775px;
+    width: 500px;
     margin-right: auto;
     margin-left: auto;
     border-radius: 3px;
-}
 
+}
 
 
 h2 {
     text-align: center;
     color: #b08522;
+    background-color: #ffedc2;
+
+}
+
+.modArea2 h2 {
+    position: relative;
+    top: 22px;
 }
 
 #osusume {
-    
+
     display: flex;
     margin-right: auto;
     margin-left: auto;
@@ -101,15 +138,31 @@ h2 {
     padding: 1rem;
     width: 775px;
 }
+
 #newfilepic {
     margin-left: 3rem;
     padding: auto;
 }
 
+.modArea2_cont span {
+    position: relative;
+    top: -8px;
+    border: #ffbf00 dotted 5px;
+    border-radius: 10px;
+    padding: 14px;
+    width: 100%;
+    background-color: #ffbf00;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+
 #osususmetext {
-    width: 15rem;
+    width: 400px;
     height: 5rem;
     word-wrap: break-word;
+    margin: 1rem;
+    resize: none;
 }
 
 #checked {
@@ -119,5 +172,6 @@ h2 {
     font-size: larger;
     background-color: #ffbf00;
     border: #efa907 3px solid;
-    border-radius: 3px;
+    padding: 0.8rem 1rem;
+    border-radius: 20px;
 }
