@@ -1,125 +1,103 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="../resources/css/navbar.css" />
-    <link rel="stylesheet" href="../resources/css/regist.css" />
-    <link rel="stylesheet" href="../resources/css/footer.css" />
-  </head>
 
-  <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-      <div class="navbarTitle">
-        <a href="../public/mainpage.html">
-          <img src="../image/icon-noBorder-whiteFont.png" />
-        </a>
-      </div>
-      <div class="hambuger">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </div>
-      <div class="navbarLink">
-        <ul>
-          <li><a href="../pubilc/menu.html">產品介紹</a></li>
-          <li><a href="../public/locations.html">分店資訊</a></li>
-          <li><a href="../public/reserve.html">預約課程</a></li>
-          <li><a href="../public/Q&A.html">常見問題</a></li>
-          <li><a href="../public/login.html">登入會員</a></li>
-        </ul>
-      </div>
-    </nav>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="../resources/css/navbar.css">
+  <link rel="stylesheet" href="../resources/css/rigist.css">
+  <link rel="stylesheet" href="../resources/css/footer.css">
+</head>
 
-    <div id="id01" class="modal">
-      <form class="modal-content" action="php/sign/register.php">
-        <div class="container">
-          <h2>會員註冊</h2>
-
-          <div class="scd-container">
-            <p>請填寫下列資訊以加入會員：</p>
-            <hr />
-            <span style="color: red">*</span>
-            <label for="email"><b>電子信箱</b></label>
-            <input
-              type="text"
-              placeholder="請輸入電子信箱"
-              name="email"
-              required
-            />
-            <span style="color: red">*</span>
-            <label for="text"><b>會員暱稱</b></label>
-            <input
-              type="text"
-              placeholder="請輸入會員暱稱"
-              name="uname"
-              required
-            />
-            <span style="color: red">*</span>
-            <label for="phone"><b>手機號碼</b></label>
-            <input
-              type="phone"
-              placeholder="請輸入手機號碼"
-              name="phone"
-              required
-            />
-            <span style="color: red">*</span>
-            <label for="psw"><b>密碼</b></label>
-            <input
-              type="password"
-              placeholder="請輸入密碼"
-              name="pwd1"
-              required
-            />
-            <span style="color: red">*</span>
-            <label for="psw-repeat"><b>確認密碼</b></label>
-            <input
-              type="password"
-              placeholder="請再次輸入密碼"
-              name="pwd2"
-              required
-            />
-
-            <p>
-              <span style="color: red">*</span>註冊會員即同意本店
-              <a href="#" style="color: dodgerblue">使用者及個資聲明</a>。
-            </p>
-          </div>
-
-          <button type="submit" class="signupbtn">註冊</button>
-        </div>
-      </form>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbarTitle">
+      <a href="../public/mainpage.html">
+        <img src="../image/icon-noBorder-whiteFont.png">
+      </a>
     </div>
-    <br />
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footerContainer">
-        <div class="footerRow">
-          <div class="footerCol">
-            <h4>DIY蛋糕</h4>
-            <ul>
-              <li><a href="">關於我們</a></li>
-              <li><a href="">常見問題</a></li>
-            </ul>
-          </div>
-          <div class="footerCol">
-            <h4>服務內容</h4>
-            <ul>
-              <li><a href="">立即預約</a></li>
-              <li><a href="">產品介紹</a></li>
-            </ul>
-          </div>
-          <div class="footerCol">
-            <h4>聯絡我們</h4>
-            <div class="socialLinks">
-              <a href=""><i class="fab fa-facebook-f"></i></a>
-              <a href=""><i class="fab fa-twitter"></i></a>
-              <a href=""><i class="fab fa-instagram"></i></a>
-              <a href=""><i class="fab fa-line"></i></a>
-            </div>
+    <div class="hambuger">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+    <div class="navbarLink">
+      <ul>
+        <li><a href="../pubilc/menu.html">產品介紹</a></li>
+        <li><a href="../public/locations.html">分店資訊</a></li>
+        <li><a href="../public/reserve.html">預約課程</a></li>
+        <li><a href="../public/Q&A.html">常見問題</a></li>
+        <li><a href="../public/login.html">登入會員</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div id="id01" class="modal">
+    <form class="modal-content" action="php/sign/register.php">
+      <div class="container">
+        <h2>會員註冊</h2>
+        
+        <div class="scd-container">
+          <p>請填寫下列資訊以加入會員：</p>
+        <hr>
+        <span style="color: red">*</span>
+        <label for="email"><b>電子信箱</b></label>
+        <input type="text" placeholder="請輸入電子信箱" name="email" required>
+        <span style="color: red">*</span>
+        <label for="text"><b>會員暱稱</b></label>
+        <input type="text" placeholder="請輸入會員暱稱" name="uname" required>
+        <span style="color: red">*</span>
+        <label for="phone"><b>手機號碼</b></label>
+        <input type="phone" placeholder="請輸入手機號碼" name="phone" required>
+        <span style="color: red">*</span>
+        <label for="psw"><b>密碼</b></label>
+        <input type="password" placeholder="請輸入密碼" name="pwd1" required>
+        <span style="color: red">*</span>
+        <label for="psw-repeat"><b>確認密碼</b></label>
+        <input type="password" placeholder="請再次輸入密碼" name="pwd2" required>
+
+
+
+        <p><span style="color: red">*</span>註冊會員即同意本店 <a href="#" style="color:dodgerblue">使用者及個資聲明</a>。</p>
+      </div>
+        
+          <button type="submit" class="signupbtn">註冊</button>
+        
+      </div>
+    </form>
+  </div>
+  <br>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footerContainer">
+      <div class="footerRow">
+        <div class="footerCol">
+          <h4>DIY蛋糕</h4>
+          <ul>
+            <li><a href="">關於我們</a></li>
+            <li><a href="">常見問題</a></li>
+          </ul>
+        </div>
+        <div class="footerCol">
+          <h4>服務內容</h4>
+          <ul>
+            <li><a href="">立即預約</a></li>
+            <li><a href="">產品介紹</a></li>
+          </ul>
+        </div>
+        <div class="footerCol">
+          <h4>聯絡我們</h4>
+          <div class="socialLinks">
+            <a href=""><i class="fab fa-facebook-f"></i></a>
+            <a href=""><i class="fab fa-twitter"></i></a>
+            <a href=""><i class="fab fa-instagram"></i></a>
+            <a href=""><i class="fab fa-line"></i></a>
           </div>
         </div>
       </div>
-    </footer>
-  </body>
+    </div>
+  </footer>
+
+</body>
+
 </html>
