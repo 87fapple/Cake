@@ -56,11 +56,11 @@ $result = $mysqli->query($sql);
         <!-- Type Navbar -->
         <div class="kindNavbar" id="kindNavbar">
             <div>
-                <input type="checkbox" name="cake" id="cake">    
+                <input type="checkbox" name="cake" id="cake" onclick="kindCake()">    
                 <label for="cake">蛋糕</label>
             </div>
             <div>
-                <input type="checkbox" name="cookie" id="cookie">
+                <input type="checkbox" name="cookie" id="cookie" onclick="kindCookie()">
                 <label for="cookie">餅乾</label>
             </div>
             <button onclick="priceSortAsc()">按價格排序低到高</button>
@@ -123,45 +123,63 @@ $result = $mysqli->query($sql);
 </body>
 <script src="../resources/js/navbar.js"></script>
 <script src="../resources/js/topBtn.js"></script>
-    <!-- 價格排序ajax -->
-    <script>
-    function priceSortAsc() {
-        fetch('php/menu/priceasc.php')
-            .then(response => response.json())
-            .then(sortedCakes => {
-                renderCakes(sortedCakes);
-            })
-            .catch(error => console.error('请求失败：', error));
-    }
-    function priceSortDesc() {
-        fetch('php/menu/pricedesc.php')
-            .then(response => response.json())
-            .then(sortedCakes => {
-                renderCakes(sortedCakes);
-            })
-            .catch(error => console.error('请求失败：', error));
-    }
+    
+<script>
+//  價格排序ajax 
+function kindCake() {
+    fetch('php/menu/kindcake.php')
+        .then(response => response.json())
+        .then(sortedCakes => {
+            renderCakes(sortedCakes);
+        })
+        .catch(error => console.error('请求失败：', error));
+}
+function kindCookie() {
+    fetch('php/menu/kindcookie.php')
+        .then(response => response.json())
+        .then(sortedCakes => {
+            renderCakes(sortedCakes);
+        })
+        .catch(error => console.error('请求失败：', error));
+}
+//  價格排序ajax 
+function priceSortAsc() {
+    fetch('php/menu/priceasc.php')
+        .then(response => response.json())
+        .then(sortedCakes => {
+            renderCakes(sortedCakes);
+        })
+        .catch(error => console.error('请求失败：', error));
+}
+function priceSortDesc() {
+    fetch('php/menu/pricedesc.php')
+        .then(response => response.json())
+        .then(sortedCakes => {
+            renderCakes(sortedCakes);
+        })
+        .catch(error => console.error('请求失败：', error));
+}
+// 畫面render
+function renderCakes(cakes) {
+    var menuBlock2 = document.querySelector('.menuBlock2');
+    menuBlock2.innerHTML = '';
 
-    function renderCakes(cakes) {
-        var menuBlock2 = document.querySelector('.menuBlock2');
-        menuBlock2.innerHTML = '';
-
-        cakes.forEach(cake => {
-            menuBlock2.innerHTML += `
-                <div class="menuInfoDiv" id="menuInfo">
-                    <a href=""><img src="../image/menuImg/menuInfo1.jpg"></a>
-                    <div class="menuInfoContent" id="menuInfoContent">
-                        <ul class="menuInfo" id="menuInfo">
-                            <li>名稱：${cake.cName}</li>
-                            <li>時間：2hr</li>
-                            <li>難度：${cake.level}</li>
-                            <li>價格：${cake.price}</li>
-                        </ul>
-                    </div>
+    cakes.forEach(cake => {
+        menuBlock2.innerHTML += `
+            <div class="menuInfoDiv" id="menuInfo">
+                <a href=""><img src="../image/menuImg/menuInfo1.jpg"></a>
+                <div class="menuInfoContent" id="menuInfoContent">
+                    <ul class="menuInfo" id="menuInfo">
+                        <li>名稱：${cake.cName}</li>
+                        <li>時間：2hr</li>
+                        <li>難度：${cake.level}</li>
+                        <li>價格：${cake.price}</li>
+                    </ul>
                 </div>
-            `;
-        });
-    }
-    </script>
+            </div>
+        `;
+    });
+}
+</script>
 
 </html>
