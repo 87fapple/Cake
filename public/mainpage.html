@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mainpage</title>
-    <link rel="stylesheet" href="/Cake/resources/css/navbar.css">
-    <link rel="stylesheet" href="/Cake/resources/css/footer.css">
-    <link rel="stylesheet" href="/Cake/resources/css/topBtn.css">
-    <link rel="stylesheet" href="/Cake/resources/css/mainpageStyle.css">
+    <link rel="stylesheet" href="../resources/css/navbar.css">
+    <link rel="stylesheet" href="../resources/css/footer.css">
+    <link rel="stylesheet" href="../resources/css/topBtn.css">
+    <link rel="stylesheet" href="../resources/css/mainpageStyle.css">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
@@ -23,7 +23,7 @@
     <!-- Navbar -->
     <nav class="navbar">
         <div class="navbarTitle">
-            <a href="/Cake/public/mainpage.html"><img src="/Cake/image/icon.png"></a>
+            <a href="../public/mainpage.html"><img src="../image/icon-noBorder-whiteFont.png"></a>
         </div>
         <div class="hambuger">
             <span class="bar"></span>
@@ -32,9 +32,11 @@
         </div>
         <div class="navbarLink">
             <ul>
-                <li><a href="">關於我們</a></li>
-                <li><a href="">產品介紹</a></li>
-                <li><a href="">登入會員</a></li>
+                <li><a href="../public/menu.html">產品介紹</a></li>
+                <li><a href="../public/locations.html">分店資訊</a></li>
+                <li><a href="../public/reserve.html">預約課程</a></li>
+                <li><a href="../public/Q&A.html">常見問題</a></li>
+                <li><a href="../public/login.html">登入會員</a></li>
             </ul>
         </div>
     </nav>
@@ -42,7 +44,7 @@
     <!-- Main  -->
     <main class="mainContainer">
         <!-- Main1 -->
-        <div class="mainBlock1"><img src="/Cake/image/mainImg/mainImg1.jpg"></div>
+        <div class="mainBlock1"><img src="../image/mainImg/mainImg1.jpg"></div>
         <!-- Main2 -->
         <div class="mainBlock2">
             <div class="infoBlock">
@@ -59,14 +61,14 @@
                     </div>
                 </div>
                 <div class="infoImg">
-                    <img src="/Cake/image/mainImg/infoImg.jpg">
+                    <img src="../image/mainImg/infoImg.jpg">
                 </div>
             </div>
         </div>
         <!-- Main3 -->
         <div class="mainBlock3">
             <div class="mainImg3">
-                <img src="/Cake/image/mainImg/mainImg3.jpg">
+                <img src="../image/mainImg/mainImg3.jpg">
             </div>
             <div class="specialBlock">
                 <div class="specialDiv">
@@ -85,8 +87,46 @@
                 <div class="expTitle">
                     <h1>心得分享</h1>
                 </div>
-                <div class="expContent">
-                    <p>所以到底要弄啥，輪播圖還怎樣</p>
+                <div class="expBlock">                    
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img src="../image/menuImg/menuInfo1.jpg" 
+                                style="width:300px; height:300px;display:cover;">
+                            </div>
+                            <div class="flip-card-back">
+                                <h1>userName</h1>
+                                <p>超級好吃</p>
+                                <p>非常好玩</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img src="../image/menuImg/menuInfo1.jpg" 
+                                style="width:300px; height:300px;display:cover;">
+                            </div>
+                            <div class="flip-card-back">
+                                <h1>userName</h1>
+                                <p>超級好吃</p>
+                                <p>非常好玩</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img src="../image/menuImg/menuInfo1.jpg" 
+                                style="width:300px; height:300px;display:cover;">
+                            </div>
+                            <div class="flip-card-back">
+                                <h1>userName</h1>
+                                <p>超級好吃</p>
+                                <p>非常好玩</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -124,7 +164,7 @@
     </footer>
 </body>
 
-<script src="/Cake/resources/js/navbar.js"></script>
-<script src="/Cake/resources/js/topBtn.js"></script>
+<script src="../resources/js/navbar.js"></script>
+<script src="../resources/js/topBtn.js"></script>
 
 </html>
