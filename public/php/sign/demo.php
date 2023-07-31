@@ -5,21 +5,21 @@ require('../db2.php');
 
 // $token = '4732438d-2c8a-11ee-83bb-0242ac110004';
 
-$sql = "select orders.uid,orders.people,orders.reserveDate,orders.reserveTime,store.location ,cake.cName 
+$sql = "select orders.oid,orders.sid,orders.people,orders.reserveDate,orders.reserveTime,store.location   ,                        GROUP_CONCAT(cake.cName,'*',orderlist.num) as cName
 from orders 
 inner join userinfo  on userinfo.uid = orders.uid
 inner join orderlist on orders.oid = orderlist.oid
-inner join cake on cake.cid = orderlist.cid
-inner join storetocake on storetocake.cid = orderlist.cid
-inner join store on store.sid = storetocake.sid
-where token = '4732438d-2c8a-11ee-83bb-0242ac110004' 
+inner join cake on orderlist.cid = cake.cid
+
+inner join store on orders.sid= store.sid
+where token = '4732438d-2c8a-11ee-83bb-0242ac110004'
+ GROUP BY orders.oid;
 ";
 
 $stmt = $mysqli->prepare($sql);
 // $stmt->bind_param('s', $token);
 $stmt->execute();
 $result = $stmt->get_result();
-
 
 ?>
 <!DOCTYPE html>
@@ -69,7 +69,7 @@ $result = $stmt->get_result();
             <div class="selectarea"> 您好，<span>使用者</span></div>
         </div>
 
-        <div id="">
+        
             <div id="">
                 <h2>預約紀錄</h2>
             </div>
@@ -88,18 +88,20 @@ $result = $stmt->get_result();
                 while($row=$result->fetch_assoc()){
                     // echo "<pre/>";
                     // var_dump($row);
-                    echo'<tr class="mainTable">
+                    echo
+                    '<tr class="mainTable">
                         <td>' . $row['reserveDate'] . '</td>
                         <td>'. $row['location'] .'</td>
                         <td>'. $row['reserveTime'] .'</td>
                         <td id="products">'. $row['cName'] .'</td>
                         <td>'. $row['people'] . '人</td>
                         <td id="button"><button>取消預約</button></td>
-                    </tr>';
+                    </tr>'
+                        ;
                 }
                 ?>
-
-            <br>
+            </table>
+            <br>    
             <br>
             <br>
             <!-- Footer -->
