@@ -9,7 +9,7 @@ $daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 $dayColumn = $daysOfWeek[date('N', strtotime($fDate)) - 1];
 
-DB::select("select $dayColumn from storeToTime where sid = ?", function ($rows) {
+DB::select("select $dayColumn from storetotime where sid = ?", function ($rows) {
     checkTime($rows);
 }, [$sid]);
 
