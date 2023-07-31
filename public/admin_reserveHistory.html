@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="../resources/css/navbar.css">
     <link rel="stylesheet" href="../resources/css/history.css">
     <link rel="stylesheet" href="../resources/css/footer.css">
+    <link rel="stylesheet" href="../resources/js/topBtn.js">
+    <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -33,7 +36,8 @@
 </head>
 
 <body>
-
+    <!-- Back-to-Top Button -->
+    <button onclick="topFunction()" class="topBtn" id="topBtn"></button>
 
     <!-- Navbar -->
     <nav class="navbar">
@@ -50,7 +54,7 @@
         </div>
         <div class="navbarLink">
             <ul>
-                <li><a href="../pubilc/menu.html">產品介紹</a></li>
+                <li><a href="../public/menu.html">產品介紹</a></li>
                 <li><a href="../public/locations.html">分店資訊</a></li>
                 <li><a href="../public/reserve.html">預約課程</a></li>
                 <li><a href="../public/Q&A.html">常見問題</a></li>
@@ -60,14 +64,14 @@
     </nav>
 
     <div name="selecttop" id="sel">
-        <a href="../pubilc/admin.html" class="selectarea"><i style='font-size:24px'
+        <a href="../public/admin.html" class="selectarea"><i style='font-size:24px'
                 class='fas'>&#xf1b0;</i>&nbsp修改首頁輪播</a>
-        <a href="../pubilc/admin_addProduct.html" class="selectarea"><i style='font-size:24px'
+        <a href="../public/admin_addProduct.html" class="selectarea"><i style='font-size:24px'
                 class='fas'>&#xf1b0;</i>&nbsp新增產品</a>
-        <a href="../pubilc/admin_changeProduct.html" class="selectarea"><i style='font-size:24px'
+        <a href="../public/admin_changeProduct.html" class="selectarea"><i style='font-size:24px'
                 class='fas'>&#xf1b0;</i>&nbsp修改產品資訊
         </a>
-        <a href="../pubilc/admin_reserveHistory.html" class="selectarea"><i style='font-size:24px'
+        <a href="../public/admin_reserveHistory.html" class="selectarea"><i style='font-size:24px'
                 class='fas'>&#xf1b0;</i>&nbsp顧客預約總覽</a>
         <div class="selectarea"> 您好，<span>管理員</span></div>
     </div>
@@ -162,7 +166,7 @@
                 </div>
             </div>
         </footer>
-
+<script src="../resources/js/topBtn.js"></script>
 
 </body>
 
