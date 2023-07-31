@@ -17,6 +17,9 @@ $token = $_COOKIE['token'];
     <link rel="stylesheet" href="../resources/css/navbar.css">
     <link rel="stylesheet" href="../resources/css/history.css">
     <link rel="stylesheet" href="../resources/css/footer.css">
+    <link rel="stylesheet" href="../resources/css/topBtn.css">
+    <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <script src="https://kit.fontawesome.com/6c4c2bf9f6.js" crossorigin="anonymous"></script>
 
 </head>
@@ -24,7 +27,10 @@ $token = $_COOKIE['token'];
 <body>
 
     <body>
-         <!-- Navbar -->
+     <!-- Back-to-Top Button -->
+    <button onclick="topFunction()" class="topBtn" id="topBtn"></button>
+
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="navbarTitle">
             <a href="../public/mainpage.html">
@@ -39,7 +45,7 @@ $token = $_COOKIE['token'];
         </div>
         <div class="navbarLink">
             <ul>
-                <li><a href="../pubilc/menu.html">產品介紹</a></li>
+                <li><a href="../public/menu.html">產品介紹</a></li>
                 <li><a href="../public/locations.html">分店資訊</a></li>
                 <li><a href="../public/reserve.html">預約課程</a></li>
                 <li><a href="../public/Q&A.html">常見問題</a></li>
@@ -49,9 +55,9 @@ $token = $_COOKIE['token'];
     </nav>
 
     <div name="selecttop" id="sel">
-        <a href="../pubilc/admin.html" class="selectarea"><i style='font-size:24px'
+        <a href="../public/admin.html" class="selectarea"><i style='font-size:24px'
                 class='fas'>&#xf1b0;</i>&nbsp更改會員資料</a>
-        <a href="../pubilc/admin_addProduct.html" class="selectarea"><i style='font-size:24px'
+        <a href="../public/admin_addProduct.html" class="selectarea"><i style='font-size:24px'
                 class='fas'>&#xf1b0;</i>&nbsp預約紀錄</a>
         <div class="selectarea"> 您好，<span>使用者</span></div>
     </div>
@@ -125,5 +131,5 @@ $token = $_COOKIE['token'];
             </div>
         </footer>
     </body>
-
+    <script src="../resources/js/topBtn.js"></script>
 </html>
