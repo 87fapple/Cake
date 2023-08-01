@@ -12,14 +12,14 @@ $result = $mysqli->query($sql);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
+    <link rel="stylesheet" href="../resources/css/menu.css">   
+    <link rel="stylesheet" href="../resources/css/kindNavbarStyle.css">   
     <link rel="stylesheet" href="../resources/css/navbar.css">
     <link rel="stylesheet" href="../resources/css/footer.css">
     <link rel="stylesheet" href="../resources/css/topBtn.css">
-    <link rel="stylesheet" href="../resources/css/menuStyle.css">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
-
 
 <body>
     <!-- Back-to-Top Button -->
@@ -37,7 +37,7 @@ $result = $mysqli->query($sql);
         </div>
         <div class="navbarLink">
             <ul>
-                <li><a href="../public/menu.html">產品介紹</a></li>
+                <li><a href="../public/menu.php">產品介紹</a></li>
                 <li><a href="../public/locations.html">分店資訊</a></li>
                 <li><a href="../public/reserve.html">預約課程</a></li>
                 <li><a href="../public/Q&A.html">常見問題</a></li>
@@ -55,16 +55,26 @@ $result = $mysqli->query($sql);
         </div>
         <!-- Type Navbar -->
         <div class="kindNavbar" id="kindNavbar">
-            <div>
-                <input type="checkbox" name="cake" id="cake">    
-                <label for="cake">蛋糕</label>
+            <div class="kindBlock">
+                <div><b>選擇種類：</b></div> 
+                <label class="container">蛋糕
+                    <input type="radio" checked="checker" name="radio" id="cake" onclick="kindCake()">   
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">餅乾
+                    <input type="radio" name="radio" id="cookie" onclick="kindCookie()">
+                    <span class="checkmark"></span>
+                </label>
             </div>
-            <div>
-                <input type="checkbox" name="cookie" id="cookie">
-                <label for="cookie">餅乾</label>
+            <div class="dropdown">
+                <button class="dropbtn">排序方式</button>
+                <div class="dropdown-content">
+                    <a herf="javascript:void(0);" onclick="priceSortAsc()">價格：由低到高</a>
+                    <a herf="javascript:void(0);" onclick="priceSortDesc()">價格：由高到低</a>
+                </div>
             </div>
-            <button onclick="sortCakes()">按價格排序</button>
         </div>
+
         <!-- Menu Info -->
         <div class="menuBlock2">
         <?php
@@ -122,38 +132,63 @@ $result = $mysqli->query($sql);
 </body>
 <script src="../resources/js/navbar.js"></script>
 <script src="../resources/js/topBtn.js"></script>
-    <!-- 價格排序ajax -->
-    <script>
-    function sortCakes() {
-        fetch('php/pricesort.php')
-            .then(response => response.json())
-            .then(
-                sortedCakes => {
-                renderCakes(sortedCakes);
-            })
-            .catch(error => console.error('请求失败：', error));
-    }
+    
+<script>
+// 蛋糕種類篩選 2.0
+function kindFilter(kind) {
+    fetch(`php/menu/kindfilter.php?kind=${kind}`)
+        .then(response => response.json())
+        .then(sortedCakes => {
+            renderCakes(sortedCakes);
+        })
+        .catch(error => console.error('請求失敗：', error));
+}
 
-    function renderCakes(cakes) {
-        var menuBlock2 = document.querySelector('.menuBlock2');
-        menuBlock2.innerHTML = '';
+function kindCake() {
+    kindFilter('蛋糕');
+}
 
-        cakes.forEach(cake => {
-            menuBlock2.innerHTML += `
-                <div class="menuInfoDiv" id="menuInfo">
-                    <a href=""><img src="../image/menuImg/menuInfo1.jpg"></a>
-                    <div class="menuInfoContent" id="menuInfoContent">
-                        <ul class="menuInfo" id="menuInfo">
-                            <li>名稱：${cake.cName}</li>
-                            <li>時間：2hr</li>
-                            <li>難度：${cake.level}</li>
-                            <li>價格：${cake.price}</li>
-                        </ul>
-                    </div>
+function kindCookie() {
+    kindFilter('餅乾');
+}
+//  價格排序ajax 
+function priceSortAsc() {
+    fetch('php/menu/priceasc.php')
+        .then(response => response.json())
+        .then(sortedCakes => {
+            renderCakes(sortedCakes);
+        })
+        .catch(error => console.error('請求失敗：', error));
+}
+function priceSortDesc() {
+    fetch('php/menu/pricedesc.php')
+        .then(response => response.json())
+        .then(sortedCakes => {
+            renderCakes(sortedCakes);
+        })
+        .catch(error => console.error('請求失敗：', error));
+}
+// 畫面render
+function renderCakes(cakes) {
+    var menuBlock2 = document.querySelector('.menuBlock2');
+    menuBlock2.innerHTML = '';
+
+    cakes.forEach(cake => {
+        menuBlock2.innerHTML += `
+            <div class="menuInfoDiv" id="menuInfo">
+                <a href=""><img src="../image/menuImg/menuInfo1.jpg"></a>
+                <div class="menuInfoContent" id="menuInfoContent">
+                    <ul class="menuInfo" id="menuInfo">
+                        <li>名稱：${cake.cName}</li>
+                        <li>時間：2hr</li>
+                        <li>難度：${cake.level}</li>
+                        <li>價格：${cake.price}</li>
+                    </ul>
                 </div>
-            `;
-        });
-    }
-    </script>
+            </div>
+        `;
+    });
+}
+</script>
 
 </html>

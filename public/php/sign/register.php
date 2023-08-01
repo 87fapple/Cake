@@ -1,5 +1,5 @@
 <?php
-require ('../db2.php');
+require ('../DB.php');
 
 $uname = $_REQUEST['uname'];
 $email = $_REQUEST['email'];
@@ -8,11 +8,7 @@ $pwd2 = $_REQUEST['pwd2'];
 $phone = $_REQUEST['phone'];
 
 
-
-$sql = "insert into userinfo (uname,pwd,email,phone) values(?,?,?,?)";
-$stmt = $mysqli->prepare($sql);
-$stmt->bind_param('ssss',  $uname,$pwd1, $email, $phone);
-$stmt->execute();
+DB::insert("insert into userinfo (uname,pwd,email,phone) values(?,?,?,?)",[$uname,$pwd1, $email, $phone]);
 
 header('location:/Cake/public/login.html');
 ?>
