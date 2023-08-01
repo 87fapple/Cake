@@ -22,6 +22,7 @@ DB::insert('insert into cake(cName,price,kind,cSize,cImg1,cImg2,feature,level,me
 value(?,?,?,?,?,?,?,?,?)',[$cName,$price,$kind,$cSize,$c1,$c2,$feature,$level,$meterial]);
 
 header('location:/Cake/public/php/sign/add.html');
+
 //查看圖片內容
 // if (($_FILES["cImg1"]["type"] == "image/gif")
 // || ($_FILES["cImg1"]["type"] == "image/jpeg")

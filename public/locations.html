@@ -5,24 +5,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/Cake/resources/css/nav_input_css.css">
-    <link rel="stylesheet" href="/Cake/resources/css/locations.css">
+    <link rel="stylesheet" href="../resources/css/navbar.css">
+    <link rel="stylesheet" href="../resources/css/locations.css">
+    <link rel="stylesheet" href="../resources/css/footer.css">
+    <link rel="stylesheet" href="../resources/css/topBtn.css">
+    <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
 </head>
 
 <body>
-    <div class="topnav">
-        <a href="/Cake/public/login.html">登入/註冊</a>
-        <a href="/Cake/public/Q&A.html">常見問題</a>
-        <a href="/Cake/public/Detail.html">商品介紹</a>
-        <a href="/Cake/public/reserve.html">預約課程</a>
-        <a href="/Cake/public/locations.html">分店資訊</a>
-    </div>
+    <!-- Back-to-Top Button -->
+    <button onclick="topFunction()" class="topBtn" id="topBtn"></button>
 
-    <img src="./pexels-zoosnow-5826506.jpg" alt="" id="pageimg">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbarTitle">
+            <a href="../public/mainpage.html"><img src="../image/icon-noBorder-whiteFont.png"></a>
+        </div>
+        <div class="hambuger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="navbarLink">
+            <ul>
+                <li><a href="../public/menu.php">產品介紹</a></li>
+                <li><a href="../public/locations.html">分店資訊</a></li>
+                <li><a href="../public/reserve.html">預約課程</a></li>
+                <li><a href="../public/Q&A.html">常見問題</a></li>
+                <li><a href="../public/login.html">登入會員</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    <h1>分店資訊</h1>
-    <p id="cts">預約請點擊導覽列的預約按鈕</p>
-    <div id="locations">
+
+    <div class="locContainer">
         <div class="card">
             <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14561.724673684103!2d120.62443844078581!3d24.156606954322648!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693def29e59835%3A0xa99bf8d338507b68!2z5Lit6I-v6Zu75L-h5a246Zmi6Ie65Lit5omA!5e0!3m2!1szh-TW!2stw!4v1689166673598!5m2!1szh-TW!2stw"
@@ -36,6 +54,8 @@
                     電話：01-11112222 Architect & Engineer
                     <br>
                     營業時間：10:00-21:00
+                    <br>
+                    店休時間：週一
                 </p>
             </div>
         </div>
@@ -51,6 +71,8 @@
                     電話：00-33334444
                     <br>
                     營業時間：10:00-21:00
+                    <br>
+                    店休時間：週一
                 </p>
             </div>
         </div>
@@ -67,13 +89,45 @@
                     電話：08-88887777
                     <br>
                     營業時間：10:00-21:00
+                    <br>
+                    店休時間：週一
                 </p>
             </div>
         </div>
     </div>
-    <br>
-    <br>
-    <br>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footerContainer">
+            <div class="footerRow">
+                <div class="footerCol">
+                    <h4>DIY蛋糕</h4>
+                    <ul>
+                        <li><a href="">關於我們</a></li>
+                        <li><a href="">常見問題</a></li>
+                    </ul>
+                </div>
+                <div class="footerCol">
+                    <h4>服務內容</h4>
+                    <ul>
+                        <li><a href="">立即預約</a></li>
+                        <li><a href="">產品介紹</a></li>
+                    </ul>
+                </div>
+                <div class="footerCol">
+                    <h4>聯絡我們</h4>
+                    <div class="socialLinks">
+                        <a href=""><i class="fab fa-facebook-f"></i></a>
+                        <a href=""><i class="fab fa-twitter"></i></a>
+                        <a href=""><i class="fab fa-instagram"></i></a>
+                        <a href=""><i class="fab fa-line"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
+<script src="../resources/js/navbar.js"></script>
+<script src="../resources/js/topBtn.js"></script>
 
 </html>

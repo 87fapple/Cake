@@ -17,46 +17,54 @@ $token = $_COOKIE['token'];
     <link rel="stylesheet" href="../resources/css/navbar.css">
     <link rel="stylesheet" href="../resources/css/history.css">
     <link rel="stylesheet" href="../resources/css/footer.css">
+    <link rel="stylesheet" href="../resources/css/topBtn.css">
+    <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://kit.fontawesome.com/6c4c2bf9f6.js" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
 
     <body>
-        <!-- Navbar -->
-        <nav class="navbar">
-            <div class="navbarTitle">
-                <a href="../public/mainpage.html">
-                    <img src="../image/icon-noBorder-whiteFont.png">
+     <!-- Back-to-Top Button -->
+    <button onclick="topFunction()" class="topBtn" id="topBtn"></button>
 
-                </a>
-            </div>
-            <div class="hambuger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-            <div class="navbarLink">
-                <ul>
-                    <li><a href="../pubilc/menu.html">產品介紹</a></li>
-                    <li><a href="../public/locations.html">分店資訊</a></li>
-                    <li><a href="../public/reserve.html">預約課程</a></li>
-                    <li><a href="../public/Q&A.html">常見問題</a></li>
-                    <li><a href="php/sign/logout.php">登出</a></li>
-                </ul>
-            </div>
-        </nav>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbarTitle">
+            <a href="../public/mainpage.html">
+                <img src="../image/icon-noBorder-whiteFont.png">
 
-        <div name="selecttop" id="sel">
-            <div href="#changeToppic" class="selectarea">修改首頁輪播</div>
-            <div href="#addProduct" class="selectarea">新增產品</div>
-            <div href="#modifyProduct" class="selectarea">修改產品資訊</div>
-            <div href="#allreserve" class="selectarea">顧客預約總覽</div>
-            <div class="selectarea"> 您好，<span>使用者</span></div>
+            </a>
         </div>
+        <div class="hambuger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="navbarLink">
+            <ul>
+                <li><a href="../public/menu.php">產品介紹</a></li>
+                <li><a href="../public/locations.html">分店資訊</a></li>
+                <li><a href="../public/reserve.html">預約課程</a></li>
+                <li><a href="../public/Q&A.html">常見問題</a></li>
+                <li><a href="../public/login.html">登入會員</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div name="selecttop" id="sel">
+        <a href="../public/admin.html" class="selectarea"><i style='font-size:24px'
+                class='fas'>&#xf1b0;</i>&nbsp更改會員資料</a>
+        <a href="../public/admin_addProduct.html" class="selectarea"><i style='font-size:24px'
+                class='fas'>&#xf1b0;</i>&nbsp預約紀錄</a>
+        <div class="selectarea"> 您好，<span>使用者</span></div>
+    </div>
 
         <div id="">
             <div id="">
-                <h2>預約紀錄</h2>
+                <h2>預約紀錄</hㄉ>
             </div>
 
             <table>
@@ -90,38 +98,38 @@ $token = $_COOKIE['token'];
 
 
             <br>
-            <br>
-            <br>
-            <!-- Footer -->
-            <footer class="footer">
-                <div class="footerContainer">
-                    <div class="footerRow">
-                        <div class="footerCol">
-                            <h4>DIY蛋糕</h4>
-                            <ul>
-                                <li><a href="">關於我們</a></li>
-                                <li><a href="">常見問題</a></li>
-                            </ul>
-                        </div>
-                        <div class="footerCol">
-                            <h4>服務內容</h4>
-                            <ul>
-                                <li><a href="">立即預約</a></li>
-                                <li><a href="">產品介紹</a></li>
-                            </ul>
-                        </div>
-                        <div class="footerCol">
-                            <h4>聯絡我們</h4>
-                            <div class="socialLinks">
-                                <a href=""><i class="fab fa-facebook-f"></i></a>
-                                <a href=""><i class="fab fa-twitter"></i></a>
-                                <a href=""><i class="fab fa-instagram"></i></a>
-                                <a href=""><i class="fab fa-line"></i></a>
-                            </div>
+        <br>
+        <br>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footerContainer">
+                <div class="footerRow">
+                    <div class="footerCol">
+                        <h4>DIY蛋糕</h4>
+                        <ul>
+                            <li><a href="">關於我們</a></li>
+                            <li><a href="">常見問題</a></li>
+                        </ul>
+                    </div>
+                    <div class="footerCol">
+                        <h4>服務內容</h4>
+                        <ul>
+                            <li><a href="">立即預約</a></li>
+                            <li><a href="">產品介紹</a></li>
+                        </ul>
+                    </div>
+                    <div class="footerCol">
+                        <h4>聯絡我們</h4>
+                        <div class="socialLinks">
+                            <a href=""><i class="fab fa-facebook-f"></i></a>
+                            <a href=""><i class="fab fa-twitter"></i></a>
+                            <a href=""><i class="fab fa-instagram"></i></a>
+                            <a href=""><i class="fab fa-line"></i></a>
                         </div>
                     </div>
                 </div>
-            </footer>
+            </div>
+        </footer>
     </body>
-
+    <script src="../resources/js/topBtn.js"></script>
 </html>
