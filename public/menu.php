@@ -125,14 +125,14 @@ $result = $mysqli->query($sql);
 <script src="../resources/js/topBtn.js"></script>
     
 <script>
-//  價格排序ajax 
+//  蛋糕種類篩選ajax 
 function kindCake() {
     fetch('php/menu/kindcake.php')
         .then(response => response.json())
         .then(sortedCakes => {
             renderCakes(sortedCakes);
         })
-        .catch(error => console.error('请求失败：', error));
+        .catch(error => console.error('請求失敗：', error));
 }
 function kindCookie() {
     fetch('php/menu/kindcookie.php')
@@ -140,7 +140,7 @@ function kindCookie() {
         .then(sortedCakes => {
             renderCakes(sortedCakes);
         })
-        .catch(error => console.error('请求失败：', error));
+        .catch(error => console.error('請求失敗：', error));
 }
 //  價格排序ajax 
 function priceSortAsc() {
@@ -149,7 +149,7 @@ function priceSortAsc() {
         .then(sortedCakes => {
             renderCakes(sortedCakes);
         })
-        .catch(error => console.error('请求失败：', error));
+        .catch(error => console.error('請求失敗：', error));
 }
 function priceSortDesc() {
     fetch('php/menu/pricedesc.php')
@@ -157,7 +157,7 @@ function priceSortDesc() {
         .then(sortedCakes => {
             renderCakes(sortedCakes);
         })
-        .catch(error => console.error('请求失败：', error));
+        .catch(error => console.error('請求失敗：', error));
 }
 // 畫面render
 function renderCakes(cakes) {
