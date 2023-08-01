@@ -69,8 +69,8 @@ $result = $mysqli->query($sql);
             <div class="dropdown">
                 <button class="dropbtn">排序方式</button>
                 <div class="dropdown-content">
-                    <a herf="javascript:void(0);" onclick="priceSortAsc()">價格：由低到高</a>
-                    <a herf="javascript:void(0);" onclick="priceSortDesc()">價格：由高到低</a>
+                    <a herf="javascript:void(0);" onclick="priceSort('asc')">價格：由低到高</a>
+                    <a herf="javascript:void(0);" onclick="priceSort('desc')">價格：由高到低</a>
                 </div>
             </div>
         </div>
@@ -151,23 +151,17 @@ function kindCake() {
 function kindCookie() {
     kindFilter('餅乾');
 }
-//  價格排序ajax 
-function priceSortAsc() {
-    fetch('php/menu/priceasc.php')
+
+// 價格排序2.0
+function priceSort(sortType) {
+    fetch(`php/menu/pricesort.php?sortType=${sortType}`)
         .then(response => response.json())
         .then(sortedCakes => {
             renderCakes(sortedCakes);
         })
         .catch(error => console.error('請求失敗：', error));
 }
-function priceSortDesc() {
-    fetch('php/menu/pricedesc.php')
-        .then(response => response.json())
-        .then(sortedCakes => {
-            renderCakes(sortedCakes);
-        })
-        .catch(error => console.error('請求失敗：', error));
-}
+
 // 畫面render
 function renderCakes(cakes) {
     var menuBlock2 = document.querySelector('.menuBlock2');

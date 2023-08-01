@@ -5,7 +5,7 @@ $cid = $_REQUEST['cid'];
 
 $sql = 'SELECT * FROM cake WHERE cid=?';
 $stmt = $mysqli->prepare($sql);
-$stmt->bind_param('s', $kind);
+$stmt->bind_param('s', $cid);
 $stmt->execute();
 
 $result = $stmt->get_result();
