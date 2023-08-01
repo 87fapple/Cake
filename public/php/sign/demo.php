@@ -17,7 +17,6 @@ where token = '4732438d-2c8a-11ee-83bb-0242ac110004'
 ";
 
 $stmt = $mysqli->prepare($sql);
-// $stmt->bind_param('s', $token);
 $stmt->execute();
 $result = $stmt->get_result();
 
