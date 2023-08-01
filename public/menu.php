@@ -12,8 +12,7 @@ $result = $mysqli->query($sql);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
-    <link rel="stylesheet" href="../resources/css/menu.css">   
-    <link rel="stylesheet" href="../resources/css/kindNavbarStyle.css">   
+    <link rel="stylesheet" href="../resources/css/menuStyle.css">   
     <link rel="stylesheet" href="../resources/css/navbar.css">
     <link rel="stylesheet" href="../resources/css/footer.css">
     <link rel="stylesheet" href="../resources/css/topBtn.css">
@@ -58,7 +57,7 @@ $result = $mysqli->query($sql);
             <div class="kindBlock">
                 <div><b>選擇種類：</b></div> 
                 <label class="container">蛋糕
-                    <input type="radio" checked="checker" name="radio" id="cake" onclick="kindCake()">   
+                    <input type="radio" checked="checked" name="radio" id="cake" onclick="kindCake()">   
                     <span class="checkmark"></span>
                 </label>
                 <label class="container">餅乾
