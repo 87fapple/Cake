@@ -32,7 +32,7 @@
 .kindNavbar {
     width: 75%;
     height: 60px;
-    background-color: #ffa237;
+    background-color: #797979;
     margin: 42px 12.5%;
     display: flex;
     justify-content: space-evenly;
@@ -76,11 +76,11 @@
 }
 
 .menuInfoContent ul {
-    margin: 8% 20%;
+    margin: 8% 5%;
 }
 
 .menuInfoContent li {
     list-style: none;
     padding: 8px 0;
-    font-size: 24px;
+    font-size: 20px;
 }

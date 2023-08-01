@@ -12,14 +12,125 @@ $result = $mysqli->query($sql);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
+    <link rel="stylesheet" href="../resources/css/menu.css">   
+    <link rel="stylesheet" href="../resources/css/kindNavbarStyle.css">   
     <link rel="stylesheet" href="../resources/css/navbar.css">
     <link rel="stylesheet" href="../resources/css/footer.css">
     <link rel="stylesheet" href="../resources/css/topBtn.css">
-    <link rel="stylesheet" href="../resources/css/menuStyle.css">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 
+<!-- <style>
+    .kindBlock {
+        display: flex;
+    }
+
+    .kindBlock div {
+        margin: 16px;
+        font-size: 18px;
+    }
+
+
+    /* The container */
+    .container {
+    display: block;
+    position: relative;
+    top: 16px;
+    padding-left: 32px;
+    margin-right: 8px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    }
+
+    /* Hide the browser's default radio button */
+    .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    }
+
+    /* Create a custom radio button */
+    .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input ~ .checkmark {
+    background-color: #ffbf00;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .container input:checked ~ .checkmark {
+    background-color: #ffa237;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .container input:checked ~ .checkmark:after {
+    display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .container .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+    }
+
+    .dropbtn {
+    background-color: #ffa237;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    }
+
+    .dropdown {
+    position: relative;
+    display: inline-block;
+    }
+
+    .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    }
+
+    .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    }
+
+    .dropdown-content a:hover {background-color: #ddd;}
+    .dropdown:hover .dropdown-content {display: block;}
+    .dropdown:hover .dropbtn {background-color: #ffbf00;}
+</style> -->
 
 <body>
     <!-- Back-to-Top Button -->
@@ -37,7 +148,7 @@ $result = $mysqli->query($sql);
         </div>
         <div class="navbarLink">
             <ul>
-                <li><a href="../public/menu.html">產品介紹</a></li>
+                <li><a href="../public/menu.php">產品介紹</a></li>
                 <li><a href="../public/locations.html">分店資訊</a></li>
                 <li><a href="../public/reserve.html">預約課程</a></li>
                 <li><a href="../public/Q&A.html">常見問題</a></li>
@@ -55,17 +166,26 @@ $result = $mysqli->query($sql);
         </div>
         <!-- Type Navbar -->
         <div class="kindNavbar" id="kindNavbar">
-            <div>
-                <input type="checkbox" name="cake" id="cake" onclick="kindCake()">    
-                <label for="cake">蛋糕</label>
+            <div class="kindBlock">
+                <div><b>選擇種類：</b></div> 
+                <label class="container">蛋糕
+                    <input type="radio" checked="checker" name="radio" id="cake" onclick="kindCake()">   
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container">餅乾
+                    <input type="radio" name="radio" id="cookie" onclick="kindCookie()">
+                    <span class="checkmark"></span>
+                </label>
             </div>
-            <div>
-                <input type="checkbox" name="cookie" id="cookie" onclick="kindCookie()">
-                <label for="cookie">餅乾</label>
+            <div class="dropdown">
+                <button class="dropbtn">排序方式</button>
+                <div class="dropdown-content">
+                    <a herf="javascript:void(0);" onclick="priceSortAsc()">價格：由低到高</a>
+                    <a herf="javascript:void(0);" onclick="priceSortDesc()">價格：由高到低</a>
+                </div>
             </div>
-            <button onclick="priceSortAsc()">按價格排序低到高</button>
-            <button onclick="priceSortDesc()">按價格排序高到低</button>
         </div>
+
         <!-- Menu Info -->
         <div class="menuBlock2">
         <?php
@@ -125,14 +245,14 @@ $result = $mysqli->query($sql);
 <script src="../resources/js/topBtn.js"></script>
     
 <script>
-//  價格排序ajax 
+//  選種類
 function kindCake() {
     fetch('php/menu/kindcake.php')
         .then(response => response.json())
         .then(sortedCakes => {
             renderCakes(sortedCakes);
         })
-        .catch(error => console.error('请求失败：', error));
+        .catch(error => console.error('請求失敗：', error));
 }
 function kindCookie() {
     fetch('php/menu/kindcookie.php')
@@ -140,7 +260,7 @@ function kindCookie() {
         .then(sortedCakes => {
             renderCakes(sortedCakes);
         })
-        .catch(error => console.error('请求失败：', error));
+        .catch(error => console.error('請求失敗：', error));
 }
 //  價格排序ajax 
 function priceSortAsc() {
@@ -149,7 +269,7 @@ function priceSortAsc() {
         .then(sortedCakes => {
             renderCakes(sortedCakes);
         })
-        .catch(error => console.error('请求失败：', error));
+        .catch(error => console.error('請求失敗：', error));
 }
 function priceSortDesc() {
     fetch('php/menu/pricedesc.php')
@@ -157,7 +277,7 @@ function priceSortDesc() {
         .then(sortedCakes => {
             renderCakes(sortedCakes);
         })
-        .catch(error => console.error('请求失败：', error));
+        .catch(error => console.error('請求失敗：', error));
 }
 // 畫面render
 function renderCakes(cakes) {
