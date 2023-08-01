@@ -1,8 +1,14 @@
 <?php
 require_once('../db2.php');
 
-$sql = 'SELECT * FROM cake WHERE id=';
-$result = $mysqli->query($sql);
+$cid = $_REQUEST['cid'];
+
+$sql = 'SELECT * FROM cake WHERE cid=?';
+$stmt = $mysqli->prepare($sql);
+$stmt->bind_param('s', $kind);
+$stmt->execute();
+
+$result = $stmt->get_result();
 
 $cakes = array();
 

@@ -2,7 +2,7 @@
 require_once('../db2.php');
 
 // 获取从前端传递过来的查询种类参数
-$kind = $_GET['kind'];
+$kind = $_REQUEST['kind'];
 
 $sql = "SELECT * FROM cake WHERE kind = ?";
 $stmt = $mysqli->prepare($sql);
