@@ -20,6 +20,8 @@ END $$
 
 DELIMITER ;
 
+新增訂單 v1.0
+
 DROP PROCEDURE IF EXISTS createOrder;
 DELIMITER $$
 
@@ -36,7 +38,40 @@ BEGIN
         IF (COALESCE(x, 0) + pNum <= y) THEN
             insert into orders (uid, sid, reserveTime, reserveDate, people, oToken) values (userId, storeId, rTime, rDate, pNum, orderToken);
             SELECT 'reserveProduct.php' as result, orderToken as orderToken;
-        	commit;
+            commit;
+        ELSE
+            SELECT concat('日期:<',rDate,'>時段:<',rTime,'>剩餘人數不足') AS result;
+        	ROLLBACK;
+        END IF;
+END $$
+
+DELIMITER ;
+
+新增訂單(同一筆訂單修正) v2.0
+
+DROP PROCEDURE IF EXISTS createOrder;
+DELIMITER $$
+
+CREATE PROCEDURE createOrder(userId INT, storeId INT, rTime VARCHAR(20), rDate VARCHAR(20), pNum INT, checkedToken VARCHAR(40))
+BEGIN
+    DECLARE orderToken varchar(40) DEFAULT uuid();
+    DECLARE x INT DEFAULT 0;
+    DECLARE y INT DEFAULT 0;
+
+    START TRANSACTION;
+    	SELECT SUM(people) INTO x FROM orders WHERE sid = storeId AND reserveTime = rTime AND reserveDate = rDate for update;
+        SELECT person INTO y FROM store WHERE sid = storeId;
+    
+        IF (COALESCE(x, 0) + pNum <= y) THEN
+            IF checkedToken <> "0" THEN 
+                UPDATE orders SET uid = userId, sid = storeId, reserveTime = rTime, reserveDate = rDate, people = pNum WHERE oToken = checkedToken;
+                SELECT 'reserveProduct.php' as result, checkedToken as orderToken;
+                commit;
+            ELSE
+                insert into orders (uid, sid, reserveTime, reserveDate, people, oToken) values (userId, storeId, rTime, rDate, pNum, orderToken);
+                SELECT 'reserveProduct.php' as result, orderToken as orderToken;
+        	    commit;
+            END IF;
         ELSE
             SELECT concat('日期:<',rDate,'>時段:<',rTime,'>剩餘人數不足') AS result;
         	ROLLBACK;

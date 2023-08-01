@@ -1,0 +1,35 @@
+select userinfo.uid,orders.people,orders.reserveDate,orders.reserveTime,store.location ,cake.cName,userinfo.token
+FROM 
+(
+    (
+       (
+    	(
+            (userinfo INNER JOIN orders 
+				ON userinfo.uid = orders.uid
+            )
+            INNER join orderlist 
+            ON orders.oid = orderlist.oid
+        )
+        	INNER JOIN cake 
+            ON orderlist.cid = cake.cid
+        )
+             INNER JOIN storetocake 
+            ON cake.cid = storetocake.cid
+	)
+             INNER JOIN store 
+            ON storetocake.sid = store.sid
+)where token='4732438d-2c8a-11ee-83bb-0242ac110004'
+--------------------------------------------------------------------
+
+select orders.uid,orders.people,orders.reserveDate,orders.reserveTime,store.location ,cake.cName 
+from orders 
+inner join userinfo  on userinfo.uid = orders.uid
+LEFT join orderlist on orders.oid = orderlist.oid
+LEFT join cake on cake.cid = orderlist.cid
+LEFT join storetocake on storetocake.cid = orderlist.cid
+LEFT join store on store.sid = storetocake.sid
+where orders.uid='1'
+
+
+
+
