@@ -56,7 +56,6 @@ var_dump($cInfo[0]);
             })
 
             document.getElementById("addnewdiv").onclick = function (e) {
-                function 
                 let view4 = '';
                 view4 = `
                 <div id="newdiv">
@@ -88,8 +87,6 @@ var_dump($cInfo[0]);
                     })
                     document.getElementById("cakeName").innerHTML = view3
                 })
-
-            
         });
 
         window.onload = function (e) {

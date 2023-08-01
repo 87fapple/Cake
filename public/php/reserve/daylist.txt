@@ -37,5 +37,9 @@ select eImg from expImage where eid = 2;
 取得 maybe name test[1-6] num[1-6]
 個別insert into 資料表 
 
-
-
+8/1
+7/31 
+限制選擇份量限制JQ完成(v
+按下新增按鈕 多一組div包含產品名以及選擇數量(完成一半 有多div但id等值問題 待解決
+try加入變數 按一次加一>加入value等
+上面可行>限制次數 xx功能再想想
