@@ -1,7 +1,7 @@
 <?php
 require_once('../db2.php');
 
-$sql = 'SELECT * FROM cake WHERE kind="蛋糕"';
+$sql = 'SELECT * FROM cake WHERE id=';
 $result = $mysqli->query($sql);
 
 $cakes = array();

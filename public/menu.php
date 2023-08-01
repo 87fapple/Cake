@@ -245,22 +245,22 @@ $result = $mysqli->query($sql);
 <script src="../resources/js/topBtn.js"></script>
     
 <script>
-//  選種類
-function kindCake() {
-    fetch('php/menu/kindcake.php')
+// 蛋糕種類篩選 2.0
+function kindFilter(kind) {
+    fetch(`php/menu/kindfilter.php?kind=${kind}`)
         .then(response => response.json())
         .then(sortedCakes => {
             renderCakes(sortedCakes);
         })
         .catch(error => console.error('請求失敗：', error));
 }
+
+function kindCake() {
+    kindFilter('蛋糕');
+}
+
 function kindCookie() {
-    fetch('php/menu/kindcookie.php')
-        .then(response => response.json())
-        .then(sortedCakes => {
-            renderCakes(sortedCakes);
-        })
-        .catch(error => console.error('請求失敗：', error));
+    kindFilter('餅乾');
 }
 //  價格排序ajax 
 function priceSortAsc() {
