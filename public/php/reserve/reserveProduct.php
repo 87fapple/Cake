@@ -12,8 +12,6 @@ $cInfo = [];
 DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInfo) {
     $cInfo[] = $rows[0];
 }, [$oToken]);
-
-var_dump($cInfo[0]);
 ?>
 
 
@@ -28,7 +26,14 @@ var_dump($cInfo[0]);
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
     <script>
-        $(function () {
+        const cInfoSid = <?= $cInfo[0]["sid"] ?>;
+
+        $(function() {
+            $("#hidden").hide();
+            let data;
+            let numFilled = false;
+            let nameFilled = false;
+
             var people = $("#people").val();
             let view1 = '<option style="display: none;">請選擇製作份數</option>';
             var numList = [];
@@ -39,67 +44,117 @@ var_dump($cInfo[0]);
             }
             document.getElementById("makeNum").innerHTML = view1
 
-            $("#makeNum").on('change', function (e) {
-                var mNum = $("#makeNum option:selected");
-                var mNumVal = mNum.val();
+            $("#makeNum").on('change', function(e) {
+                var mNum = $("#makeNum option:selected").val();
                 var people = $("#people").val();
-                let view2 = '';
 
-                $("#companion").val(people - mNumVal);
-
-                for (var i = 1; i <= mNumVal; i++) {
-                    view2 += `
-                            <option value=${i}>${i}份</option>
-                        `;
-                }
-                document.getElementById("num").innerHTML = view2
+                universalNums();
+                $("#companion").val(people - mNum);
+                $("#hidden").show();
             })
 
-            document.getElementById("addnewdiv").onclick = function (e) {
-                let view4 = '';
-                view4 = `
-                <div id="newdiv">
-                    <label for="newCakeName">選擇產品</label>
-                    <select id="newCakeName" name="newCakeName">
-                        <option value="皮卡蛋糕">皮卡蛋糕</option>
-                    </select>
-                    <label for="num">份數</label>
-                    <select id="num" name="num">
-                        <option value="1">一份</option>
-                        <option value="2">兩份</option>
-                    </select>
-                </div>
-                `;
-                $("#baseChoose").append(view4);
-            }
-
-            fetch(`storeToCake_sql.php?indexInfo=<?= $cInfo[0]["sid"] ?>`,)
-                .then(function (response) {
+            fetch(`storeToCake_sql.php?indexInfo=${cInfoSid}`)
+                .then(function(response) {
                     return response.json();
                 })
-                .then(function (data) {
-                    console.log(data);
-                    let view3 = '<option style="display: none;">請選擇產品</option>';
-                    data.forEach(function (e2) {
-                        view3 += `
-                            <option value="${e2.cid}">${e2.cName}</option>
-                        `
-                    })
-                    document.getElementById("cakeName").innerHTML = view3
+                .then(function(responseData) {
+                    data = responseData;
+                    universalOptions();
                 })
+
+            var nextNumber = (function() {
+                var lastNumber = 0;
+                return function() {
+                    lastNumber += 1;
+                    return lastNumber;
+                };
+            })();
+
+            document.getElementById("addnewdiv").onclick = function(e) {
+                var x = 0;
+                var mNum = $("#makeNum option:selected").val();
+                let view4 = '';
+
+                x = nextNumber();
+
+                if (x < mNum) {
+                    view4 = `
+                    <div id="newdiv${x}">
+                        <label for="newCakeName${x}">選擇產品</label>
+                        <select id="newCakeName${x}" name="newCakeName${x}">
+                        </select>
+                        <label for="newNum${x}">份數</label>
+                        <select id="newNum${x}" name="newNum${x}">
+                        </select>
+                    </div>
+                    `;
+                    $("#baseChoose").append(view4);
+                    universalOptions(x);
+                    universalNums(x);
+                }
+                if (x >= mNum - 1) {
+                    $("#addnewdiv").hide();
+                }
+            };
+
+            function universalOptions(x) {
+                let view3 = '<option style="display: none;">請選擇產品</option>';
+                data.forEach(function(e) {
+                    view3 += `
+                            <option value="${e.cid}">${e.cName}</option>
+                        `
+                });
+
+                if (!nameFilled) {
+                    const cakeNameEle = document.getElementById("cakeName");
+                    if (cakeNameEle) {
+                        cakeNameEle.innerHTML = view3;
+                        nameFilled = true;
+                    }
+                }
+
+                const newCakeNameEle = document.getElementById("newCakeName" + x);
+                if (newCakeNameEle) {
+                    newCakeNameEle.innerHTML = view3;
+                }
+            }
+
+            function universalNums(x) {
+                var mNum = $("#makeNum option:selected").val();
+
+                let view2 = '';
+                for (let i = 1; i <= mNum; i++) {
+                    view2 += `
+                        <option value=${i}>${i}份</option>
+                    `;
+                }
+
+                if (!numFilled) {
+                    const numElement = document.getElementById("num");
+                    if (numElement) {
+                        numElement.innerHTML = view2;
+                        numFilled = true;
+                    }
+                }
+
+                const newNumElement = document.getElementById("newNum" + x);
+                if (newNumElement) {
+                    newNumElement.innerHTML = view2;
+                }
+            }
         });
 
-        window.onload = function (e) {
+        window.onload = function(e) {
             e.preventDefault();
-            submitBtn.onclick = function (e) {
+            submitBtn.onclick = function(e) {
                 fetch('insertOrdersCake.php', {
-                    method: "POST",
-                    body: new FormData(productForm)
-                })
-                    .then(function (response) {
+                        method: "POST",
+                        body: new FormData(productForm)
+                    })
+                    .then(function(response) {
                         return response.text();
                     })
-                    .then(function (data) {
+                    .then(function(data) {
                         console.log(data);
                         // if (data == "reserveProduct.php") {
                         //     location.href = data;
@@ -129,6 +184,7 @@ var_dump($cInfo[0]);
     <div class="container">
         <form id="productForm">
             <div>目前預定人數
+                <input type="hidden" id="oid" name="oid" value="<?= $cInfo[0]["oid"] ?>">
                 <input type="text" id="people" value="<?= $cInfo[0]["people"] ?>" disabled>
                 <label for="makeNum">製作份數</label>
                 <select id="makeNum" name="makeNum">
@@ -136,34 +192,33 @@ var_dump($cInfo[0]);
                 <span>陪同人數:</span><input type="text" id="companion" name="companion" value="0" readonly="readonly">
             </div>
             <div>注意：一份甜點最多一位陪同，將酌收陪同費120元/人。</div>
-            <div id="baseChoose">
-                <label for="cakeName">選擇產品</label>
-                <select id="cakeName" name="cakeName">
-                </select>
-                <label for="num">份數</label>
-                <select id="num" name="num">
-                    <option style="display: none;">製作份數</option>
-                </select>
+            <div id="hidden">
+                <div id="baseChoose">
+                    <label for="cakeName">選擇產品</label>
+                    <select id="cakeName" name="cakeName">
+                    </select>
+                    <label for="num">份數</label>
+                    <select id="num" name="num">
+                        <option style="display: none;">製作份數</option>
+                    </select>
+                </div>
+
+                <input type="button" id="addnewdiv" value="新增品項">
+                <div>注意：若選取的甜點份數未滿製作份數，剩餘份數可現場到實體店面再做確認製作項目</div>
+                <br>
+
+                <div id="newdiv" style="display: none;">
+                    <label for="newCakeName">選擇產品</label>
+                    <select id="newCakeName" name="newCakeName">
+                    </select>
+                    <label for="newNum">份數</label>
+                    <select id="newNum" name="newNum">
+                    </select>
+                </div>
+
+                <br>
+                <input type="button" value="確認產品" id="submitBtn">
             </div>
-
-            <input type="button" id="addnewdiv" value="新增品項">
-            <div>注意：若選取的甜點份數未滿製作份數，剩餘份數可現場到實體店面再做確認製作項目</div>
-
-            <!-- <div id="newdiv">
-                <label for="newCakeName">選擇產品</label>
-                <select id="newCakeName" name="newCakeName">
-                    <option value="皮卡蛋糕">皮卡蛋糕</option>
-                </select>
-                <label for="num">份數</label>
-                <select id="num" name="num">
-                    <option value="1">一份</option>
-                    <option value="2">兩份</option>
-                </select>
-            </div> -->
-            <br>
-
-            <br>
-            <input type="button" value="確認產品" id="submitBtn">
         </form>
     </div>
     <script>
