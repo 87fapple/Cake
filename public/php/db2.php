@@ -1,6 +1,6 @@
 <?php
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-$host = "localhost"; //"127.0.0.1:33306"; 
+$host = "127.0.0.1:33306"; //"127.0.0.1:33306"; 
 $user = "root";
 $pwd  = "";
 $db   = "cake";
