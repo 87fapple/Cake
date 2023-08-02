@@ -26,13 +26,19 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
     <script>
-        const cInfoSid = <?= $cInfo[0]["sid"] ?>;
-
         $(function() {
+            const cInfoSid = <?= $cInfo[0]["sid"] ?>;
             $("#hidden").hide();
             let data;
-            let numFilled = false;
             let nameFilled = false;
+
+            const nextNumber = (function() {
+                var lastNumber = 0;
+                return function() {
+                    lastNumber += 1;
+                    return lastNumber;
+                };
+            })();
 
             var people = $("#people").val();
             let view1 = '<option style="display: none;">請選擇製作份數</option>';
@@ -48,7 +54,11 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                 var mNum = $("#makeNum option:selected").val();
                 var people = $("#people").val();
 
-                universalNums();
+                // console.log(mNum);
+                for (let i = 0; i < mNum; i++) {
+                    universalNums(i);
+                }
+
                 $("#companion").val(people - mNum);
                 $("#hidden").show();
             })
@@ -61,14 +71,6 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                     data = responseData;
                     universalOptions();
                 })
-
-            var nextNumber = (function() {
-                var lastNumber = 0;
-                return function() {
-                    lastNumber += 1;
-                    return lastNumber;
-                };
-            })();
 
             document.getElementById("addnewdiv").onclick = function(e) {
                 var x = 0;
@@ -122,6 +124,7 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             function universalNums(x) {
                 var mNum = $("#makeNum option:selected").val();
 
+                // console.log(mNum);
                 let view2 = '';
                 for (let i = 1; i <= mNum; i++) {
                     view2 += `
@@ -129,12 +132,9 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                     `;
                 }
 
-                if (!numFilled) {
-                    const numElement = document.getElementById("num");
-                    if (numElement) {
-                        numElement.innerHTML = view2;
-                        numFilled = true;
-                    }
+                const numElement = document.getElementById("num");
+                if (numElement) {
+                    numElement.innerHTML = view2;
                 }
 
                 const newNumElement = document.getElementById("newNum" + x);
@@ -147,25 +147,25 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
         window.onload = function(e) {
             e.preventDefault();
             submitBtn.onclick = function(e) {
-                fetch('insertOrdersCake.php', {
-                        method: "POST",
-                        body: new FormData(productForm)
-                    })
-                    .then(function(response) {
-                        return response.text();
-                    })
-                    .then(function(data) {
-                        console.log(data);
-                        // if (data == "reserveProduct.php") {
-                        //     location.href = data;
-                        // } else {
-                        //     let view = '';
-                        //     view += `
-                        //         <div>${data}</div>
-                        //     `;
-                        //     document.getElementById("test").innerHTML = view
-                        // }
-                    })
+                // fetch('insertOrdersCake.php', {
+                //         method: "POST",
+                //         body: new FormData(productForm)
+                //     })
+                //     .then(function(response) {
+                //         return response.text();
+                //     })
+                //     .then(function(data) {
+                //         console.log(data);
+                //         // if (data == "reserveProduct.php") {
+                //         //     location.href = data;
+                //         // } else {
+                //         //     let view = '';
+                //         //     view += `
+                //         //         <div>${data}</div>
+                //         //     `;
+                //         //     document.getElementById("test").innerHTML = view
+                //         // }
+                //     })
             }
         }
     </script>
