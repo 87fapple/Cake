@@ -12,14 +12,16 @@ $kind = $_REQUEST['kind'];
 $cSize = $_REQUEST['cSize'];
 $price = $_REQUEST['price'];
 $feature = $_REQUEST['feature'];
+$material = $_REQUEST['material'];
+// $meterial= '我好帥';
 $cImg1 = $_FILES['cImg1']['tmp_name'];
 $cImg2 = $_FILES['cImg2']['tmp_name'];
-$meterial= '我好帥';
 
 $c1 = file_get_contents($cImg1);
 $c2 = file_get_contents($cImg2);
-DB::insert('insert into cake(cName,price,kind,cSize,cImg1,cImg2,feature,level,meterial)
-value(?,?,?,?,?,?,?,?,?)',[$cName,$price,$kind,$cSize,$c1,$c2,$feature,$level,$meterial]);
+
+DB::insert('insert into cake(cName,price,kind,cSize,cImg1,cImg2,feature,level,material)
+value(?,?,?,?,?,?,?,?,?)',[$cName,$price,$kind,$cSize,$c1,$c2,$feature,$level,$material]);
 
 header('location:/Cake/public/php/sign/add.html');
 
