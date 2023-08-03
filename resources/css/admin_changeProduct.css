@@ -36,7 +36,7 @@
 
 
 h2 {
-    color: #885500;
+    color: #7a5500;
     background-color:  #ffbf00;
     padding: 1.1rem;
     margin: 0;
@@ -47,7 +47,7 @@ h2 {
 
 #changeForm {
     width: 70%;
-    height: 670px;
+    height: 740px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 1rem;
@@ -94,7 +94,7 @@ select {
     position: relative;
     float: left;
     height: 520px; 
-    margin-top: 2rem;
+    margin-top: 1rem;
     margin-left: 3.5rem;
     margin-bottom: 1rem;
     padding: 1rem 2rem;
@@ -132,7 +132,7 @@ select {
     padding: 10px 30px;
     height: 3rem;
     position: relative;
-    top: -1rem;
+    
   }
 
 div>h2 {

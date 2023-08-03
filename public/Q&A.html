@@ -7,9 +7,17 @@
   <link rel="stylesheet" href="../resources/css/QA.css">
   <link rel="stylesheet" href="../resources/css/navbar.css">
   <link rel="stylesheet" href="../resources/css/footer.css">
+  <link rel="stylesheet" href="../resources/css/topBtn.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+
 </head>
 
 <body>
+  <!-- Back-to-Top Button -->
+  <button onclick="topFunction()" class="topBtn" id="topBtn"></button>
+
   <!-- Navbar -->
   <nav class="navbar">
     <div class="navbarTitle">
@@ -24,7 +32,7 @@
     </div>
     <div class="navbarLink">
       <ul>
-        <li><a href="../pubilc/menu.html">產品介紹</a></li>
+        <li><a href="../public/menu.php">產品介紹</a></li>
         <li><a href="../public/locations.html">分店資訊</a></li>
         <li><a href="../public/reserve.html">預約課程</a></li>
         <li><a href="../public/Q&A.html">常見問題</a></li>
@@ -34,8 +42,9 @@
   </nav>
   <img src="../image/icon-noBorder-whiteFont.png" alt="" id="mainPic">
   <br>
+  <h2>常見問題</h2>
   <div class="qaarea">
-    <h2>常見問題</h2>
+
 
     <button class="accordion">● 要怎麼加入會員？</button>
     <div class="panel">
@@ -54,7 +63,7 @@
 
     <button class="accordion">● 請問我不知道要做什麼甜點，可以現場決定嗎？</button>
     <div class="panel">
-      <p>因為所需要材料不同，為防當下材料不足，恕無法現場決定。請決定好再送出表單，小浣熊感謝您！</p>
+      <p>因為所需要材料不同，為防當下材料不足，恕無法現場決定。請決定好再送出表單，Raccoon DIY感謝您！</p>
     </div>
 
     <button class="accordion">● 請問可以一起做一份甜點嗎？</button>
@@ -98,7 +107,7 @@
 
 
 
-
+  <script src="../resources/js/topBtn.js"></script>
   <script>
     var acc = document.getElementsByClassName("accordion");
     var i;

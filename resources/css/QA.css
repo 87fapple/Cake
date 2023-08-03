@@ -5,7 +5,7 @@
 }
 
 .accordion {
-    background-color: #ffd26a;
+    background-color: #ffd761;
     color: #444;
     cursor: pointer;
     padding: 18px;
@@ -18,26 +18,32 @@
     font-weight: bold;
     border-radius: 3px;
     margin-top: 5px;
+    border-radius: 10px;
 }
 
 .active,
-  .accordion:hover {
-    background-color: #ffdb87;
+.accordion:hover {
+    background-color: #ffedc4;
 }
 
 .panel {
     padding: 0 18px;
     display: none;
-    border: #ffe29dde solid 3px;
+    border: #ccc solid 1px;
+    border-top: 0;
     overflow: hidden;
+    border-radius: 10px;
 }
 
 h2 {
-  color: #7a5500;
-  background-color:  #ffa51e;
-  padding: 0.5rem;
-  border-radius: 3px;
-  text-align: center;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    color: #885500;
+    background-color: #ffbf00;
+    padding: 1.1rem;
+    border-radius: 10px;
+    text-align: center;
 }
 
 #mainPic {

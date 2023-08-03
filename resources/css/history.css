@@ -1,38 +1,56 @@
-#sel {
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
-    
-    flex-direction: row;
-    justify-content: center;
-    margin: 2rem 10rem;
-    padding: 2rem;
-}
-
+/* 選擇按鈕CSS-s */
 .selectarea {
-    background-color: #ffe495c4;
-    width: 9rem;
+    background-color: #ffbf00;
+    width: 11rem;
+    padding: 5px;
     display: block;
     margin-left: 3rem;
-    border-radius: 3px;
+    border-radius: 20px;
     text-align: center;
     font-size: large;
+    border: #b98500 solid 2px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
 }
+
+.selectarea:hover {
+    background-color: #ff8a60c4;
+    border: #f79a64c4 solid 2px;
+    cursor: pointer;
+    /* box-shadow: 0px 0px 7px rgb(154, 95, 0); */
+}
+
+#sel {
+    display: flex;
+    margin-left: 6rem;
+    margin-right: 6rem;
+    margin-top: 6rem;
+    /* background-color: #ffbf00; */
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 3px;
+    padding: 2rem;
+}
+/* 選擇按鈕CSS-e */
 
 div>h2 {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    color: #7a5500;
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    color: #885500;
     background-color:  #ffb01e;
     width: 30rem;
-    background: radial-gradient(circle, #ffb01e, #ffb01e, #ffffff);
+    background:  #ffb01e;
 }
 
 table {
     margin-right: auto;
     margin-left: auto;
     text-align: center;
+
 }
 
 #button {
@@ -55,19 +73,6 @@ table {
     width: 20rem ;
     word-wrap:break-word;
     
-}
-
-/* admin_reserveHistory Part */
-#sel {
-    display: flex;
-    margin-left: 6rem;
-    margin-right: 6rem;
-    margin-top: 6rem;
-    background-color: #ffbf00;
-    flex-direction: row;
-    justify-content: center;
-    border-radius: 3px;
-    padding: 2rem;
 }
 
 .row {

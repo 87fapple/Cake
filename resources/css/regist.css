@@ -17,13 +17,13 @@ input[type=phone] {
   margin: 5px 0 22px 0;
   display: inline-block;
   border: none;
-  background: #f1f1f1;
+  background: #ffffff;
 }
 
 /* Add a background color when the inputs get focus */
 input[type=text]:focus,
 input[type=password]:focus {
-  background-color: #fff7f3;
+  background-color: #ffffff;
   outline: none;
 }
 
@@ -36,11 +36,12 @@ input[type=password]:focus {
   margin-left: 25%;
   margin-right: 25%;
   border: none;
+  border-radius: 20px;
   cursor: pointer;
   width: 50%;
-  opacity: 0.9;
+  opacity: 0.8;
   text-align: center;
-  
+  font-weight: bold;
 }
 
 button:hover {
@@ -55,30 +56,30 @@ button:hover {
 
 }
 
-/* Modal Content/Box */
 .modal-content {
   
-  margin: 6% auto 15% auto;
-  border: 2px solid #e7b81f;
-  background-color: #ffe6c4;
+  margin: 6% auto 5% auto;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: #fff5d6c4;
   width: 50%;
   padding-bottom: 3rem;
 
 }
 
-/* Style the horizontal ruler */
 hr {
   border: 1px solid #ca9b00;
   margin-bottom: 25px;
-  width: 90%;
+  width: 95%;
 }
 
 h2 {
-  text-align: center;
- background-color: #e7b81f;
-  color: #85600a;
+  color: #885500;
+  background-color:  #ffbf00;
+  padding: 1.1rem;
   margin: 0;
-  padding: 1.5rem;
+  border-radius: 20px;
+  text-align: center;
 }
 
 .scd-container {

@@ -9,20 +9,18 @@ require('../DB.php');
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <!-- <link rel="stylesheet" href="../resources/css/預約表單.css"> -->
-    <!-- <link rel="stylesheet" href="jqueryui/style.css"> -->
-    <!-- <link rel="stylesheet" href="../resources/css/nav_input_css.css"> -->
+    <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    
+    <link rel="stylesheet" href="../../../resources/css/navbar.css">
+    <link rel="stylesheet" href="../../../resources/css/reserve.css">
+    <link rel="stylesheet" href="../../../resources/css/footer.css">
 
     <style>
         input[type="radio"] {
             display: none;
         }
 
-        /* 自定义样式来模拟按钮 */
         .radio-button-base,
         .radio-button {
             display: inline-block;
@@ -37,14 +35,13 @@ require('../DB.php');
             cursor: pointer;
         }
 
-        /* 修改选中状态时的样式 */
         input[type="radio"]:checked+span {
             background-color: #007BFF;
         }
     </style>
 
     <script>
-        $(function() {
+        $(function () {
             const currentDate = new Date();
             currentDate.setDate(currentDate.getDate() + 1);
             const nextDate = currentDate;
@@ -53,7 +50,7 @@ require('../DB.php');
                 minDate: nextDate,
                 dateFormat: 'yy-mm-dd',
             });
-            $("#datepicker").on("change", function(e) {
+            $("#datepicker").on("change", function (e) {
                 e.preventDefault();
                 var optionsLocation = $("#location option:selected");
                 var optionsPerson = $("#person option:selected");
@@ -65,14 +62,14 @@ require('../DB.php');
                 $("#selectedDate").val(formattedDate);
 
                 fetch(`storeToTime.php?sid=${optsLocalVal}&fDate=${fromdate}&peopleNum=${optsPersonVal}`)
-                    .then(function(response) {
+                    .then(function (response) {
                         return response.json();
                     })
-                    .then(function(data) {
+                    .then(function (data) {
                         console.log(data);
                         let viewTime = '';
-                        data.forEach(function(e2) {
-                            if (typeof(e2.sequel) !== 'undefined') {
+                        data.forEach(function (e2) {
+                            if (typeof (e2.sequel) !== 'undefined') {
                                 viewTime += `
                                 <label>
                                     <input type="radio" name="timeOption" value="${e2.sequel}">
@@ -92,16 +89,16 @@ require('../DB.php');
             });
         });
 
-        window.onload = function(e) {
+        window.onload = function (e) {
             e.preventDefault();
             fetch('store_sql.php')
-                .then(function(response) {
+                .then(function (response) {
                     return response.json();
                 })
-                .then(function(data) {
+                .then(function (data) {
                     // console.log(data);
                     let view = '<option style="display: none;">請選擇分店</option>';
-                    data.forEach(function(e2) {
+                    data.forEach(function (e2) {
                         // console.log(e);
                         view += `
                             <option value="${e2.sid}">${e2.location}</option>
@@ -110,36 +107,15 @@ require('../DB.php');
                     document.getElementById("location").innerHTML = view
                 })
 
-            document.getElementById("location").onchange = function(e) {
-                var options = $("#location option:selected");
-                var optsVal = options.val();
-
-                fetch(`storeToCake_sql.php?sid=${optsVal}`)
-                    .then(function(response) {
-                        return response.json();
-                    })
-                    .then(function(data) {
-                        // console.log(data);
-                        let view = '<option style="display: none;">請選擇產品</option>';
-                        data.forEach(function(e2) {
-                            // console.log(e);
-                            view += `
-                            <option value="${e2.cid}">${e2.cName}</option>
-                        `
-                        })
-                        document.getElementById("cakeName").innerHTML = view
-                    })
-            }
-
-            submitBTN.onclick = function(e) {
+            submitBTN.onclick = function (e) {
                 fetch('createOrder.php', {
-                        method: "POST",
-                        body: new FormData(form)
-                    })
-                    .then(function(response) {
+                    method: "POST",
+                    body: new FormData(form)
+                })
+                    .then(function (response) {
                         return response.text();
                     })
-                    .then(function(data) {
+                    .then(function (data) {
                         console.log(data);
                         if (data == "reserveProduct.php") {
                             location.href = data;

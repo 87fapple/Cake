@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php
 require_once('../DB.php');
 
@@ -25,12 +26,3 @@ DB::select("call createOrder(1, ?, ?, ?, ?)", function ($rows) {
     }
     echo $result;
 }, [$sid, $fTime, $fDate, $peopleNum]);
-
-
-
-// $nextPage = $row['result'];
-// if ($nextPage === '/Cake/public/history.php') {
-//     setcookie('token', $token,time() +120,"/");
-//     setcookie('welcome',$nextPage,time() +120,"/");
-// }
-// header("Location:{$nextPage}");
