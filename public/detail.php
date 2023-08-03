@@ -38,7 +38,7 @@ require_once('php/db2.php');
             <ul>
                 <li><a href="../public/menu.php">產品介紹</a></li>
                 <li><a href="../public/locations.html">分店資訊</a></li>
-                <li><a href="../public/reserve.html">預約課程</a></li>
+                <li><a href="../public/reserve.php">預約課程</a></li>
                 <li><a href="../public/Q&A.html">常見問題</a></li>
                 <li><a href="../public/login.html">登入會員</a></li>
             </ul>
@@ -74,6 +74,7 @@ require_once('php/db2.php');
                 </ul>
                 <a href="../public/reserve.html" class="bookingBtn">預約</a>
             </div>
+            <a href="./reserve.php" class="bookingBtn">預約</a>
         </div>
 
         <!-- Detail -->
@@ -122,7 +123,7 @@ require_once('php/db2.php');
                 </div>
 
             </section>
-            <a href="./reserve.html" class="bookingBtn">預約</a>
+            <a href="./reserve.php" class="bookingBtn">預約</a>
         </div>
     </main>
 

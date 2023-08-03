@@ -11,7 +11,7 @@ require('../DB.php');
     <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
     <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-    
+
     <link rel="stylesheet" href="../../../resources/css/navbar.css">
     <link rel="stylesheet" href="../../../resources/css/reserve.css">
     <link rel="stylesheet" href="../../../resources/css/footer.css">
@@ -107,10 +107,10 @@ require('../DB.php');
                     document.getElementById("location").innerHTML = view
                 })
 
-            submitBTN.onclick = function (e) {
+            submitBtn.onclick = function (e) {
                 fetch('createOrder.php', {
                     method: "POST",
-                    body: new FormData(form)
+                    body: new FormData(ordersForm)
                 })
                     .then(function (response) {
                         return response.text();
@@ -143,8 +143,7 @@ require('../DB.php');
 
     <h3>預約</h3>
     <div class="container">
-        <!-- <form action="./reserveProduct.php" method="POST"> -->
-        <form id="form">
+        <form id="ordersForm">
             <label for="location">預約分店：</label>
             <select id="location" name="location">
             </select>
@@ -156,6 +155,7 @@ require('../DB.php');
                 <option value="3">三位</option>
                 <option value="4">四位</option>
             </select>
+            
             <br><br>
             <div id="timeselect">
                 <div id="datezone">
@@ -176,7 +176,7 @@ require('../DB.php');
                 <br>
 
                 <br>
-                <input type="button" value="確認預約" id="submitBTN">
+                <input type="button" value="確認預約" id="submitBtn">
                 <span id="test"></span>
         </form>
     </div>
