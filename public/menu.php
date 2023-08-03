@@ -12,8 +12,7 @@ $result = $mysqli->query($sql);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
-    <link rel="stylesheet" href="../resources/css/menu.css">   
-    <link rel="stylesheet" href="../resources/css/kindNavbarStyle.css">   
+    <link rel="stylesheet" href="../resources/css/menuStyle.css">   
     <link rel="stylesheet" href="../resources/css/navbar.css">
     <link rel="stylesheet" href="../resources/css/footer.css">
     <link rel="stylesheet" href="../resources/css/topBtn.css">
@@ -58,7 +57,7 @@ $result = $mysqli->query($sql);
             <div class="kindBlock">
                 <div><b>選擇種類：</b></div> 
                 <label class="container">蛋糕
-                    <input type="radio" checked="checker" name="radio" id="cake" onclick="kindCake()">   
+                    <input type="radio" checked="checked" name="radio" id="cake" onclick="kindCake()">   
                     <span class="checkmark"></span>
                 </label>
                 <label class="container">餅乾
@@ -134,11 +133,17 @@ $result = $mysqli->query($sql);
 <script src="../resources/js/topBtn.js"></script>
     
 <script>
-// 蛋糕種類篩選 2.0
+
+// 在此添加全局变量来记录客人点击的种类
+let selectedKind = '';
+
+// 蛋糕種類篩選 3.0
 function kindFilter(kind) {
     fetch(`php/menu/kindfilter.php?kind=${kind}`)
         .then(response => response.json())
         .then(sortedCakes => {
+            // 更新全局变量的值
+            selectedKind = kind;
             renderCakes(sortedCakes);
         })
         .catch(error => console.error('請求失敗：', error));
@@ -152,15 +157,43 @@ function kindCookie() {
     kindFilter('餅乾');
 }
 
-// 價格排序2.0
+// 價格排序ajax，接收排序方式参数
 function priceSort(sortType) {
-    fetch(`php/menu/pricesort.php?sortType=${sortType}`)
+    // 增加種類參數
+    fetch(`php/menu/pricesort.php?sortType=${sortType}&kind=${selectedKind}`)
         .then(response => response.json())
         .then(sortedCakes => {
             renderCakes(sortedCakes);
         })
         .catch(error => console.error('請求失敗：', error));
 }
+// // 蛋糕種類篩選 2.0
+// function kindFilter(kind) {
+//     fetch(`php/menu/kindfilter.php?kind=${kind}`)
+//         .then(response => response.json())
+//         .then(sortedCakes => {
+//             renderCakes(sortedCakes);
+//         })
+//         .catch(error => console.error('請求失敗：', error));
+// }
+
+// function kindCake() {
+//     kindFilter('蛋糕');
+// }
+
+// function kindCookie() {
+//     kindFilter('餅乾');
+// }
+
+// // 價格排序2.0
+// function priceSort(sortType) {
+//     fetch(`php/menu/pricesort.php?sortType=${sortType}`)
+//         .then(response => response.json())
+//         .then(sortedCakes => {
+//             renderCakes(sortedCakes);
+//         })
+//         .catch(error => console.error('請求失敗：', error));
+// }
 
 // 畫面render
 function renderCakes(cakes) {
