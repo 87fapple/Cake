@@ -4,17 +4,40 @@ require_once('../db2.php');
 // 获取从前端传递过来的排序方式参数
 $sortType = $_REQUEST['sortType'];
 
-// 根据排序方式参数生成不同的排序SQL语句
+// 获取从前端传递过来的种类参数
+$kind = $_REQUEST['kind'];
+
+// 根据排序方式参数和种类参数生成不同的排序SQL语句
 if ($sortType === 'asc') {
-    $sql = 'SELECT * FROM cake ORDER BY price ASC';
+    if ($kind !== '') {
+        // 如果种类参数不为空，则按种类和价格升序排序
+        $sql = "SELECT * FROM cake WHERE kind = ? ORDER BY price ASC";
+    } else {
+        // 否则，只按价格升序排序
+        $sql = 'SELECT * FROM cake ORDER BY price ASC';
+    }
 } else if ($sortType === 'desc') {
-    $sql = 'SELECT * FROM cake ORDER BY price DESC';
+    if ($kind !== '') {
+        // 如果种类参数不为空，则按种类和价格降序排序
+        $sql = "SELECT * FROM cake WHERE kind = ? ORDER BY price DESC";
+    } else {
+        // 否则，只按价格降序排序
+        $sql = 'SELECT * FROM cake ORDER BY price DESC';
+    }
 } else {
     // 默认按价格升序排序
     $sql = 'SELECT * FROM cake ORDER BY price ASC';
 }
 
-$result = $mysqli->query($sql);
+// 使用预处理语句绑定参数
+if ($kind !== '') {
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param('s', $kind);
+    $stmt->execute();
+    $result = $stmt->get_result();
+} else {
+    $result = $mysqli->query($sql);
+}
 
 $cakes = array();
 
