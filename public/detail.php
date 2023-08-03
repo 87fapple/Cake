@@ -1,8 +1,6 @@
 <?php
 require_once('php/db2.php');
 
-$sql = 'select * from cake where id="1"';
-$result = $mysqli->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,8 +13,9 @@ $result = $mysqli->query($sql);
     <link rel="stylesheet" href="../resources/css/navbar.css">
     <link rel="stylesheet" href="../resources/css/footer.css">
     <link rel="stylesheet" href="../resources/css/topBtn.css">
-    <link rel="stylesheet" href="../resources/css/Carousel.css">
-    <link rel="stylesheet" href="../resources/css/detailStyle.css">
+    <link rel="stylesheet" href="../resources/css/carousel.css">
+    <link rel="stylesheet" href="../resources/css/detail.css">
+    <!-- <link rel="stylesheet" href="../resources/css/detailStyle.css"> -->
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
@@ -37,7 +36,7 @@ $result = $mysqli->query($sql);
         </div>
         <div class="navbarLink">
             <ul>
-                <li><a href="../public/menu.html">產品介紹</a></li>
+                <li><a href="../public/menu.php">產品介紹</a></li>
                 <li><a href="../public/locations.html">分店資訊</a></li>
                 <li><a href="../public/reserve.html">預約課程</a></li>
                 <li><a href="../public/Q&A.html">常見問題</a></li>
@@ -69,12 +68,12 @@ $result = $mysqli->query($sql);
             <div class="productContent">
                 <h1>皮卡蛋糕</h1>
                 <ul class="productList">
-                    <li>難度： 5</li>
                     <li>尺寸： 6吋</li>
-                    <li>價格： 200</li>
+                    <li>難度： 5</li>
+                    <li>價格： 200元</li>
                 </ul>
+                <a href="../public/reserve.html" class="bookingBtn">預約</a>
             </div>
-            <a href="./reserve.html" class="bookingBtn">預約</a>
         </div>
 
         <!-- Detail -->
@@ -84,6 +83,8 @@ $result = $mysqli->query($sql);
                 <li><a href="#material">使用材料</a></li>
                 <li><a href="#experience">製作心得</a></li>
             </ul>
+
+            <!-- Detail Content Block -->
             <section class="detailContent">
                 <h1 id="detail">詳細內容</h1>
                 <pre>
@@ -112,7 +113,6 @@ $result = $mysqli->query($sql);
                         分享這次DIY的過程，非常有趣
                     </pre>
                     <div class="expImgBlock">
-                        <img src="../image/mainImg/mainImg1.jpg" alt="">
                         <img src="../image/mainImg/mainImg1.jpg" alt="">
                         <img src="../image/mainImg/mainImg1.jpg" alt="">
                         <img src="../image/mainImg/mainImg1.jpg" alt="">
