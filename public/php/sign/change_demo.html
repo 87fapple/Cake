@@ -71,9 +71,6 @@
         <div class="column">
           <h2>修改產品資訊</h2>
         </div>
-      </div>
-
-      <form action="change.php" method="post" id="form">
         <div class="column2">
           <label for="change_cName" class="selectcake">選擇產品：</label>
           <select
@@ -83,7 +80,7 @@
             onchange="select()"
           >
             <optgroup label="蛋糕" name="cake">
-              <option value="皮卡丘蛋糕">皮卡丘蛋糕</option>
+              <option value="皮卡蛋糕">皮卡蛋糕</option>
             </optgroup>
             <optgroup label="點心" name="cake">
               <option value="小火龍餅乾">小火龍餅乾</option>
@@ -91,6 +88,9 @@
             </optgroup>
           </select>
         </div>
+      </div>
+
+      <form action="change.php" method="post" id="form">
         <div class="r1">
           <label for="cName">產品名稱</label>
           <br />
@@ -125,8 +125,8 @@
           <label for="cSize">尺寸/數量</label>
           <br />
           <select id="cSize" name="cSize" class="select">
-            <option value="6">6吋</option>
-            <option value="12">12個</option>
+            <option value="6吋">6吋</option>
+            <option value="12個">12個</option>
           </select>
           <br />
 
@@ -137,6 +137,7 @@
             id="price"
             name="price"
             placeholder="請輸入價格"
+            value=""
           />
           <br />
         </div>
@@ -147,6 +148,7 @@
             id="feature"
             name="feature"
             placeholder="字數上限為200字"
+            value=""
           ></textarea>
           <br />
           <label for="material">材料內容</label>
@@ -155,6 +157,7 @@
             id="material"
             name="material"
             placeholder="字數上限為200字"
+            value=""
           ></textarea>
           <br />
           <label for="cImg1">上傳產品照片</label>
@@ -169,9 +172,9 @@
         <br />
         <input type="submit" value="儲存產品資料" id="checked" />
       </form>
+      <br />
+      <br />
     </div>
-    <br />
-    <br />
     <!-- Footer -->
     <footer class="footer">
       <div class="footerContainer">
@@ -208,27 +211,33 @@
     const form = document.getElementById("form");
     const change_cName = document.getElementById("change_cName");
     const Name = document.getElementById("cName");
+    const price = document.getElementById("price");
 
     form.addEventListener("submit", function (event) {
       event.preventDefault();
     });
 
-    function select() {
-        var ccName = document.getElementById("change_cName").value;
-      return ccName;
-    }
-
     change_cName.onchange = function (e){
-        var cName =  select();
-        console.log(cName);
+        const cName = e.target.value;
+        // console.log(cName);
+        const data = {cName};
         fetch(
             `change.php?cName=${cName}`
+            // ,{method:'post',body:JSON.stringify(data),
+            // headers:{'Content-Type':'application/json'}}
         )
         .then(function(response){
-            return response.text();
+            return response.json();
         })
         .then(function(data){
-            jojo.innerHTML = data
+           Name.value = data[0].cName;
+           price.value = data[0].price;
+           kind.value = data[0].kind;
+           cSize.value = data[0].cSize;
+           feature.value = data[0].feature;
+           level.value = data[0].level;
+           material.value = data[0].material;
+
         })
     }
   </script>
