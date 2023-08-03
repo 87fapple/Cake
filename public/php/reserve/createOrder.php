@@ -1,19 +1,25 @@
 <?php session_start(); ?>
 <?php
-require_once('../DB.php');
+if (!$_COOKIE['token']) {
+    header('Location: /Cake/public/login.html');
+    die();
+}
 
-$sid = $_REQUEST["location"];
-$peopleNum = $_REQUEST["person"];
-$fTime = $_REQUEST["timeOption"];
-$fDate = $_REQUEST["selectedDate"];
+require_once('../DB.php');
+$sid = $_REQUEST["location"] ?? null;
+$peopleNum = $_REQUEST["person"] ?? null;
+$fTime = $_REQUEST["timeOption"] ?? null;
+$fDate = $_REQUEST["selectedDate"] ?? null;
+$token = $_COOKIE['token'];
 
 // var_dump($_REQUEST);
 
 if (!$sid || !$peopleNum || !$fTime || !$fDate) {
     echo "資料有空";
+    die();
 }
 
-DB::select("call createOrder(1, ?, ?, ?, ?)", function ($rows) {
+DB::select("call createOrder(?, ?, ?, ?, ?)", function ($rows) {
     foreach ($rows as $key => $row) {
         $result = $row["result"];
 
@@ -25,4 +31,4 @@ DB::select("call createOrder(1, ?, ?, ?, ?)", function ($rows) {
         }
     }
     echo $result;
-}, [$sid, $fTime, $fDate, $peopleNum]);
+}, [$token, $sid, $fTime, $fDate, $peopleNum]);

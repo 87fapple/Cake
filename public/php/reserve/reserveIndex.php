@@ -143,7 +143,6 @@ require('../DB.php');
 
     <h3>預約</h3>
     <div class="container">
-        <!-- <form action="./reserveProduct.php" method="POST"> -->
         <form id="ordersForm">
             <label for="location">預約分店：</label>
             <select id="location" name="location">
@@ -156,6 +155,7 @@ require('../DB.php');
                 <option value="3">三位</option>
                 <option value="4">四位</option>
             </select>
+            
             <br><br>
             <div id="timeselect">
                 <div id="datezone">

@@ -39,7 +39,7 @@ $result = $mysqli->query($sql);
             <ul>
                 <li><a href="../public/menu.html">產品介紹</a></li>
                 <li><a href="../public/locations.html">分店資訊</a></li>
-                <li><a href="../public/reserve.html">預約課程</a></li>
+                <li><a href="../public/reserve.php">預約課程</a></li>
                 <li><a href="../public/Q&A.html">常見問題</a></li>
                 <li><a href="../public/login.html">登入會員</a></li>
             </ul>
@@ -74,7 +74,7 @@ $result = $mysqli->query($sql);
                     <li>價格： 200</li>
                 </ul>
             </div>
-            <a href="./reserve.html" class="bookingBtn">預約</a>
+            <a href="./reserve.php" class="bookingBtn">預約</a>
         </div>
 
         <!-- Detail -->
@@ -122,7 +122,7 @@ $result = $mysqli->query($sql);
                 </div>
 
             </section>
-            <a href="./reserve.html" class="bookingBtn">預約</a>
+            <a href="./reserve.php" class="bookingBtn">預約</a>
         </div>
     </main>
 
