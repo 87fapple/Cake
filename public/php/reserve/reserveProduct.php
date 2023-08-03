@@ -26,15 +26,16 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
     <script>
-        $(function() {
+        $(function () {
             const cInfoSid = <?= $cInfo[0]["sid"] ?>;
             $("#hidden").hide();
             let data;
             let nameFilled = false;
+            let numFilled = false;
 
-            const nextNumber = (function() {
+            const nextNumber = (function () {
                 var lastNumber = 0;
-                return function() {
+                return function () {
                     lastNumber += 1;
                     return lastNumber;
                 };
@@ -50,9 +51,10 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             }
             document.getElementById("makeNum").innerHTML = view1
 
-            $("#makeNum").on('change', function(e) {
+            $("#makeNum").on('change', function (e) {
                 var mNum = $("#makeNum option:selected").val();
                 var people = $("#people").val();
+                numFilled = false;
 
                 // console.log(mNum);
                 for (let i = 0; i < mNum; i++) {
@@ -64,15 +66,15 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             })
 
             fetch(`storeToCake_sql.php?indexInfo=${cInfoSid}`)
-                .then(function(response) {
+                .then(function (response) {
                     return response.json();
                 })
-                .then(function(responseData) {
+                .then(function (responseData) {
                     data = responseData;
                     universalOptions();
                 })
 
-            document.getElementById("addnewdiv").onclick = function(e) {
+            document.getElementById("addnewdiv").onclick = function (e) {
                 var x = 0;
                 var mNum = $("#makeNum option:selected").val();
                 let view4 = '';
@@ -82,26 +84,27 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                 if (x < mNum) {
                     view4 = `
                     <div id="newdiv${x}">
-                        <label for="newCakeName${x}">選擇產品</label>
-                        <select id="newCakeName${x}" name="newCakeName${x}">
-                        </select>
-                        <label for="newNum${x}">份數</label>
-                        <select id="newNum${x}" name="newNum${x}">
-                        </select>
+                    <label for="newCakeName${x}">選擇產品</label>
+                    <select id="newCakeName${x}" name="newCakeName${x}">
+                    </select>
+                    <label for="newNum${x}">份數</label>
+                    <select id="newNum${x}" name="newNum${x}">
+                    </select>
                     </div>
                     `;
                     $("#baseChoose").append(view4);
                     universalOptions(x);
                     universalNums(x);
                 }
+
                 if (x >= mNum - 1) {
                     $("#addnewdiv").hide();
                 }
             };
 
             function universalOptions(x) {
-                let view3 = '<option style="display: none;">請選擇產品</option>';
-                data.forEach(function(e) {
+                let view3 = '<option style="display: none;" value="">請選擇產品</option>';
+                data.forEach(function (e) {
                     view3 += `
                             <option value="${e.cid}">${e.cName}</option>
                         `
@@ -125,16 +128,19 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                 var mNum = $("#makeNum option:selected").val();
 
                 // console.log(mNum);
-                let view2 = '';
+                let view2 = '<option style="display: none;" value="">品項數量</option>';
                 for (let i = 1; i <= mNum; i++) {
                     view2 += `
                         <option value=${i}>${i}份</option>
                     `;
                 }
 
-                const numElement = document.getElementById("num");
-                if (numElement) {
-                    numElement.innerHTML = view2;
+                if (!numFilled) {
+                    const numElement = document.getElementById("num");
+                    if (numElement) {
+                        numElement.innerHTML = view2;
+                        numFilled = true;
+                    }
                 }
 
                 const newNumElement = document.getElementById("newNum" + x);
@@ -144,28 +150,49 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             }
         });
 
-        window.onload = function(e) {
+        window.onload = function (e) {
             e.preventDefault();
-            submitBtn.onclick = function(e) {
-                // fetch('insertOrdersCake.php', {
-                //         method: "POST",
-                //         body: new FormData(productForm)
-                //     })
-                //     .then(function(response) {
-                //         return response.text();
-                //     })
-                //     .then(function(data) {
-                //         console.log(data);
-                //         // if (data == "reserveProduct.php") {
-                //         //     location.href = data;
-                //         // } else {
-                //         //     let view = '';
-                //         //     view += `
-                //         //         <div>${data}</div>
-                //         //     `;
-                //         //     document.getElementById("test").innerHTML = view
-                //         // }
-                //     })
+            submitBtn.onclick = function (e) {
+                const ckCakeName = $("#cakeName option:selected").val();
+                const mNum = $("#makeNum option:selected").val();
+                const ckNum = $("#num option:selected").val();
+                // console.log(ckCakeName);
+
+                const newDivs = $("[id^='newdiv']");
+                for (let i = 0; i < newDivs.length; i++) {
+                    const newCakeName = $(newDivs[i]).find("[id^='newCakeName']").val();
+                    const newNum = $(newDivs[i]).find("[id^='newNum']").val();
+
+                    if (!newCakeName || !newNum) {
+                        alert("請選擇新建的產品和份數");
+                        return;
+                    }
+                }
+
+                if (!ckCakeName || !ckNum) {
+                    alert("請選擇產品和份數");
+                    return;
+                } else {
+                    fetch('insertOrdersCake.php', {
+                        method: "POST",
+                        body: new FormData(productForm)
+                    })
+                        .then(function (response) {
+                            return response.text();
+                        })
+                        .then(function (data) {
+                            console.log(data);
+                            // if (data == "reserveProduct.php") {
+                            //     location.href = data;
+                            // } else {
+                            //     let view = '';
+                            //     view += `
+                            //         <div>${data}</div>
+                            //     `;
+                            //     document.getElementById("test").innerHTML = view
+                            // }
+                        })
+                }
             }
         }
     </script>
@@ -193,31 +220,23 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             </div>
             <div>注意：一份甜點最多一位陪同，將酌收陪同費120元/人。</div>
             <div id="hidden">
-                <div id="baseChoose">
-                    <label for="cakeName">選擇產品</label>
-                    <select id="cakeName" name="cakeName">
-                    </select>
-                    <label for="num">份數</label>
-                    <select id="num" name="num">
-                        <option style="display: none;">製作份數</option>
-                    </select>
-                </div>
+                <form id="productForm">
+                    <div id="baseChoose">
+                        <label for="cakeName">選擇產品</label>
+                        <select id="cakeName" name="cakeName">
+                        </select>
+                        <label for="num">份數</label>
+                        <select id="num" name="num">
+                        </select>
+                    </div>
 
-                <input type="button" id="addnewdiv" value="新增品項">
-                <div>注意：若選取的甜點份數未滿製作份數，剩餘份數可現場到實體店面再做確認製作項目</div>
-                <br>
+                    <input type="button" id="addnewdiv" value="新增品項">
+                    <div>注意：若選取的甜點份數未滿製作份數，剩餘份數可現場到實體店面再做確認製作項目</div>
+                    <br>
 
-                <div id="newdiv" style="display: none;">
-                    <label for="newCakeName">選擇產品</label>
-                    <select id="newCakeName" name="newCakeName">
-                    </select>
-                    <label for="newNum">份數</label>
-                    <select id="newNum" name="newNum">
-                    </select>
-                </div>
-
-                <br>
-                <input type="button" value="確認產品" id="submitBtn">
+                    <br>
+                    <input type="button" value="確認產品" id="submitBtn">
+                </form>
             </div>
         </form>
     </div>
