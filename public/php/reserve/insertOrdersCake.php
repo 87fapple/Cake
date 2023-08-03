@@ -1,7 +1,7 @@
 <?php session_start(); ?>
 <?php
 require_once('../DB.php');
-// var_dump($_REQUEST);
+var_dump($_REQUEST);
 
 $oid = $_REQUEST["oid"];
 $makeNum = $_REQUEST["makeNum"];
@@ -11,21 +11,21 @@ $numArr = [$_REQUEST["num"]];
 
 for ($x = 0; $x < $makeNum; $x++) {
     $nameKey = "newCakeName" . ($x + 1);
-    if (isset($_REQUEST[$nameKey])) {
+    if (isset($_REQUEST[$nameKey]) && trim($_REQUEST[$nameKey]) !== "") {
         $nameArr[] = $_REQUEST[$nameKey];
     }
 
     $numKey = "newNum" . ($x + 1);
-    if (isset($_REQUEST[$numKey])) {
+    if (isset($_REQUEST[$numKey]) && trim($_REQUEST[$numKey]) !== "") {
         $numArr[] = $_REQUEST[$numKey];
     }
 }
 
-// var_dump($nameArr);
-// var_dump($numArr);
+var_dump($nameArr);
+var_dump($numArr);
 
-for($y = 0; $y < count($nameArr) ; $y++){
-    DB::insert("insert into orderlist value (?, ?, ?)",[$oid, $nameArr[$y], $numArr[$y]]);
-}
+// for($y = 0; $y < count($nameArr) ; $y++){
+//     DB::insert("insert into orderlist value (?, ?, ?)",[$oid, $nameArr[$y], $numArr[$y]]);
+// }
 
 echo "OK";

@@ -28,10 +28,11 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
     <script>
         $(function () {
             const cInfoSid = <?= $cInfo[0]["sid"] ?>;
-            $("#hidden").hide();
+            // $("#hidden").hide();
             let data;
             let nameFilled = false;
             let numFilled = false;
+            let currentDivIndex = 0;
 
             const nextNumber = (function () {
                 var lastNumber = 0;
@@ -54,12 +55,33 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             $("#makeNum").on('change', function (e) {
                 var mNum = $("#makeNum option:selected").val();
                 var people = $("#people").val();
+                let view4 = '';
                 numFilled = false;
+                currentDivIndex = -1;
+                nextNewNumber();
+                $("#addnewdiv").show();
 
                 // console.log(mNum);
                 for (let i = 0; i < mNum; i++) {
                     universalNums(i);
                 }
+
+                for (let a = 1; a < mNum; a++) {
+                    view4 += `
+                    <div id="newdiv${a}" style="display:none">
+                        <label for="newCakeName${a}">選擇產品</label>
+                            <select id="newCakeName${a}" name="newCakeName${a}">
+                            <option style="display: none;" value="">請選擇產品</option>
+                                <optgroup label="蛋糕" id="newCake${a}">
+                                <optgroup label="餅乾" id="newCookie${a}">
+                                <optgroup label="點心" id="newDessert${a}">
+                            </select>
+                        <label for="newNum${a}">份數</label>
+                            <select id="newNum${a}" name="newNum${a}"></select>
+                    </div>
+                    `;
+                }
+                $("#newChoose").html(view4);
 
                 $("#companion").val(people - mNum);
                 $("#hidden").show();
@@ -75,56 +97,79 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                 })
 
             document.getElementById("addnewdiv").onclick = function (e) {
-                var x = 0;
+                nextNewNumber();
+            }
+
+            function nextNewNumber() {
                 var mNum = $("#makeNum option:selected").val();
-                let view4 = '';
 
-                x = nextNumber();
+                const newDivs = $("[id^='newdiv']");
+                console.log(newDivs);
 
-                if (x < mNum) {
-                    view4 = `
-                    <div id="newdiv${x}">
-                    <label for="newCakeName${x}">選擇產品</label>
-                    <select id="newCakeName${x}" name="newCakeName${x}">
-                    </select>
-                    <label for="newNum${x}">份數</label>
-                    <select id="newNum${x}" name="newNum${x}">
-                    </select>
-                    </div>
-                    `;
-                    $("#baseChoose").append(view4);
-                    universalOptions(x);
-                    universalNums(x);
+                if (currentDivIndex <= mNum) {
+                    $(newDivs[currentDivIndex]).css('display', '');
+                    currentDivIndex += 1;
+                    universalOptions();
+                    universalNums();
+
+                    if (currentDivIndex == (mNum - 1)) {
+                        $("#addnewdiv").hide();
+                    }
                 }
+            }
 
-                if (x >= mNum - 1) {
-                    $("#addnewdiv").hide();
-                }
-            };
+            function universalOptions() {
+                var mNum = $("#makeNum option:selected").val();
 
-            function universalOptions(x) {
-                let view3 = '<option style="display: none;" value="">請選擇產品</option>';
+                let cakeView = '';
+                let cookieView = '';
+                let dessertView = '';
+
                 data.forEach(function (e) {
-                    view3 += `
-                            <option value="${e.cid}">${e.cName}</option>
-                        `
+                    switch (e.kind) {
+                        case '蛋糕':
+                            cakeView += `
+                                <option value="${e.cid}">${e.cName}</option>
+                            `;
+                            break;
+                        case '餅乾':
+                            cookieView += `
+                                <option value="${e.cid}">${e.cName}</option>
+                            `;
+                            break;
+                        case '點心':
+                            dessertView += `
+                                <option value="${e.cid}">${e.cName}</option>
+                            `;
+                            break;
+                    }
                 });
 
                 if (!nameFilled) {
-                    const cakeNameEle = document.getElementById("cakeName");
-                    if (cakeNameEle) {
-                        cakeNameEle.innerHTML = view3;
+                    const cakeNameEle = document.getElementById("cake");
+                    const cookieNameEle = document.getElementById("cookie");
+                    const dessertNameEle = document.getElementById("dessert");
+                    if (cakeNameEle || cookieNameEle || dessertNameEle) {
+                        cakeNameEle.innerHTML = cakeView;
+                        cookieNameEle.innerHTML = cookieView;
+                        dessertNameEle.innerHTML = dessertView;
                         nameFilled = true;
                     }
                 }
 
-                const newCakeNameEle = document.getElementById("newCakeName" + x);
-                if (newCakeNameEle) {
-                    newCakeNameEle.innerHTML = view3;
+                for (let x = 0; x < mNum; x++) {
+                    const newCakeNameEle = document.getElementById("newCake" + x);
+                    const newCookieNameEle = document.getElementById("newCookie" + x);
+                    const newDessertNameEle = document.getElementById("newDessert" + x);
+                    if (newCakeNameEle || newCookieNameEle || newDessertNameEle) {
+                        newCakeNameEle.innerHTML = cakeView;
+                        newCookieNameEle.innerHTML = cookieView;
+                        newDessertNameEle.innerHTML = dessertView;
+                    }
                 }
             }
 
-            function universalNums(x) {
+            function universalNums() {
                 var mNum = $("#makeNum option:selected").val();
 
                 // console.log(mNum);
@@ -143,9 +188,11 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                     }
                 }
 
-                const newNumElement = document.getElementById("newNum" + x);
-                if (newNumElement) {
-                    newNumElement.innerHTML = view2;
+                for (let x = 0; x < mNum; x++) {
+                    const newNumElement = document.getElementById("newNum" + x);
+                    if (newNumElement) {
+                        newNumElement.innerHTML = view2;
+                    }
                 }
             }
         });
@@ -156,7 +203,6 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                 const ckCakeName = $("#cakeName option:selected").val();
                 const mNum = $("#makeNum option:selected").val();
                 const ckNum = $("#num option:selected").val();
-                // console.log(ckCakeName);
 
                 const newDivs = $("[id^='newdiv']");
                 for (let i = 0; i < newDivs.length; i++) {
@@ -224,11 +270,17 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                     <div id="baseChoose">
                         <label for="cakeName">選擇產品</label>
                         <select id="cakeName" name="cakeName">
+                            <option style="display: none;" value="">請選擇產品</option>
+                            <optgroup label="蛋糕" id="cake">
+                            <optgroup label="餅乾" id="cookie">
+                            <optgroup label="點心" id="dessert">
                         </select>
                         <label for="num">份數</label>
                         <select id="num" name="num">
                         </select>
                     </div>
+                    <div id="newChoose"></div>
+
 
                     <input type="button" id="addnewdiv" value="新增品項">
                     <div>注意：若選取的甜點份數未滿製作份數，剩餘份數可現場到實體店面再做確認製作項目</div>
