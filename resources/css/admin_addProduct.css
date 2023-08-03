@@ -47,7 +47,7 @@ h2 {
 
 #changeForm {
     width: 70%;
-    height: 670px;
+    height: 780px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 1rem;
@@ -96,15 +96,17 @@ select {
     height: 520px; 
     margin-top: 2rem;
     margin-left: 3.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
     padding: 1rem 2rem;
     font-weight: bold;
 }
 
 #checked {
     display: flex;
-    margin-left: auto;
-    margin-right: auto;
+    /* margin-left: auto;
+    margin-right: auto; */
+
+    margin: 4rem auto;
     font-size: larger;
     background-color: #ffbf00;
     border: #efa907 3px solid;
