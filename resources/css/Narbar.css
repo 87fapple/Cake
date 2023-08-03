@@ -92,7 +92,7 @@ body {
 
 
 
-@media (max-width: 720px) {
+@media (max-width: 960px) {
     .navbar {
         flex-direction: column;
         align-items: flex-start;

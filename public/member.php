@@ -27,9 +27,9 @@ echo $uName;
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 
-  <link rel="stylesheet" href="../resources/css/navbar.css">
+  <link rel="stylesheet" href="../resources/css/Navbar.css">
   <link rel="stylesheet" href="../resources/css/member.css">
-  <link rel="stylesheet" href="../resources/css/footer.css">
+  <link rel="stylesheet" href="../resources/css/footer2.css">
   <link rel="stylesheet" href="../resources/css/topBtn.css">
   <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
