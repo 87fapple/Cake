@@ -81,8 +81,10 @@ $result = $mysqli->query($sql);
                 echo 
                     "
                     <div class=\"menuInfoDiv\" id=\"menuInfo\" data-cakeid={$row['cid']}>
-                        <a href=\"\"><img src=\"../image/menuImg/menuInfo1.jpg\" onclick=\"showProductDetail({$row['cid']})\"></a>
-                        <div class=\"menuInfoContent\" id=\"menuInfoContent\" >
+                        <a href=\"detail.php?cid={$row['cid']}\">
+                            <img src=\"../image/menuImg/menuInfo1.jpg\">
+                        </a>
+                        <div class=\"menuInfoContent\" id=\"menuInfoContent\">
                             <ul class=\"menuInfo\" id=\"menuInfo\">
                                 <li>名稱：{$row['cName']}</li>
                                 <li>時間：2hr</li>
@@ -189,7 +191,7 @@ function renderCakes(cakes) {
     cakes.forEach(cake => {
         menuBlock2.innerHTML += `
             <div class="menuInfoDiv" id="menuInfo" data-cakeid="${cake.cid}" > <!-- 添加data-cakeid屬性 -->
-                <a href="javascript:void(0);" onclick="showProductDetail(${cake.cid})"><img src="../image/menuImg/menuInfo1.jpg"></a> <!-- 修改onclick事件 -->
+                <a href="javascript:void(0);" onclick="showProductDetail(${cake.cid})"><img src="../image/menuImg/menuInfo1.jpg"></a> 
                 <div class="menuInfoContent" id="menuInfoContent">
                     <ul class="menuInfo" id="menuInfo">
                         <li>名稱：${cake.cName}</li>
@@ -205,20 +207,8 @@ function renderCakes(cakes) {
 
 // 點擊產品總攬其中一個div後
 function showProductDetail(cakeId) {
-        fetch(`php/menu/product_detail.php?cid=${cakeId}`)
-            .then(response => {
-                if (!response.ok) {
-                    console.log(response);
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(cakeDetail => {
-                // 在這裡調用新的JS函式detailRender()並將產品詳細資訊傳遞過去
-                detailRender(cakeDetail);
-            })
-            .catch(error => console.error('請求失敗：', error));
-    }
+    window.location.href = `detail.php?cid=${cakeId}`;
+}
 
     function detailRender(cakeDetail) {
         var menu = document.querySelector('.menu');
