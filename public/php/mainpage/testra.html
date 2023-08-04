@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="exp1"></div>
+    <div id="exp2"></div>
+    <div id="exp3"></div>
+    <script>
+      function loadRandomData(targetId, phpFile) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var data = JSON.parse(xhr.responseText);
+
+            var html =
+              "<h1>" +
+              data[0].uName +
+              "</h1>" +
+              "<p>" +
+              data[0].eText +
+              "</p>" +
+              "<p>" +
+              data[0].eDate +
+              "</p>";
+
+            document.getElementById(targetId).innerHTML = html;
+          }
+        };
+        xhr.open("GET", 'random.php', true);
+        xhr.send();
+      }
+
+      function loadAllRandomData() {
+        loadRandomData("exp1", "random.php");
+        loadRandomData("exp2", "random.php");
+        loadRandomData("exp3", "random.php");
+      }
+
+      function loadUniqueData() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var data = JSON.parse(xhr.responseText);
+
+            var html1 =
+              "<h1>" +
+              data[0].uName +
+              "</h1>" +
+              "<p>" +
+              data[0].eText +
+              "</p>" +
+              "<p>" +
+              data[0].eDate +
+              "</p>";
+
+            var html2 =
+              "<h1>" +
+              data[1].uName +
+              "</h1>" +
+              "<p>" +
+              data[1].eText +
+              "</p>" +
+              "<p>" +
+              data[1].eDate +
+              "</p>";
+
+            var html3 =
+              "<h1>" +
+              data[2].uName +
+              "</h1>" +
+              "<p>" +
+              data[2].eText +
+              "</p>" +
+              "<p>" +
+              data[2].eDate +
+              "</p>";
+
+            document.getElementById("exp1").innerHTML = html1;
+            document.getElementById("exp2").innerHTML = html2;
+            document.getElementById("exp3").innerHTML = html3;
+          }
+        };
+        xhr.open("GET", "random.php", true);
+        xhr.send();
+      }
+
+      loadUniqueData();
+    </script>
+  </body>
+</html>

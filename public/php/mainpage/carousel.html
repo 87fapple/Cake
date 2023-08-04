@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Slider</title>
+    <style>
+        .slider-container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slider img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="slider-container">
+    <div class="slider">
+        <!-- Images will be inserted here by JavaScript -->
+    </div>
+</div>
+
+<script>
+    const slider = document.querySelector('.slider');
+    const sliderWidth = slider.offsetWidth;
+    let currentImageIndex = 0;
+    let images = [];
+
+    function showImage(index) {
+        slider.innerHTML = ''; // 清空 slider 中的內容
+        const imgElement = document.createElement('img');
+        imgElement.src = `data:image/jpeg;base64,${images[index]}`;
+        slider.appendChild(imgElement);
+    }
+
+    function nextImage() {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        showImage(currentImageIndex);
+    }
+
+    function fetchImages() {
+        // 使用 AJAX 取得 PHP 回傳的圖片資料
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    // 解析回傳的 JSON 資料
+                    images = JSON.parse(xhr.responseText);
+
+                    // 顯示第一張圖片
+                    showImage(currentImageIndex);
+
+                    setInterval(nextImage, 3000); // Change image every 3 seconds
+                } else {
+                    console.error('Failed to fetch images');
+                }
+            }
+        };
+
+        xhr.open('GET', 'getcimg.php', true);
+        xhr.send();
+    }
+
+    // 執行 AJAX 請求來取得圖片資料
+    fetchImages();
+</script>
+</body>
+</html>

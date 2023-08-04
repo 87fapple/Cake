@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mainpage</title>
+    <link rel="stylesheet" href="../../../resources/css/navbar.css" />
+    <link rel="stylesheet" href="../../../resources/css/footer.css" />
+    <link rel="stylesheet" href="../../../resources/css/topBtn.css" />
+    <link rel="stylesheet" href="../../../resources/css/mainpageStyle.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+    <style>
+      .slider-container {
+        width: 80%;
+        margin: auto;
+        overflow: hidden;
+      }
+      .slider {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+      }
+      .slider img {
+        width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Back-to-Top Button -->
+    <button onclick="topFunction()" class="topBtn" id="topBtn"></button>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="navbarTitle">
+        <a href="../../../public/mainpage.html"
+          ><img src="../../../image/icon-noBorder-whiteFont.png"
+        /></a>
+      </div>
+      <div class="hambuger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+      <div class="navbarLink">
+        <ul>
+          <li><a href="../../../public/menu.php">產品介紹</a></li>
+          <li><a href="../../../public/locations.html">分店資訊</a></li>
+          <li><a href="../../../public/reserve.html">預約課程</a></li>
+          <li><a href="../../../public/Q&A.html">常見問題</a></li>
+          <li><a href="../../../public/login.html">登入會員</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main  -->
+    <main class="mainContainer">
+      <!-- Main1 -->
+      <div class="slider"></div>
+      <!-- Main2 -->
+      <div class="mainBlock2">
+        <div class="infoBlock">
+          <div class="info">
+            <div class="infoTitle">
+              <h1>近期推薦</h1>
+            </div>
+            <div class="infoContent">
+              <p>
+                推薦<br />
+                促銷<br />
+                活動<br />
+              </p>
+            </div>
+          </div>
+          <div class="infoImg">
+            <img src="../../../image/mainImg/infoImg.jpg" />
+          </div>
+        </div>
+      </div>
+      <!-- Main3 -->
+      <div class="mainBlock3">
+        <div class="mainImg3">
+          <img src="../../../image/mainImg/mainImg3.jpg" />
+        </div>
+        <div class="specialBlock">
+          <div class="specialDiv">
+            <div class="specialTitle">
+              <h1>關於我們</h1>
+            </div>
+            <div class="specialContent">
+              <p>關於關於</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Main4 -->
+      <div class="mainBlock4">
+        <div class="expSharing">
+          <div class="expTitle">
+            <h1>心得分享</h1>
+          </div>
+          <div class="expBlock">
+            <div class="flip-card">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <img
+                    src="../../../image/menuImg/menuInfo1.jpg"
+                    style="width: 300px; height: 300px; display: cover"
+                  />
+                </div>
+                <div class="flip-card-back" id="exp1"></div>
+              </div>
+            </div>
+            <div class="flip-card">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <img
+                    src="../../../image/menuImg/menuInfo1.jpg"
+                    style="width: 300px; height: 300px; display: cover"
+                  />
+                </div>
+                <div class="flip-card-back" id="exp2"></div>
+              </div>
+            </div>
+            <div class="flip-card">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <img
+                    src="../../../image/menuImg/menuInfo1.jpg"
+                    style="width: 300px; height: 300px; display: cover"
+                  />
+                </div>
+                <div class="flip-card-back" id="exp3"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footerContainer">
+        <div class="footerRow">
+          <div class="footerCol">
+            <h4>DIY蛋糕</h4>
+            <ul>
+              <li><a href="">關於我們</a></li>
+              <li><a href="">常見問題</a></li>
+            </ul>
+          </div>
+          <div class="footerCol">
+            <h4>服務內容</h4>
+            <ul>
+              <li><a href="">立即預約</a></li>
+              <li><a href="">產品介紹</a></li>
+            </ul>
+          </div>
+          <div class="footerCol">
+            <h4>聯絡我們</h4>
+            <div class="socialLinks">
+              <a href=""><i class="fab fa-facebook-f"></i></a>
+              <a href=""><i class="fab fa-twitter"></i></a>
+              <a href=""><i class="fab fa-instagram"></i></a>
+              <a href=""><i class="fab fa-line"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script>
+      function loadRandomData(targetId, phpFile) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var data = JSON.parse(xhr.responseText);
+
+            var html =
+              "<h1>" +
+              data[0].uName +
+              "</h1>" +
+              "<p>" +
+              data[0].eText +
+              "</p>" +
+              "<p>" +
+              data[0].eDate +
+              "</p>";
+
+            document.getElementById(targetId).innerHTML = html;
+          }
+        };
+        xhr.open("GET", "random.php", true);
+        xhr.send();
+      }
+
+      function loadAllRandomData() {
+        loadRandomData("exp1", "random.php");
+        loadRandomData("exp2", "random.php");
+        loadRandomData("exp3", "random.php");
+      }
+
+      function loadUniqueData() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var data = JSON.parse(xhr.responseText);
+
+            var html1 =
+              "<h1>" +
+              data[0].uName +
+              "</h1>" +
+              "<p>" +
+              data[0].eText +
+              "</p>" +
+              "<p>" +
+              data[0].eDate +
+              "</p>";
+
+            var html2 =
+              "<h1>" +
+              data[1].uName +
+              "</h1>" +
+              "<p>" +
+              data[1].eText +
+              "</p>" +
+              "<p>" +
+              data[1].eDate +
+              "</p>";
+
+            var html3 =
+              "<h1>" +
+              data[2].uName +
+              "</h1>" +
+              "<p>" +
+              data[2].eText +
+              "</p>" +
+              "<p>" +
+              data[2].eDate +
+              "</p>";
+
+            document.getElementById("exp1").innerHTML = html1;
+            document.getElementById("exp2").innerHTML = html2;
+            document.getElementById("exp3").innerHTML = html3;
+          }
+        };
+        xhr.open("GET", "random.php", true);
+        xhr.send();
+      }
+
+      loadUniqueData();
+    </script>
+    <script>
+      const slider = document.querySelector(".slider");
+      const sliderWidth = slider.offsetWidth;
+      let currentImageIndex = 0;
+      let images = [];
+
+      function showImage(index) {
+        slider.innerHTML = ""; // 清空 slider 中的內容
+        const imgElement = document.createElement("img");
+        imgElement.src = `data:image/jpeg;base64,${images[index]}`;
+        slider.appendChild(imgElement);
+      }
+
+      function nextImage() {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        showImage(currentImageIndex);
+      }
+
+      function fetchImages() {
+        // 使用 AJAX 取得 PHP 回傳的圖片資料
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              // 解析回傳的 JSON 資料
+              images = JSON.parse(xhr.responseText);
+
+              // 顯示第一張圖片
+              showImage(currentImageIndex);
+
+              setInterval(nextImage, 3000); // Change image every 3 seconds
+            } else {
+              console.error("Failed to fetch images");
+            }
+          }
+        };
+
+        xhr.open("GET", "getcimg.php", true);
+        xhr.send();
+      }
+
+      // 執行 AJAX 請求來取得圖片資料
+      fetchImages();
+    </script>
+  </body>
+
+  <script src="../../../resources/js/navbar.js"></script>
+  <script src="../../../resources/js/topBtn.js"></script>
+</html>

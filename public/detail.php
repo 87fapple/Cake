@@ -1,6 +1,19 @@
 <?php
 require_once('php/db2.php');
 
+
+    $cakeId = $_GET['cid'];
+
+    // 使用預處理語句獲取指定ID的產品詳細資訊
+    $sql = 'SELECT * FROM cake WHERE cid = ?';
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param('i', $cakeId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+   
+    $cakeDetail = $result->fetch_assoc();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,9 +22,9 @@ require_once('php/db2.php');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details</title>
-    <link rel="stylesheet" href="../resources/css/navbar.css">
-    <link rel="stylesheet" href="../resources/css/footer.css">
+    <title><?php echo $cakeDetail['cName']; ?></title>
+    <link rel="stylesheet" href="../resources/css/Navbar.css">
+    <link rel="stylesheet" href="../resources/css/footer2.css">
     <link rel="stylesheet" href="../resources/css/topBtn.css">
     <link rel="stylesheet" href="../resources/css/carousel.css">
     <link rel="stylesheet" href="../resources/css/detail.css">
@@ -66,11 +79,11 @@ require_once('php/db2.php');
             </div>
             <!-- Product Content -->
             <div class="productContent">
-                <h1>皮卡蛋糕</h1>
+                <h1><?php echo $cakeDetail['cName']; ?></h1>
                 <ul class="productList">
-                    <li>尺寸： 6吋</li>
-                    <li>難度： 5</li>
-                    <li>價格： 200元</li>
+                    <li>尺寸： <?php echo $cakeDetail['cSize']; ?></li>
+                    <li>難度： <?php echo $cakeDetail['level']; ?></li>
+                    <li>價格： <?php echo $cakeDetail['price']; ?></li>
                 </ul>
                 <a href="../public/reserve.html" class="bookingBtn">預約</a>
             </div>
@@ -88,24 +101,10 @@ require_once('php/db2.php');
             <!-- Detail Content Block -->
             <section class="detailContent">
                 <h1 id="detail">詳細內容</h1>
-                <pre>
-                    "🏠提供製作：所有分店\n
-
-                    [蛋奶素]\n
-                    主體：伯爵茶餅乾\n
-                    尺寸約：長5cm、寬3cm、高1cm\n
-                    🎁附手提紙盒一個 (20片裝一起)\n"
-                </pre>
+                <pre><?php echo $cakeDetail['feature']; ?></pre>
 
                 <h1 id="material">使用材料</h1>
-                <pre>
-                    "OREO 餅乾（ 2 盒）\n
-                    鮮奶油（ 400ml ）\n
-                    奶油乳酪（ 400ml ）\n
-                    無鹽奶油（ 20g ）\n
-                    香草精（少量）\
-                    糖（ 70g ）\n"
-                </pre>
+                <pre><?php echo $cakeDetail['meterial']; ?></pre>
 
                 <h1 id="experience">製作心得</h1>
                 <div class="expBlock">
@@ -164,6 +163,5 @@ require_once('php/db2.php');
 <script src="../resources/js/navbar.js"></script>
 <script src="../resources/js/topBtn.js"></script>
 <script src="../resources/js/Carousel.js"></script>
-
 
 </html>
