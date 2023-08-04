@@ -56,14 +56,20 @@
 }
 
 .menuInfoDiv {
-    width: 90%;
+    max-width: 240px;
+    min-width: 200px;
     height: 200px;
     background-color: #ffa237;
-    margin: 24px 0;
+    border-radius: 8px;
+    margin: 24px 2px 160px;
     position: relative;
     left: 0;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
+}
+
+.menuInfoDiv a {
+    text-decoration: none;
 }
 
 .menuInfoDiv a:hover {
@@ -74,12 +80,14 @@
 
 .menuInfoDiv img {
     object-fit: fill;
+    border-radius: 8px 8px 0 0;
     width: 100%;
     height: 100%;
 }
 
 .menuInfoContent {
     background-color: #ffa237;
+    border-radius: 0 0 8px 8px;
     color: #885500;
     width: 100%;
     height: 70%;
@@ -96,29 +104,6 @@
     text-align: center;
     padding: 8px 0;
     font-size: 20px;
-}
-
-
-/* product card */
-.productCard {
-    width: 100%;
-    /* Add shadows to create the "card" effect */
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    transition: 0.3s;
-}
-
-.productCard img {
-    width: 100%;
-}
-
-/* On mouse-over, add a deeper shadow */
-.productCard:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
-
-/* Add some padding inside the card container */
-.productContainer {
-    padding: 2px 16px;
 }
 
 /* ------------------------------------------------------------------- */
@@ -246,4 +231,20 @@
 .dropdown:hover .dropbtn {
     background-color: #ffbf00;
     cursor: pointer;
+}
+
+@media (max-width:960px) {
+    body {
+        width: 960px;
+    }
+
+    .kindNavbar {
+        width: 710px;
+    }
+
+    .menuBlock2 {
+        width: 864px;
+        grid-template-columns: repeat(3, 1fr);
+        margin: 0 auto;
+    }
 }
