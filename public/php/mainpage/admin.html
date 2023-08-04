@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會員後台</title>
+    <link rel="stylesheet" href="../resources/css/admin.css">
+    <link rel="stylesheet" href="../resources/css/navbar.css">
+    <link rel="stylesheet" href="../resources/css/footer.css">
+    <link rel="stylesheet" href="../resources/js/topBtn.js">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+    <!-- icon引用 -->
+    <script src="https://kit.fontawesome.com/6c4c2bf9f6.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- Back-to-Top Button -->
+    <button onclick="topFunction()" class="topBtn" id="topBtn"></button>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbarTitle">
+            <a href="../public/mainpage.html">
+                <img src="../image/icon-noBorder-whiteFont.png">
+            </a>
+        </div>
+        <div class="hambuger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="navbarLink">
+            <ul>
+                <li><a href="../public/menu.php">產品介紹</a></li>
+                <li><a href="../public/locations.html">分店資訊</a></li>
+                <li><a href="../public/reserve.html">預約課程</a></li>
+                <li><a href="../public/Q&A.html">常見問題</a></li>
+                <li><a href="../public/login.html">登入會員</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div name="selecttop" id="sel">
+        <a href="../public/admin.html" class="selectarea"><i style='font-size:24px'
+                class='fas'>&#xf1b0;</i>&nbsp修改首頁輪播</a>
+        <a href="../public/admin_addProduct.html" class="selectarea"><i style='font-size:24px'
+                class='fas'>&#xf1b0;</i>&nbsp新增產品</a>
+        <a href="../public/admin_changeProduct.html" class="selectarea"><i style='font-size:24px'
+                class='fas'>&#xf1b0;</i>&nbsp修改產品資訊
+        </a>
+        <a href="../public/admin_reserveHistory.html" class="selectarea"><i style='font-size:24px'
+                class='fas'>&#xf1b0;</i>&nbsp顧客預約總覽</a>
+        <div class="selectarea"> 您好，<span>管理員</span></div>
+    </div>
+    <div class="modArea">
+        <h2>修改輪播圖</h2>
+
+        <div class="tab">
+            <button class="tablinks" onclick="opengroup(event, 'group1')" id="defaultOpen">草莓</button>
+            <button class="tablinks" onclick="opengroup(event, 'group2')">芒果</button>
+            <button class="tablinks" onclick="opengroup(event, 'group3')">葡萄</button>
+            <button class="tablinks" onclick="opengroup(event, 'group4')">水蜜桃</button>
+        </div>
+        <!--  -->
+        <div id="group1" class="tabcontent">
+
+            更改輪播群組標題：<input type="text" name="" id="">
+            <p>請選擇四張圖片：</p>
+            <input type="file" name="" id="">
+            <input type="file" name="" id="">
+            <br>
+            <input type="file" name="" id="">
+            <input type="file" name="" id="">
+        </div>
+
+        <div id="group2" class="tabcontent">
+
+            更改輪播群組標題1：<input type="text" name="" id="">
+            <p>請選擇四張圖片：</p>
+            <input type="file" name="" id="">
+            <input type="file" name="" id="">
+            <br>
+            <input type="file" name="" id="">
+            <input type="file" name="" id="">
+        </div>
+
+        <div id="group3" class="tabcontent">
+
+            更改輪播群組標題2：<input type="text" name="" id="">
+            <p>請選擇四張圖片：</p>
+            <input type="file" name="" id="">
+            <input type="file" name="" id="">
+            <br>
+            <input type="file" name="" id="">
+            <input type="file" name="" id="">
+        </div>
+
+        <div id="group4" class="tabcontent">
+
+            更改輪播群組標題3：<input type="text" name="" id="">
+            <p>請選擇四張圖片：</p>
+            <input type="file" name="" id="">
+            <input type="file" name="" id="">
+            <br>
+            <input type="file" name="" id="">
+            <input type="file" name="" id="">
+        </div>
+
+    </div>
+
+    <div class="modArea2">
+        <h2>近期推薦</h2>
+        <br>
+        <div class="modArea2_cont">
+            <span>推薦內文：</span>
+            <br>
+            <br>
+            <textarea id="osususmetext"></textarea>
+            <br>
+            <br>
+
+            <div id="newfilepic">
+                <input type="file" name="" id="">
+            </div>
+        </div>
+    </div>
+
+    <input type="submit" name="" id="checked" value="✔儲存變更">
+    <br>
+    <br>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footerContainer">
+            <div class="footerRow">
+                <div class="footerCol">
+                    <h4>DIY蛋糕</h4>
+                    <ul>
+                        <li><a href="">關於我們</a></li>
+                        <li><a href="">常見問題</a></li>
+                    </ul>
+                </div>
+                <div class="footerCol">
+                    <h4>服務內容</h4>
+                    <ul>
+                        <li><a href="">立即預約</a></li>
+                        <li><a href="">產品介紹</a></li>
+                    </ul>
+                </div>
+                <div class="footerCol">
+                    <h4>聯絡我們</h4>
+                    <div class="socialLinks">
+                        <a href=""><i class="fab fa-facebook-f"></i></a>
+                        <a href=""><i class="fab fa-twitter"></i></a>
+                        <a href=""><i class="fab fa-instagram"></i></a>
+                        <a href=""><i class="fab fa-line"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="../resources/js/topBtn.js"></script>
+    <script>
+        function opengroup(evt, groupName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(groupName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+    </script>
+
+</body>
+
+</html>
