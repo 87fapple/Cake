@@ -132,4 +132,6 @@ $token = $_COOKIE['token'];
         </footer>
     </body>
     <script src="../resources/js/topBtn.js"></script>
+    <script src="../resources/js/navbar.js"></script>
+
 </html>
