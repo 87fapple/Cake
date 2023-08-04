@@ -17,7 +17,9 @@ $material = $_REQUEST['material'];
 $cImg1 = $_FILES['cImg1']['tmp_name'];
 $cImg2 = $_FILES['cImg2']['tmp_name'];
 
+
 $c1 = file_get_contents($cImg1);
+$c1 = base64_encode($c1);
 $c2 = file_get_contents($cImg2);
 
 DB::insert('insert into cake(cName,price,kind,cSize,cImg1,cImg2,feature,level,material)

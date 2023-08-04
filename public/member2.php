@@ -1,3 +1,24 @@
+<?php session_start(); ?>
+<?php
+if (!$_COOKIE['token']) {
+  header('Location: /Cake/public/login.html');
+  die();
+}
+require('php/db2.php');
+$token = $_COOKIE['token'];
+
+$sql = ' SELECT * FROM userinfo where token=? ';
+$stmt = $mysqli->prepare($sql);
+$stmt->bind_param('s', $token);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+$email=$row['email'];
+$uName=$row['uName'];
+$phone=$row['phone'];
+
+echo $uName;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,8 +32,9 @@
   <link rel="stylesheet" href="../resources/css/footer.css">
   <link rel="stylesheet" href="../resources/css/topBtn.css">
   <link rel="stylesheet" type="text/css"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-  <script src="https://kit.fontawesome.com/6c4c2bf9f6.js" crossorigin="anonymous"></script>
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+
 
 </head>
 
@@ -39,43 +61,43 @@
         <li><a href="../public/locations.html">分店資訊</a></li>
         <li><a href="../public/reserve.php">預約課程</a></li>
         <li><a href="../public/Q&A.html">常見問題</a></li>
-        <li><a href="../public/login.html">登入會員</a></li>
+        <li><a href="php/sign/logout.php">登出</a></li>
       </ul>
     </div>
   </nav>
 
   <div name="selectarea" id="sel">
-    <a href="./admin.html" class="selectarea"><i style='font-size:24px' class='fas'>&#xf1b0;</i>&nbsp更改會員資料</a>
-    <a href="./history.html" class="selectarea"><i style='font-size:24px' class='fas'>&#xf1b0;</i>&nbsp預約紀錄</a>
-    <div class="selectarea"> 您好，<span>使用者</span></div>
-
+    <div href="#changeData" class="selectarea"> <a href="./admin.html">更改會員資料</a></div>
+    <div href="#reserveHistory" class="selectarea"><a href="./history.html">預約紀錄</a></div>
+    <div class="selectarea"> 您好，<span><?= $uName ?></span></div>
   </div>
+
 
   <div id="contents">
 
     <h2>更改會員資料</h2>
 
     <div class="container">
-      <form>
+      <form action="php/sign/update.php">
         <label for="nickname">暱稱</label>
-        <input type="text" id="nickname" name="nickname" placeholder="更改暱稱">
+        <input type="text" id="uname" name="uname" value="<?= $uName ?>" />
         <br>
-        <label for="newemailadd">信箱</label>
-        <input type="email" id="newemailadd" name="newemailadd" placeholder="更改信箱">
+        <label for="email">信箱</label>
+        <input type="email" id="email" name="email" value="<?= $email ?>"/>
         <br>
-        <label for="newphone">手機號碼</label>
-        <input type="phone" id="newphone" name="newphone" placeholder="更改手機號碼">
+        <label for="phone">手機號碼</label>
+        <input type="phone" id="phone" name="phone" value="<?= $phone ?>"/>
         <br>
         <label for="newpwd">密碼</label>
-        <input type="password" id="newpwd" name="newpwd" placeholder="更改密碼">
+        <input type="password" id="pwd" name="pwd" placeholder="更改密碼">
         <br>
         <label for="cfrpwd">確認密碼</label>
         <input type="password" id="cfrpwd" name="cfrpwd" placeholder="再次輸入密碼">
         <br>
+        <input type="submit" value="確認更改" class="comfirmbtn">
       </form>
     </div>
     <br>
-    <input type="submit" value="確認更改" class="comfirmbtn">
     <br>
   </div>
 
