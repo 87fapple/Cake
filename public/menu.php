@@ -1,8 +1,12 @@
 <?php
 require_once('php/db2.php');
 
-$sql = 'select * from cake';
-$result = $mysqli->query($sql);
+$sql = 'select cid,cName,price,kind,cSize,level from cake';
+// $result = $mysqli->query($sql);
+$stmt = $mysqli->prepare($sql);
+// $stmt->bind_param('s', $token);
+$stmt->execute();
+$result = $stmt->get_result();
 ?>
 <!DOCTYPE html>
 <html lang="en">

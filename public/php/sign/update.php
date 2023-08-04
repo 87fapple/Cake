@@ -12,7 +12,9 @@ $phone = $_REQUEST['phone'];
 $uName = $_REQUEST['uname'];
 $token = $_COOKIE['token'];
 
-
+if(strlen($pwd)==0){
 DB::update("update userinfo set uName = ? ,email = ? ,phone = ? where token = ?",[$uName,$email,$phone,$token]);
-
+}else{
+DB::update("update userinfo set uName = ? ,email = ? ,phone = ? ,pwd = ? where token = ?",[$uName,$email,$phone,$pwd,$token]);
+}
 header('location:/Cake/public/member.php');

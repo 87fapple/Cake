@@ -77,7 +77,7 @@
             name="change_cName"
             id="change_cName"
             class="selectcake"
-            onchange="select()"
+            
           >
             <optgroup label="蛋糕" name="cake">
               <option value="皮卡蛋糕">皮卡蛋糕</option>
@@ -213,9 +213,9 @@
     const Name = document.getElementById("cName");
     const price = document.getElementById("price");
 
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
-    });
+    // form.addEventListener("submit", function (event) {
+    //   event.preventDefault();
+    // });
 
     change_cName.onchange = function (e){
         const cName = e.target.value;
@@ -230,6 +230,7 @@
             return response.json();
         })
         .then(function(data){
+          // console.log(data);
            Name.value = data[0].cName;
            price.value = data[0].price;
            kind.value = data[0].kind;
@@ -237,7 +238,6 @@
            feature.value = data[0].feature;
            level.value = data[0].level;
            material.value = data[0].material;
-
         })
     }
   </script>
