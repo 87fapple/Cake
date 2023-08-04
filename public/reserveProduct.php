@@ -1,42 +1,53 @@
 <?php session_start(); ?>
 <?php
-require_once('../DB.php');
+if (!$_COOKIE['token']) {
+    header('Location: /Cake/public/login.html');
+    die();
+}
+require('./php/DB.php');
 
-// if (isset($_COOKIE["oToken"])) {
-//     $oToken = $_COOKIE["oToken"];
-// }
-
-$oToken = 'b2729291-2f66-11ee-b7cc-0242ac110004';
+$token = $_COOKIE['token'];
 $cInfo = [];
+
+if (isset($_COOKIE["oToken"])) {
+    $oToken = $_COOKIE["oToken"];
+}
+// $oToken = 'b2729291-2f66-11ee-b7cc-0242ac110004';
 
 DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInfo) {
     $cInfo[] = $rows[0];
 }, [$oToken]);
 ?>
 
-
 <!DOCTYPE html>
 <html>
 
 <head>
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <!-- <link rel="stylesheet" href="jqueryui/style.css"> -->
+
+    <link rel="stylesheet" href="../resources/css/navbar.css">
+    <link rel="stylesheet" href="../resources/css/reserve.css">
+    <link rel="stylesheet" href="../resources/css/footer.css">
+    <link rel="stylesheet" href="../resources/css/topBtn.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
     <script>
-        $(function () {
+        $(function() {
             const cInfoSid = <?= $cInfo[0]["sid"] ?>;
-            // $("#hidden").hide();
+            $("#hidden").hide();
             let data;
             let nameFilled = false;
             let numFilled = false;
             let currentDivIndex = 0;
 
-            const nextNumber = (function () {
+            const nextNumber = (function() {
                 var lastNumber = 0;
-                return function () {
+                return function() {
                     lastNumber += 1;
                     return lastNumber;
                 };
@@ -52,7 +63,7 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             }
             document.getElementById("makeNum").innerHTML = view1
 
-            $("#makeNum").on('change', function (e) {
+            $("#makeNum").on('change', function(e) {
                 var mNum = $("#makeNum option:selected").val();
                 var people = $("#people").val();
                 let view4 = '';
@@ -87,16 +98,16 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                 $("#hidden").show();
             })
 
-            fetch(`storeToCake_sql.php?indexInfo=${cInfoSid}`)
-                .then(function (response) {
+            fetch(`./php/reserve/storeToCake_sql.php?indexInfo=${cInfoSid}`)
+                .then(function(response) {
                     return response.json();
                 })
-                .then(function (responseData) {
+                .then(function(responseData) {
                     data = responseData;
                     universalOptions();
                 })
 
-            document.getElementById("addnewdiv").onclick = function (e) {
+            document.getElementById("addnewdiv").onclick = function(e) {
                 nextNewNumber();
             }
 
@@ -125,7 +136,7 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                 let cookieView = '';
                 let dessertView = '';
 
-                data.forEach(function (e) {
+                data.forEach(function(e) {
                     switch (e.kind) {
                         case '蛋糕':
                             cakeView += `
@@ -197,9 +208,9 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             }
         });
 
-        window.onload = function (e) {
+        window.onload = function(e) {
             e.preventDefault();
-            submitBtn.onclick = function (e) {
+            submitBtn.onclick = function(e) {
                 const ckCakeName = $("#cakeName option:selected").val();
                 const mNum = $("#makeNum option:selected").val();
                 const ckNum = $("#num option:selected").val();
@@ -219,14 +230,14 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                     alert("請選擇產品和份數");
                     return;
                 } else {
-                    fetch('insertOrdersCake.php', {
-                        method: "POST",
-                        body: new FormData(productForm)
-                    })
-                        .then(function (response) {
+                    fetch('./php/reserve/insertOrdersCake.php', {
+                            method: "POST",
+                            body: new FormData(productForm)
+                        })
+                        .then(function(response) {
                             return response.text();
                         })
-                        .then(function (data) {
+                        .then(function(data) {
                             console.log(data);
                             // if (data == "reserveProduct.php") {
                             //     location.href = data;
@@ -242,62 +253,109 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             }
         }
     </script>
+
 </head>
 
 <body>
-    <div class="topnav">
-        <a href="#logout">登入/註冊</a>
-        <a href="#contact">常見問題</a>
-        <a href="#news">商品介紹</a>
-        <a href="#reserve">預約課程</a>
-        <a href="#location">分店資訊</a>
-    </div>
+    <!-- Back-to-Top Button -->
+    <button onclick="topFunction()" class="topBtn" id="topBtn"></button>
 
-    <h3>預約產品</h3>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbarTitle">
+            <a href="../public/mainpage.html">
+                <img src="../image/icon-noBorder-whiteFont.png">
+            </a>
+        </div>
+        <div class="hambuger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="navbarLink">
+            <ul>
+                <li><a href="../public/menu.php">產品介紹</a></li>
+                <li><a href="../public/locations.html">分店資訊</a></li>
+                <li><a href="../public/reserve.php">預約課程</a></li>
+                <li><a href="../public/Q&A.html">常見問題</a></li>
+                <li><a href="../public/login.html">登入會員</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <h3>預約</h3>
     <div class="container">
-        <form id="productForm">
-            <div>目前預定人數
-                <input type="hidden" id="oid" name="oid" value="<?= $cInfo[0]["oid"] ?>">
-                <input type="text" id="people" value="<?= $cInfo[0]["people"] ?>" disabled>
-                <label for="makeNum">製作份數</label>
-                <select id="makeNum" name="makeNum">
-                </select>
-                <span>陪同人數:</span><input type="text" id="companion" name="companion" value="0" readonly="readonly">
-            </div>
-            <div>注意：一份甜點最多一位陪同，將酌收陪同費120元/人。</div>
-            <div id="hidden">
-                <form id="productForm">
-                    <div id="baseChoose">
-                        <label for="cakeName">選擇產品</label>
-                        <select id="cakeName" name="cakeName">
-                            <option style="display: none;" value="">請選擇產品</option>
-                            <optgroup label="蛋糕" id="cake">
-                            <optgroup label="餅乾" id="cookie">
-                            <optgroup label="點心" id="dessert">
-                        </select>
-                        <label for="num">份數</label>
-                        <select id="num" name="num">
-                        </select>
-                    </div>
-                    <div id="newChoose"></div>
+        <h2>預約</h2>
+        <div class="scd-container">
+            <form id="productForm">
+                <div>目前預定人數
+                    <input type="hidden" id="oid" name="oid" value="<?= $cInfo[0]["oid"] ?>">
+                    <input type="text" id="people" value="<?= $cInfo[0]["people"] ?>" disabled>
+                    <label for="makeNum">製作份數</label>
+                    <select id="makeNum" name="makeNum">
+                    </select>
+                    <span>陪同人數:</span><input type="text" id="companion" name="companion" value="0" readonly="readonly">
+                </div>
+                <div>注意：一份甜點最多一位陪同，將酌收陪同費120元/人。</div>
 
+                <br><br>
+                <div id="hidden">
+                    <form id="productForm">
+                        <div id="baseChoose">
+                            <label for="cakeName">選擇產品</label>
+                            <select id="cakeName" name="cakeName">
+                                <option style="display: none;" value="">請選擇產品</option>
+                                <optgroup label="蛋糕" id="cake">
+                                <optgroup label="餅乾" id="cookie">
+                                <optgroup label="點心" id="dessert">
+                            </select>
+                            <label for="num">份數</label>
+                            <select id="num" name="num">
+                            </select>
+                        </div>
+                        <div id="newChoose"></div>
 
-                    <input type="button" id="addnewdiv" value="新增品項">
-                    <div>注意：若選取的甜點份數未滿製作份數，剩餘份數可現場到實體店面再做確認製作項目</div>
-                    <br>
-
-                    <br>
-                    <input type="button" value="確認產品" id="submitBtn">
-                </form>
-            </div>
-        </form>
+                        <input type="button" id="addnewdiv" value="新增品項">
+                        <div>注意：若選取的甜點份數未滿製作份數，剩餘份數可現場到實體店面再做確認製作項目</div>
+                        <br>
+                        <input type="button" value="確認產品" id="submitBtn">
+                    </form>
+                </div>
+            </form>
+        </div>
     </div>
-    <script>
-
-    </script>
-
-
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footerContainer">
+            <div class="footerRow">
+                <div class="footerCol">
+                    <h4>DIY蛋糕</h4>
+                    <ul>
+                        <li><a href="">關於我們</a></li>
+                        <li><a href="">常見問題</a></li>
+                    </ul>
+                </div>
+                <div class="footerCol">
+                    <h4>服務內容</h4>
+                    <ul>
+                        <li><a href="">立即預約</a></li>
+                        <li><a href="">產品介紹</a></li>
+                    </ul>
+                </div>
+                <div class="footerCol">
+                    <h4>聯絡我們</h4>
+                    <div class="socialLinks">
+                        <a href=""><i class="fab fa-facebook-f"></i></a>
+                        <a href=""><i class="fab fa-twitter"></i></a>
+                        <a href=""><i class="fab fa-instagram"></i></a>
+                        <a href=""><i class="fab fa-line"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 </body>
+<script src="../resources/js/topBtn.js"></script>
 
 </html>

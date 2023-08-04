@@ -53,7 +53,7 @@ $result = $stmt->get_result();
                 <ul>
                     <li><a href="../pubilc/menu.html">產品介紹</a></li>
                     <li><a href="../public/locations.html">分店資訊</a></li>
-                    <li><a href="../public/reserve.html">預約課程</a></li>
+                    <li><a href="../public/reserve.php">預約課程</a></li>
                     <li><a href="../public/Q&A.html">常見問題</a></li>
                     <li><a href="php/sign/logout.php">登出</a></li>
                 </ul>
