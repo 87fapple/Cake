@@ -12,7 +12,22 @@
     <link rel="stylesheet" href="../resources/css/mainpageStyle.css">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-</head>
+        <style>
+            .slider-container {
+              width: 80%;
+              margin: auto;
+              overflow: hidden;
+            }
+            .slider {
+              display: flex;
+              transition: transform 0.5s ease-in-out;
+            }
+            .slider img {
+              width: 100%;
+              height: auto;
+            }
+          </style>
+    </head>
 
 </head>
 
@@ -44,7 +59,7 @@
     <!-- Main  -->
     <main class="mainContainer">
         <!-- Main1 -->
-        <div class="mainBlock1"><img src="../image/mainImg/mainImg1.jpg"></div>
+        <div class="slider"></div>
         <!-- Main2 -->
         <div class="mainBlock2">
             <div class="infoBlock">
@@ -94,10 +109,7 @@
                                 <img src="../image/menuImg/menuInfo1.jpg" 
                                 style="width:300px; height:300px;display:cover;">
                             </div>
-                            <div class="flip-card-back">
-                                <h1>userName</h1>
-                                <p>超級好吃</p>
-                                <p>非常好玩</p>
+                            <div class="flip-card-back" id="exp1">
                             </div>
                         </div>
                     </div>
@@ -107,10 +119,7 @@
                                 <img src="../image/menuImg/menuInfo1.jpg" 
                                 style="width:300px; height:300px;display:cover;">
                             </div>
-                            <div class="flip-card-back">
-                                <h1>userName</h1>
-                                <p>超級好吃</p>
-                                <p>非常好玩</p>
+                            <div class="flip-card-back" id="exp2">
                             </div>
                         </div>
                     </div>
@@ -120,10 +129,8 @@
                                 <img src="../image/menuImg/menuInfo1.jpg" 
                                 style="width:300px; height:300px;display:cover;">
                             </div>
-                            <div class="flip-card-back">
-                                <h1>userName</h1>
-                                <p>超級好吃</p>
-                                <p>非常好玩</p>
+                            <div class="flip-card-back" id="exp3">
+
                             </div>
                         </div>
                     </div>
@@ -163,7 +170,131 @@
         </div>
     </footer>
 </body>
+<script>
+    function loadRandomData(targetId, phpFile) {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var data = JSON.parse(xhr.responseText);
 
+          var html =
+            "<h1>" +
+            data[0].uName +
+            "</h1>" +
+            "<p>" +
+            data[0].eText +
+            "</p>" +
+            "<p>" +
+            data[0].eDate +
+            "</p>";
+
+          document.getElementById(targetId).innerHTML = html;
+        }
+      };
+      xhr.open("GET", "././php/mainpage/random.php", true);
+      xhr.send();
+    }
+
+    function loadAllRandomData() {
+      loadRandomData("exp1", "././php/mainpage/random.php");
+      loadRandomData("exp2", "././php/mainpage/random.php");
+      loadRandomData("exp3", "././php/mainpage/random.php");
+    }
+    function loadUniqueData() {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var data = JSON.parse(xhr.responseText);
+
+          var html1 =
+            "<h1>" +
+            data[0].uName +
+            "</h1>" +
+            "<p>" +
+            data[0].eText +
+            "</p>" +
+            "<p>" +
+            data[0].eDate +
+            "</p>";
+
+          var html2 =
+            "<h1>" +
+            data[1].uName +
+            "</h1>" +
+            "<p>" +
+            data[1].eText +
+            "</p>" +
+            "<p>" +
+            data[1].eDate +
+            "</p>";
+
+          var html3 =
+            "<h1>" +
+            data[2].uName +
+            "</h1>" +
+            "<p>" +
+            data[2].eText +
+            "</p>" +
+            "<p>" +
+            data[2].eDate +
+            "</p>";
+
+          document.getElementById("exp1").innerHTML = html1;
+          document.getElementById("exp2").innerHTML = html2;
+          document.getElementById("exp3").innerHTML = html3;
+        }
+      };
+      xhr.open("GET", "././php/mainpage/random.php", true);
+      xhr.send();
+    }
+
+    loadUniqueData();
+  </script>
+  
+  <script>
+    const slider = document.querySelector(".slider");
+    const sliderWidth = slider.offsetWidth;
+    let currentImageIndex = 0;
+    let images = [];
+
+    function showImage(index) {
+      slider.innerHTML = ""; // 清空 slider 中的內容
+      const imgElement = document.createElement("img");
+      imgElement.src = `data:image/jpeg;base64,${images[index]}`;
+      slider.appendChild(imgElement);
+    }
+
+    function nextImage() {
+      currentImageIndex = (currentImageIndex + 1) % images.length;
+      showImage(currentImageIndex);
+    }
+
+    function fetchImages() {
+      // 使用 AJAX 取得 PHP 回傳的圖片資料
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            // 解析回傳的 JSON 資料
+            images = JSON.parse(xhr.responseText);
+
+            // 顯示第一張圖片
+            showImage(currentImageIndex);
+
+            setInterval(nextImage, 3000); // Change image every 3 seconds
+          } else {
+            console.error("Failed to fetch images");
+          }
+        }
+      };
+
+      xhr.open("GET", "././php/mainpage/getcimg.php", true);
+      xhr.send();
+    }
+
+    // 執行 AJAX 請求來取得圖片資料
+    fetchImages();
+  </script>
 <script src="../resources/js/navbar.js"></script>
 <script src="../resources/js/topBtn.js"></script>
 
