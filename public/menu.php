@@ -12,9 +12,9 @@ $result = $mysqli->query($sql);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
-    <link rel="stylesheet" href="../resources/css/menuStyle.css">   
-    <link rel="stylesheet" href="../resources/css/navbar.css">
-    <link rel="stylesheet" href="../resources/css/footer.css">
+    <link rel="stylesheet" href="../resources/css/menu2.css">   
+    <link rel="stylesheet" href="../resources/css/Navbar.css">
+    <link rel="stylesheet" href="../resources/css/footer2.css">
     <link rel="stylesheet" href="../resources/css/topBtn.css">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
@@ -48,11 +48,13 @@ $result = $mysqli->query($sql);
     <!-- Menu -->
     <main class="menu">
         <!-- Welcome img and title -->
-        <div class="menuBlock1">
+        <!-- <div class="menuBlock1">
             <img src="../image/menuImg/menuWelcomeImg.jpg">
             <p >所有產品</p>
         </div>
-        <!-- Type Navbar -->
+
+        <!- Type Navbar -->
+        <p style="margin:120px 0 0 0 "></p>
         <div class="kindNavbar" id="kindNavbar">
             <div class="kindBlock">
                 <div><b>選擇種類：</b></div> 
@@ -76,20 +78,21 @@ $result = $mysqli->query($sql);
 
         <!-- Menu Info -->
         <div class="menuBlock2">
+            
         <?php
             while($row = $result->fetch_assoc()){
                 echo 
                     "
                     <div class=\"menuInfoDiv\" id=\"menuInfo\" data-cakeid={$row['cid']}>
-                        <a href=\"\"><img src=\"../image/menuImg/menuInfo1.jpg\" onclick=\"showProductDetail({$row['cid']})\"></a>
-                        <div class=\"menuInfoContent\" id=\"menuInfoContent\" >
+                        <a href=\"detail.php?cid={$row['cid']}\">
+                            <img src=\"../image/menuImg/menuInfo1.jpg\">
+                        <div class=\"menuInfoContent\" id=\"menuInfoContent\">
                             <ul class=\"menuInfo\" id=\"menuInfo\">
-                                <li>名稱：{$row['cName']}</li>
-                                <li>時間：2hr</li>
-                                <li>難度：{$row['level']}</li>
-                                <li>價格：{$row['price']}</li>
+                                <li>{$row['cName']}</li>
+                                <li>難度 {$row['level']}</li>
+                                <li>$ {$row['price']}</li>
                             </ul>
-                        </div>
+                        </div></a>
                     </div>
                     ";
             }
@@ -189,13 +192,12 @@ function renderCakes(cakes) {
     cakes.forEach(cake => {
         menuBlock2.innerHTML += `
             <div class="menuInfoDiv" id="menuInfo" data-cakeid="${cake.cid}" > <!-- 添加data-cakeid屬性 -->
-                <a href="javascript:void(0);" onclick="showProductDetail(${cake.cid})"><img src="../image/menuImg/menuInfo1.jpg"></a> <!-- 修改onclick事件 -->
+                <a href="javascript:void(0);" onclick="showProductDetail(${cake.cid})"><img src="../image/menuImg/menuInfo1.jpg"></a> 
                 <div class="menuInfoContent" id="menuInfoContent">
                     <ul class="menuInfo" id="menuInfo">
-                        <li>名稱：${cake.cName}</li>
-                        <li>時間：2hr</li>
-                        <li>難度：${cake.level}</li>
-                        <li>價格：${cake.price}</li>
+                        <li>${cake.cName}</li>
+                        <li>難度${cake.level}</li>
+                        <li>$${cake.price}</li>
                     </ul>
                 </div>
             </div>
@@ -205,20 +207,8 @@ function renderCakes(cakes) {
 
 // 點擊產品總攬其中一個div後
 function showProductDetail(cakeId) {
-        fetch(`php/menu/product_detail.php?cid=${cakeId}`)
-            .then(response => {
-                if (!response.ok) {
-                    console.log(response);
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(cakeDetail => {
-                // 在這裡調用新的JS函式detailRender()並將產品詳細資訊傳遞過去
-                detailRender(cakeDetail);
-            })
-            .catch(error => console.error('請求失敗：', error));
-    }
+    window.location.href = `detail.php?cid=${cakeId}`;
+}
 
     function detailRender(cakeDetail) {
         var menu = document.querySelector('.menu');

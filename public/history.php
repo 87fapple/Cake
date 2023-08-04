@@ -14,9 +14,9 @@ $token = $_COOKIE['token'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>預約紀錄</title>
-    <link rel="stylesheet" href="../resources/css/navbar.css">
+    <link rel="stylesheet" href="../resources/css/Navbar.css">
     <link rel="stylesheet" href="../resources/css/history.css">
-    <link rel="stylesheet" href="../resources/css/footer.css">
+    <link rel="stylesheet" href="../resources/css/footer2.css">
     <link rel="stylesheet" href="../resources/css/topBtn.css">
     <link rel="stylesheet" type="text/css"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
@@ -132,4 +132,6 @@ $token = $_COOKIE['token'];
         </footer>
     </body>
     <script src="../resources/js/topBtn.js"></script>
+    <script src="../resources/js/navbar.js"></script>
+
 </html>

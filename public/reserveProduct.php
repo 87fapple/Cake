@@ -357,5 +357,6 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
 
 </body>
 <script src="../resources/js/topBtn.js"></script>
+<script src="../resources/js/navbar.js"></script>
 
 </html>
