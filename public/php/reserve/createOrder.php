@@ -26,7 +26,7 @@ DB::select("call createOrder(?, ?, ?, ?, ?)", function ($rows) {
         if ($result === 'reserveProduct.php') {
             if(isset($row["orderToken"])){
                 $oToken = $row["orderToken"];
-                setcookie('oToken', $oToken, time() + 120, "/");
+                setcookie('oToken', $oToken, time() + 12000, "/");
             }
         }
     }
