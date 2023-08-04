@@ -12,7 +12,7 @@ $result = $mysqli->query($sql);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
-    <link rel="stylesheet" href="../resources/css/menuStyle.css">   
+    <link rel="stylesheet" href="../resources/css/menu2.css">   
     <link rel="stylesheet" href="../resources/css/Navbar.css">
     <link rel="stylesheet" href="../resources/css/footer2.css">
     <link rel="stylesheet" href="../resources/css/topBtn.css">
@@ -48,11 +48,13 @@ $result = $mysqli->query($sql);
     <!-- Menu -->
     <main class="menu">
         <!-- Welcome img and title -->
-        <div class="menuBlock1">
+        <!-- <div class="menuBlock1">
             <img src="../image/menuImg/menuWelcomeImg.jpg">
             <p >所有產品</p>
         </div>
-        <!-- Type Navbar -->
+
+        <!- Type Navbar -->
+        <p style="margin:120px 0 0 0 "></p>
         <div class="kindNavbar" id="kindNavbar">
             <div class="kindBlock">
                 <div><b>選擇種類：</b></div> 
@@ -76,20 +78,20 @@ $result = $mysqli->query($sql);
 
         <!-- Menu Info -->
         <div class="menuBlock2">
+            
         <?php
             while($row = $result->fetch_assoc()){
                 echo 
                     "
                     <div class=\"menuInfoDiv\" id=\"menuInfo\" data-cakeid={$row['cid']}>
-                        <a href=\"\"><img src=\"../image/menuImg/menuInfo1.jpg\" onclick=\"showProductDetail({$row['cid']})\"></a>
+                        <a href=\"\"><img src=\"../image/menuImg/menuInfo1.jpg\" onclick=\"showProductDetail({$row['cid']})\">
                         <div class=\"menuInfoContent\" id=\"menuInfoContent\" >
                             <ul class=\"menuInfo\" id=\"menuInfo\">
-                                <li>名稱：{$row['cName']}</li>
-                                <li>時間：2hr</li>
-                                <li>難度：{$row['level']}</li>
-                                <li>價格：{$row['price']}</li>
+                                <li>{$row['cName']}</li>
+                                <li>難度 {$row['level']}</li>
+                                <li>$ {$row['price']}</li>
                             </ul>
-                        </div>
+                        </div></a>
                     </div>
                     ";
             }
@@ -192,10 +194,9 @@ function renderCakes(cakes) {
                 <a href="javascript:void(0);" onclick="showProductDetail(${cake.cid})"><img src="../image/menuImg/menuInfo1.jpg"></a> <!-- 修改onclick事件 -->
                 <div class="menuInfoContent" id="menuInfoContent">
                     <ul class="menuInfo" id="menuInfo">
-                        <li>名稱：${cake.cName}</li>
-                        <li>時間：2hr</li>
-                        <li>難度：${cake.level}</li>
-                        <li>價格：${cake.price}</li>
+                        <li>${cake.cName}</li>
+                        <li>難度${cake.level}</li>
+                        <li>$${cake.price}</li>
                     </ul>
                 </div>
             </div>
