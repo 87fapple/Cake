@@ -11,10 +11,15 @@ require('../DB.php');
     <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
     <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<<<<<<< HEAD
+    
+    <link rel="stylesheet" href="../../../resources/css/Navbar.css">
+=======
 
     <link rel="stylesheet" href="../../../resources/css/navbar.css">
+>>>>>>> 25c8023f2e8be78d588e408f65608bfc0528e4cd
     <link rel="stylesheet" href="../../../resources/css/reserve.css">
-    <link rel="stylesheet" href="../../../resources/css/footer.css">
+    <link rel="stylesheet" href="../../../resources/css/footer2.css">
 
     <style>
         input[type="radio"] {
