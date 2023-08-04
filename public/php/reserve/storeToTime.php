@@ -1,5 +1,10 @@
+<?php session_start(); ?>
 <?php
-require_once('../DB.php');
+if (!$_COOKIE['token']) {
+    header('Location: /Cake/public/login.html');
+    die();
+}
+require('../DB.php');
 
 $sid = $_REQUEST["sid"];
 $peopleNum = $_REQUEST["peopleNum"];
@@ -20,7 +25,7 @@ function checkTime($datas)
     foreach ($datas as $data => $values) {
         foreach ($values as $key => $value) {
             if ($value === "No availability") {
-                $cTime[] = "No availability";
+                $cTime[] = "本日公休";
             } else {
                 DB::select('CALL getTime(?, ?, ?, ?)', function ($rows) use (&$cTime) {
                     if ($rows[0]['sequel'] !== "fail") {

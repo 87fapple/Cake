@@ -25,18 +25,20 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS createOrder;
 DELIMITER $$
 
-CREATE PROCEDURE createOrder(userId INT, storeId INT, rTime VARCHAR(20), rDate VARCHAR(20), pNum INT)
+CREATE PROCEDURE createOrder(myToken VARCHAR(40), storeId INT, rTime VARCHAR(20), rDate VARCHAR(20), pNum INT)
 BEGIN
     DECLARE orderToken varchar(40) DEFAULT uuid();
     DECLARE x INT DEFAULT 0;
     DECLARE y INT DEFAULT 0;
+    DECLARE z INT DEFAULT 0;
 
     START TRANSACTION;
     	SELECT SUM(people) INTO x FROM orders WHERE sid = storeId AND reserveTime = rTime AND reserveDate = rDate for update;
         SELECT person INTO y FROM store WHERE sid = storeId;
+        SELECT uid INTO z FROM userinfo WHERE token = myToken;
     
         IF (COALESCE(x, 0) + pNum <= y) THEN
-            insert into orders (uid, sid, reserveTime, reserveDate, people, oToken) values (userId, storeId, rTime, rDate, pNum, orderToken);
+            insert into orders (uid, sid, reserveTime, reserveDate, people, oToken) values (z, storeId, rTime, rDate, pNum, orderToken);
             SELECT 'reserveProduct.php' as result, orderToken as orderToken;
             commit;
         ELSE
@@ -52,7 +54,7 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS createOrder;
 DELIMITER $$
 
-CREATE PROCEDURE createOrder(userId INT, storeId INT, rTime VARCHAR(20), rDate VARCHAR(20), pNum INT, checkedToken VARCHAR(40))
+CREATE PROCEDURE createOrder(token VARCHAR(40), storeId INT, rTime VARCHAR(20), rDate VARCHAR(20), pNum INT, checkedToken VARCHAR(40))
 BEGIN
     DECLARE orderToken varchar(40) DEFAULT uuid();
     DECLARE x INT DEFAULT 0;
