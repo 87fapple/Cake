@@ -32,7 +32,7 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
 
     <link rel="stylesheet" href="../resources/css/navbar.css">
     <link rel="stylesheet" href="../resources/css/reserve.css">
-    <link rel="stylesheet" href="../resources/css/footer.css">
+    <link rel="stylesheet" href="../resources/css/footer2.css">
     <link rel="stylesheet" href="../resources/css/topBtn.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
@@ -42,16 +42,9 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             $("#hidden").hide();
             let data;
             let nameFilled = false;
+            let newNameFilled = false;
             let numFilled = false;
             let currentDivIndex = 0;
-
-            const nextNumber = (function() {
-                var lastNumber = 0;
-                return function() {
-                    lastNumber += 1;
-                    return lastNumber;
-                };
-            })();
 
             var people = $("#people").val();
             let view1 = '<option style="display: none;">請選擇製作份數</option>';
@@ -68,11 +61,11 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                 var people = $("#people").val();
                 let view4 = '';
                 numFilled = false;
-                currentDivIndex = -1;
-                nextNewNumber();
+                newNameFilled = false;
+                currentDivIndex = 0;
+                // nextNewNumber();
                 $("#addnewdiv").show();
 
-                // console.log(mNum);
                 for (let i = 0; i < mNum; i++) {
                     universalNums(i);
                 }
@@ -89,6 +82,7 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                             </select>
                         <label for="newNum${a}">份數</label>
                             <select id="newNum${a}" name="newNum${a}"></select>
+                        <input type="button" id="hideNewDiv${a}" value="移除" onClick="hideNewDivs(${a})"/>
                     </div>
                     `;
                 }
@@ -113,20 +107,32 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
 
             function nextNewNumber() {
                 var mNum = $("#makeNum option:selected").val();
-
                 const newDivs = $("[id^='newdiv']");
-                console.log(newDivs);
 
-                if (currentDivIndex <= mNum) {
-                    $(newDivs[currentDivIndex]).css('display', '');
+                if (currentDivIndex < mNum) {
+                    $(newDivs[currentDivIndex]).show();
                     currentDivIndex += 1;
                     universalOptions();
                     universalNums();
 
-                    if (currentDivIndex == (mNum - 1)) {
+                }
+                if (currentDivIndex == mNum - 1) {
+                    $("#addnewdiv").hide();
+                    currentDivIndex += 2;
+                } else if (currentDivIndex > mNum) {
+                    let hideNewDivIndex = [];
+                    for (let i = 0; i < mNum; i++) {
+                        if ($(newDivs[i]).is(':hidden')) {
+                            hideNewDivIndex.push(i);
+                        }
+                    }
+                    $(newDivs[hideNewDivIndex.shift()]).show();
+
+                    if (hideNewDivIndex.length === 0) {
                         $("#addnewdiv").hide();
                     }
                 }
+                console.log(currentDivIndex);
             }
 
             function universalOptions() {
@@ -156,26 +162,26 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                     }
                 });
 
-                if (!nameFilled) {
-                    const cakeNameEle = document.getElementById("cake");
-                    const cookieNameEle = document.getElementById("cookie");
-                    const dessertNameEle = document.getElementById("dessert");
-                    if (cakeNameEle || cookieNameEle || dessertNameEle) {
-                        cakeNameEle.innerHTML = cakeView;
-                        cookieNameEle.innerHTML = cookieView;
-                        dessertNameEle.innerHTML = dessertView;
-                        nameFilled = true;
+                function fillOptions(eleId, options) {
+                    const element = document.getElementById(eleId);
+                    if (element) {
+                        element.innerHTML = options;
                     }
                 }
 
-                for (let x = 0; x < mNum; x++) {
-                    const newCakeNameEle = document.getElementById("newCake" + x);
-                    const newCookieNameEle = document.getElementById("newCookie" + x);
-                    const newDessertNameEle = document.getElementById("newDessert" + x);
-                    if (newCakeNameEle || newCookieNameEle || newDessertNameEle) {
-                        newCakeNameEle.innerHTML = cakeView;
-                        newCookieNameEle.innerHTML = cookieView;
-                        newDessertNameEle.innerHTML = dessertView;
+                if (!nameFilled) {
+                    fillOptions("cake", cakeView);
+                    fillOptions("cookie", cookieView);
+                    fillOptions("dessert", dessertView);
+                    nameFilled = true;
+                }
+
+                if (!newNameFilled) {
+                    for (let x = 0; x < mNum; x++) {
+                        fillOptions("newCake" + x, cakeView);
+                        fillOptions("newCookie" + x, cookieView);
+                        fillOptions("newDessert" + x, dessertView);
+                        newNameFilled = true;
                     }
                 }
             }
@@ -183,7 +189,6 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             function universalNums() {
                 var mNum = $("#makeNum option:selected").val();
 
-                // console.log(mNum);
                 let view2 = '<option style="display: none;" value="">品項數量</option>';
                 for (let i = 1; i <= mNum; i++) {
                     view2 += `
@@ -208,21 +213,46 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             }
         });
 
+        function hideNewDivs(num) {
+            $("#newdiv" + num).hide();
+            $("#addnewdiv").show();
+        }
+
         window.onload = function(e) {
-            e.preventDefault();
+            const submitBtn = document.getElementById('submitBtn');
             submitBtn.onclick = function(e) {
+                e.preventDefault();
+
+                const productForm = document.getElementById('productForm');
+                const formData = new FormData(productForm);
+
+                const newDivsForm = document.querySelectorAll('[id^="newdiv"]');
+                newDivsForm.forEach(div => {
+                    const isHidden = window.getComputedStyle(div).display === 'none';
+                    if (isHidden) {
+                        const newCakeName = div.querySelector('[id^="newCakeName"]').name;
+                        const newNum = div.querySelector('[id^="newNum"]').name;
+                        formData.delete(newCakeName);
+                        formData.delete(newNum);
+                    }
+                });
+
                 const ckCakeName = $("#cakeName option:selected").val();
                 const mNum = $("#makeNum option:selected").val();
                 const ckNum = $("#num option:selected").val();
 
                 const newDivs = $("[id^='newdiv']");
                 for (let i = 0; i < newDivs.length; i++) {
-                    const newCakeName = $(newDivs[i]).find("[id^='newCakeName']").val();
-                    const newNum = $(newDivs[i]).find("[id^='newNum']").val();
+                    if (!$(newDivs[i]).is(':hidden')) {
+                        const newCakeName = $(newDivs[i]).find("[id^='newCakeName']").val();
+                        const newNum = $(newDivs[i]).find("[id^='newNum']").val();
+                        console.log(newCakeName);
+                        console.log(newNum);
 
-                    if (!newCakeName || !newNum) {
-                        alert("請選擇新建的產品和份數");
-                        return;
+                        if (!newCakeName || !newNum) {
+                            alert("請選擇新建的產品和份數");
+                            return;
+                        }
                     }
                 }
 
@@ -232,7 +262,7 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                 } else {
                     fetch('./php/reserve/insertOrdersCake.php', {
                             method: "POST",
-                            body: new FormData(productForm)
+                            body: formData
                         })
                         .then(function(response) {
                             return response.text();
@@ -252,6 +282,8 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                 }
             }
         }
+    </script>
+    <script>
     </script>
 
 </head>
@@ -300,26 +332,24 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
 
                 <br><br>
                 <div id="hidden">
-                    <form id="productForm">
-                        <div id="baseChoose">
-                            <label for="cakeName">選擇產品</label>
-                            <select id="cakeName" name="cakeName">
-                                <option style="display: none;" value="">請選擇產品</option>
-                                <optgroup label="蛋糕" id="cake">
-                                <optgroup label="餅乾" id="cookie">
-                                <optgroup label="點心" id="dessert">
-                            </select>
-                            <label for="num">份數</label>
-                            <select id="num" name="num">
-                            </select>
-                        </div>
-                        <div id="newChoose"></div>
+                    <div id="baseChoose">
+                        <label for="cakeName">選擇產品</label>
+                        <select id="cakeName" name="cakeName">
+                            <option style="display: none;" value="">請選擇產品</option>
+                            <optgroup label="蛋糕" id="cake">
+                            <optgroup label="餅乾" id="cookie">
+                            <optgroup label="點心" id="dessert">
+                        </select>
+                        <label for="num">份數</label>
+                        <select id="num" name="num">
+                        </select>
+                    </div>
+                    <div id="newChoose"></div>
 
-                        <input type="button" id="addnewdiv" value="新增品項">
-                        <div>注意：若選取的甜點份數未滿製作份數，剩餘份數可現場到實體店面再做確認製作項目</div>
-                        <br>
-                        <input type="button" value="確認產品" id="submitBtn">
-                    </form>
+                    <input type="button" id="addnewdiv" value="新增品項">
+                    <div>注意：若選取的甜點份數未滿製作份數，剩餘份數可現場到實體店面再做確認製作項目</div>
+                    <br>
+                    <input type="button" value="確認產品" id="submitBtn">
                 </div>
             </form>
         </div>

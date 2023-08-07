@@ -17,7 +17,7 @@ $token = $row['token'];
 
 $nextPage = $row['result'];
 if ($nextPage === '/Cake/public/history.php') {
-    setcookie('token', $token, time() + 1200, "/");
+    setcookie('token', $token, time() + 12000, "/");
     setcookie('welcome', $nextPage, time() + 1200, "/");
     echo 100;
     // header("Location:{$nextPage}");
