@@ -163,9 +163,12 @@
           <label for="cImg1">上傳產品照片</label>
           <br />
           <br />
-          <input type="file" id="cImg1" name="cImg1" />
+          <input accept="image/*" type="file" id="cImg1" name="cImg1" />
+          <!-- <img id="img1" src=""  style="max-width: 200px" /> -->
+          <div id="img1" >
           <br />
-          <input type="file" id="cImg2" name="cImg2" />
+          <input accept="image/*" type="file" id="cImg2" name="cImg2" />
+          <img id="img2" src=""  style="max-width: 400px" />
           <br />
         </div>
         <br />
@@ -207,12 +210,15 @@
     </footer>
   </body>
   <script src="../../../resources/js/topBtn.js"></script>
+  <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
   <script>
     const form = document.getElementById("form");
     const change_cName = document.getElementById("change_cName");
     const Name = document.getElementById("cName");
     const price = document.getElementById("price");
-
+    const img1 = document.getElementById("img1");
+    const img2 = document.getElementById("img2");
     // form.addEventListener("submit", function (event) {
     //   event.preventDefault();
     // });
@@ -227,18 +233,47 @@
             // headers:{'Content-Type':'application/json'}}
         )
         .then(function(response){
-            return response.json();
+            return response.text();
         })
         .then(function(data){
           // console.log(data);
-           Name.value = data[0].cName;
-           price.value = data[0].price;
-           kind.value = data[0].kind;
-           cSize.value = data[0].cSize;
-           feature.value = data[0].feature;
-           level.value = data[0].level;
-           material.value = data[0].material;
+          //  Name.value = data[0].cName;
+          //  price.value = data[0].price;
+          //  kind.value = data[0].kind;
+          //  cSize.value = data[0].cSize;
+          //  feature.value = data[0].feature;
+          //  level.value = data[0].level;
+          //  material.value = data[0].material;
+          // console.log(data);
+           img1.innerHTML=data;
         })
     }
+     //第一張圖片預覽
+     $("#cImg1").on("change", function (e) {
+      const file = this.files[0]; //將上傳檔案轉換為base64字串
+
+      const fr = new FileReader(); //建立FileReader物件
+      fr.onload = function (e) {
+        $("#img1").attr("src", e.target.result); //读取的结果放入圖片
+      };
+      // 使用 readAsDataURL 將圖片轉成 Base64
+      fr.readAsDataURL(file);
+      console.log('ok');
+    });
+
+    //第二張圖片預覽
+    $("#cImg2").on("change", function (e) {
+      const file = this.files[0]; //將上傳檔案轉換為base64字串
+
+      const fr = new FileReader(); //建立FileReader物件
+      fr.onload = function (e) {
+        $("#img2").attr("src", e.target.result); //读取的结果放入圖片
+      };
+      // 使用 readAsDataURL 將圖片轉成 Base64
+      fr.readAsDataURL(file);
+      console.log('ok');
+    });
+//     var src1="22";
+// document.querySelector("#img1").src = src1
   </script>
 </html>
