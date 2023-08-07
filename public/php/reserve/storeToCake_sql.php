@@ -1,4 +1,9 @@
+<?php session_start(); ?>
 <?php
+if (!$_COOKIE['token']) {
+    header('Location: /Cake/public/login.html');
+    die();
+}
 require_once('../DB.php');
 
 $indexInfo = $_REQUEST["indexInfo"];
