@@ -216,7 +216,7 @@ if ($token !== 'undefined') {
         </form>
     </div>
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" style="margin-top: 144px;">
         <div class="footerContainer">
             <div class="footerRow">
                 <div class="footerCol">

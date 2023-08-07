@@ -26,8 +26,8 @@ require_once('php/db2.php');
     <link rel="stylesheet" href="../resources/css/Navbar.css">
     <link rel="stylesheet" href="../resources/css/footer2.css">
     <link rel="stylesheet" href="../resources/css/topBtn.css">
-    <link rel="stylesheet" href="../resources/css/carousel.css">
-    <link rel="stylesheet" href="../resources/css/detail.css">
+    <link rel="stylesheet" href="../resources/css/carousel1.css">
+    <link rel="stylesheet" href="../resources/css/detail1.css">
     <!-- <link rel="stylesheet" href="../resources/css/detailStyle.css"> -->
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
@@ -87,7 +87,6 @@ require_once('php/db2.php');
                 </ul>
                 <a href="../public/reserve.html" class="bookingBtn">預約</a>
             </div>
-            <a href="./reserve.php" class="bookingBtn">預約</a>
         </div>
 
         <!-- Detail -->
