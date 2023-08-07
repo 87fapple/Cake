@@ -1,7 +1,6 @@
 <?php
 require_once('php/db2.php');
 
-
     $cakeId = $_GET['cid'];
 
     // 使用預處理語句獲取指定ID的產品詳細資訊
@@ -10,7 +9,6 @@ require_once('php/db2.php');
     $stmt->bind_param('i', $cakeId);
     $stmt->execute();
     $result = $stmt->get_result();
-
    
     $cakeDetail = $result->fetch_assoc();
 
@@ -26,8 +24,8 @@ require_once('php/db2.php');
     <link rel="stylesheet" href="../resources/css/Navbar.css">
     <link rel="stylesheet" href="../resources/css/footer2.css">
     <link rel="stylesheet" href="../resources/css/topBtn.css">
-    <link rel="stylesheet" href="../resources/css/carousel.css">
-    <link rel="stylesheet" href="../resources/css/detail.css">
+    <link rel="stylesheet" href="../resources/css/carousel1.css">
+    <link rel="stylesheet" href="../resources/css/detail1.css">
     <!-- <link rel="stylesheet" href="../resources/css/detailStyle.css"> -->
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
@@ -87,7 +85,6 @@ require_once('php/db2.php');
                 </ul>
                 <a href="../public/reserve.html" class="bookingBtn">預約</a>
             </div>
-            <a href="./reserve.php" class="bookingBtn">預約</a>
         </div>
 
         <!-- Detail -->
@@ -104,7 +101,7 @@ require_once('php/db2.php');
                 <pre><?php echo $cakeDetail['feature']; ?></pre>
 
                 <h1 id="material">使用材料</h1>
-                <pre><?php echo $cakeDetail['meterial']; ?></pre>
+                <pre><?php echo $cakeDetail['material']; ?></pre>
 
                 <h1 id="experience">製作心得</h1>
                 <div class="expBlock">
