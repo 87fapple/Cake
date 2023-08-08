@@ -1,0 +1,93 @@
+
+/* 顧客訂單總覽 */
+.modal1, textarea {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+    resize: none;
+}
+
+.modal1:focus,
+textarea:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+button {
+    background-color: #ffb12b;
+    color: black;
+    font-weight: bold;
+    font-size: large;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    border-radius: 10px;
+}
+
+button:hover {
+    opacity: 1;
+}
+
+.cancelbtn {
+    padding: 14px 20px;
+    background-color: #f44336;
+}
+
+.cancelbtn,
+.submitOK {
+    float: left;
+    width: 50%;
+}
+
+.totalOrder-container {
+    padding: 2rem;
+    background-color: #fefefe;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.totalOrder {
+    display: none;
+    position: fixed;
+    z-index: 4;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #474e5d;
+    padding-top: 50px;
+}
+
+.totalOrder-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+@media screen and (max-width: 300px) {
+
+    .cancelbtn,
+    .signupbtn {
+        width: 100%;
+    }
+}
