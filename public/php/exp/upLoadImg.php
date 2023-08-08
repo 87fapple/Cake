@@ -32,20 +32,12 @@ if (isset($getNum, $_FILES["file"]["name"], $_FILES["file"]["tmp_name"])) {
     if (!empty($imageName[0]) && !empty($imageTmp[0])) {
 
         for ($i = 0; $i < count($imageName); $i++) {
-            $contents[$i] = file_get_contents($imageTmp);
+            $contents[$i] = file_get_contents($imageTmp[$i]);
+
+            DB::insert("insert into expimage value (?, ?)",[$getNum, $contents[$i]]);
         }
     }
+    unlink($imageTmp);
+    echo "留言且上傳圖片成功";
 }
-
-// $contents = [];
-
-// for ($i = 0; $i < count($imageName); $i++) {
-//     $contents[$i] = file_get_contents($imageTmp);
-// }
-
-// $cid = $_REQUEST["cid"];
-
-
-
-
 ?>

@@ -5,16 +5,16 @@ if ($token !== 'undefined') {
 }
 require_once('php/db2.php');
 
-    $cakeId = $_GET['cid'];
+$cakeId = $_GET['cid'];
 
-    // 使用預處理語句獲取指定ID的產品詳細資訊
-    $sql = 'SELECT * FROM cake WHERE cid = ?';
-    $stmt = $mysqli->prepare($sql);
-    $stmt->bind_param('i', $cakeId);
-    $stmt->execute();
-    $result = $stmt->get_result();
-   
-    $cakeDetail = $result->fetch_assoc();
+// 使用預處理語句獲取指定ID的產品詳細資訊
+$sql = 'SELECT * FROM cake WHERE cid = ?';
+$stmt = $mysqli->prepare($sql);
+$stmt->bind_param('i', $cakeId);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$cakeDetail = $result->fetch_assoc();
 
 ?>
 <!DOCTYPE html>
@@ -33,25 +33,24 @@ require_once('php/db2.php');
     <link rel="stylesheet" href="../resources/css/carousel1.css">
     <link rel="stylesheet" href="../resources/css/detail1.css">
     <!-- <link rel="stylesheet" href="../resources/css/detailStyle.css"> -->
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 </head>
 <script>
-    window.onload = function (e) {
+    window.onload = function(e) {
         let eId;
         fetch(`./php/exp/expInfo.php?cid=<?= $cakeId; ?>`)
-            .then(function (response) {
+            .then(function(response) {
                 return response.json();
             })
-            .then(function (responseData) {
+            .then(function(responseData) {
                 let view = '';
                 if (responseData.length === 0) {
                     view = `<div>目前沒有留言</div>`;
                 } else {
                     eId = responseData;
-                    responseData.forEach(function (e) {
+                    responseData.forEach(function(e) {
                         view += `
                             <h4>${e.uName}</h4>
                             <pre>${e.eText}</pre>
@@ -59,21 +58,29 @@ require_once('php/db2.php');
                             <p>${e.eDate}</p>
                             `;
                         fetch(`./php/exp/expImg.php?eid=${e.eid}`)
-                            .then(function (response) {
-                                return response.text();
+                            .then(function(response) {
+                                return response.json();
                             })
-                            .then(function (data) {
-                                // console.log(data);
-                                if (data != "none") {
-                                    let imgElement = document.createElement('img');
-                                    imgElement.src = data;
-                                    document.getElementById(`img${e.eid}`).appendChild(imgElement);
-                                }
+                            .then(function(data) {
+                                console.log(data);
+                                view2 = '';
+                                data.forEach(function(img) {
+                                    if (img != "none") {
+                                        view2 += `
+                                            <img src="${img}">
+                                        `;
+                                    }
+                                });
+                                $("#img" + e.eid).append(view2);
                             });
                     })
                 }
                 $("#expBlock").append(view);
             })
+
+        function reloadPage() {
+            location.reload();
+        }
 
         const token = "<?= $token; ?>";
 
@@ -85,16 +92,18 @@ require_once('php/db2.php');
             $("#expMessage").show();
         }
 
-        $("#expInput").click(function(e){
-            fetch(`./php/exp/upLoadImg.php`,{
-                method:"POST",
-                body: new FormData(expMessage)
-            }).then(function (response) {
-                return response.text();
-            })
-            .then(function (data) {
-                console.log(data);
-            })
+        $("#expInput").click(function(e) {
+            fetch(`./php/exp/upLoadImg.php`, {
+                    method: "POST",
+                    body: new FormData(expMessage)
+                }).then(function(response) {
+                    return response.text();
+                })
+                .then(function(data) {
+                    if(typeof(data) !== 'undefined'){
+                        reloadPage();
+                    }
+                })
         });
     }
 </script>
