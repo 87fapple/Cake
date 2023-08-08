@@ -4,8 +4,29 @@ if (!$_COOKIE['token']) {
     header('Location: /Cake/public/login.html');
     die();
 }
+
+$uName=$_COOKIE['user'];
+
 require('php/db2.php');
 $token = $_COOKIE['token'];
+
+$sql = "select orders.oid,orders.sid,orders.people,orders.reserveDate,orders.reserveTime,store.location , GROUP_CONCAT(cake.cName,'*',orderlist.num) as cName
+from orders 
+inner join userinfo  on userinfo.uid = orders.uid
+inner join orderlist on orders.oid = orderlist.oid
+inner join cake on orderlist.cid = cake.cid
+
+inner join store on orders.sid= store.sid
+where token = ?
+ GROUP BY orders.oid;
+";
+
+$stmt = $mysqli->prepare($sql);
+$stmt->bind_param('s',$token);
+$stmt->execute();
+
+$result = $stmt->get_result();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,17 +70,17 @@ $token = $_COOKIE['token'];
                 <li><a href="../public/locations.html">分店資訊</a></li>
                 <li><a href="../public/reserve.php">預約課程</a></li>
                 <li><a href="../public/Q&A.html">常見問題</a></li>
-                <li><a href="../public/login.html">登入會員</a></li>
+                <li><a href="../public/php/sign/logout.php">登出</a></li>
             </ul>
         </div>
     </nav>
 
     <div name="selecttop" id="sel">
-        <a href="../public/admin.html" class="selectarea"><i style='font-size:24px'
+        <a href="../public/member.php" class="selectarea"><i style='font-size:24px'
                 class='fas'>&#xf1b0;</i>&nbsp更改會員資料</a>
         <a href="../public/admin_addProduct.html" class="selectarea"><i style='font-size:24px'
                 class='fas'>&#xf1b0;</i>&nbsp預約紀錄</a>
-        <div class="selectarea"> 您好，<span>使用者</span></div>
+        <div class="selectarea"> 您好，<span><?= $uName ?></span></div>
     </div>
 
         <div id="">
@@ -77,23 +98,23 @@ $token = $_COOKIE['token'];
                     <th>是否取消</th>
                 </tr>
 
-                <tr class="mainTable">
-                    <td>2023/7/6</td>
-                    <td>皮卡丘店</td>
-                    <td>13:00-15:00</td>
-                    <td id="products">小火龍餅乾X2、皮卡丘蛋糕X1</td>
-                    <td>3人</td>
-                    <td id="button"><button>取消預約</button></td>
-                </tr>
+                <?php
+                while($row=$result->fetch_assoc()){
+                    // echo "<pre/>";
+                    // var_dump($row);
+                    echo
+                    '<tr class="mainTable">
+                        <td>' . $row['reserveDate'] . '</td>
+                        <td>'. $row['location'] .'</td>
+                        <td>'. $row['reserveTime'] .'</td>
+                        <td id="products">'. $row['cName'] .'</td>
+                        <td>'. $row['people'] . '人</td>
+                        <td id="button"><button>取消預約</button></td>
+                    </tr>'
+                        ;
+                }
+                ?>
 
-                <tr class="mainTable">
-                    <td>2023/7/6</td>
-                    <td>皮卡丘店</td>
-                    <td>13:00-15:00</td>
-                    <td id="products">小火龍餅乾</td>
-                    <td>1人</td>
-                    <td>已取消</td>
-                </tr>
             </table>
 
 

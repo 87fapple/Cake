@@ -16,7 +16,7 @@ $row = $result->fetch_assoc();
 $email=$row['email'];
 $uName=$row['uName'];
 $phone=$row['phone'];
-
+setcookie('user', $uName, time() + 1200, "/");
 echo $uName;
 ?>
 <!DOCTYPE html>
@@ -32,9 +32,8 @@ echo $uName;
   <link rel="stylesheet" href="../resources/css/footer2.css">
   <link rel="stylesheet" href="../resources/css/topBtn.css">
   <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-
-
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <script src="https://kit.fontawesome.com/6c4c2bf9f6.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -67,11 +66,11 @@ echo $uName;
   </nav>
 
   <div name="selectarea" id="sel">
-    <div href="#changeData" class="selectarea"> <a href="./admin.html">更改會員資料</a></div>
-    <div href="#reserveHistory" class="selectarea"><a href="./history.html">預約紀錄</a></div>
+    <a href="./admin.html" class="selectarea"><i style='font-size:24px' class='fas'>&#xf1b0;</i>&nbsp更改會員資料</a>
+    <a href="./history.php" class="selectarea"><i style='font-size:24px' class='fas'>&#xf1b0;</i>&nbsp預約紀錄</a>
     <div class="selectarea"> 您好，<span><?= $uName ?></span></div>
-  </div>
 
+  </div>
 
   <div id="contents">
 
@@ -80,13 +79,13 @@ echo $uName;
     <div class="container">
       <form action="php/sign/update.php">
         <label for="nickname">暱稱</label>
-        <input type="text" id="uname" name="uname" value="<?= $uName ?>" />
+        <input type="text" id="uname" name="uname" value="<?= $uName ?>">
         <br>
-        <label for="email">信箱</label>
-        <input type="email" id="email" name="email" value="<?= $email ?>"/>
+        <label for="newemailadd">信箱</label>
+        <input type="email" id="email" name="email" value="<?= $email ?>">
         <br>
-        <label for="phone">手機號碼</label>
-        <input type="phone" id="phone" name="phone" value="<?= $phone ?>"/>
+        <label for="newphone">手機號碼</label>
+        <input type="phone" id="phone" name="phone" value="<?= $phone ?>">
         <br>
         <label for="newpwd">密碼</label>
         <input type="password" id="pwd" name="pwd" placeholder="更改密碼">
@@ -94,10 +93,10 @@ echo $uName;
         <label for="cfrpwd">確認密碼</label>
         <input type="password" id="cfrpwd" name="cfrpwd" placeholder="再次輸入密碼">
         <br>
+        <br>
         <input type="submit" value="確認更改" class="comfirmbtn">
       </form>
     </div>
-    <br>
     <br>
   </div>
 

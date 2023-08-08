@@ -1,0 +1,19 @@
+
+新增留言內容並取得eid後加入圖片
+
+DROP PROCEDURE IF EXISTS createExp;
+DELIMITER $$
+
+CREATE PROCEDURE createExp(myToken VARCHAR(40), expText VARCHAR(255), cakeId INT)
+BEGIN
+    DECLARE x INT DEFAULT 0;
+    DECLARE newEid INT;
+
+    select uid into x from userinfo where token = myToken;
+    insert into exp (uid, eText, cid) value (x, expText, cakeId);
+
+    SET newEid = LAST_INSERT_ID();
+    SELECT newEid AS myEid;
+END $$
+
+DELIMITER ;

@@ -1,18 +1,20 @@
 <?php
+$token = isset($_COOKIE['token']) ? $_COOKIE['token'] : 'undefined';
+if ($token !== 'undefined') {
+    require('./php/DB.php');
+}
 require_once('php/db2.php');
 
+    $cakeId = $_GET['cid'];
 
-$cakeId = $_GET['cid'];
-
-// 使用預處理語句獲取指定ID的產品詳細資訊
-$sql = 'SELECT * FROM cake WHERE cid = ?';
-$stmt = $mysqli->prepare($sql);
-$stmt->bind_param('i', $cakeId);
-$stmt->execute();
-$result = $stmt->get_result();
-
-
-$cakeDetail = $result->fetch_assoc();
+    // 使用預處理語句獲取指定ID的產品詳細資訊
+    $sql = 'SELECT * FROM cake WHERE cid = ?';
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param('i', $cakeId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+   
+    $cakeDetail = $result->fetch_assoc();
 
 ?>
 <!DOCTYPE html>
@@ -38,6 +40,7 @@ $cakeDetail = $result->fetch_assoc();
 </head>
 <script>
     window.onload = function (e) {
+        let eId;
         fetch(`./php/exp/expInfo.php?cid=<?= $cakeId; ?>`)
             .then(function (response) {
                 return response.json();
@@ -47,32 +50,52 @@ $cakeDetail = $result->fetch_assoc();
                 if (responseData.length === 0) {
                     view = `<div>目前沒有留言</div>`;
                 } else {
+                    eId = responseData;
                     responseData.forEach(function (e) {
                         view += `
                             <h4>${e.uName}</h4>
                             <pre>${e.eText}</pre>
-                            <div class="expImgBlock" id="img${e.eid}">
-                                <img src="./php/exp/expImg.php?eid=${e.eid}">
-                            </div>
+                            <div class="expImgBlock" id="img${e.eid}"></div>
                             <p>${e.eDate}</p>
-                        `;
-                        // fetch(`./php/exp/expImg.php?eid=${e.eid}`)
-                        //     .then(function (response) {
-                        //         return response.text();
-                        //     })
-                        //     .then(function (data) {
-                        //         view2 = '';
-                        //         function(e2) {
-                        //             view2 += `
-                        //                 <img src="${e2.eImg}">
-                        //             `;
-                        //         }
-                        //         $("#img" + e.eid).append(view2);
-                        //     })
+                            `;
+                        fetch(`./php/exp/expImg.php?eid=${e.eid}`)
+                            .then(function (response) {
+                                return response.text();
+                            })
+                            .then(function (data) {
+                                // console.log(data);
+                                if (data != "none") {
+                                    let imgElement = document.createElement('img');
+                                    imgElement.src = data;
+                                    document.getElementById(`img${e.eid}`).appendChild(imgElement);
+                                }
+                            });
                     })
                 }
-                $(".expBlock").append(view);
+                $("#expBlock").append(view);
             })
+
+        const token = "<?= $token; ?>";
+
+        if (token === 'undefined') {
+            $("#checkLogin").show();
+            $("#expMessage").hide();
+        } else {
+            $("#checkLogin").hide();
+            $("#expMessage").show();
+        }
+
+        $("#expInput").click(function(e){
+            fetch(`./php/exp/upLoadImg.php`,{
+                method:"POST",
+                body: new FormData(expMessage)
+            }).then(function (response) {
+                return response.text();
+            })
+            .then(function (data) {
+                console.log(data);
+            })
+        });
     }
 </script>
 
@@ -138,7 +161,6 @@ $cakeDetail = $result->fetch_assoc();
                 </ul>
                 <a href="../public/reserve.html" class="bookingBtn">預約</a>
             </div>
-            <a href="./reserve.php" class="bookingBtn">預約</a>
         </div>
 
         <!-- Detail -->
@@ -158,7 +180,7 @@ $cakeDetail = $result->fetch_assoc();
                 <pre><?php echo $cakeDetail['material']; ?></pre>
 
                 <h1 id="experience">製作心得</h1>
-                <div class="expBlock">
+                <div class="expBlock" id="expBlock">
                     <!-- <h4>userName</h4>
                     <pre>分享這次DIY的過程，非常有趣</pre>
                     <div class="expImgBlock">
@@ -167,14 +189,19 @@ $cakeDetail = $result->fetch_assoc();
                     <p>2023/7/10 10:00:00</p> -->
                 </div>
 
-                <h4 for="message">分享心得</h4>
-                <form id="expMessage">
-                    <div class="newExpBlock">
-                        <textarea id="message" name="message"></textarea>
-                        <!-- <div class="newExpImgBlock">
-                        </div> -->
+                <h1 id="expText">分享心得</h1>
+                <div class="expBlock">
+                    <div id="checkLogin">請先
+                        <a href="./login.html">登入</a>後才能留言
                     </div>
-                </form>
+                    <form id="expMessage">
+                        <input type="hidden" value="<?= $cakeId; ?>" name="cid">
+                        <textarea id="message" name="message"></textarea>
+                        <input type="file" name="file[]" multiple accept="image/*">
+                        <p></p>
+                    </form>
+                    <input type="button" id="expInput" value="送出">
+                </div>
             </section>
             <a href="./reserve.php" class="bookingBtn">預約</a>
         </div>

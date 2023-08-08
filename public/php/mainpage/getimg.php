@@ -15,6 +15,7 @@ while($row = $result->fetch_assoc()) {
     $images[] = $row['Img2'];
     $images[] = $row['Img3'];
     $images[] = $row['Img4'];
+    $images[] = $row['bodyimg'];
     // ...
 }
 

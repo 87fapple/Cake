@@ -7,9 +7,24 @@
     <link rel="stylesheet" href="../../../resources/css/navbar.css" />
     <link rel="stylesheet" href="../../../resources/css/admin_addProduct.css" />
     <link rel="stylesheet" href="../../../resources/css/footer.css" />
+    <link rel="stylesheet" href="../../../resources/css/topBtn.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+
+    <!-- icon引用 -->
+    <script
+      src="https://kit.fontawesome.com/6c4c2bf9f6.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
 
   <body>
+    <!-- Back-to-Top Button -->
+    <button onclick="topFunction()" class="topBtn" id="topBtn"></button>
+
     <!-- Navbar -->
     <nav class="navbar">
       <div class="navbarTitle">
@@ -24,24 +39,31 @@
       </div>
       <div class="navbarLink">
         <ul>
-          <li><a href="../pubilc/menu.html">產品介紹</a></li>
+          <li><a href="../public/menu.php">產品介紹</a></li>
           <li><a href="../public/locations.html">分店資訊</a></li>
-          <li><a href="../public/reserve.php">預約課程</a></li>
+          <li><a href="../public/reserve.html">預約課程</a></li>
           <li><a href="../public/Q&A.html">常見問題</a></li>
           <li><a href="../public/login.html">登入會員</a></li>
         </ul>
       </div>
     </nav>
     <div name="selecttop" id="sel">
-      <div href="#changeToppic" class="selectarea">修改首頁輪播</div>
-      <div href="#addProduct" class="selectarea">新增產品</div>
-      <div href="#modifyProduct" class="selectarea">修改產品資訊</div>
-      <div href="#allreserve" class="selectarea">顧客預約總覽</div>
+      <a href="../public/admin.html" class="selectarea"
+        ><i style="font-size: 24px" class="fas">&#xf1b0;</i>&nbsp修改首頁輪播</a
+      >
+      <a href="../public/admin_addProduct.html" class="selectarea"
+        ><i style="font-size: 24px" class="fas">&#xf1b0;</i>&nbsp新增產品</a
+      >
+      <a href="../public/admin_changeProduct.html" class="selectarea"
+        ><i style="font-size: 24px" class="fas">&#xf1b0;</i>&nbsp修改產品資訊
+      </a>
+      <a href="../public/admin_reserveHistory.html" class="selectarea"
+        ><i style="font-size: 24px" class="fas">&#xf1b0;</i>&nbsp顧客預約總覽</a
+      >
       <div class="selectarea">您好，<span>管理員</span></div>
     </div>
     <div id="changeForm">
-      <h2>修改輪播圖</h2>
-
+      <h2>新增產品資訊</h2>
       <form action="add.php" method="post" enctype="multipart/form-data">
         <div class="r1">
           <label for="pname">產品名稱</label>
@@ -53,6 +75,7 @@
             placeholder="請輸入產品名"
           />
           <br />
+
           <label for="level">難度</label>
           <br />
           <select name="level" id="level" class="select">
@@ -74,8 +97,8 @@
           <label for="cSize">尺寸/數量</label>
           <br />
           <select id="cSize" name="cSize" class="select">
-            <option >6吋</option>
-            <option >12個</option>
+            <option value="6">6吋</option>
+            <option value="12">12個</option>
           </select>
           <br />
 
@@ -98,12 +121,23 @@
             placeholder="字數上限為200字"
           ></textarea>
           <br />
+          <label for="material">材料內容</label>
+          <br />
+          <textarea
+            id="material"
+            name="material"
+            placeholder="字數上限為200字"
+          ></textarea>
+          <br />
           <label for="cImg1">上傳產品照片</label>
           <br />
           <br />
-          <input type="file" id="cImg1" name="cImg1" />
+          <input accept="image/*" type="file" id="cImg1" name="cImg1" />
+          <img id="img1" src=""  style="max-width: 200px" />
           <br />
           <input type="file" id="cImg2" name="cImg2" />
+          <img id="img2" src=""  style="max-width: 400px" />
+          <br />
           <br />
         </div>
         <br />
@@ -144,4 +178,36 @@
       </div>
     </footer>
   </body>
+  <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+  <script src="../../../resources/js/topBtn.js"></script>
+  <script>
+
+
+    //第一張圖片預覽
+    $("#cImg1").on("change", function (e) {
+      const file = this.files[0]; //將上傳檔案轉換為base64字串
+
+      const fr = new FileReader(); //建立FileReader物件
+      fr.onload = function (e) {
+        $("#img1").attr("src", e.target.result); //读取的结果放入圖片
+      };
+      // 使用 readAsDataURL 將圖片轉成 Base64
+      fr.readAsDataURL(file);
+      console.log('ok');
+    });
+
+    //第二張圖片預覽
+    $("#cImg2").on("change", function (e) {
+      const file = this.files[0]; //將上傳檔案轉換為base64字串
+
+      const fr = new FileReader(); //建立FileReader物件
+      fr.onload = function (e) {
+        $("#img2").attr("src", e.target.result); //读取的结果放入圖片
+      };
+      // 使用 readAsDataURL 將圖片轉成 Base64
+      fr.readAsDataURL(file);
+      console.log('ok');
+    });
+  </script>
 </html>
