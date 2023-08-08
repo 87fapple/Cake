@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fruit Form</title>
+    <style>
+      .fruitBlock {
+        display: none;
+      }
+
+      .visibleBlock {
+        display: block;
+      }
+    </style>
+    <script>
+      function loadImagesWithAjax() {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "./php/mainpage/previmg.php", true);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              const images = JSON.parse(xhr.responseText);
+              const imgElements = document.querySelectorAll("img");
+
+              for (let i = 0; i < images.length; i++) {
+                imgElements[i].src = `data:image/jpeg;base64,${images[i]}`;
+              }
+            } else {
+              console.error("Error:", xhr.status, xhr.statusText);
+            }
+          }
+        };
+        xhr.send();
+      }
+
+      function updateImagePreview(inputIndex) {
+        const inputElement = document.getElementsByName(`file${inputIndex}`)[0];
+        const imgElement = document.querySelectorAll("img")[inputIndex - 1];
+
+        if (inputElement.files && inputElement.files[0]) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            imgElement.src = e.target.result;
+          };
+          reader.readAsDataURL(inputElement.files[0]);
+        }
+      }
+    </script>
+  </head>
+  <body onload="loadImagesWithAjax()">
+    <form
+      id="fruitForm"
+      enctype="multipart/form-data"
+      action="./php/mainpage/upload.php"
+      method="post"
+    >
+      <button type="button" onclick="showFruit('strawberry', 1)">草莓</button>
+      <button type="button" onclick="showFruit('mango', 2)">芒果</button>
+      <button type="button" onclick="showFruit('grape', 3)">葡萄</button>
+      <button type="button" onclick="showFruit('cherry', 4)">櫻桃</button>
+    </form>
+
+    <div id="strawberryBlock" class="fruitBlock">
+      <h2>草莓區塊</h2>
+      <div id="fileUploads">
+        <input type="file" name="file1" onchange="updateImagePreview(1)" />
+        <img src="" alt="" />
+        <input type="file" name="file2" onchange="updateImagePreview(2)" />
+        <img src="" alt="" />
+        <input type="file" name="file3" onchange="updateImagePreview(3)" />
+        <img src="" alt="" />
+        <input type="file" name="file4" onchange="updateImagePreview(4)" />
+        <img src="" alt="" />
+      </div>
+      <div id="singleFileUpload">
+        <h3>單一檔案上傳</h3>
+        <input type="file" name="file5" onchange="updateImagePreview(5)" />
+        <img src="" alt="" />
+        <textarea name="body" rows="4" cols="50"></textarea>
+        <!-- 使用 <textarea> 元素 -->
+      </div>
+    </div>
+
+    <div id="mangoBlock" class="fruitBlock">
+      <h2>芒果區塊</h2>
+      <div id="fileUploads">
+        <input type="file" name="file1" onchange="updateImagePreview(1)" />
+        <img src="" alt="" />
+        <input type="file" name="file2" onchange="updateImagePreview(2)" />
+        <img src="" alt="" />
+        <input type="file" name="file3" onchange="updateImagePreview(3)" />
+        <img src="" alt="" />
+        <input type="file" name="file4" onchange="updateImagePreview(4)" />
+        <img src="" alt="" />
+      </div>
+      <div id="singleFileUpload">
+        <h3>單一檔案上傳</h3>
+        <input type="file" name="file5" onchange="updateImagePreview(5)" />
+        <img src="" alt="" />
+        <textarea name="body" rows="4" cols="50"></textarea>
+        <!-- 使用 <textarea> 元素 -->
+      </div>
+    </div>
+
+    <div id="grapeBlock" class="fruitBlock">
+      <h2>葡萄區塊</h2>
+      <div id="fileUploads">
+        <input type="file" name="file1" onchange="updateImagePreview(1)" />
+        <img src="" alt="" />
+        <input type="file" name="file2" onchange="updateImagePreview(2)" />
+        <img src="" alt="" />
+        <input type="file" name="file3" onchange="updateImagePreview(3)" />
+        <img src="" alt="" />
+        <input type="file" name="file4" onchange="updateImagePreview(4)" />
+        <img src="" alt="" />
+      </div>
+      <div id="singleFileUpload">
+        <h3>單一檔案上傳</h3>
+        <input type="file" name="file5" onchange="updateImagePreview(5)" />
+        <img src="" alt="" />
+        <textarea name="body" rows="4" cols="50"></textarea>
+        <!-- 使用 <textarea> 元素 -->
+      </div>
+    </div>
+
+    <div id="cherryBlock" class="fruitBlock">
+      <h2>櫻桃區塊</h2>
+      <div id="fileUploads">
+        <input type="file" name="file1" onchange="updateImagePreview(1)" />
+        <img src="" alt="" />
+        <input type="file" name="file2" onchange="updateImagePreview(2)" />
+        <img src="" alt="" />
+        <input type="file" name="file3" onchange="updateImagePreview(3)" />
+        <img src="" alt="" />
+        <input type="file" name="file4" onchange="updateImagePreview(4)" />
+        <img src="" alt="" />
+      </div>
+      <div id="singleFileUpload">
+        <h3>單一檔案上傳</h3>
+        <input type="file" name="file5" onchange="updateImagePreview(5)" />
+        <img src="" alt="" />
+        <textarea name="body" rows="4" cols="50"></textarea>
+        <!-- 使用 <textarea> 元素 -->
+      </div>
+    </div>
+
+    <button type="submit">上傳</button>
+
+    <script>
+      function showFruit(fruit, bid) {
+        const fruitBlocks = [
+          "strawberryBlock",
+          "mangoBlock",
+          "grapeBlock",
+          "cherryBlock",
+        ];
+        fruitBlocks.forEach((block) => {
+          if (block === `${fruit}Block`) {
+            document.getElementById(block).classList.add("visibleBlock");
+          } else {
+            document.getElementById(block).classList.remove("visibleBlock");
+          }
+        });
+
+        // 儲存選擇的bid
+        document.getElementById("selectedBid").value = bid;
+      }
+
+      // 一開始就顯示草莓區塊
+      showFruit("strawberry", 1);
+    </script>
+  </body>
+</html>
