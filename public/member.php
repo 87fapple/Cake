@@ -17,7 +17,7 @@ $email=$row['email'];
 $uName=$row['uName'];
 $phone=$row['phone'];
 setcookie('user', $uName, time() + 1200, "/");
-echo $uName;
+// echo $uName;
 ?>
 <!DOCTYPE html>
 <html lang="en">
