@@ -66,7 +66,6 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                 newNameFilled = false;
                 currentDivIndex = 0;
                 // nextNewNumber();
-                $("#addnewdiv").show();
 
                 for (let i = 0; i < mNum; i++) {
                     universalNums(i);
@@ -93,6 +92,12 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                     `;
                 }
                 $("#newChoose").html(view4);
+
+                if (mNum == 1) {
+                    $("#addnewdiv").hide();
+                }else{
+                    $("#addnewdiv").show();
+                }
 
                 $("#companion").val(people - mNum);
                 $("#hidden").show();
@@ -225,8 +230,8 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
         }
 
         window.onload = function (e) {
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.onclick = function (e) {
+            const checkBtn = document.getElementById('checkBtn');
+            checkBtn.onclick = function (e) {
                 e.preventDefault();
 
                 const productForm = document.getElementById('productForm');
@@ -389,7 +394,7 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                 <div class="clearfix">
                     <button type="button" onclick="document.getElementById('id01').style.display='none'"
                         class="cancelbtn">重新選擇</button>
-                    <button type="submit" class="submitOK">送出訂單</button>
+                    <button type="submit" class="submitOK" id="checkBtn">送出訂單</button>
                 </div>
             </div>
         </form>
