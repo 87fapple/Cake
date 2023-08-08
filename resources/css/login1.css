@@ -163,13 +163,14 @@
       width: 720px;
       margin: 0 auto;
       height: 360px;
+      border-radius: 10px;
   }
 
   .tocomfirm {
       background-color: rgb(255, 179, 0);
       margin: 16px 40%;
       border: none;
-      cursor: pointer;
+      /* cursor: pointer; */
       width: 150px;
       height: 48px;
       /* height: 2.8rem; */
