@@ -6,9 +6,9 @@ if(!isset($_SESSION['UserData']['Username'])){
 }
 ?>
 
-<?php $title = 'CMS Main'; ?>
+<?php $title = 'CMS Home'; ?>
 <?php $metaTags = 'tag1 tag2'; ?>
-<?php $currentPage = 'main'; ?>
+<?php $currentPage = 'home'; ?>
 <?php require_once(__DIR__.'/head.php'); ?>
 <?php require_once(__DIR__.'/navbar.php'); ?>
 <body>

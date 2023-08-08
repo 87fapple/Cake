@@ -29,7 +29,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Content Management System</title>
-    <link rel="stylesheet" href="../../resources/css/CMS_css/login1.css">
+    <link rel="stylesheet" href="./CMS_css/login1.css">
 </head>
 
 <body>
