@@ -1,19 +1,26 @@
 <link rel="stylesheet" href="./CMS_css/side_navbar.css">
-<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 
+<div class="head_nav">
+	<ul>
+		<li><span class="material-symbols-outlined">person</span>您好 <?php echo $_SESSION['UserData']['Username']; ?></li>
+		<li><a href="logout.php"><span class="material-symbols-outlined">logout</span>登出</a></li>
+	</ul>
+</div>
 
 <nav class="sidebar">
-    <h2>Addmin</h2>
+    <a href="./home.php"><img src="../../image/icon-noBorder-whiteFont.png"></a>
     <hr>
     <ul>
         <?php
             $urls = array(
-                'Home' => '/Cake/public/CMS/home.php',
+                '首頁' => '/Cake/public/CMS/home.php',
+                '訂單總覽' => '/Cake/public/CMS/order_overview.php',
                 // …
             );
             
             foreach ($urls as $name => $url) {
-                print '<li ' . (($currentPage === $name)) . '><a href="' . $url . '"><i class="fas fa-' . $name .'"></i>' . $name . '</a></li>';
+                print '<li ' . (($currentPage === $name)) . '>
+                    <a href="' . $url . '">' . $name . '</a></li>';
             }
         ?>
     </ul> 
