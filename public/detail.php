@@ -65,12 +65,10 @@ require_once('php/db2.php');
                 <span id="carouselPrevious">＜</span>
                 <span id="carouselNext">＞</span>
                 <div id="slider" class="slider">
-                    <img src="../image/DetailImg/detailImg1.jpg">
-                    <img src="../image/DetailImg/detailImg2.jpg">
-                    <img src="../image/DetailImg/detailImg3.jpg">
+                    <img src="<?php echo $cakeDetail['cImg1']; ?>">
+                    <img src="<?php echo $cakeDetail['cImg2']; ?>">
                 </div>
                 <ul id="dots" class="dots">
-                    <li></li>
                     <li></li>
                     <li></li>
                 </ul>
