@@ -22,7 +22,26 @@
       crossorigin="anonymous"
     ></script>
   </head>
+<style>
+  #img1:after,
+  #img2:after{
+    content: "\f1c5" " "attr(alt) ;
 
+  font-size: 16px;
+  font-family: FontAwesome;
+  color: rgb(100, 100, 100);
+
+  display: block;
+  position: relative;
+  z-index: 2;
+  top: -27px;
+  left: 0;
+  width: 110px;
+  height: 25px;
+  background-color: #fff;
+
+  }
+</style>
   <body>
     <!-- Back-to-Top Button -->
     <button onclick="topFunction()" class="topBtn" id="topBtn"></button>
@@ -67,30 +86,30 @@
     </div>
 
     <div id="changeForm">
-      <div class="row">
-        <div class="column">
-          <h2>修改產品資訊</h2>
+      
+      <form action="change_update.php" method="post" enctype="multipart/form-data" id="form" >
+        <div class="row">
+          <div class="column">
+            <h2>修改產品資訊</h2>
+          </div>
+          <div class="column2">
+            <label for="change_cName" class="selectcake">選擇產品：</label>
+            <select
+              name="change_cName"
+              id="change_cName"
+              class="selectcake"
+              
+            >
+              <optgroup label="蛋糕" name="cake">
+                <option value="皮卡蛋糕">皮卡蛋糕</option>
+              </optgroup>
+              <optgroup label="點心" name="cake">
+                <option value="小火龍餅乾">小火龍餅乾</option>
+                <option value="廟挖馬卡龍">廟挖馬卡龍</option>
+              </optgroup>
+            </select>
+          </div>
         </div>
-        <div class="column2">
-          <label for="change_cName" class="selectcake">選擇產品：</label>
-          <select
-            name="change_cName"
-            id="change_cName"
-            class="selectcake"
-            
-          >
-            <optgroup label="蛋糕" name="cake">
-              <option value="皮卡蛋糕">皮卡蛋糕</option>
-            </optgroup>
-            <optgroup label="點心" name="cake">
-              <option value="小火龍餅乾">小火龍餅乾</option>
-              <option value="廟挖馬卡龍">廟挖馬卡龍</option>
-            </optgroup>
-          </select>
-        </div>
-      </div>
-
-      <form action="change.php" method="post" id="form">
         <div class="r1">
           <label for="cName">產品名稱</label>
           <br />
@@ -164,10 +183,12 @@
           <br />
           <br />
           <input accept="image/*" type="file" id="cImg1" name="cImg1" />
-          <img id="img1" src=""  style="max-width: 200px" />
+          <img id="img1"   style="max-width: 200px" alt="未上傳圖片"/>
+          <!-- <div id="img1_1"></div> -->
           <br />
           <input accept="image/*" type="file" id="cImg2" name="cImg2" />
-          <img id="img2" src=""  style="max-width: 200px" />
+          <img id="img2"   style="max-width: 200px" alt="未上傳圖片"/>
+          <!-- <div id="img2_2"></div> -->
           <br />
         </div>
         <br />
@@ -218,7 +239,7 @@
         const cName = e.target.value;
         const data = {cName};
         fetch(
-            `change.php?cName=${cName}`
+            `change_search.php?cName=${cName}`
         )
         .then(function(response){
             return response.json();
@@ -231,9 +252,10 @@
            kind.value = data[0].kind;
            feature.value = data[0].feature;
            level.value = data[0].level;
-           material.value = data[0].material;
-           img1.src=data[0].cImg1;
-           img2.src=data[0].cImg2;
+           material.value = data[0].material;       
+             img1.src=data[0].cImg1;       
+             img2.src=data[0].cImg2;
+           
         })
     }
      //第一張圖片預覽
@@ -261,7 +283,5 @@
       fr.readAsDataURL(file);
       console.log('ok');
     });
-//     var src1="22";
-// document.querySelector("#img1").src = src1
   </script>
 </html>

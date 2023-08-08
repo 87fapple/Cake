@@ -5,9 +5,9 @@ require('../db2.php');
 
 $cName = $_GET['cName'];
 
-$sql = "select cName,price,kind,cSize,feature,level,material, cImg1,cImg2 from cake where cName = '巧克力蛋糕'";
+$sql = "select cName,price,kind,cSize,feature,level,material, cImg1,cImg2 from cake where cName = ?";
 $stmt = $mysqli->prepare($sql);
-// $stmt->bind_param('s', $cName);
+$stmt->bind_param('s', $cName);
 $stmt->execute();
 $result = $stmt->get_result();
 

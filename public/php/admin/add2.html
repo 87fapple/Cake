@@ -20,7 +20,26 @@
       crossorigin="anonymous"
     ></script>
   </head>
-
+  <style>
+    #img1:after,
+    #img2:after{
+      content: "\f1c5" " "attr(alt) ;
+  
+    font-size: 16px;
+    font-family: FontAwesome;
+    color: rgb(100, 100, 100);
+  
+    display: block;
+    position: relative;
+    z-index: 2;
+    top: -27px;
+    left: 0;
+    width: 110px;
+    height: 25px;
+    background-color: #fff;
+  
+    }
+  </style>
   <body>
     <!-- Back-to-Top Button -->
     <button onclick="topFunction()" class="topBtn" id="topBtn"></button>
@@ -133,10 +152,10 @@
           <br />
           <br />
           <input accept="image/*" type="file" id="cImg1" name="cImg1" />
-          <img id="img1" src=""  style="max-width: 200px" />
+          <img id="img1" src=""  style="max-width: 200px" alt="未上傳圖片"/>
           <br />
           <input type="file" id="cImg2" name="cImg2" />
-          <img id="img2" src=""  style="max-width: 400px" />
+          <img id="img2" src=""  style="max-width: 200px" alt="未上傳圖片"/>
           <br />
           <br />
         </div>

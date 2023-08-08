@@ -28,13 +28,15 @@ $cImg2 = $_FILES['cImg2']['tmp_name'];
 if ($_FILES["cImg1"]["error"] > 0 or $_FILES["cImg2"]["error"] > 0) {
     echo "Return Code: " . $_FILES["cImg1"]["error"] . "<br />";
     echo "Return Code: " . $_FILES["cImg2"]["error"] . "<br />";
+    echo "圖片錯誤,3秒後自動跳轉";
 } else {
     move_uploaded_file($cImg1,"../../../image/cake_add/".$_FILES["cImg1"]["name"]);
     $c1 = "../../../image/cake_add/".$_FILES["cImg1"]["name"];
-    echo $c1 ."<br/>";
+    // echo $c1 ."<br/>";
     move_uploaded_file($cImg2,"../../../image/cake_add/".$_FILES["cImg2"]["name"]);
     $c2 = "../../../image/cake_add/".$_FILES["cImg2"]["name"];
-    echo $c2;
+    // echo $c2;
+    echo "上傳成功,3秒後自動跳轉";
 }
 
 
@@ -42,8 +44,8 @@ $sql="insert into cake(cName,price,kind,cSize,cImg1,cImg2,feature,level,material
 value(?,?,?,?,?,?,?,?,?)";
 $stmt=$mysqli->prepare($sql);
 $stmt->bind_param('sssssssss',$cName,$price,$kind,$cSize,$c1,$c2,$feature,$level,$material);
-$stmt->send_long_data(4, $c1);
-$stmt->send_long_data(5, $c2);
+// $stmt->send_long_data(4, $c1);
+// $stmt->send_long_data(5, $c2);
 $stmt->execute();
 
 
@@ -73,5 +75,5 @@ $stmt->execute();
 // }
 
 // header('location:/Cake/public/php/sign/add2.html');
-header("refresh:3;url=add2.html"); 
+header("refresh:2;url=add2.html"); 
 // alert('正在加载，请稍等...3秒後自動跳轉');
