@@ -1,7 +1,7 @@
 <?php
 require('../db2.php');
 
-$sql = "SELECT Img1, Img2, Img3 FROM binfo WHERE bid = 1";
+$sql = "SELECT Img1, Img2, Img3, Img4 FROM binfo WHERE bid = 2";
 $stmt = $mysqli->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -14,9 +14,10 @@ while ($row = $result->fetch_assoc()) {
     $imageData1 = base64_encode($row['Img1']);
     $imageData2 = base64_encode($row['Img2']);
     $imageData3 = base64_encode($row['Img3']);
+    $imageData4 = base64_encode($row['Img4']);
 
     // 將三個圖片欄位的資料存入陣列中
-    array_push($images, $imageData1, $imageData2, $imageData3);
+    array_push($images, $imageData1, $imageData2, $imageData3, $imageData4);
 }
 
 // 輸出 JSON 格式的圖片資料
