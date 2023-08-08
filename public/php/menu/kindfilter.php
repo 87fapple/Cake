@@ -21,5 +21,6 @@ while ($row = $result->fetch_assoc()) {
 header('Content-Type: application/json');
 
 // 将查询结果转换为 JSON 格式并返回给 AJAX 请求
+// var_dump($cakes);
 echo json_encode($cakes);
 ?>
