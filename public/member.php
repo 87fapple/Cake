@@ -66,7 +66,7 @@ setcookie('user', $uName, time() + 1200, "/");
   </nav>
 
   <div name="selectarea" id="sel">
-    <a href="./member.html" class="selectarea"><i style='font-size:24px' class='fas'>&#xf1b0;</i>&nbsp更改會員資料</a>
+    <a href="./member.php" class="selectarea"><i style='font-size:24px' class='fas'>&#xf1b0;</i>&nbsp更改會員資料</a>
     <a href="./history.php" class="selectarea"><i style='font-size:24px' class='fas'>&#xf1b0;</i>&nbsp預約紀錄</a>
     <div class="selectarea"> 您好，<span><?= $uName ?></span></div>
 
@@ -99,20 +99,6 @@ setcookie('user', $uName, time() + 1200, "/");
     </div>
     <br>
   </div>
-  <div class="layui-btn-group">
-  <button type="button" class="layui-btn layui-btn-sm">
-    <i class="layui-icon">&#xe654;</i>
-  </button>
-  <button type="button" class="layui-btn layui-btn-sm">
-    <i class="layui-icon">&#xe642;</i>
-  </button>
-  <button type="button" class="layui-btn layui-btn-sm">
-    <i class="layui-icon">&#xe640;</i>
-  </button>
-  <button type="button" class="layui-btn layui-btn-sm">
-    <i class="layui-icon">&#xe602;</i>
-  </button>
-</div>
   <br><br><br>
   <!-- Footer -->
   <footer class="footer">
