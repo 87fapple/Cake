@@ -1,4 +1,4 @@
-<?php $title = 'CMS Order Overview'; ?>
+<?php $title = 'CMS Order Management'; ?>
 <?php $metaTags = 'tag1 tag2'; ?>
 <?php $currentPage = '訂單總覽'; ?>
 <?php require_once(__DIR__ . '/head.php'); ?>
