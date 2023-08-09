@@ -191,6 +191,7 @@ function renderCakes(cakes) {
 
     cakes.forEach(cake => {
         menuBlock2.innerHTML += `
+        // <div class="backgroundDiv">
             <div class="menuInfoDiv" id="menuInfo" data-cakeid="${cake.cid}" > <!-- 添加data-cakeid屬性 -->
                 <a href="javascript:void(0);" onclick="showProductDetail(${cake.cid})"><img src="${cake.cImg1}"></a> 
                 <div class="menuInfoContent" id="menuInfoContent">
@@ -201,6 +202,7 @@ function renderCakes(cakes) {
                     </ul>
                 </div>
             </div>
+            // </div>
         `;
     });
 }
