@@ -11,6 +11,8 @@ $email = $_REQUEST['email'];
 $phone = $_REQUEST['phone'];
 $uName = $_REQUEST['uname'];
 $token = $_COOKIE['token'];
+$rpwd = $_REQUEST['cfrpwd'];
+
 
 if(strlen($pwd)==0){
 DB::update("update userinfo set uName = ? ,email = ? ,phone = ? where token = ?",[$uName,$email,$phone,$token]);

@@ -78,7 +78,7 @@ $result = $stmt->get_result();
     <div name="selecttop" id="sel">
         <a href="../public/member.php" class="selectarea"><i style='font-size:24px'
                 class='fas'>&#xf1b0;</i>&nbsp更改會員資料</a>
-        <a href="../public/admin_addProduct.html" class="selectarea"><i style='font-size:24px'
+        <a href="history.php" class="selectarea"><i style='font-size:24px'
                 class='fas'>&#xf1b0;</i>&nbsp預約紀錄</a>
         <div class="selectarea"> 您好，<span><?= $uName ?></span></div>
     </div>

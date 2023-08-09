@@ -43,14 +43,16 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    
 }
 
 .menuBlock2 {
     width: 90%;
-    background-color: #fff;
+    background-color: #ffeec3;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     margin: 0 auto;
+    border-radius: 10px;
     /* position: relative;
     left: 5%; */
 }
@@ -64,8 +66,13 @@
     margin: 24px 2px 160px;
     position: relative;
     left: 0;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    bottom: 1.3rem;
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
     transition: 0.3s;
+}
+
+.menuInfoDiv:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
 }
 
 .menuInfoDiv a {
@@ -75,7 +82,7 @@
 .menuInfoDiv a:hover {
     cursor: pointer;
     filter: contrast(120%);
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); */
 }
 
 .menuInfoDiv img {
@@ -86,11 +93,11 @@
 }
 
 .menuInfoContent {
-    background-color: #ffa237;
+    background-color: #ffbc6f;
     border-radius: 0 0 8px 8px;
     color: #885500;
     width: 100%;
-    height: 70%;
+    height: 67%;
     position: relative;
     bottom: 10%;
 }
@@ -99,11 +106,44 @@
     padding-inline-start: 0;
 }
 
-.menuInfoContent li {
+/* .menuInfoContent li {
     list-style: none;
     text-align: center;
-    padding: 8px 0;
+    padding: 4px 0;
     font-size: 20px;
+} */
+
+.titleName {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: black;
+    list-style: none;
+    text-align: center;
+    padding: 10px 0;
+    text-decoration: underline;
+}
+
+.scdName {
+    list-style: none;
+    text-align: center;
+    padding: 4px 0;
+    font-size: 20px;
+
+
+}
+
+.backgroundDiv {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.6);
+    height: 341px;
+    width: 230px;
+    border-radius: 8px;
+    background-color: #ffead5;
+    margin: 1.5rem;
+}
+
+.backgroundDiv:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.8);
 }
 
 /* ------------------------------------------------------------------- */
@@ -247,4 +287,26 @@
         grid-template-columns: repeat(3, 1fr);
         margin: 0 auto;
     }
+}
+
+/* 8/9 add */
+
+.titleName {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: black;
+    list-style: none;
+    text-align: center;
+    padding: 10px 0;
+    text-decoration: underline;
+}
+
+.scdName {
+    list-style: none;
+    text-align: center;
+    padding: 4px 0;
+    font-size: 20px;
+
+
 }
