@@ -80,7 +80,8 @@ $result = $stmt->get_result();
             
         <?php
             while($row = $result->fetch_assoc()){
-                echo 
+                if($row['cid'] != 0){
+                    echo 
                     "
                     <div class=\"backgroundDiv\">
                         <div class=\"menuInfoDiv\" id=\"menuInfo\" data-cakeid={$row['cid']}>
@@ -97,6 +98,8 @@ $result = $stmt->get_result();
                         </div>
                     </div>
                     ";
+                }
+                
             }
         ?>
         </div>
