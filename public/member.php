@@ -13,9 +13,9 @@ $stmt->bind_param('s', $token);
 $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
-$email=$row['email'];
-$uName=$row['uName'];
-$phone=$row['phone'];
+$email = $row['email'];
+$uName = $row['uName'];
+$phone = $row['phone'];
 setcookie('user', $uName, time() + 1200, "/");
 // echo $uName;
 ?>
@@ -31,10 +31,10 @@ setcookie('user', $uName, time() + 1200, "/");
   <link rel="stylesheet" href="../resources/css/member.css">
   <link rel="stylesheet" href="../resources/css/footer2.css">
   <link rel="stylesheet" href="../resources/css/topBtn.css">
-  <link rel="stylesheet" type="text/css"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
   <script src="https://kit.fontawesome.com/6c4c2bf9f6.js" crossorigin="anonymous"></script>
-
+  <script src="//unpkg.com/layui@2.7.6/dist/layui.js"></script>
+  <!-- <link rel="stylesheet" href="//unpkg.com/layui@2.7.6/dist/css/layui.css" /> -->
 </head>
 
 <body>
@@ -66,7 +66,7 @@ setcookie('user', $uName, time() + 1200, "/");
   </nav>
 
   <div name="selectarea" id="sel">
-    <a href="./admin.html" class="selectarea"><i style='font-size:24px' class='fas'>&#xf1b0;</i>&nbsp更改會員資料</a>
+    <a href="./member.php" class="selectarea"><i style='font-size:24px' class='fas'>&#xf1b0;</i>&nbsp更改會員資料</a>
     <a href="./history.php" class="selectarea"><i style='font-size:24px' class='fas'>&#xf1b0;</i>&nbsp預約紀錄</a>
     <div class="selectarea"> 您好，<span><?= $uName ?></span></div>
 
@@ -77,7 +77,7 @@ setcookie('user', $uName, time() + 1200, "/");
     <h2>更改會員資料</h2>
 
     <div class="container">
-      <form action="php/sign/update.php">
+      <form action="php/sign/update.php" id="form">
         <label for="nickname">暱稱</label>
         <input type="text" id="uname" name="uname" value="<?= $uName ?>">
         <br>
@@ -94,12 +94,11 @@ setcookie('user', $uName, time() + 1200, "/");
         <input type="password" id="cfrpwd" name="cfrpwd" placeholder="再次輸入密碼">
         <br>
         <br>
-        <input type="submit" value="確認更改" class="comfirmbtn">
+        <input type="submit" value="確認更改" class="comfirmbtn" id="update">
       </form>
     </div>
     <br>
   </div>
-
   <br><br><br>
   <!-- Footer -->
   <footer class="footer">
@@ -131,8 +130,33 @@ setcookie('user', $uName, time() + 1200, "/");
       </div>
     </div>
   </footer>
-</body>
-<script src="../resources/js/topBtn.js"></script>
+  </body>
+  <script src="../resources/js/topBtn.js"></script>
 <script src="../resources/js/navbar.js"></script>
+<script>
+  const form = document.getElementById("form");
+  const pwd = document.getElementById("pwd").value;
+  const email = document.getElementById("email").value;
+  const phone = document.getElementById("phone").value;
+  const uname = document.getElementById("uname").value;
+  const cfrpwd = document.getElementById("cfrpwd").value;
+  const update = document.getElementById("update");
+  const re = document.getElementById("re");
+
+  form.addEventListener("submit", function(event) {
+    event.preventDefault();
+  });
+  update.onclick = function(e) {
+    fetch(
+        `php/sign/update.php?email=${email}&uname=${uname}&phone=${phone}&pwd=${pwd}&cfrpwd=${cfrpwd}`
+      )
+      .then(function(response) {
+        return response.text();
+      })
+      .then(function(data) {
+        layer.alert('已更改完成', {icon: 6,title: ['', 'font-size:18px;'],});
+      })
+  }
+</script>
 
 </html>
