@@ -14,7 +14,7 @@
         <?php
             $urls = array(
                 '首頁' => '/Cake/public/CMS/home.php',
-                '訂單總覽' => '/Cake/public/CMS/order_overview.php',
+                '訂單管理' => '/Cake/public/CMS/order_overview.php',
                 // …
             );
             

@@ -50,9 +50,11 @@ $mysqli->close();
 
     .order-table {
         border-collapse: collapse;
-        margin: 25px 0;
-        font-size: 0.9em;
+        margin: 32px 5%;
+        font-size: 14px;
         font-family: sans-serif;
+        white-space: nowrap;
+        width: 90%;
         min-width: 400px;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     }
@@ -60,6 +62,7 @@ $mysqli->close();
     .order-table thead tr {
         background-color: #885500;
         color: #ffffff;
+        font-size: 16px;
         text-align: left;
     }
 
@@ -77,12 +80,34 @@ $mysqli->close();
     }
 
     .order-table tbody tr:last-of-type {
-        border-bottom: 2px solid #009879;
+        border-bottom: 2px solid #ffa237;
     }
 
     .order-table tbody tr.active-row {
         font-weight: bold;
         color: #009879;
+    }
+
+    .order-table tbody tr:hover {
+        background-color: #e8e8e8;
+        cursor: pointer;
+    }
+
+    .order-table tbody tr td button {
+        background-color: #ffa237;
+        border: 1px solid #ffa237;
+        border-radius: 6px;
+        padding: 4px 12px;
+    }
+
+    .order-table tbody tr td button:hover {
+        background-color: #ffcb53;
+        border: 1px solid #ffcb53;
+        cursor: pointer;
+    }
+
+    .order-table tbody tr td button:last-child {
+        margin-left: 16px;
     }
 </style>
 
@@ -98,6 +123,7 @@ $mysqli->close();
                 <th>預約時間</th>
                 <th>總人數</th>
                 <th>同行人數</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -111,7 +137,11 @@ $mysqli->close();
                                 <td>'.$order['reserveTime'].'</td>
                                 <td>'.$order['reserveDate'].'</td>
                                 <td>'.$order['people'].'</td>
-                                <td>'.$order['companion'].'</td>';
+                                <td>'.$order['companion'].'</td>
+                                <td>
+                                    <button>修改</button>
+                                    <button>取消</button>
+                                </td>';
                             // 這裡可以顯示其他你想要的資料項目
                         }
                         echo '</tr>';
