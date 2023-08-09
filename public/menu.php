@@ -80,7 +80,8 @@ $result = $stmt->get_result();
             
         <?php
             while($row = $result->fetch_assoc()){
-                echo 
+                if($row['cid'] != 0){
+                    echo 
                     "
                     <div class=\"menuInfoDiv\" id=\"menuInfo\" data-cakeid={$row['cid']}>
                         <a href=\"detail.php?cid={$row['cid']}\">
@@ -95,6 +96,8 @@ $result = $stmt->get_result();
                         </a>
                     </div>
                     ";
+                }
+                
             }
         ?>
         </div>
