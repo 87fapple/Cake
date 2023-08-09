@@ -36,11 +36,10 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
     <link rel="stylesheet" href="../resources/css/reserve2.css">
     <link rel="stylesheet" href="../resources/css/footer2.css">
     <link rel="stylesheet" href="../resources/css/topBtn.css">
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
     <script>
-        $(function () {
+        $(function() {
             const cInfoSid = <?= $cInfo[0]["sid"] ?>;
             $("#hidden").hide();
             let data;
@@ -59,7 +58,7 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             }
             document.getElementById("makeNum").innerHTML = view1
 
-            $("#makeNum").on('change', function (e) {
+            $("#makeNum").on('change', function(e) {
                 var mNum = $("#makeNum option:selected").val();
                 var people = $("#people").val();
                 let view4 = '';
@@ -80,7 +79,6 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                                 <select id="newCakeName${a}" name="newCakeName${a}" class="newSelect">
                                 <option style="display: none;" value="">請選擇產品</option>
                                     <optgroup label="蛋糕" id="newCake${a}">
-                                    <optgroup label="餅乾" id="newCookie${a}">
                                     <optgroup label="點心" id="newDessert${a}">
                                 </select>
                                 <br>
@@ -105,15 +103,15 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             })
 
             fetch(`./php/reserve/storeToCake_sql.php?indexInfo=${cInfoSid}`)
-                .then(function (response) {
+                .then(function(response) {
                     return response.json();
                 })
-                .then(function (responseData) {
+                .then(function(responseData) {
                     data = responseData;
                     universalOptions();
                 })
 
-            document.getElementById("addnewdiv").onclick = function (e) {
+            document.getElementById("addnewdiv").onclick = function(e) {
                 nextNewNumber();
             }
 
@@ -144,7 +142,6 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                         $("#addnewdiv").hide();
                     }
                 }
-                console.log(currentDivIndex);
             }
 
             function universalOptions() {
@@ -153,7 +150,7 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                 let cakeView = '';
                 let dessertView = '';
 
-                data.forEach(function (e) {
+                data.forEach(function(e) {
                     switch (e.kind) {
                         case '蛋糕':
                             cakeView += `
@@ -222,10 +219,10 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             $("#addnewdiv").show();
         }
 
-        window.onload = function (e) {
+        window.onload = function(e) {
             let isSubmitting = false;
             const submitBtn = document.getElementById('submitBtn');
-            submitBtn.onclick = function (e) {
+            submitBtn.onclick = function(e) {
                 e.preventDefault();
 
                 if (isSubmitting) {
@@ -270,17 +267,17 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                     return;
                 } else {
                     fetch('./php/reserve/insertOrdersCake.php', {
-                        method: "POST",
-                        body: formData
-                    })
-                        .then(function (response) {
+                            method: "POST",
+                            body: formData
+                        })
+                        .then(function(response) {
                             return response.text();
                         })
-                        .then(function (data) {
+                        .then(function(data) {
                             if (data == "reserveTotal.php") {
                                 isSubmitting = true;
                                 $("#submitButton").disabled = true;
-                                // location.href = data;
+                                location.href = data;
                             } else {
                                 let view = '';
                                 view += `
@@ -401,15 +398,15 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
     </div> -->
 
                 <script>
-                // Get the modal
-                // var modal = document.getElementById('id01');
+                    // Get the modal
+                    // var modal = document.getElementById('id01');
 
-                // When the user clicks anywhere outside of the modal, close it
-                // window.onclick = function (event) {
-                //     if (event.target == modal) {
-                //         modal.style.display = "none";
-                //     }
-                // }
+                    // When the user clicks anywhere outside of the modal, close it
+                    // window.onclick = function (event) {
+                    //     if (event.target == modal) {
+                    //         modal.style.display = "none";
+                    //     }
+                    // }
                 </script>
 
             </form>

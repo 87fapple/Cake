@@ -17,6 +17,7 @@ if (!$oid || !$makeNum || !$nameArr || !$numArr) {
     echo "資料有空";
     die();
 }
+
 $nameNumArr = [
     $_REQUEST["cakeName"] => $_REQUEST["num"]
 ];
@@ -40,7 +41,6 @@ for ($x = 0; $x < $makeNum; $x++) {
 
 if ($checkNum > $makeNum) {
     echo ("選取品項總份數超過製作份數!!");
-    die();
 } elseif ($checkNum < $makeNum) {
     $sceneNum = $makeNum - $checkNum;
     $nameNumArr[0] = $sceneNum;
@@ -48,8 +48,8 @@ if ($checkNum > $makeNum) {
 
 DB::update("update orders set companion = ? where oid = ?", [$companion, $oid]);
 
-for ($y = 0; $y < count($nameArr); $y++) {
-    DB::insert("insert into orderlist value (?, ?, ?)", [$oid, $nameArr[$y], $numArr[$y]]);
+foreach ($nameNumArr as $key => $value) {
+    DB::insert("insert into orderlist value (?, ?, ?)", [$oid, $key, $value]);
 }
 
 echo "reserveTotal.php";
