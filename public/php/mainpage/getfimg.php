@@ -3,7 +3,7 @@ require('../db2.php');
 
 // $bid = $_REQUEST['bid'];
 
-$sql = "select bodyImg, body from binfo where bid = 1";
+$sql = "select bodyImg, body from binfo where act = 1";
 $stmt = $mysqli->prepare($sql);
 // $stmt->bind_param('s', $bid);
 $stmt->execute();
