@@ -2,7 +2,7 @@
 require('../db2.php');
 
 $bid = $_REQUEST['bid'];
-// $text = $_REQUEST['text'];
+$body = $_REQUEST['body'];
 $src = $_FILES['file1']['tmp_name'];
 $src1 = $_FILES['file2']['tmp_name'];
 $src2 = $_FILES['file3']['tmp_name'];
@@ -14,9 +14,9 @@ $contents2 = file_get_contents($src2);
 $contents3 = file_get_contents($src3);
 $contents4 = file_get_contents($src4);
 
-$sql = "update binfo set Img1 = ?,Img2 = ?,Img3 = ?,Img4 = ?,bodyimg = ? where bid = ?";
+$sql = "update binfo set Img1 = ?,Img2 = ?,Img3 = ?,Img4 = ?,bodyimg = ?,body = ? where bid = ?";
 $stmt = $mysqli->prepare($sql);
-$stmt->bind_param('bbbbbs', $contents, $contents1, $contents2, $contents3, $contents4, $bid);
+$stmt->bind_param('bbbbbss', $contents, $contents1, $contents2, $contents3, $contents4, $body, $bid);
 $stmt->send_long_data(0, $contents); // send_long_data(a, 變數) a取至於上方的相對位置 (bs) [01]
 $stmt->send_long_data(1, $contents1); // send_long_data(a, 變數) a取至於上方的相對位置 (bs) [01]
 $stmt->send_long_data(2, $contents2); // send_long_data(a, 變數) a取至於上方的相對位置 (bs) [01]

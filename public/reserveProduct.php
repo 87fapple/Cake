@@ -31,13 +31,15 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
     <!-- <link rel="stylesheet" href="jqueryui/style.css"> -->
 
     <link rel="stylesheet" href="../resources/css/navbar.css">
-    <link rel="stylesheet" href="../resources/css/reserve.css">
+    <link rel="stylesheet" href="../resources/css/reserve1.css">
+    <link rel="stylesheet" href="../resources/css/reserve2.css">
     <link rel="stylesheet" href="../resources/css/footer2.css">
     <link rel="stylesheet" href="../resources/css/topBtn.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
     <script>
-        $(function() {
+        $(function () {
             const cInfoSid = <?= $cInfo[0]["sid"] ?>;
             $("#hidden").hide();
             let data;
@@ -56,7 +58,7 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             }
             document.getElementById("makeNum").innerHTML = view1
 
-            $("#makeNum").on('change', function(e) {
+            $("#makeNum").on('change', function (e) {
                 var mNum = $("#makeNum option:selected").val();
                 var people = $("#people").val();
                 let view4 = '';
@@ -72,17 +74,21 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
 
                 for (let a = 1; a < mNum; a++) {
                     view4 += `
-                    <div id="newdiv${a}" style="display:none">
-                        <label for="newCakeName${a}">選擇產品</label>
-                            <select id="newCakeName${a}" name="newCakeName${a}">
-                            <option style="display: none;" value="">請選擇產品</option>
-                                <optgroup label="蛋糕" id="newCake${a}">
-                                <optgroup label="餅乾" id="newCookie${a}">
-                                <optgroup label="點心" id="newDessert${a}">
-                            </select>
-                        <label for="newNum${a}">份數</label>
-                            <select id="newNum${a}" name="newNum${a}"></select>
-                        <input type="button" id="hideNewDiv${a}" value="移除" onClick="hideNewDivs(${a})"/>
+                    <div id="newbase">
+                        <div id="newdiv${a}" style="display:none" class="newdivArea">
+                            <label for="newCakeName${a}">選擇產品</label>
+                                <select id="newCakeName${a}" name="newCakeName${a}" class="newSelect">
+                                <option style="display: none;" value="">請選擇產品</option>
+                                    <optgroup label="蛋糕" id="newCake${a}">
+                                    <optgroup label="餅乾" id="newCookie${a}">
+                                    <optgroup label="點心" id="newDessert${a}">
+                                </select>
+                                <br>
+                            <label for="newNum${a}">選擇份數</label>
+                                <select id="newNum${a}" name="newNum${a}" class="newSelect"></select>
+                                <br>
+                                <input type="button" id="hideNewDiv${a}" value="移除" onClick="hideNewDivs(${a})" class="removeBtn"/>
+                        </div>
                     </div>
                     `;
                 }
@@ -93,15 +99,15 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             })
 
             fetch(`./php/reserve/storeToCake_sql.php?indexInfo=${cInfoSid}`)
-                .then(function(response) {
+                .then(function (response) {
                     return response.json();
                 })
-                .then(function(responseData) {
+                .then(function (responseData) {
                     data = responseData;
                     universalOptions();
                 })
 
-            document.getElementById("addnewdiv").onclick = function(e) {
+            document.getElementById("addnewdiv").onclick = function (e) {
                 nextNewNumber();
             }
 
@@ -142,7 +148,7 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                 let cookieView = '';
                 let dessertView = '';
 
-                data.forEach(function(e) {
+                data.forEach(function (e) {
                     switch (e.kind) {
                         case '蛋糕':
                             cakeView += `
@@ -218,9 +224,9 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             $("#addnewdiv").show();
         }
 
-        window.onload = function(e) {
+        window.onload = function (e) {
             const submitBtn = document.getElementById('submitBtn');
-            submitBtn.onclick = function(e) {
+            submitBtn.onclick = function (e) {
                 e.preventDefault();
 
                 const productForm = document.getElementById('productForm');
@@ -249,25 +255,25 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                         console.log(newCakeName);
                         console.log(newNum);
 
-                        if (!newCakeName || !newNum) {
+                        if (newCakeName && newNum) {
                             alert("請選擇新建的產品和份數");
                             return;
                         }
                     }
                 }
 
-                if (!ckCakeName || !ckNum) {
+                if (ckCakeName && ckNum) {
                     alert("請選擇產品和份數");
                     return;
                 } else {
                     fetch('./php/reserve/insertOrdersCake.php', {
-                            method: "POST",
-                            body: formData
-                        })
-                        .then(function(response) {
+                        method: "POST",
+                        body: formData
+                    })
+                        .then(function (response) {
                             return response.text();
                         })
-                        .then(function(data) {
+                        .then(function (data) {
                             console.log(data);
                             // if (data == "reserveProduct.php") {
                             //     location.href = data;
@@ -289,8 +295,8 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
 </head>
 
 <body>
-    <!-- Back-to-Top Button -->
-    <button onclick="topFunction()" class="topBtn" id="topBtn"></button>
+    <!-- Back-to-Top Button
+    <button onclick="topFunction()" class="topBtn" id="topBtn"></button> -->
 
     <!-- Navbar -->
     <nav class="navbar">
@@ -321,12 +327,13 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
         <div class="scd-container">
             <form id="productForm">
                 <div>目前預定人數
-                    <input type="hidden" id="oid" name="oid" value="<?= $cInfo[0]["oid"] ?>">
+                    <input type="hidden" id="oid" name="oid" value="<?= $cInfo[0]["oid"] ?>" >
                     <input type="text" id="people" value="<?= $cInfo[0]["people"] ?>" disabled>
+                    <br>
                     <label for="makeNum">製作份數</label>
                     <select id="makeNum" name="makeNum">
                     </select>
-                    <span>陪同人數:</span><input type="text" id="companion" name="companion" value="0" readonly="readonly">
+                    <span>陪同人數:</span><input type="text" id="companion" name="companion" value="0" readonly="readonly" >
                 </div>
                 <div>注意：一份甜點最多一位陪同，將酌收陪同費120元/人。</div>
 
@@ -334,6 +341,7 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                 <div id="hidden">
                     <div id="baseChoose">
                         <label for="cakeName">選擇產品</label>
+                        <br>
                         <select id="cakeName" name="cakeName">
                             <option style="display: none;" value="">請選擇產品</option>
                             <optgroup label="蛋糕" id="cake">
@@ -341,6 +349,7 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                             <optgroup label="點心" id="dessert">
                         </select>
                         <label for="num">份數</label>
+                        <br>
                         <select id="num" name="num">
                         </select>
                     </div>
@@ -349,11 +358,60 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                     <input type="button" id="addnewdiv" value="新增品項">
                     <div>注意：若選取的甜點份數未滿製作份數，剩餘份數可現場到實體店面再做確認製作項目</div>
                     <br>
-                    <input type="button" value="確認產品" id="submitBtn">
+                    <input type="button" value="確認產品" id="submitBtn2" onclick="document.getElementById('id01').style.display='block'" ;>
                 </div>
+
+    <div id="id01" class="totalOrder">
+        <form class="totalOrder-content">
+            <div class="totalOrder-container">
+                <h1>訂單資訊</h1>
+                <p>請確認您的訂單資訊</p>
+                <hr>
+                <label for="name"><b>訂購人姓名：</b></label>
+                <br>
+                <input type="text" value="" name="name" readonly="readonly" class="modal1">
+                <br>
+                <label for="location"><b>分店：</b></label>
+                <br>
+                <input type="text" value="" name="location" readonly="readonly" class="modal1">
+                <br>
+                <label for="people"><b>人數：</b></label>
+                <br>
+                <input type="number" value="" name="people" readonly="readonly" class="modal1">
+                <br>
+                <label for="cakeName"><b>訂單產品：</b></label>
+                <br>
+                <textarea name="cakeName" readonly="readonly" ></textarea>
+                <br>
+                <label>
+                    <input type="checkbox" checked="checked" name="ok" required>以上確認無誤
+                </label>
+                <div class="clearfix">
+                    <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                        class="cancelbtn">重新選擇</button>
+                    <button type="submit" class="submitOK">送出訂單</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+                <script>
+                // Get the modal
+                var modal = document.getElementById('id01');
+
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function (event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+                </script>
+
             </form>
         </div>
     </div>
+
+
     <!-- Footer -->
     <footer class="footer">
         <div class="footerContainer">

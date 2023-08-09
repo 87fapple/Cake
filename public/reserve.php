@@ -18,34 +18,11 @@ if ($token !== 'undefined') {
     <!-- <link rel="stylesheet" href="jqueryui/style.css"> -->
 
     <link rel="stylesheet" href="../resources/css/Navbar.css">
-    <link rel="stylesheet" href="../resources/css/reserve.css">
+    <link rel="stylesheet" href="../resources/css/reserve1.css">
     <link rel="stylesheet" href="../resources/css/footer2.css">
     <link rel="stylesheet" href="../resources/css/topBtn.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
-    <style>
-        input[type="radio"] {
-            display: none;
-        }
-
-        .radio-button-base,
-        .radio-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #222222;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-        }
-
-        .radio-button {
-            cursor: pointer;
-        }
-
-        input[type="radio"]:checked+span {
-            background-color: #007BFF;
-        }
-    </style>
 
     <script>
         $(function() {
@@ -88,8 +65,8 @@ if ($token !== 'undefined') {
                                 if (typeof(e2.sequel) !== 'undefined') {
                                     viewTime += `
                                     <label>
-                                        <input type="radio" name="timeOption" value="${e2.sequel}">
-                                        <span class="radio-button">${e2.sequel}</span>
+                                        <input type="radio" name="timeOption" value="${e2.sequel}"  style="background-color: #ffb12b; color: black;">
+                                        <span class="radio-button" style="background-color: #ffb12b; color: black;">${e2.sequel}</span>
                                     </label>
                                      `
                                 } else {
@@ -210,7 +187,7 @@ if ($token !== 'undefined') {
                     <br>
                 </div>
                 <br>
-                <input type="button" value="確認預約" id="submitBtn">
+                <input type="button" value="確認預約" id="submitBtn" class="submitBtn">
                 <span id="test"></span>
             </div>
         </form>

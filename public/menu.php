@@ -61,7 +61,7 @@ $result = $stmt->get_result();
                     <input type="radio" checked="checked" name="radio" id="cake" onclick="kindCake()">   
                     <span class="checkmark"></span>
                 </label>
-                <label class="container">餅乾
+                <label class="container">點心
                     <input type="radio" name="radio" id="cookie" onclick="kindCookie()">
                     <span class="checkmark"></span>
                 </label>
@@ -80,21 +80,26 @@ $result = $stmt->get_result();
             
         <?php
             while($row = $result->fetch_assoc()){
-                echo 
+                if($row['cid'] != 0){
+                    echo 
                     "
-                    <div class=\"menuInfoDiv\" id=\"menuInfo\" data-cakeid={$row['cid']}>
-                        <a href=\"detail.php?cid={$row['cid']}\">
-                            <img src=\"../image/menuImg/menuInfo1.jpg\">
-                            <div class=\"menuInfoContent\" id=\"menuInfoContent\">
-                                <ul class=\"menuInfo\" id=\"menuInfo\">
-                                    <li>{$row['cName']}</li>
-                                    <li>難度 {$row['level']}</li>
-                                    <li>$ {$row['price']}</li>
-                                </ul>
-                            </div>
-                        </a>
+                    <div class=\"backgroundDiv\">
+                        <div class=\"menuInfoDiv\" id=\"menuInfo\" data-cakeid={$row['cid']}>
+                            <a href=\"detail.php?cid={$row['cid']}\">
+                                <img src=\"{$row['cImg1']}\">
+                                <div class=\"menuInfoContent\" id=\"menuInfoContent\">
+                                    <ul class=\"menuInfo\" id=\"menuInfo\">
+                                        <li class=\"titleName\">{$row['cName']}</li>
+                                        <li class=\"scdName\">難度 {$row['level']}</li>
+                                        <li class=\"scdName\">$ {$row['price']}</li>
+                                    </ul>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                     ";
+                }
+                
             }
         ?>
         </div>
@@ -170,7 +175,7 @@ function kindCake() {
 }
 
 function kindCookie() {
-    kindFilter('餅乾');
+    kindFilter('點心');
 }
 
 // 接收排序方式参数，價格排序ajax 3.0 
@@ -191,8 +196,9 @@ function renderCakes(cakes) {
 
     cakes.forEach(cake => {
         menuBlock2.innerHTML += `
+        // <div class="backgroundDiv">
             <div class="menuInfoDiv" id="menuInfo" data-cakeid="${cake.cid}" > <!-- 添加data-cakeid屬性 -->
-                <a href="javascript:void(0);" onclick="showProductDetail(${cake.cid})"><img src="../image/menuImg/menuInfo1.jpg"></a> 
+                <a href="javascript:void(0);" onclick="showProductDetail(${cake.cid})"><img src="${cake.cImg1}"></a> 
                 <div class="menuInfoContent" id="menuInfoContent">
                     <ul class="menuInfo" id="menuInfo">
                         <li>${cake.cName}</li>
@@ -201,6 +207,7 @@ function renderCakes(cakes) {
                     </ul>
                 </div>
             </div>
+            // </div>
         `;
     });
 }
@@ -209,82 +216,6 @@ function renderCakes(cakes) {
 function showProductDetail(cakeId) {
     window.location.href = `detail.php?cid=${cakeId}`;
 }
-
-    function detailRender(cakeDetail) {
-        var menu = document.querySelector('.menu');
-        menu.innerHTML = `
-            <!-- Product Details -->
-            <main class="detailContainer">
-                <!-- Product -->
-                <div class="productBlock">
-                    <!-- Carousel Img -->
-                    <div class="carouselContainer">
-                        <span id="carouselPrevious">＜</span>
-                        <span id="carouselNext">＞</span>
-                        <div id="slider" class="slider">
-                            <img src="../image/DetailImg/detailImg1.jpg">
-                            <img src="../image/DetailImg/detailImg2.jpg">
-                            <img src="../image/DetailImg/detailImg3.jpg">
-                        </div>
-                        <ul id="dots" class="dots">
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ul>
-                    </div>
-                    <!-- Product Content -->
-                    <div class="productContent">
-                        <h1>${cakeDetail.cName}</h1>
-                        <ul class="productList">
-                            <li>尺寸： ${cakeDetail.size}</li>
-                            <li>難度： ${cakeDetail.level}</li>
-                            <li>價格： ${cakeDetail.price}</li>
-                        </ul>
-                        <a href="../public/reserve.html" class="bookingBtn">預約</a>
-                    </div>
-                </div>
-
-                <!-- Detail -->
-                <div class="detailBlock">
-                    <ul class="detailNavbar">
-                        <li><a href="#detail">詳細內容</a></li>
-                        <li><a href="#material">使用材料</a></li>
-                        <li><a href="#experience">製作心得</a></li>
-                    </ul>
-
-                    <!-- Detail Content Block -->
-                    <section class="detailContent">
-                        <h1 id="detail">詳細內容</h1>
-                        <pre>
-                            ${cakeDetail.feature}
-                        </pre>
-
-                        <h1 id="material">使用材料</h1>
-                        <pre>
-                            ${cakeDetail.material}
-                        </pre>
-
-                        <h1 id="experience">製作心得</h1>
-                        <div class="expBlock">
-                            <h4>userName</h4>
-                            <pre>
-                                分享這次DIY的過程，非常有趣
-                            </pre>
-                            <div class="expImgBlock">
-                                <img src="../image/mainImg/mainImg1.jpg" alt="">
-                                <img src="../image/mainImg/mainImg1.jpg" alt="">
-                                <img src="../image/mainImg/mainImg1.jpg" alt="">
-                                <img src="../image/mainImg/mainImg1.jpg" alt="">
-                            </div>
-                            <p>2023/7/10 10:00:00</p>
-                        </div>
-
-                    </section>
-                    <a href="./reserve.html" class="bookingBtn">預約</a>
-                </div>
-            </main>
-        `;
-    }
     
 </script>
 
