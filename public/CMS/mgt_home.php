@@ -1,40 +1,72 @@
 <?php $title = 'CMS Home Management'; ?>
 <?php $metaTags = 'tag1 tag2'; ?>
 <?php $currentPage = '首頁管理'; ?>
+<?php require_once(__DIR__ . '/head.php'); ?>
+<?php require_once(__DIR__ . '/navbar.php'); ?>
 
+<style>
+  .container {
+    width: calc(100% - 200px);
+    position: relative;
+    top: 52px;
+    left: 200px;
+  }
+
+  .box {
+    width: calc(95% - 200px);
+    margin: 32px 2.5%;
+    border: 2px solid #885500;
+    border-radius: 12px;
+  }
+
+  .container h2,
+  .container div {
+    margin: 32px;
+  }
+
+  .container div {
+    display: flex;
+  }
+</style>
 
 <body>
-  <button onclick="loadImagesWithAjax(1)">顯示圖片1</button>
-  <button onclick="loadImagesWithAjax(2)">顯示圖片2</button>
-  <button onclick="loadImagesWithAjax(3)">顯示圖片3</button>
-  <button onclick="loadImagesWithAjax(4)">顯示圖片4</button>
+  <div class="container box">
+    <h2>圖片群組</h2>
+    <div>
+      <button onclick="loadImagesWithAjax(1)">Group 1</button>
+      <button onclick="loadImagesWithAjax(2)">Group 2</button>
+      <button onclick="loadImagesWithAjax(3)">Group 3</button>
+      <button onclick="loadImagesWithAjax(4)">Group 4</button>
+    </div>
+    
+    <form id="imageForm" data-bid="">
+      <!-- 初始載入頁面時的表單內容 -->
+      <input type="file" name="file1" onchange="updateImagePreview(1)" />
+      <img src="" alt="" />
+      <input type="file" name="file2" onchange="updateImagePreview(2)" />
+      <img src="" alt="" />
+      <input type="file" name="file3" onchange="updateImagePreview(3)" />
+      <img src="" alt="" />
+      <input type="file" name="file4" onchange="updateImagePreview(4)" />
+      <img src="" alt="" />
 
-  <form id="imageForm" data-bid="">
-    <!-- 初始載入頁面時的表單內容 -->
-
-    <input type="file" name="file1" onchange="updateImagePreview(1)" />
-    <img src="" alt="" />
-    <input type="file" name="file2" onchange="updateImagePreview(2)" />
-    <img src="" alt="" />
-    <input type="file" name="file3" onchange="updateImagePreview(3)" />
-    <img src="" alt="" />
-    <input type="file" name="file4" onchange="updateImagePreview(4)" />
-    <img src="" alt="" />
-    <input type="file" name="file5" onchange="updateImagePreview(5)" />
-    <img src="" alt="" />
-    <textarea name="body" rows="4" cols="50"></textarea>
-    <button type="button" onclick="submitForm()">上傳</button>
-  </form>
+      <hr>
+      <input type="file" name="file5" onchange="updateImagePreview(5)" />
+      <img src="" alt="" />
+      <textarea name="body" rows="4" cols="50"></textarea>
+      <button type="button" onclick="submitForm()">上傳</button>
+    </form>
+  </div>
 </body>
-
-<script>
-  const form = document.getElementById("imageForm");
-  let bid = form.dataset.bid; // 使用 dataset 屬性取得 data-bid 的值
-  // console.log(bid);
-  function loadImagesWithAjax(bid) {
-    form.setAttribute("data-bid", bid);
+  
+  <script>
+    const form = document.getElementById("imageForm");
+    let bid = form.dataset.bid; // 使用 dataset 屬性取得 data-bid 的值
+    // console.log(bid);
+    function loadImagesWithAjax(bid) {
+      form.setAttribute("data-bid", bid);
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", `./php/mainpage/previmg.php?bid=${bid}`, true);
+    xhr.open("GET", `./previmg.php?bid=${bid}`, true);
     xhr.onreadystatechange = function () {
       if (xhr.readyState === XMLHttpRequest.DONE) {
         if (xhr.status === 200) {
@@ -69,7 +101,7 @@
     const formData = new FormData(form);
     const xhr = new XMLHttpRequest();
     let bid = form.dataset.bid;
-    xhr.open("POST", `./php/mainpage/upload.php?bid=${bid}`, true);
+    xhr.open("POST", `./upload.php?bid=${bid}`, true);
     console.log(bid);
     xhr.onreadystatechange = function () {
       if (xhr.readyState === XMLHttpRequest.DONE) {

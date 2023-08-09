@@ -45,7 +45,7 @@ $mysqli->close();
         width: calc(100% - 200px);
         position: relative;
         top: 52px;
-        left: 200px;;
+        left: 200px;
     }
 
     .order-table {
