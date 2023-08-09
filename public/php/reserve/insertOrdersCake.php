@@ -6,14 +6,17 @@ if (!$_COOKIE['token']) {
 }
 require_once('../DB.php');
 
-$oid = $_REQUEST["oid"];
-$makeNum = $_REQUEST["makeNum"];
-$companion = $_REQUEST["companion"];
+$oid = $_REQUEST["oid"] ?? null;
+$makeNum = $_REQUEST["makeNum"] ?? null;
+$companion = $_REQUEST["companion"] ?? null;
 $nameArr = [$_REQUEST["cakeName"]];
 $numArr = [$_REQUEST["num"]];
 $sceneNum = 0;
 
-var_dump($_REQUEST);
+if (!$oid || !$makeNum || !$nameArr || !$numArr) {
+    echo "資料有空";
+    die();
+}
 $nameNumArr = [
     $_REQUEST["cakeName"] => $_REQUEST["num"]
 ];
@@ -31,7 +34,6 @@ for ($x = 0; $x < $makeNum; $x++) {
         } else {
             $nameNumArr[$name] = $num;
         }
-
         $checkNum += $num;
     }
 }
@@ -43,15 +45,11 @@ if ($checkNum > $makeNum) {
     $sceneNum = $makeNum - $checkNum;
     $nameNumArr[0] = $sceneNum;
 }
-$nameArr = array_keys($nameNumArr);
-$numArr = array_values($nameNumArr);
 
-// var_dump($nameArr);
-// var_dump($numArr);
+DB::update("update orders set companion = ? where oid = ?", [$companion, $oid]);
 
-DB::update("update orders set companion = ? where oid = ?",[$companion, $oid]);
-
-for($y = 0; $y < count($nameArr) ; $y++){
-    // var_dump($nameNumArr[$y]);
-    DB::insert("insert into orderlist value (?, ?, ?)",[$oid, $nameArr[$y], $numArr[$y]]);
+for ($y = 0; $y < count($nameArr); $y++) {
+    DB::insert("insert into orderlist value (?, ?, ?)", [$oid, $nameArr[$y], $numArr[$y]]);
 }
+
+echo "reserveTotal.php";

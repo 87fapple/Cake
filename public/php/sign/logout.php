@@ -3,7 +3,7 @@
 
 session_destroy();
 setcookie('token', '',time() -1, "/");
-setcookie('otoken', '',time() -1, "/");
+setcookie('oToken', '',time() -1, "/");
 setcookie('welcome', '',time() -1, "/");
 
 
