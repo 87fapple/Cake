@@ -35,10 +35,11 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
     <link rel="stylesheet" href="../resources/css/reserve2.css">
     <link rel="stylesheet" href="../resources/css/footer2.css">
     <link rel="stylesheet" href="../resources/css/topBtn.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
     <script>
-        $(function() {
+        $(function () {
             const cInfoSid = <?= $cInfo[0]["sid"] ?>;
             $("#hidden").hide();
             let data;
@@ -57,7 +58,7 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             }
             document.getElementById("makeNum").innerHTML = view1
 
-            $("#makeNum").on('change', function(e) {
+            $("#makeNum").on('change', function (e) {
                 var mNum = $("#makeNum option:selected").val();
                 var people = $("#people").val();
                 let view4 = '';
@@ -98,15 +99,15 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             })
 
             fetch(`./php/reserve/storeToCake_sql.php?indexInfo=${cInfoSid}`)
-                .then(function(response) {
+                .then(function (response) {
                     return response.json();
                 })
-                .then(function(responseData) {
+                .then(function (responseData) {
                     data = responseData;
                     universalOptions();
                 })
 
-            document.getElementById("addnewdiv").onclick = function(e) {
+            document.getElementById("addnewdiv").onclick = function (e) {
                 nextNewNumber();
             }
 
@@ -147,7 +148,7 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                 let cookieView = '';
                 let dessertView = '';
 
-                data.forEach(function(e) {
+                data.forEach(function (e) {
                     switch (e.kind) {
                         case '蛋糕':
                             cakeView += `
@@ -223,9 +224,9 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             $("#addnewdiv").show();
         }
 
-        window.onload = function(e) {
+        window.onload = function (e) {
             const submitBtn = document.getElementById('submitBtn');
-            submitBtn.onclick = function(e) {
+            submitBtn.onclick = function (e) {
                 e.preventDefault();
 
                 const productForm = document.getElementById('productForm');
@@ -254,25 +255,25 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                         console.log(newCakeName);
                         console.log(newNum);
 
-                        if (!newCakeName || !newNum) {
+                        if (newCakeName && newNum) {
                             alert("請選擇新建的產品和份數");
                             return;
                         }
                     }
                 }
 
-                if (!ckCakeName || !ckNum) {
+                if (ckCakeName && ckNum) {
                     alert("請選擇產品和份數");
                     return;
                 } else {
                     fetch('./php/reserve/insertOrdersCake.php', {
-                            method: "POST",
-                            body: formData
-                        })
-                        .then(function(response) {
+                        method: "POST",
+                        body: formData
+                    })
+                        .then(function (response) {
                             return response.text();
                         })
-                        .then(function(data) {
+                        .then(function (data) {
                             console.log(data);
                             // if (data == "reserveProduct.php") {
                             //     location.href = data;

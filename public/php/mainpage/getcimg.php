@@ -1,7 +1,7 @@
 <?php
 require('../db2.php');
 
-$sql = "SELECT Img1, Img2, Img3, Img4 FROM binfo WHERE bid = 2";
+$sql = "SELECT Img1, Img2, Img3, Img4 FROM binfo WHERE bid = 1";
 $stmt = $mysqli->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();

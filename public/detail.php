@@ -1,16 +1,20 @@
 <?php
+$token = isset($_COOKIE['token']) ? $_COOKIE['token'] : 'undefined';
+if ($token !== 'undefined') {
+    require('./php/DB.php');
+}
 require_once('php/db2.php');
 
-    $cakeId = $_GET['cid'];
+$cakeId = $_GET['cid'];
 
-    // 使用預處理語句獲取指定ID的產品詳細資訊
-    $sql = 'SELECT * FROM cake WHERE cid = ?';
-    $stmt = $mysqli->prepare($sql);
-    $stmt->bind_param('i', $cakeId);
-    $stmt->execute();
-    $result = $stmt->get_result();
-   
-    $cakeDetail = $result->fetch_assoc();
+// 使用預處理語句獲取指定ID的產品詳細資訊
+$sql = 'SELECT * FROM cake WHERE cid = ?';
+$stmt = $mysqli->prepare($sql);
+$stmt->bind_param('i', $cakeId);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$cakeDetail = $result->fetch_assoc();
 
 ?>
 <!DOCTYPE html>
@@ -20,16 +24,89 @@ require_once('php/db2.php');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $cakeDetail['cName']; ?></title>
+    <title>
+        <?php echo $cakeDetail['cName']; ?>
+    </title>
     <link rel="stylesheet" href="../resources/css/Navbar.css">
     <link rel="stylesheet" href="../resources/css/footer2.css">
     <link rel="stylesheet" href="../resources/css/topBtn.css">
     <link rel="stylesheet" href="../resources/css/carousel1.css">
     <link rel="stylesheet" href="../resources/css/detail2.css">
     <!-- <link rel="stylesheet" href="../resources/css/detailStyle.css"> -->
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 </head>
+<script>
+    window.onload = function(e) {
+        let eId;
+        fetch(`./php/exp/expInfo.php?cid=<?= $cakeId; ?>`)
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(responseData) {
+                let view = '';
+                if (responseData.length === 0) {
+                    view = `<div>目前沒有留言</div>`;
+                } else {
+                    eId = responseData;
+                    responseData.forEach(function(e) {
+                        view += `
+                            <h4>${e.uName}</h4>
+                            <pre>${e.eText}</pre>
+                            <div class="expImgBlock" id="img${e.eid}"></div>
+                            <p>${e.eDate}</p>
+                            `;
+                        fetch(`./php/exp/expImg.php?eid=${e.eid}`)
+                            .then(function(response) {
+                                return response.json();
+                            })
+                            .then(function(data) {
+                                console.log(data);
+                                view2 = '';
+                                data.forEach(function(img) {
+                                    if (img != "none") {
+                                        view2 += `
+                                            <img src="${img}">
+                                        `;
+                                    }
+                                });
+                                $("#img" + e.eid).append(view2);
+                            });
+                    })
+                }
+                $("#expBlock").append(view);
+            })
+
+        function reloadPage() {
+            location.reload();
+        }
+
+        const token = "<?= $token; ?>";
+
+        if (token === 'undefined') {
+            $("#checkLogin").show();
+            $("#expMessage").hide();
+        } else {
+            $("#checkLogin").hide();
+            $("#expMessage").show();
+        }
+
+        $("#expInput").click(function(e) {
+            fetch(`./php/exp/upLoadImg.php`, {
+                    method: "POST",
+                    body: new FormData(expMessage)
+                }).then(function(response) {
+                    return response.text();
+                })
+                .then(function(data) {
+                    if(typeof(data) !== 'undefined'){
+                        reloadPage();
+                    }
+                })
+        });
+    }
+</script>
 
 <body>
     <!-- Back-to-Top Button -->
@@ -75,11 +152,19 @@ require_once('php/db2.php');
             </div>
             <!-- Product Content -->
             <div class="productContent">
-                <h1><?php echo $cakeDetail['cName']; ?></h1>
+                <h1>
+                    <?php echo $cakeDetail['cName']; ?>
+                </h1>
                 <ul class="productList">
-                    <li>尺寸： <?php echo $cakeDetail['cSize']; ?></li>
-                    <li>難度： <?php echo $cakeDetail['level']; ?></li>
-                    <li>價格： <?php echo $cakeDetail['price']; ?></li>
+                    <li>尺寸：
+                        <?php echo $cakeDetail['cSize']; ?>
+                    </li>
+                    <li>難度：
+                        <?php echo $cakeDetail['level']; ?>
+                    </li>
+                    <li>價格：
+                        <?php echo $cakeDetail['price']; ?>
+                    </li>
                 </ul>
                 <a href="../public/reserve.html" class="bookingBtn">預約</a>
             </div>
@@ -103,47 +188,47 @@ require_once('php/db2.php');
                 <div class="detailContainer22">
                     <pre><?php echo $cakeDetail['material']; ?></pre>
                 </div>
+
+
+
+
+
+
+
+
+
+                
                 <h1 id="experience">製作心得</h1>
-
+                
                 <div class="slideshow-container">
-                    <div class="detailContainer22 mySlides fade">
-                        <h4>userName</h4>
-                        <pre>
-                            分享這次DIY的過程，非常有趣
-                        </pre>
-                        <div class="expImgBlock">
-                            <img src="../image/mainImg/mainImg1.jpg" alt="">
-                            <img src="../image/mainImg/mainImg1.jpg" alt="">
-                            <img src="../image/mainImg/mainImg1.jpg" alt="">
-                            <img src="../image/mainImg/mainImg1.jpg" alt="">
-                        </div>
-                        <p>2023/7/10 10:00:00</p>
+                <div class="detailContainer22 mySlides fade" id="expBlock">
+                    <!-- <h4>userName</h4>
+                    <pre>分享這次DIY的過程，非常有趣</pre>
+                    <div class="expImgBlock">
+                        <img src="../image/mainImg/mainImg1.jpg">
                     </div>
-
-                    <div class="detailContainer22 mySlides fade">
-                        <h4>userName</h4>
-                        <pre>
-                            分享這次DIY的過程，非常有趣2
-                        </pre>
-                        <div class="expImgBlock">
-                            <img src="../image/mainImg/mainImg1.jpg" alt="">
-                            <img src="../image/mainImg/mainImg1.jpg" alt="">
-                            <img src="../image/mainImg/mainImg1.jpg" alt="">
-                            <img src="../image/mainImg/mainImg1.jpg" alt="">
-                        </div>
-                        <p>2023/7/10 10:00:00</p>
-                    </div>
-
-                    <a class="prev" onclick="plusSlides(-1)">❮</a>
-                    <a class="next" onclick="plusSlides(1)">❯</a>                
-
+                    <p>2023/7/10 10:00:00</p> -->
                 </div>
 
-                <!-- <div style="text-align:center">
-                    <span class="dot" onclick="currentSlide(1)"></span> 
-                    <span class="dot" onclick="currentSlide(2)"></span> 
-                    <span class="dot" onclick="currentSlide(3)"></span> 
-                </div> -->
+                <h1 id="expText">分享心得</h1>
+                <div class="expBlock">
+                    <div id="checkLogin">請先
+                        <a href="./login.html">登入</a>後才能留言
+                    </div>
+                    <form id="expMessage">
+                        <input type="hidden" value="<?= $cakeId; ?>" name="cid">
+                        <textarea id="message" name="message"></textarea>
+                        <input type="file" name="file[]" multiple accept="image/*">
+                        <p></p>
+                    </form>
+                    <input type="button" id="expInput" value="送出">
+                </div>
+
+                <a class="prev" onclick="plusSlides(-1)">❮</a>
+                <a class="next" onclick="plusSlides(1)">❯</a>                
+            </div>
+
+
             </section>
             <a href="./reserve.php" class="bookingBtn">預約</a>
         </div>

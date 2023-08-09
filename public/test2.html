@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Change</title>
+    <title>Display and Upload Images</title>
   </head>
   <body>
     <button onclick="loadImagesWithAjax(1)">顯示圖片1</button>
@@ -25,9 +25,6 @@
       <img src="" alt="" />
       <textarea name="body" rows="4" cols="50"></textarea>
       <button type="button" onclick="submitForm()">上傳</button>
-      <div id="successMessage" style="display: none">
-        修改成功!!10秒後刷新頁面
-      </div>
     </form>
     <script>
       const form = document.getElementById("imageForm");
@@ -70,17 +67,13 @@
       function submitForm() {
         const formData = new FormData(form);
         const xhr = new XMLHttpRequest();
-        bid = form.dataset.bid;
+        let bid = form.dataset.bid;
         xhr.open("POST", `./php/mainpage/upload.php?bid=${bid}`, true);
+        console.log(bid);
         xhr.onreadystatechange = function () {
           if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
               console.log("Upload successful");
-              const successMessage = document.getElementById("successMessage");
-              successMessage.style.display = "block"; // 顯示成功訊息
-              setTimeout(function () {
-                location.reload(); // 在10秒後刷新頁面
-              }, 10000);
             } else {
               console.error("Error:", xhr.status, xhr.statusText);
             }
