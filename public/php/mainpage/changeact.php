@@ -17,6 +17,6 @@ $stmtUpdateSelected->execute();
 $stmtUpdateAll->close();
 $stmtUpdateSelected->close();
 
-header("Location: ../../../public/test2.html");
+header("Location: ../../CMS/mgt_home.php");
 exit();
 ?>
