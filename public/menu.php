@@ -201,7 +201,7 @@ function renderCakes(cakes) {
                 <a href="javascript:void(0);" onclick="showProductDetail(${cake.cid})"><img src="${cake.cImg1}"></a> 
                 <div class="menuInfoContent" id="menuInfoContent">
                     <ul class="menuInfo" id="menuInfo">
-                        <li li class="titleName">${cake.cName}</li>
+                        <li class="titleName">${cake.cName}</li>
                         <li class="scdName">難度${cake.level}</li>
                         <li class="scdName">$${cake.price}</li>
                     </ul>

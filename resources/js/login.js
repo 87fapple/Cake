@@ -1,6 +1,6 @@
 const sign = document.getElementById('login_check');
 fetch(
-    "php/sign/login.php?"
+    "php/sign/login.php"
 )
 .then(function(response){
     return response.text();
