@@ -80,21 +80,26 @@ $result = $stmt->get_result();
             
         <?php
             while($row = $result->fetch_assoc()){
-                echo 
+                if($row['cid'] != 0){
+                    echo 
                     "
-                    <div class=\"menuInfoDiv\" id=\"menuInfo\" data-cakeid={$row['cid']}>
-                        <a href=\"detail.php?cid={$row['cid']}\">
-                            <img src=\"{$row['cImg1']}\">
-                            <div class=\"menuInfoContent\" id=\"menuInfoContent\">
-                                <ul class=\"menuInfo\" id=\"menuInfo\">
-                                    <li>{$row['cName']}</li>
-                                    <li>難度 {$row['level']}</li>
-                                    <li>$ {$row['price']}</li>
-                                </ul>
-                            </div>
-                        </a>
+                    <div class=\"backgroundDiv\">
+                        <div class=\"menuInfoDiv\" id=\"menuInfo\" data-cakeid={$row['cid']}>
+                            <a href=\"detail.php?cid={$row['cid']}\">
+                                <img src=\"{$row['cImg1']}\">
+                                <div class=\"menuInfoContent\" id=\"menuInfoContent\">
+                                    <ul class=\"menuInfo\" id=\"menuInfo\">
+                                        <li class=\"titleName\">{$row['cName']}</li>
+                                        <li class=\"scdName\">難度 {$row['level']}</li>
+                                        <li class=\"scdName\">$ {$row['price']}</li>
+                                    </ul>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                     ";
+                }
+                
             }
         ?>
         </div>
@@ -191,16 +196,18 @@ function renderCakes(cakes) {
 
     cakes.forEach(cake => {
         menuBlock2.innerHTML += `
+         <div class="backgroundDiv">
             <div class="menuInfoDiv" id="menuInfo" data-cakeid="${cake.cid}" > <!-- 添加data-cakeid屬性 -->
                 <a href="javascript:void(0);" onclick="showProductDetail(${cake.cid})"><img src="${cake.cImg1}"></a> 
                 <div class="menuInfoContent" id="menuInfoContent">
                     <ul class="menuInfo" id="menuInfo">
-                        <li>${cake.cName}</li>
-                        <li>難度${cake.level}</li>
-                        <li>$${cake.price}</li>
+                        <li class="titleName">${cake.cName}</li>
+                        <li class="scdName">難度${cake.level}</li>
+                        <li class="scdName">$${cake.price}</li>
                     </ul>
                 </div>
             </div>
+             </div>
         `;
     });
 }
