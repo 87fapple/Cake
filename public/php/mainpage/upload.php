@@ -3,29 +3,39 @@ require('../db2.php');
 
 $bid = $_REQUEST['bid'];
 $body = $_REQUEST['body'];
-$src = $_FILES['file1']['tmp_name'];
-$src1 = $_FILES['file2']['tmp_name'];
-$src2 = $_FILES['file3']['tmp_name'];
-$src3 = $_FILES['file4']['tmp_name'];
-$src4 = $_FILES['file5']['tmp_name'];
-$contents = file_get_contents($src);
-$contents1 = file_get_contents($src1);
-$contents2 = file_get_contents($src2);
-$contents3 = file_get_contents($src3);
-$contents4 = file_get_contents($src4);
 
-$sql = "update binfo set Img1 = ?,Img2 = ?,Img3 = ?,Img4 = ?,bodyimg = ?,body = ? where bid = ?";
-$stmt = $mysqli->prepare($sql);
-$stmt->bind_param('bbbbbss', $contents, $contents1, $contents2, $contents3, $contents4, $body, $bid);
-$stmt->send_long_data(0, $contents); // send_long_data(a, 變數) a取至於上方的相對位置 (bs) [01]
-$stmt->send_long_data(1, $contents1); // send_long_data(a, 變數) a取至於上方的相對位置 (bs) [01]
-$stmt->send_long_data(2, $contents2); // send_long_data(a, 變數) a取至於上方的相對位置 (bs) [01]
-$stmt->send_long_data(3, $contents3); // send_long_data(a, 變數) a取至於上方的相對位置 (bs) [01]
-$stmt->send_long_data(4, $contents4); // send_long_data(a, 變數) a取至於上方的相對位置 (bs) [01]
+// 定義要處理的檔案數量
+$fileCount = 5;
 
+// 逐一處理每個檔案上傳
+for ($i = 1; $i <= $fileCount; $i++) {
+    $fileKey = 'file' . $i;
+    $src = $_FILES[$fileKey]['tmp_name'];
+
+    // 檢查是否有選擇上傳檔案
+    if (!empty($src)) {
+        $contents = file_get_contents($src);
+        $stmt = $mysqli->prepare("UPDATE binfo SET Img{$i} = ? WHERE bid = ?");
+        $stmt->bind_param('bs', $contents, $bid);
+        $stmt->send_long_data(0, $contents); // 使用 send_long_data 進行大型資料傳輸
+        $stmt->execute();
+    }
+}
+
+// 更新文字內容
+$stmt = $mysqli->prepare("UPDATE binfo SET body = ? WHERE bid = ?");
+$stmt->bind_param('si', $body, $bid);
 $stmt->execute();
 
-echo "真的修改成功!";
+echo "修改成功!";
 sleep(5);
 
-unlink($src);
+// 刪除暫存檔案
+for ($i = 1; $i <= $fileCount; $i++) {
+    $fileKey = 'file' . $i;
+    $src = $_FILES[$fileKey]['tmp_name'];
+    if (!empty($src)) {
+        unlink($src);
+    }
+}
+?>
