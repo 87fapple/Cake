@@ -8,14 +8,16 @@
 </div>
 
 <nav class="sidebar">
-    <a href="./home.php"><img src="../../image/icon-noBorder-whiteFont.png"></a>
+    <div class="nav_icon">
+        <a href="./home.php"></a>
+    </div>
     <hr>
     <ul>
         <?php
             $urls = array(
                 '首頁' => '/Cake/public/CMS/home.php',
                 '首頁管理' => '/Cake/public/CMS/mgt_home.php',
-                '訂單管理' => '/Cake/public/CMS/mgt_order.php',
+                '預約管理' => '/Cake/public/CMS/mgt_reserve.php',
                 // …
             );
             

@@ -1,6 +1,6 @@
-<?php $title = 'CMS Order Management'; ?>
+<?php $title = 'CMS Reserve Management'; ?>
 <?php $metaTags = 'tag1 tag2'; ?>
-<?php $currentPage = '訂單總覽'; ?>
+<?php $currentPage = '預約總覽'; ?>
 <?php require_once(__DIR__ . '/head.php'); ?>
 <?php require_once(__DIR__ . '/navbar.php'); ?>
 
@@ -113,6 +113,7 @@ $mysqli->close();
 
 <body>
     <div class="container">
+        <center><h2>預約管理</h2></center>
         <table class="order-table">
         <thead>
             <tr>
