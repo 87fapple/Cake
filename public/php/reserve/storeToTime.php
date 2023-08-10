@@ -9,6 +9,7 @@ require('../DB.php');
 $sid = $_REQUEST["sid"];
 $peopleNum = $_REQUEST["peopleNum"];
 $fDate = $_REQUEST["fDate"];
+$checkedoToken = $_REQUEST["checkedoToken"] ?? "0";
 
 $daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
@@ -27,11 +28,11 @@ function checkTime($datas)
             if ($value === "No availability") {
                 $cTime[] = "本日公休";
             } else {
-                DB::select('CALL getTime(?, ?, ?, ?)', function ($rows) use (&$cTime) {
+                DB::select('CALL getTime(?, ?, ?, ?, ?)', function ($rows) use (&$cTime) {
                     if ($rows[0]['sequel'] !== "fail") {
                         $cTime[] = $rows[0];
                     }
-                }, [$GLOBALS["sid"], $value, $GLOBALS["peopleNum"], $GLOBALS["fDate"]]);
+                }, [$GLOBALS["sid"], $value, $GLOBALS["peopleNum"], $GLOBALS["fDate"], $GLOBALS["checkedoToken"]]);
             }
         }
     }

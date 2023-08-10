@@ -3,12 +3,12 @@
 DROP PROCEDURE IF EXISTS getTime;
 DELIMITER $$
 
-CREATE PROCEDURE getTime(fSid INT, dateInfo VARCHAR(20), peopleNum INT, fReserveDate VARCHAR(20))
+CREATE PROCEDURE getTime(fSid INT, dateInfo VARCHAR(20), peopleNum INT, fReserveDate VARCHAR(20), checkedoToken VARCHAR(40))
 BEGIN
     DECLARE x INT DEFAULT 0;
     DECLARE y INT DEFAULT 0;
 
-    SELECT SUM(people) INTO x FROM orders WHERE sid = fSid AND reserveTime = dateInfo AND reserveDate = fReserveDate;
+    SELECT SUM(people) INTO x FROM orders WHERE sid = fSid AND reserveTime = dateInfo AND reserveDate = fReserveDate AND oToken <> checkedoToken;
     SELECT person INTO y FROM store WHERE sid = fSid;
 
     IF (COALESCE(x, 0) + peopleNum <= y) THEN
@@ -54,23 +54,26 @@ DELIMITER ;
 DROP PROCEDURE IF EXISTS createOrder;
 DELIMITER $$
 
-CREATE PROCEDURE createOrder(token VARCHAR(40), storeId INT, rTime VARCHAR(20), rDate VARCHAR(20), pNum INT, checkedToken VARCHAR(40))
+CREATE PROCEDURE createOrder(myToken VARCHAR(40), storeId INT, rTime VARCHAR(20), rDate VARCHAR(20), pNum INT, checkedoToken VARCHAR(40))
 BEGIN
     DECLARE orderToken varchar(40) DEFAULT uuid();
     DECLARE x INT DEFAULT 0;
     DECLARE y INT DEFAULT 0;
+    DECLARE z INT DEFAULT 0;
 
     START TRANSACTION;
-    	SELECT SUM(people) INTO x FROM orders WHERE sid = storeId AND reserveTime = rTime AND reserveDate = rDate for update;
         SELECT person INTO y FROM store WHERE sid = storeId;
+        SELECT uid INTO z FROM userinfo WHERE token = myToken;
     
+    	SELECT SUM(people) INTO x FROM orders WHERE sid = storeId AND reserveTime = rTime AND reserveDate = rDate AND oToken <> checkedoToken for update;
+
         IF (COALESCE(x, 0) + pNum <= y) THEN
-            IF checkedToken <> "0" THEN 
-                UPDATE orders SET uid = userId, sid = storeId, reserveTime = rTime, reserveDate = rDate, people = pNum WHERE oToken = checkedToken;
-                SELECT 'reserveProduct.php' as result, checkedToken as orderToken;
+            IF checkedoToken <> "0" THEN 
+                UPDATE orders SET uid = z, sid = storeId, reserveTime = rTime, reserveDate = rDate, people = pNum WHERE oToken = checkedoToken;
+                SELECT 'reserveProduct.php' as result, checkedoToken as orderToken;
                 commit;
             ELSE
-                insert into orders (uid, sid, reserveTime, reserveDate, people, oToken) values (userId, storeId, rTime, rDate, pNum, orderToken);
+                insert into orders (uid, sid, reserveTime, reserveDate, people, oToken) values (z, storeId, rTime, rDate, pNum, orderToken);
                 SELECT 'reserveProduct.php' as result, orderToken as orderToken;
         	    commit;
             END IF;

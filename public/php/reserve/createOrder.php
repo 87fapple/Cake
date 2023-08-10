@@ -10,6 +10,7 @@ $sid = $_REQUEST["location"] ?? null;
 $peopleNum = $_REQUEST["person"] ?? null;
 $fTime = $_REQUEST["timeOption"] ?? null;
 $fDate = $_REQUEST["selectedDate"] ?? null;
+$checkedoToken = $_REQUEST["checkedoToken"] ?? "0";
 $token = $_COOKIE['token'];
 
 // var_dump($_REQUEST);
@@ -19,7 +20,7 @@ if (!$sid || !$peopleNum || !$fTime || !$fDate) {
     die();
 }
 
-DB::select("call createOrder(?, ?, ?, ?, ?)", function ($rows) {
+DB::select("call createOrder(?, ?, ?, ?, ?, ?)", function ($rows) {
     foreach ($rows as $key => $row) {
         $result = $row["result"];
 
@@ -31,4 +32,4 @@ DB::select("call createOrder(?, ?, ?, ?, ?)", function ($rows) {
         }
     }
     echo $result;
-}, [$token, $sid, $fTime, $fDate, $peopleNum]);
+}, [$token, $sid, $fTime, $fDate, $peopleNum, $checkedoToken]);

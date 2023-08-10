@@ -4,6 +4,19 @@ $token = isset($_COOKIE['token']) ? $_COOKIE['token'] : 'undefined';
 if ($token !== 'undefined') {
     require('./php/DB.php');
 }
+
+$oInfo = [];
+if (isset($_GET['oToken'])) {
+    DB::select("select s.sid,s.location, o.people, o.reserveTime, o.reserveDate, o.oToken from orders o INNER JOIN store s on s.sid = o.sid where oToken = ?", function ($rows) use (&$oInfo) {
+        if (count($rows) === 0) {
+            header('Location: /Cake/public/error.php?error_code=1');
+            die();
+        } else {
+            $oInfo[] = $rows[0];
+        }
+    }, [$_GET['oToken']]);
+}
+// var_dump($oInfo[0]);
 ?>
 
 <!DOCTYPE html>
@@ -39,9 +52,22 @@ if ($token !== 'undefined') {
                 currentDate.setDate(currentDate.getDate() + 1);
                 const nextDate = currentDate;
 
+                <?php if (isset($oInfo[0]["reserveDate"])) { ?>
+                    const dateData = "<?= $oInfo[0]["reserveDate"] ?>";
+                    const dataArray = dateData.split("-");
+                    const year = parseInt(dataArray[0], 10);
+                    const month = parseInt(dataArray[1], 10) - 1;
+                    const day = parseInt(dataArray[2], 10);
+                <?php } else { ?>
+                    const year = null;
+                    const month = null;
+                    const day = null;
+                <?php } ?>
+
                 $("#datepicker").datepicker({
                     minDate: nextDate,
                     dateFormat: 'yy-mm-dd',
+                    defaultDate: year !== null ? new Date(year, month, day) : null,
                 });
                 $("#datepicker").on("change", function(e) {
                     e.preventDefault();
@@ -54,7 +80,11 @@ if ($token !== 'undefined') {
                     const formattedDate = $.datepicker.formatDate('yy-mm-dd', selectedDay);
                     $("#selectedDate").val(formattedDate);
 
-                    fetch(`./php/reserve/storeToTime.php?sid=${optsLocalVal}&fDate=${fromdate}&peopleNum=${optsPersonVal}`)
+                    <?php if (isset($oInfo[0]["oToken"])) { ?>
+                        fetch(`./php/reserve/storeToTime.php?sid=${optsLocalVal}&fDate=${fromdate}&peopleNum=${optsPersonVal}&checkedoToken=<?= $oInfo[0]["oToken"];?>`)
+                    <?php } else { ?>
+                        fetch(`./php/reserve/storeToTime.php?sid=${optsLocalVal}&fDate=${fromdate}&peopleNum=${optsPersonVal}`)
+                    <?php } ?>
                         .then(function(response) {
                             return response.json();
                         })
@@ -85,7 +115,11 @@ if ($token !== 'undefined') {
                         return response.json();
                     })
                     .then(function(data) {
-                        let view = '<option style="display: none;">請選擇分店</option>';
+                        <?php if (isset($oInfo[0]["sid"]) && isset($oInfo[0]["location"])) { ?>
+                            let view = `<option style="display: none;" value="<?= $oInfo[0]["sid"]; ?>"><?= $oInfo[0]["location"]; ?></option>`;
+                        <?php } else { ?>
+                            let view = '<option style="display: none;">請選擇分店</option>';
+                        <?php } ?>
                         data.forEach(function(e2) {
                             view += `
                                 <option value="${e2.sid}">${e2.location}</option>
@@ -95,6 +129,11 @@ if ($token !== 'undefined') {
                     })
 
                 submitBtn.onclick = function(e) {
+                    if ($("#selectedDate").val() === "") {
+                        const defaultDate = $("#datepicker").datepicker("option", "defaultDate");
+                        $("#selectedDate").val($.datepicker.formatDate("yy-mm-dd", defaultDate));
+                    }
+
                     fetch('./php/reserve/createOrder.php', {
                             method: "POST",
                             body: new FormData(ordersForm)
@@ -148,7 +187,8 @@ if ($token !== 'undefined') {
             <h2>預約</h2>
             <div id="checkLogin">請先
                 <a href="./login.html">登入</a>
-            後才能預約</div>
+                後才能預約
+            </div>
 
             <div class="scd-container">
                 <label for="location">預約分店：</label>
@@ -156,6 +196,9 @@ if ($token !== 'undefined') {
 
                 <label for="person">預約人數</label>
                 <select id="person" name="person">
+                    <?php if (isset($oInfo[0]["people"])) { ?>
+                        <option value="<?= $oInfo[0]["people"] ?>" style="display: none;"><?= $oInfo[0]["people"] ?>位</option>
+                    <?php } ?>
                     <option value="1">一位</option>
                     <option value="2">兩位</option>
                     <option value="3">三位</option>
@@ -174,12 +217,22 @@ if ($token !== 'undefined') {
                         <br>
                         <br>
                         <div id="timezone">
-                            <input type="hidden" name="timeOption">
-                            <span class="radio-button-base">請先選擇日期</span>
+                            <?php if (isset($oInfo[0]["reserveTime"])) { ?>
+                                <label>
+                                    <input type="radio" name="timeOption" value="<?= $oInfo[0]["reserveTime"]; ?>" style="background-color: #ffb12b; color: black;" checked>
+                                    <span class="radio-button" style="background-color: #ffb12b; color: black;"><?= $oInfo[0]["reserveTime"]; ?></span>
+                                </label>
+                            <?php } else { ?>
+                                <input type="hidden" name="timeOption">
+                                <span class="radio-button-base">請先選擇日期</span>
+                            <?php } ?>
                         </div>
                     </div>
                     <br>
                 </div>
+                <?php if (isset($oInfo[0]["oToken"])) { ?>
+                    <input type="hidden" name="checkedoToken" value="<?= $oInfo[0]["oToken"]; ?>">
+                <?php } ?>
                 <br>
                 <input type="button" value="確認預約" id="submitBtn" class="submitBtn">
                 <span id="test"></span>
