@@ -18,7 +18,8 @@ inner join cake on orderlist.cid = cake.cid
 
 inner join store on orders.sid= store.sid
 where token = ?
- GROUP BY orders.oid;
+ GROUP BY orders.oid
+ order by orders.reserveDate
 ";
 
 $stmt = $mysqli->prepare($sql);
