@@ -16,7 +16,7 @@ $row = $result->fetch_assoc();
 $email = $row['email'];
 $uName = $row['uName'];
 $phone = $row['phone'];
-setcookie('user', $uName, time() + 1200, "/");
+setcookie('user', $uName, time() + 12000, "/");
 // echo $uName;
 ?>
 <!DOCTYPE html>
