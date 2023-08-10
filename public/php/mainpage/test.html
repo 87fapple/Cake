@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
     <title>上傳檔案測試</title>
   </head>
   <body>
-    <form action="upload.php" method="post" enctype="multipart/form-data">
+    <form action="uptest.php" method="post" enctype="multipart/form-data">
       <!-- 圖片欄位 -->
       User ID:<input type="text" name="bid" />
       <br />
@@ -14,7 +17,6 @@
         name="file1"
         id="fileToUpload1"
         accept="image/*"
-        required
       />
       <br />
       <label for="fileToUpload2">圖片 2:</label>
@@ -23,7 +25,6 @@
         name="file2"
         id="fileToUpload2"
         accept="image/*"
-        required
       />
       <br />
       <label for="fileToUpload3">圖片 3:</label>
@@ -32,7 +33,6 @@
         name="file3"
         id="fileToUpload3"
         accept="image/*"
-        required
       />
       <br />
       <label for="fileToUpload4">圖片 4:</label>
@@ -41,7 +41,6 @@
         name="file4"
         id="fileToUpload4"
         accept="image/*"
-        required
       />
       <br />
       <label for="fileToUpload5">圖片 5:</label>
@@ -50,9 +49,8 @@
         name="file5"
         id="fileToUpload5"
         accept="image/*"
-        required
       />
-      <input type="text" name="body" id="">
+      <input type="text" name="body" id="" />
       <br />
 
       <!-- 文字欄位 -->

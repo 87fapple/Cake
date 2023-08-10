@@ -10,15 +10,15 @@ $uName = $_COOKIE['user'];
 require('php/db2.php');
 $token = $_COOKIE['token'];
 
-$sql = "select orders.oid,orders.sid,orders.people,orders.reserveDate,orders.reserveTime,store.location , GROUP_CONCAT(cake.cName,'*',orderlist.num) as cName
+$sql = "select orders.oid,orders.sid,orders.people,orders.reserveDate,orders.reserveTime,orders.remove,store.location , GROUP_CONCAT(cake.cName,'*',orderlist.num) as cName
 from orders 
 inner join userinfo  on userinfo.uid = orders.uid
 inner join orderlist on orders.oid = orderlist.oid
 inner join cake on orderlist.cid = cake.cid
-
 inner join store on orders.sid= store.sid
 where token = ?
- GROUP BY orders.oid;
+ GROUP BY orders.oid
+ order by orders.reserveDate
 ";
 
 $stmt = $mysqli->prepare($sql);
@@ -100,6 +100,11 @@ $result = $stmt->get_result();
                 while ($row = $result->fetch_assoc()) {
                     // echo "<pre/>";
                     // var_dump($row);
+                    if($row['remove']===0){
+                        $a='<button class="btn">取消預約</button>';
+                    }else{
+                        $a='<span>已取消</span>';
+                    }
                     echo
                     '<tr class="mainTable">
                         <td>' . $row['reserveDate'] . '</td>
@@ -107,7 +112,7 @@ $result = $stmt->get_result();
                         <td>' . $row['reserveTime'] . '</td>
                         <td id="products">' . $row['cName'] . '</td>
                         <td>' . $row['people'] . '人</td>
-                        <td class="td-btn"><button class="btn">取消預約</button></td>
+                        <td class="td-btn">'. $a.'</td>
                     </tr>';
                 }
                 ?>
