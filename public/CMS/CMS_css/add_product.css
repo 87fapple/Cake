@@ -45,22 +45,6 @@ h2 {
     width: 100%;
 }
 
-#changeForm {
-    width: 70%;
-    height: 780px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1rem;
-    border: solid 1px #ccc;
-    font-size: large;
-    border-radius: 20px;
-    padding: 1rem;
-}
-
-* {
-    box-sizing: border-box;
-}
-
 input[type=text],
 input[type=number],
 input[type=file],
@@ -141,17 +125,18 @@ div>h2 {
     position: relative;
     top: -0.5rem;
 }  
-  /* Clear floats after the columns */
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
 
-  .row {
-    margin: 2rem;
-  }
+/* Clear floats after the columns */
+.row:after {
+content: "";
+display: table;
+clear: both;
+}
 
-  .selectcake {
-    height: 3rem;
-  }
+.row {
+margin: 2rem;
+}
+
+.selectcake {
+height: 3rem;
+}

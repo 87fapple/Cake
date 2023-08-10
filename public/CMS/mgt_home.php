@@ -13,14 +13,15 @@
   }
 
   .box {
+    background-color: #fff5d6c4;
     width: calc(95% - 200px);
     margin: 32px 2.5% 72px;
     border: 2px solid #885500;
     border-radius: 12px;
   }
 
-  .container h2,
-  .container h3 {
+  .box h2,
+  .box h3 {
     margin: 32px;
   }
 
@@ -38,7 +39,7 @@
   }
 
   .groupSelect,
-  .container button {
+  .box button {
     width: 72px;
     height: 36px;
     background-color: #ffa237;
@@ -57,12 +58,12 @@
     cursor: pointer;
   }
 
-  .container .btnGroup {
+  .box .btnGroup {
     display: flex;
     margin: 12px 42px;
   }
 
-  .container .btnGroup button {
+  .box .btnGroup button {
     margin: 0 8px;
   }
 
