@@ -108,7 +108,7 @@
             <div class="flip-card">
               <div class="flip-card-inner">
                 <div class="flip-card-front">
-                  <img src="../image/menuImg/menuInfo1.jpg" />
+                  <img id="expimg1" />
                 </div>
                 <div class="flip-card-back" id="exp1"></div>
               </div>
@@ -116,7 +116,7 @@
             <div class="flip-card">
               <div class="flip-card-inner">
                 <div class="flip-card-front">
-                  <img src="../image/menuImg/menuInfo1.jpg" />
+                  <img id="expimg2" />
                 </div>
                 <div class="flip-card-back" id="exp2"></div>
               </div>
@@ -124,7 +124,7 @@
             <div class="flip-card">
               <div class="flip-card-inner">
                 <div class="flip-card-front">
-                  <img src="../image/menuImg/menuInfo1.jpg" />
+                  <img id="expimg3" />
                 </div>
                 <div class="flip-card-back" id="exp3"></div>
               </div>
@@ -233,10 +233,12 @@
             "<p>" +
             data[2].eDate +
             "</p>";
-
           document.getElementById("exp1").innerHTML = html1;
           document.getElementById("exp2").innerHTML = html2;
           document.getElementById("exp3").innerHTML = html3;
+          document.getElementById("expimg1").src = data[0].cImg1;
+          document.getElementById("expimg2").src = data[1].cImg1;
+          document.getElementById("expimg3").src = data[2].cImg1;
         }
       };
       xhr.open("GET", "././php/mainpage/random.php", true);

@@ -16,7 +16,7 @@ for ($i = 1; $i <= $fileCount; $i++) {
     if (!empty($src)) {
         $contents = file_get_contents($src);
         $stmt = $mysqli->prepare("UPDATE binfo SET Img{$i} = ? WHERE bid = ?");
-        $stmt->bind_param('bs', $contents, $bid);
+        $stmt->bind_param('bi', $contents, $bid);
         $stmt->send_long_data(0, $contents); // 使用 send_long_data 進行大型資料傳輸
         $stmt->execute();
     }
