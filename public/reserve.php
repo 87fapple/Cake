@@ -138,13 +138,7 @@ if ($token !== 'undefined') {
             <span class="bar"></span>
         </div>
         <div class="navbarLink">
-            <ul>
-                <li><a href="../public/menu.php">產品介紹</a></li>
-                <li><a href="../public/locations.html">分店資訊</a></li>
-                <li><a href="../public/reserve.php">預約課程</a></li>
-                <li><a href="../public/Q&A.html">常見問題</a></li>
-                <li><a href="../public/login.html">登入會員</a></li>
-            </ul>
+            <ul id="login_check" name="login_check"></ul>
         </div>
     </nav>
 
@@ -224,6 +218,7 @@ if ($token !== 'undefined') {
     </footer>
 
 </body>
+<script src="../resources/js/login.js"></script>
 <script src="../resources/js/topBtn.js"></script>
 <script src="../resources/js/navbar.js"></script>
 

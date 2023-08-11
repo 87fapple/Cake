@@ -21,7 +21,7 @@ while ($row = $result->fetch_assoc()) {
     $imageData5 = base64_encode($row['bodyImg']);
     $imageData6 = base64_encode($row['body']);
 
-    // 將三個圖片欄位的資料存入陣列中
+    // 將圖片欄位的資料存入陣列中
     array_push($images, $imageData1, $imageData2, $imageData3,$imageData4,$imageData5,$imageData6);
 }
 

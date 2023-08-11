@@ -31,7 +31,7 @@ $cakeDetail = $result->fetch_assoc();
     <link rel="stylesheet" href="../resources/css/footer2.css">
     <link rel="stylesheet" href="../resources/css/topBtn.css">
     <link rel="stylesheet" href="../resources/css/carousel1.css">
-    <link rel="stylesheet" href="../resources/css/detail1.css">
+    <link rel="stylesheet" href="../resources/css/detail2.css">
     <!-- <link rel="stylesheet" href="../resources/css/detailStyle.css"> -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -181,13 +181,27 @@ $cakeDetail = $result->fetch_assoc();
             <!-- Detail Content Block -->
             <section class="detailContent">
                 <h1 id="detail">詳細內容</h1>
-                <pre><?php echo $cakeDetail['feature']; ?></pre>
-
+                <div class="detailContainer22">
+                    <pre><?php echo $cakeDetail['feature']; ?></pre>
+                </div>
                 <h1 id="material">使用材料</h1>
-                <pre><?php echo $cakeDetail['material']; ?></pre>
+                <div class="detailContainer22">
+                    <pre><?php echo $cakeDetail['material']; ?></pre>
+                </div>
 
+
+
+
+
+
+
+
+
+                
                 <h1 id="experience">製作心得</h1>
-                <div class="expBlock" id="expBlock">
+                
+                <div class="slideshow-container">
+                <div class="detailContainer22 mySlides fade" id="expBlock">
                     <!-- <h4>userName</h4>
                     <pre>分享這次DIY的過程，非常有趣</pre>
                     <div class="expImgBlock">
@@ -209,6 +223,12 @@ $cakeDetail = $result->fetch_assoc();
                     </form>
                     <input type="button" id="expInput" value="送出">
                 </div>
+
+                <a class="prev" onclick="plusSlides(-1)">❮</a>
+                <a class="next" onclick="plusSlides(1)">❯</a>                
+            </div>
+
+
             </section>
             <a href="./reserve.php" class="bookingBtn">預約</a>
         </div>
@@ -249,5 +269,6 @@ $cakeDetail = $result->fetch_assoc();
 <script src="../resources/js/navbar.js"></script>
 <script src="../resources/js/topBtn.js"></script>
 <script src="../resources/js/Carousel.js"></script>
+<script src="../resources/js/detailCarousel.js"></script>
 
 </html>
