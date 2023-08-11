@@ -18,6 +18,26 @@ $oToken = $_COOKIE["oToken"];
 DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInfo) {
     $cInfo[] = $rows[0];
 }, [$oToken]);
+
+$oInfo = [];
+if (isset($_GET['checkedoToken'])) {
+    DB::select("select * from orders where oToken = ?", function ($rows) {
+        if (count($rows) === 0) {
+            header('Location: /Cake/public/error.php?error_code=1');
+            die();
+        }
+    }, [$_GET['checkedoToken']]);
+
+    $checkoToken = $_GET['checkedoToken'];
+
+    DB::select("select c.cid,c.cName,ol.num from orderlist ol INNER JOIN orders o on o.oid = ol.oid INNER JOIN cake c on c.cid = ol.cid where o.oToken = ?", function ($rows) use (&$oInfo) {
+        if (count($rows) !== 0) {
+            $oInfo = $rows;
+        }
+    }, [$checkoToken]);
+}
+
+var_dump($oInfo);
 ?>
 
 <!DOCTYPE html>
@@ -36,10 +56,11 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
     <link rel="stylesheet" href="../resources/css/reserve2.css">
     <link rel="stylesheet" href="../resources/css/footer2.css">
     <link rel="stylesheet" href="../resources/css/topBtn.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
     <script>
-        $(function() {
+        $(function () {
             const cInfoSid = <?= $cInfo[0]["sid"] ?>;
             $("#hidden").hide();
             let data;
@@ -58,7 +79,7 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             }
             document.getElementById("makeNum").innerHTML = view1
 
-            $("#makeNum").on('change', function(e) {
+            $("#makeNum").on('change', function (e) {
                 var mNum = $("#makeNum option:selected").val();
                 var people = $("#people").val();
                 let view4 = '';
@@ -103,15 +124,15 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             })
 
             fetch(`./php/reserve/storeToCake_sql.php?indexInfo=${cInfoSid}`)
-                .then(function(response) {
+                .then(function (response) {
                     return response.json();
                 })
-                .then(function(responseData) {
+                .then(function (responseData) {
                     data = responseData;
                     universalOptions();
                 })
 
-            document.getElementById("addnewdiv").onclick = function(e) {
+            document.getElementById("addnewdiv").onclick = function (e) {
                 nextNewNumber();
             }
 
@@ -150,7 +171,7 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                 let cakeView = '';
                 let dessertView = '';
 
-                data.forEach(function(e) {
+                data.forEach(function (e) {
                     switch (e.kind) {
                         case '蛋糕':
                             cakeView += `
@@ -219,10 +240,10 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             $("#addnewdiv").show();
         }
 
-        window.onload = function(e) {
+        window.onload = function (e) {
             let isSubmitting = false;
             const submitBtn = document.getElementById('submitBtn');
-            submitBtn.onclick = function(e) {
+            submitBtn.onclick = function (e) {
                 e.preventDefault();
 
                 if (isSubmitting) {
@@ -267,13 +288,13 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                     return;
                 } else {
                     fetch('./php/reserve/insertOrdersCake.php', {
-                            method: "POST",
-                            body: formData
-                        })
-                        .then(function(response) {
+                        method: "POST",
+                        body: formData
+                    })
+                        .then(function (response) {
                             return response.text();
                         })
-                        .then(function(data) {
+                        .then(function (data) {
                             if (data == "reserveTotal.php") {
                                 isSubmitting = true;
                                 $("#submitButton").disabled = true;
@@ -312,19 +333,17 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
             <span class="bar"></span>
         </div>
         <div class="navbarLink">
-            <ul>
-                <li><a href="../public/menu.php">產品介紹</a></li>
-                <li><a href="../public/locations.html">分店資訊</a></li>
-                <li><a href="../public/reserve.php">預約課程</a></li>
-                <li><a href="../public/Q&A.html">常見問題</a></li>
-                <li><a href="../public/login.html">登入會員</a></li>
-            </ul>
+            <ul id="login_check" name="login_check"></ul>
         </div>
     </nav>
 
     <h3>預約</h3>
     <div class="container">
-        <h2>預約</h2>
+        <?php if (isset($oInfo)) { ?>
+            <h2>重新選擇品項</h2>
+        <?php } else { ?>
+            <h2>選擇品項</h2>
+        <?php } ?>
         <div class="scd-container">
             <form id="productForm">
                 <div>目前預定人數
@@ -356,59 +375,15 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
                     <div id="newChoose"></div>
 
                     <input type="button" id="addnewdiv" value="新增品項">
-                    <div>注意：若選取的甜點份數未滿製作份數，剩餘份數可現場到實體店面再做確認製作項目</div>
+                    <div>注意：若選取的甜點份數未滿製作份數，剩餘份數系統會自動轉成現場挑選，可現場到實體店面再做確認製作項目</div>
                     <br>
+
+                    <?php if (isset($checkoToken)) { ?>
+                        <input type="hidden" name="checkedoToken" value="<?= $checkoToken; ?>">
+                    <?php } ?>
                     <input type="button" value="確認產品" id="submitBtn" ;>
                     <div id="test"></div>
-                    <!-- <input type="button" value="確認產品" id="submitBtn2" onclick="document.getElementById('id01').style.display='block'" ;> -->
                 </div>
-
-                <!-- <div id="id01" class="totalOrder">
-        <form class="totalOrder-content">
-            <div class="totalOrder-container">
-                <h1>訂單資訊</h1>
-                <p>請確認您的訂單資訊</p>
-                <hr>
-                <label for="name"><b>訂購人姓名：</b></label>
-                <br>
-                <input type="text" value="" name="name" readonly="readonly" class="modal1">
-                <br>
-                <label for="location"><b>分店：</b></label>
-                <br>
-                <input type="text" value="" name="location" readonly="readonly" class="modal1">
-                <br>
-                <label for="people"><b>人數：</b></label>
-                <br>
-                <input type="number" value="" name="people" readonly="readonly" class="modal1">
-                <br>
-                <label for="cakeName"><b>訂單產品：</b></label>
-                <br>
-                <textarea name="cakeName" readonly="readonly" ></textarea>
-                <br>
-                <label>
-                    <input type="checkbox" checked="checked" name="ok" required>以上確認無誤
-                </label>
-                <div class="clearfix">
-                    <button type="button" onclick="document.getElementById('id01').style.display='none'"
-                        class="cancelbtn">重新選擇</button>
-                    <button type="submit" class="submitOK" id="checkBtn">送出訂單</button>
-                </div>
-            </div>
-        </form>
-    </div> -->
-
-                <script>
-                    // Get the modal
-                    // var modal = document.getElementById('id01');
-
-                    // When the user clicks anywhere outside of the modal, close it
-                    // window.onclick = function (event) {
-                    //     if (event.target == modal) {
-                    //         modal.style.display = "none";
-                    //     }
-                    // }
-                </script>
-
             </form>
         </div>
     </div>
@@ -447,6 +422,7 @@ DB::select("select * from orders where oToken = ?", function ($rows) use (&$cInf
 
 </body>
 <!-- <script src="../resources/js/topBtn.js"></script> -->
+<script src="../resources/js/login.js"></script>
 <script src="../resources/js/navbar.js"></script>
 
 </html>

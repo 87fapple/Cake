@@ -15,12 +15,12 @@ DB::select("select uName from userinfo where token = ?", function ($rows) use (&
     $uName = $rows[0]["uName"];
 }, [$token]);
 
-$sql = "select orders.oToken,orders.sid,orders.people,orders.reserveDate,orders.reserveTime,orders.remove,store.location , GROUP_CONCAT(cake.cName,'*',orderlist.num) as cName
+$sql = "select orders.oToken,orders.sid, orders.companion, orders.people,orders.reserveDate,orders.reserveTime,orders.remove,store.location , IFNULL(GROUP_CONCAT(cake.cName,'*',orderlist.num), '尚未選擇商品') as cName
 from orders 
-inner join userinfo  on userinfo.uid = orders.uid
-inner join orderlist on orders.oid = orderlist.oid
-inner join cake on orderlist.cid = cake.cid
-inner join store on orders.sid= store.sid
+left join userinfo  on userinfo.uid = orders.uid
+left join orderlist on orders.oid = orderlist.oid
+left join cake on orderlist.cid = cake.cid
+left join store on orders.sid= store.sid
 where token = ?
  GROUP BY orders.oid
  order by orders.reserveDate
@@ -101,6 +101,8 @@ $result = $stmt->get_result();
                     <th>分店</th>
                     <th>時段</th>
                     <th>產品</th>
+                    <th>製作份數</th>
+                    <th>陪同人數</th>
                     <th>總人數</th>
                     <th>是否取消</th>
                     <th>修改訂單</th>
@@ -121,6 +123,8 @@ $result = $stmt->get_result();
                         <td>' . $row['location'] . '</td>
                         <td>' . $row['reserveTime'] . '</td>
                         <td id="products">' . $row['cName'] . '</td>
+                        <td>' . ($row['people'] - $row['companion']) . '人</td>
+                        <td>' . $row['companion'] . '人</td>
                         <td>' . $row['people'] . '人</td>
                         <td class="td-btn" >' . $a . '</td>
                         <td><input class="getOid" type="button" value="修改" data-oToken="' . $row["oToken"] . '"></td>

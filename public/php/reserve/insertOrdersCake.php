@@ -11,6 +11,7 @@ $makeNum = $_REQUEST["makeNum"] ?? null;
 $companion = $_REQUEST["companion"] ?? null;
 $nameArr = [$_REQUEST["cakeName"]];
 $numArr = [$_REQUEST["num"]];
+$checkedoToken = $_REQUEST["checkedoToken"] ?? "0";
 $sceneNum = 0;
 
 if (!$oid || !$makeNum || !$nameArr || !$numArr) {
@@ -47,6 +48,10 @@ if ($checkNum > $makeNum) {
 }
 
 DB::update("update orders set companion = ? where oid = ?", [$companion, $oid]);
+
+if ($checkedoToken !== "0") {
+    DB::delete("delete from orderlist where oid = ?", [$oid]);
+}
 
 foreach ($nameNumArr as $key => $value) {
     DB::insert("insert into orderlist value (?, ?, ?)", [$oid, $key, $value]);

@@ -34,11 +34,12 @@ if (isset($_GET['oToken'])) {
     <link rel="stylesheet" href="../resources/css/reserve1.css">
     <link rel="stylesheet" href="../resources/css/footer2.css">
     <link rel="stylesheet" href="../resources/css/topBtn.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
 
     <script>
-        $(function() {
+        $(function () {
             const token = "<?= $token; ?>";
 
             if (token === 'undefined') {
@@ -69,7 +70,7 @@ if (isset($_GET['oToken'])) {
                     dateFormat: 'yy-mm-dd',
                     defaultDate: year !== null ? new Date(year, month, day) : null,
                 });
-                $("#datepicker").on("change", function(e) {
+                $("#datepicker").on("change", function (e) {
                     e.preventDefault();
                     var optionsLocation = $("#location option:selected");
                     var optionsPerson = $("#person option:selected");
@@ -81,18 +82,18 @@ if (isset($_GET['oToken'])) {
                     $("#selectedDate").val(formattedDate);
 
                     <?php if (isset($oInfo[0]["oToken"])) { ?>
-                        fetch(`./php/reserve/storeToTime.php?sid=${optsLocalVal}&fDate=${fromdate}&peopleNum=${optsPersonVal}&checkedoToken=<?= $oInfo[0]["oToken"];?>`)
+                        fetch(`./php/reserve/storeToTime.php?sid=${optsLocalVal}&fDate=${fromdate}&peopleNum=${optsPersonVal}&checkedoToken=<?= $oInfo[0]["oToken"]; ?>`)
                     <?php } else { ?>
                         fetch(`./php/reserve/storeToTime.php?sid=${optsLocalVal}&fDate=${fromdate}&peopleNum=${optsPersonVal}`)
                     <?php } ?>
-                        .then(function(response) {
+                        .then(function (response) {
                             return response.json();
                         })
-                        .then(function(data) {
+                        .then(function (data) {
                             console.log(data);
                             let viewTime = '';
-                            data.forEach(function(e2) {
-                                if (typeof(e2.sequel) !== 'undefined') {
+                            data.forEach(function (e2) {
+                                if (typeof (e2.sequel) !== 'undefined') {
                                     viewTime += `
                                     <label>
                                         <input type="radio" name="timeOption" value="${e2.sequel}"  style="background-color: #ffb12b; color: black;">
@@ -111,44 +112,48 @@ if (isset($_GET['oToken'])) {
                 });
 
                 fetch('./php/reserve/store_sql.php')
-                    .then(function(response) {
+                    .then(function (response) {
                         return response.json();
                     })
-                    .then(function(data) {
+                    .then(function (data) {
                         <?php if (isset($oInfo[0]["sid"]) && isset($oInfo[0]["location"])) { ?>
-                            let view = `<option style="display: none;" value="<?= $oInfo[0]["sid"]; ?>"><?= $oInfo[0]["location"]; ?></option>`;
+                                let view = `<option style="display: none;" value="<?= $oInfo[0]["sid"]; ?>"><?= $oInfo[0]["location"]; ?></option>`;
                         <?php } else { ?>
-                            let view = '<option style="display: none;">請選擇分店</option>';
+                                let view = '<option style="display: none;">請選擇分店</option>';
                         <?php } ?>
-                        data.forEach(function(e2) {
-                            view += `
+                            data.forEach(function (e2) {
+                                view += `
                                 <option value="${e2.sid}">${e2.location}</option>
                             `
-                        })
+                            })
                         document.getElementById("location").innerHTML = view
                     })
 
-                submitBtn.onclick = function(e) {
+                submitBtn.onclick = function (e) {
                     if ($("#selectedDate").val() === "") {
                         const defaultDate = $("#datepicker").datepicker("option", "defaultDate");
                         $("#selectedDate").val($.datepicker.formatDate("yy-mm-dd", defaultDate));
                     }
 
                     fetch('./php/reserve/createOrder.php', {
-                            method: "POST",
-                            body: new FormData(ordersForm)
-                        })
-                        .then(function(response) {
+                        method: "POST",
+                        body: new FormData(ordersForm)
+                    })
+                        .then(function (response) {
                             return response.text();
                         })
-                        .then(function(data) {
+                        .then(function (data) {
                             console.log(data);
                             if (data == "reserveProduct.php") {
-                                location.href = data;
+                                <?php if (isset($oInfo[0]["oToken"])) { ?>
+                                        location.href = data + '?checkedoToken=<?= $oInfo[0]["oToken"] ?>';
+                                <?php } else { ?>
+                                        location.href = data;
+                                <?php } ?>
                             } else {
                                 let view = '';
                                 view += `
-                                    <div>${data}</div>
+                                        <div>${data}</div>
                                 `;
                                 document.getElementById("test").innerHTML = view
                             }
@@ -197,7 +202,8 @@ if (isset($_GET['oToken'])) {
                 <label for="person">預約人數</label>
                 <select id="person" name="person">
                     <?php if (isset($oInfo[0]["people"])) { ?>
-                        <option value="<?= $oInfo[0]["people"] ?>" style="display: none;"><?= $oInfo[0]["people"] ?>位</option>
+                        <option value="<?= $oInfo[0]["people"] ?>" style="display: none;"><?= $oInfo[0]["people"] ?>位
+                        </option>
                     <?php } ?>
                     <option value="1">一位</option>
                     <option value="2">兩位</option>
@@ -219,8 +225,11 @@ if (isset($_GET['oToken'])) {
                         <div id="timezone">
                             <?php if (isset($oInfo[0]["reserveTime"])) { ?>
                                 <label>
-                                    <input type="radio" name="timeOption" value="<?= $oInfo[0]["reserveTime"]; ?>" style="background-color: #ffb12b; color: black;" checked>
-                                    <span class="radio-button" style="background-color: #ffb12b; color: black;"><?= $oInfo[0]["reserveTime"]; ?></span>
+                                    <input type="radio" name="timeOption" value="<?= $oInfo[0]["reserveTime"]; ?>"
+                                        style="background-color: #ffb12b; color: black;" checked>
+                                    <span class="radio-button" style="background-color: #ffb12b; color: black;">
+                                        <?= $oInfo[0]["reserveTime"]; ?>
+                                    </span>
                                 </label>
                             <?php } else { ?>
                                 <input type="hidden" name="timeOption">
