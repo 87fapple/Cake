@@ -174,11 +174,7 @@ $cakeDetail = $result->fetch_assoc();
 
         <!-- Detail -->
         <div class="detailBlock">
-            <ul class="detailNavbar">
-                <li><a href="#detail">詳細內容</a></li>
-                <li><a href="#material">使用材料</a></li>
-                <li><a href="#experience">製作心得</a></li>
-            </ul>
+            
 
             <!-- Detail Content Block -->
             <section class="detailContent">
@@ -231,10 +227,10 @@ $cakeDetail = $result->fetch_assoc();
                     <input type="button" id="expInput" value="送出">
                 </div>
         </div>
-        <a href="./reserve.php" class="bookingBtn">預約</a>
-            </section>
-        </div>
-    </main>
+    </section>
+</div>
+</main>
+<div><a href="./reserve.php" class="bookingBtn">預約</a></div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -271,7 +267,6 @@ $cakeDetail = $result->fetch_assoc();
 <script src="../resources/js/navbar.js"></script>
 <script src="../resources/js/topBtn.js"></script>
 <script src="../resources/js/Carousel.js"></script>
-<script src="../resources/js/detailCarousel.js"></script>
 
 <script>
  function openCity(evt, cityName) {
