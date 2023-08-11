@@ -3,6 +3,27 @@
     width: 100%;
 }
 
+/* slide option */
+.slider-container {
+    width: 10%;
+    margin: auto;
+    overflow: hidden;
+  }
+
+  .slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .slider img {
+    position: relative;
+    left: 10%;
+    width: 80%;
+    height: auto;
+
+  }
+
+
 /* main1 */
 .mainBlock1 img {
     object-fit: fill;
@@ -24,8 +45,6 @@ body {
     margin-top: 8px;
     /* position: relative;
     top: 16px; */
-    /* background-image: url(https://static.wixstatic.com/media/2e2a49_088fe3c00555483598ce1d79bd9c54f2~mv2_d_1919_2165_s_2.png/v1/fill/w_1616,h_2165,al_t,q_95,enc_auto/2e2a49_088fe3c00555483598ce1d79bd9c54f2~mv2_d_1919_2165_s_2.png);
-     */
 }
 
 .infoBlock {
@@ -34,6 +53,10 @@ body {
     position: relative;
     left: 15%;
     /* background-color: #fff; */
+}
+
+img {
+    border-radius: 10px;
 }
 
 .info {
@@ -71,10 +94,12 @@ body {
 
 .infoContent {
     width: 40%;
-    height: 50%;
+    height: 40%;
     position: absolute;
     top: 35%;
-    left: 6%;
+
+    font-size: 2rem;
+    padding: 2rem;
     background-color: #ffdc7b;
     border-radius: 10px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.525);
@@ -84,7 +109,8 @@ body {
 .specialContent pre,
 .flip-card-back pre {
     white-space: pre-line;
-    padding-left: 16px;
+    padding: 5px 2rem;
+    line-height : 30px ;
     font-size: 22px;
     color: #7a5500;
 }
@@ -136,7 +162,7 @@ body {
 
 .specialContent {
     width: 75%;
-    height: 50%;
+    height: 60%;
     position: absolute;
     top: 35%;
     left: 20%;
@@ -161,8 +187,9 @@ body {
     width: 90%;
     height: 100%;
     margin: 1rem auto;
-    background-color: #b9b9b9;
+    background-color: #ffdc7b;
     border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.525);
 }
 
 .expTitle {
@@ -185,6 +212,7 @@ body {
     justify-content: space-evenly;
     position: relative;
     top: 35%;
+   
 }
 
 /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
@@ -197,13 +225,15 @@ body {
     /* border: 4px solid #f1f1f1; */
     perspective: 1000px;
     /* Remove this if you don't want the 3D effect */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.525);
+    border-radius: 10px;
 }
 
 /* This container is needed to position the front and back side */
 .flip-card-inner {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 240px;
     text-align: center;
     transition: transform 0.8s;
     transform-style: preserve-3d;
@@ -239,10 +269,33 @@ body {
 
 /* Style the back side */
 .flip-card-back {
-    background-color: #ffa237;
+    background-color: #ffe59c;
     color: #7a5500;
     transform: rotateY(180deg);
+    border-radius: 10px;
+    padding: 0.8rem;
+    height: 215px;
+    width: 215px;
 }
+
+h2 {
+    background-color: #a2a2a2;
+    border-radius: 40px;
+    color: black;
+}
+p {
+    color: rgb(72, 72, 72);
+    letter-spacing : 0.8px;
+}
+
+
+
+/* fadin opacity */
+.fadeIn {
+    opacity:0;
+
+}
+
 
 @media (max-width: 960px) {
     .mainBlock1,
