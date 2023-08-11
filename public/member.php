@@ -92,9 +92,10 @@ setcookie('user', $uName, time() + 12000, "/");
         <br>
         <label for="cfrpwd">確認密碼</label>
         <input type="password" id="cfrpwd" name="cfrpwd" placeholder="再次輸入密碼">
+        <span id="check"></span>
         <br>
         <br>
-        <input type="submit" value="確認更改" class="comfirmbtn" id="update">
+        <input type="submit" value="確認更改" class="comfirmbtn" id="update" onclick="checkpwd()">
       </form>
     </div>
     <br>
@@ -130,32 +131,44 @@ setcookie('user', $uName, time() + 12000, "/");
       </div>
     </div>
   </footer>
-  </body>
-  <script src="../resources/js/topBtn.js"></script>
+  <div name="jojo" id="jojo"></div>
+</body>
+<script src="../resources/js/topBtn.js"></script>
 <script src="../resources/js/navbar.js"></script>
 <script>
   const form = document.getElementById("form");
-  const pwd = document.getElementById("pwd").value;
-  const email = document.getElementById("email").value;
-  const phone = document.getElementById("phone").value;
-  const uname = document.getElementById("uname").value;
-  const cfrpwd = document.getElementById("cfrpwd").value;
-  const update = document.getElementById("update");
-  const re = document.getElementById("re");
-
   form.addEventListener("submit", function(event) {
     event.preventDefault();
   });
-  update.onclick = function(e) {
-    fetch(
-        `php/sign/update.php?email=${email}&uname=${uname}&phone=${phone}&pwd=${pwd}&cfrpwd=${cfrpwd}`
-      )
-      .then(function(response) {
-        return response.text();
-      })
-      .then(function(data) {
-        layer.alert('已更改完成', {icon: 6,title: ['', 'font-size:18px;'],});
-      })
+
+  function checkpwd() {
+    const pwd1 = document.getElementById("pwd").value;
+    const pwd2 = document.getElementById("cfrpwd").value;
+    const check = document.getElementById("check");
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const uname = document.getElementById("uname").value;
+    console.log(pwd1);
+    if (pwd1 === pwd2) {
+      fetch(
+          `php/sign/update.php?email=${email}&uname=${uname}&phone=${phone}&pwd=${pwd1}&cfrpwd=${cfrpwd}`
+        )
+        .then(function(response) {
+          return response.text();
+        })
+        .then(function(data) {
+          layer.alert('已更改完成', {
+            icon: 6,
+            yes: function(index, layero) {
+              window.location.reload();
+            }
+          });
+        });
+    } else {
+      check.innerHTML = "<span style='*color:red'>密碼不相同</span>";
+      console.log('失敗');
+      event.preventDefault();
+    }
   }
 </script>
 
