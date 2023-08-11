@@ -31,10 +31,10 @@ if ($_FILES["cImg1"]["error"] > 0 or $_FILES["cImg2"]["error"] > 0) {
     echo "圖片錯誤,3秒後自動跳轉";
 } else {
     move_uploaded_file($cImg1,"../../../image/cake_add/".$_FILES["cImg1"]["name"]);
-    $c1 = "../../../image/cake_add/".$_FILES["cImg1"]["name"];
+    $c1 = "../image/cake_add/".$_FILES["cImg1"]["name"];
     // echo $c1 ."<br/>";
     move_uploaded_file($cImg2,"../../../image/cake_add/".$_FILES["cImg2"]["name"]);
-    $c2 = "../../../image/cake_add/".$_FILES["cImg2"]["name"];
+    $c2 = "../image/cake_add/".$_FILES["cImg2"]["name"];
     // echo $c2;
     echo "上傳成功,3秒後自動跳轉";
 }
