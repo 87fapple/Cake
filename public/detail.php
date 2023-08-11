@@ -245,8 +245,6 @@ $cakeDetail = $result->fetch_assoc();
         </div>
     </footer>
 
-
-
 </body>
 <script src="../resources/js/navbar.js"></script>
 <script src="../resources/js/topBtn.js"></script>
