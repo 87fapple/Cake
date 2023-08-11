@@ -4,9 +4,18 @@ require_once('../db2.php');
 // 获取从前端传递过来的查询种类参数
 $kind = $_REQUEST['kind'];
 
-$sql = "SELECT * FROM cake WHERE kind = ?";
+$sql = '';
+if($kind == '全部') {
+    $sql = "SELECT * FROM cake";
+} else {
+    $sql = "SELECT * FROM cake WHERE kind = ?";
+}
+
 $stmt = $mysqli->prepare($sql);
-$stmt->bind_param('s', $kind);
+if($kind != '全部') {
+    $stmt->bind_param('s', $kind);
+}
+
 $stmt->execute();
 
 $result = $stmt->get_result();

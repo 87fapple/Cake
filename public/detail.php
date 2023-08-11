@@ -189,15 +189,6 @@ $cakeDetail = $result->fetch_assoc();
                     <pre><?php echo $cakeDetail['material']; ?></pre>
                 </div>
 
-
-
-
-
-
-
-
-
-                
                 <h1 id="experience">製作心得</h1>
                 
                 <div class="slideshow-container">
@@ -264,8 +255,6 @@ $cakeDetail = $result->fetch_assoc();
             </div>
         </div>
     </footer>
-
-
 
 </body>
 <script src="../resources/js/navbar.js"></script>
