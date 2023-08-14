@@ -50,7 +50,7 @@ $mysqli->close();
 
     .order-table {
         border-collapse: collapse;
-        margin: 32px 5%;
+        margin: 32px 5% 80px;
         font-size: 14px;
         font-family: sans-serif;
         white-space: nowrap;
@@ -113,44 +113,38 @@ $mysqli->close();
 
 <body>
     <div class="container">
-        <center><h2>預約管理</h2></center>
+        <center><h2>預約總覽</h2></center>
         <table class="order-table">
-        <thead>
-            <tr>
-                <th>訂單編號</th>
-                <th>預約人</th>
-                <th>地點</th>
-                <th>預約日期</th>
-                <th>預約時間</th>
-                <th>總人數</th>
-                <th>同行人數</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <?php
-                    foreach ($ordersByOid as $oid => $orders) {
-                        echo '<tr><td>'.$oid.'</td>';
-                        foreach ($orders as $order) {
-                            echo '<td>'.$order['uName'].'</td>
-                                <td>'.$order['location'].'</td>
-                                <td>'.$order['reserveTime'].'</td>
-                                <td>'.$order['reserveDate'].'</td>
-                                <td>'.$order['people'].'</td>
-                                <td>'.$order['companion'].'</td>
-                                <td>
-                                    <button>修改</button>
-                                    <button>取消</button>
-                                </td>';
-                            // 這裡可以顯示其他你想要的資料項目
+            <thead>
+                <tr>
+                    <th />訂單編號
+                    <th />預約人
+                    <th />地點
+                    <th />預約日期
+                    <th />預約時間
+                    <th />總人數
+                    <th />同行人數
+                    <th />
+                </tr>
+            </thead>
+            <tbody>
+                    <?php
+                        foreach ($ordersByOid as $oid => $orders) {
+                            echo '<tr /><td />'.$oid.'</td>';
+                            foreach ($orders as $order) {
+                                echo '<td />'.$order['uName'].
+                                    '<td />'.$order['location'].
+                                    '<td />'.$order['reserveTime'].
+                                    '<td />'.$order['reserveDate'].
+                                    '<td />'.$order['people'].
+                                    '<td />'.$order['companion'].
+                                    '<td align="right" width="100px" />
+                                        <button />修改
+                                        <button />取消';
+                            }
                         }
-                        echo '</tr>';
-                    }
-                ?> 
-            <!-- and so on... -->
-        </tbody>
+                    ?> 
+            </tbody>
         </table>
-
     </div>
 </body>

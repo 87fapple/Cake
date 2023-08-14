@@ -52,10 +52,12 @@ $cakeDetail = $result->fetch_assoc();
                     eId = responseData;
                     responseData.forEach(function(e) {
                         view += `
-                            <h4>${e.uName}</h4>
+                        <div class="eachEXP">
+                            <h3>${e.uName}</h4>
                             <pre>${e.eText}</pre>
                             <div class="expImgBlock" id="img${e.eid}"></div>
                             <p>${e.eDate}</p>
+                        </div>
                             `;
                         fetch(`./php/exp/expImg.php?eid=${e.eid}`)
                             .then(function(response) {
@@ -172,27 +174,35 @@ $cakeDetail = $result->fetch_assoc();
 
         <!-- Detail -->
         <div class="detailBlock">
-            <ul class="detailNavbar">
-                <li><a href="#detail">詳細內容</a></li>
-                <li><a href="#material">使用材料</a></li>
-                <li><a href="#experience">製作心得</a></li>
-            </ul>
+            
 
             <!-- Detail Content Block -->
             <section class="detailContent">
-                <h1 id="detail">詳細內容</h1>
+            <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">詳細內容</button>
+        <button class="tablinks" onclick="openCity(event, 'Paris')">使用材料</button>
+        <button class="tablinks" onclick="openCity(event, 'Tokyo')">製作心得</button>
+    </div>
+    <section class="detailContent">
+        <div id="London" class="tabcontent">
+            <h1 id="detail">詳細內容</h1>
                 <div class="detailContainer22">
                     <pre><?php echo $cakeDetail['feature']; ?></pre>
                 </div>
-                <h1 id="material">使用材料</h1>
-                <div class="detailContainer22">
-                    <pre><?php echo $cakeDetail['material']; ?></pre>
-                </div>
+        </div>
 
-                <h1 id="experience">製作心得</h1>
+        <div id="Paris" class="tabcontent">
+            <h1 id="material">使用材料</h1>
+            <div class="detailContainer22">
+                <pre><?php echo $cakeDetail['material']; ?></pre>
+            </div>
+        </div>
+
+        <div id="Tokyo" class="tabcontent">
+            <h1 id="experience">製作心得</h1>
                 
-                <div class="slideshow-container">
-                <div class="detailContainer22 mySlides fade" id="expBlock">
+            
+                <div class="detailContainer22" id="expBlock">
                     <!-- <h4>userName</h4>
                     <pre>分享這次DIY的過程，非常有趣</pre>
                     <div class="expImgBlock">
@@ -201,29 +211,26 @@ $cakeDetail = $result->fetch_assoc();
                     <p>2023/7/10 10:00:00</p> -->
                 </div>
 
-                <h1 id="expText">分享心得</h1>
+                <h1 id="expText">分享心得與照片</h1>
                 <div class="expBlock">
                     <div id="checkLogin">請先
                         <a href="./login.html">登入</a>後才能留言
                     </div>
                     <form id="expMessage">
-                        <input type="hidden" value="<?= $cakeId; ?>" name="cid">
-                        <textarea id="message" name="message"></textarea>
-                        <input type="file" name="file[]" multiple accept="image/*">
-                        <p></p>
+                            <input type="hidden" value="<?= $cakeId; ?>" name="cid">
+                            <br>
+                            <textarea id="message" name="message" placeholder="內文上限150字"></textarea>
+                            <br>
+                            <input type="file" name="file[]" multiple accept="image/*">
+                            <p></p>
                     </form>
                     <input type="button" id="expInput" value="送出">
                 </div>
-
-                <a class="prev" onclick="plusSlides(-1)">❮</a>
-                <a class="next" onclick="plusSlides(1)">❯</a>                
-            </div>
-
-
-            </section>
-            <a href="./reserve.php" class="bookingBtn">預約</a>
         </div>
-    </main>
+    </section>
+</div>
+</main>
+<div><a href="./reserve.php" class="bookingBtn">預約</a></div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -260,6 +267,26 @@ $cakeDetail = $result->fetch_assoc();
 <script src="../resources/js/navbar.js"></script>
 <script src="../resources/js/topBtn.js"></script>
 <script src="../resources/js/Carousel.js"></script>
-<script src="../resources/js/detailCarousel.js"></script>
+
+<script>
+ function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+
+
+</script>
 
 </html>
