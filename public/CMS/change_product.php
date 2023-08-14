@@ -10,7 +10,7 @@ require('../php/db2.php');
 
 $cid = $_GET['cid'];
 echo $cid;
-$sql = "select cName,price,kind,cSize,feature,level,material, cImg1,cImg2 from cake where cid = ?";
+$sql = "select cid,cName,price,kind,cSize,feature,level,material, cImg1,cImg2 from cake where cid = ?";
 $stmt = $mysqli->prepare($sql);
 $stmt->bind_param('s', $cid);
 $stmt->execute();
@@ -156,6 +156,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.min.css
         <form id="change_form" method="post" enctype="multipart/form-data">
         <!-- action="../php/admin/change_update.php"  -->
             <div class="mid_Box">
+                <input type="hidden" name="change_cName" value="<?= $row['cid'] ?>">
                 <div class="input_Box">
                     <label for="pname">產品名稱</label>
                     <input type="text" id="cname" name="cname" placeholder="請輸入產品名稱"value="<?= $row['cName'] ?>" required />
@@ -241,30 +242,6 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.min.css
 </body>
 
 <script>
-    const Name = document.getElementById("cName");
-
-    // change_cName.onchange = function (e){
-    //     const cName = e.target.value;
-    //     const data = {cName};
-    //     fetch(
-    //         `change_search.php?cName=${cName}`
-    //     )
-    //     .then(function(response){
-    //         return response.json();
-    //     })
-    //     .then(function(data){
-    //         console.log(data);
-    //         Name.value = data[0].cName;
-    //         price.value = data[0].price;
-    //         cSize.value = data[0].cSize
-    //         kind.value = data[0].kind;
-    //         feature.value = data[0].feature;
-    //         level.value = data[0].level;
-    //         material.value = data[0].material;       
-    //         img1.src=data[0].cImg1;       
-    //         img2.src=data[0].cImg2;
-    //     })
-    // }
      //第一張圖片預覽
      $("#cImg1").on("change", function (e) {
       const file = this.files[0]; //將上傳檔案轉換為base64字串

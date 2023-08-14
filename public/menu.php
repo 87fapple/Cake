@@ -14,7 +14,7 @@ $result = $stmt->get_result();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu</title>
-    <link rel="stylesheet" href="../resources/css/menu2.css">   
+    <link rel="stylesheet" href="../resources/css/menu2.css">
     <link rel="stylesheet" href="../resources/css/Navbar.css">
     <link rel="stylesheet" href="../resources/css/footer2.css">
     <link rel="stylesheet" href="../resources/css/topBtn.css">
@@ -37,13 +37,7 @@ $result = $stmt->get_result();
             <span class="bar"></span>
         </div>
         <div class="navbarLink">
-            <ul>
-                <li><a href="../public/menu.php">產品介紹</a></li>
-                <li><a href="../public/locations.html">分店資訊</a></li>
-                <li><a href="../public/reserve.php">預約課程</a></li>
-                <li><a href="../public/Q&A.html">常見問題</a></li>
-                <li><a href="../public/login.html">登入會員</a></li>
-            </ul>
+            <ul id="login_check" name="login_check"></ul>
         </div>
     </nav>
 
@@ -54,13 +48,13 @@ $result = $stmt->get_result();
         <p style="margin:120px 0 0 0 "></p>
         <div class="kindNavbar" id="kindNavbar">
             <div class="kindBlock">
-                <div><b>選擇種類：</b></div> 
+                <div><b>選擇種類：</b></div>
                 <label class="container">全品項
-                    <input type="radio" checked="checked" name="radio" id="cake" onclick="kindFilter('全部')">   
+                    <input type="radio" checked="checked" name="radio" id="cake" onclick="kindFilter('全部')">
                     <span class="checkmark"></span>
                 </label>
                 <label class="container">蛋糕
-                    <input type="radio" name="radio" id="cake" onclick="kindFilter('蛋糕')">   
+                    <input type="radio" name="radio" id="cake" onclick="kindFilter('蛋糕')">
                     <span class="checkmark"></span>
                 </label>
                 <label class="container">點心
@@ -81,12 +75,20 @@ $result = $stmt->get_result();
 
         <!-- Menu Info -->
         <div class="menuBlock2">
-            
-        <?php
-            while($row = $result->fetch_assoc()){
-                if($row['cid'] != 0){
-                    echo 
-                    "
+
+            <?php
+            while ($row = $result->fetch_assoc()) {
+                $level = '';
+                if ($row['level'] == 1) {
+                    $level = '★';
+                } else if ($row['level'] == 2) {
+                    $level = '★★';
+                } else if ($row['level'] == 3) {
+                    $level = '★★★';
+                }
+                if ($row['cid'] != 0) {
+                    echo
+                        "
                     <div class=\"backgroundDiv\">
                         <div class=\"menuInfoDiv\" id=\"menuInfo\" data-cakeid={$row['cid']}>
                             <a href=\"detail.php?cid={$row['cid']}\">
@@ -94,7 +96,7 @@ $result = $stmt->get_result();
                                 <div class=\"menuInfoContent\" id=\"menuInfoContent\">
                                     <ul class=\"menuInfo\" id=\"menuInfo\">
                                         <li class=\"titleName\">{$row['cName']}</li>
-                                        <li class=\"scdName\">難度 {$row['level']}</li>
+                                        <li class=\"scdName\">難度 {$level}</li>
                                         <li class=\"scdName\">$ {$row['price']}</li>
                                     </ul>
                                 </div>
@@ -103,9 +105,9 @@ $result = $stmt->get_result();
                     </div>
                     ";
                 }
-                
+
             }
-        ?>
+            ?>
         </div>
     </main>
 
@@ -141,68 +143,77 @@ $result = $stmt->get_result();
     </footer>
 
 </body>
+<script src="../resources/js/login.js"></script>
 <script src="../resources/js/navbar.js"></script>
 <script src="../resources/js/topBtn.js"></script>
-    
+
 <script>
-// 在此添加全局变量来记录客人点击的种类
-let selectedKind = '';
+    // 在此添加全局变量来记录客人点击的种类
+    let selectedKind = '';
 
-// 蛋糕種類篩選 3.0
-function kindFilter(kind) {
-    fetch(`php/menu/kindfilter.php?kind=${kind}`)
-        .then(response => response.json())
-        .then(sortedCakes => {
-            // 更新全局变量的值
-            selectedKind = kind;
-            renderCakes(sortedCakes);
-        })
-        .catch(error => console.error('請求失敗：', error));
-}
-
-// 接收排序方式参数，價格排序ajax 3.0 
-function cakeSort(sortType) {
-    // 增加種類參數
-    fetch(`php/menu/cakesort.php?sortType=${sortType}&kind=${selectedKind}`)
-        .then(response => response.json())
-        .then(sortedCakes => {
-            renderCakes(sortedCakes);
-        })
-        .catch(error => console.error('請求失敗：', error));
-}
-
-// 畫面總攬render
-function renderCakes(cakes) {
-    var menuBlock2 = document.querySelector('.menuBlock2');
-    menuBlock2.innerHTML = '';
-
-    if (cake.cid === 0) {
-            return;
+    // 蛋糕種類篩選 3.0
+    function kindFilter(kind) {
+        fetch(`php/menu/kindfilter.php?kind=${kind}`)
+            .then(response => response.json())
+            .then(sortedCakes => {
+                // 更新全局变量的值
+                selectedKind = kind;
+                renderCakes(sortedCakes);
+            })
+            .catch(error => console.error('請求失敗：', error));
     }
-    
-    cakes.forEach(cake => {
-        menuBlock2.innerHTML += `
+
+    // 接收排序方式参数，價格排序ajax 3.0 
+    function cakeSort(sortType) {
+        // 增加種類參數
+        fetch(`php/menu/cakesort.php?sortType=${sortType}&kind=${selectedKind}`)
+            .then(response => response.json())
+            .then(sortedCakes => {
+                renderCakes(sortedCakes);
+            })
+            .catch(error => console.error('請求失敗：', error));
+    }
+
+    // 畫面總攬render
+    function renderCakes(cakes) {
+        var menuBlock2 = document.querySelector('.menuBlock2');
+        menuBlock2.innerHTML = '';
+
+        if (cake.cid === 0) {
+            return;
+        }
+
+        cakes.forEach(cake => {
+            level = '';
+            if (cake.level === 1) {
+                level = '★';
+            } if (cake.level === 2) {
+                level = '★★';
+            } if (cake.level === 3) {
+                level = '★★★';
+            }
+            menuBlock2.innerHTML += `
          <div class="backgroundDiv">
             <div class="menuInfoDiv" id="menuInfo" data-cakeid="${cake.cid}" > <!-- 添加data-cakeid屬性 -->
                 <a href="javascript:void(0);" onclick="showProductDetail(${cake.cid})"><img src="${cake.cImg1}"></a> 
                 <div class="menuInfoContent" id="menuInfoContent">
                     <ul class="menuInfo" id="menuInfo">
                         <li class="titleName">${cake.cName}</li>
-                        <li class="scdName">難度${cake.level}</li>
+                        <li class="scdName">難度${level}</li>
                         <li class="scdName">$${cake.price}</li>
                     </ul>
                 </div>
             </div>
              </div>
         `;
-    });
-}
+        });
+    }
 
-// 點擊產品總攬其中一個div後
-function showProductDetail(cakeId) {
-    window.location.href = `detail.php?cid=${cakeId}`;
-}
-    
+    // 點擊產品總攬其中一個div後
+    function showProductDetail(cakeId) {
+        window.location.href = `detail.php?cid=${cakeId}`;
+    }
+
 </script>
 
 </html>

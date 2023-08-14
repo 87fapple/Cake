@@ -9,41 +9,41 @@ $cSize = $_REQUEST['cSize'];
 $price = $_REQUEST['price'];
 $feature = $_REQUEST['feature'];
 $material = $_REQUEST['material'];
-// $change = $_REQUEST['change_cName'];
+$change = $_REQUEST['change_cName'];
 $cImg1 = $_FILES['cImg1']['tmp_name'];
 $cImg2 = $_FILES['cImg2']['tmp_name'];
 
 if( isset($cImg1) and isset($cImg2)){
     move_uploaded_file($cImg1,"../../../image/cake_add/".$_FILES["cImg1"]["name"]);
-    $c1 = "../../../image/cake_add/".$_FILES["cImg1"]["name"];
+    $c1 = "../image/cake_add/".$_FILES["cImg1"]["name"];
     // echo $c1 ."<br/>";
     move_uploaded_file($cImg2,"../../../image/cake_add/".$_FILES["cImg2"]["name"]);
-    $c2 = "../../../image/cake_add/".$_FILES["cImg2"]["name"];
+    $c2 = "../image/cake_add/".$_FILES["cImg2"]["name"];
     // echo $c2;
 
-    $sql="update cake set cName = ? ,price = ? ,kind = ? ,cSize = ? ,cImg1 = ? ,cImg2 = ? ,feature = ? ,level = ? ,material = ?  where cName = ?";
+    $sql="update cake set cName = ? ,price = ? ,kind = ? ,cSize = ? ,cImg1 = ? ,cImg2 = ? ,feature = ? ,level = ? ,material = ?  where cid = ?";
     $stmt=$mysqli->prepare($sql);
     $stmt->bind_param('ssssssssss',$cName,$price,$kind,$cSize,$c1,$c2,$feature,$level,$material,$change);
     $stmt->execute();
 }if(!isset($cImg1) and isset($cImg2)){
     move_uploaded_file($cImg2,"../../../image/cake_add/".$_FILES["cImg2"]["name"]);
-    $c2 = "../../../image/cake_add/".$_FILES["cImg2"]["name"];
+    $c2 = "../image/cake_add/".$_FILES["cImg2"]["name"];
     // echo $c2;
-    $sql="update cake set cName = ? ,price = ? ,kind = ? ,cSize = ?  ,cImg2 = ? ,feature = ? ,level = ? ,material = ?  where cName = ?";
+    $sql="update cake set cName = ? ,price = ? ,kind = ? ,cSize = ?  ,cImg2 = ? ,feature = ? ,level = ? ,material = ?  where cid = ?";
     $stmt=$mysqli->prepare($sql);
     $stmt->bind_param('sssssssss',$cName,$price,$kind,$cSize,$c2,$feature,$level,$material,$change);
     $stmt->execute();
 }if(isset($cImg1) and !isset($cImg2)){
     move_uploaded_file($cImg1,"../../../image/cake_add/".$_FILES["cImg1"]["name"]);
-    $c1 = "../../../image/cake_add/".$_FILES["cImg1"]["name"];
+    $c1 = "../image/cake_add/".$_FILES["cImg1"]["name"];
     echo $c1 ."<br/>";
 
-    $sql="update cake set cName = ? ,price = ? ,kind = ? ,cSize = ? ,cImg1 = ?  ,feature = ? ,level = ? ,material = ?  where cName = ?";
+    $sql="update cake set cName = ? ,price = ? ,kind = ? ,cSize = ? ,cImg1 = ?  ,feature = ? ,level = ? ,material = ?  where cid = ?";
     $stmt=$mysqli->prepare($sql);
     $stmt->bind_param('sssssssss',$cName,$price,$kind,$cSize,$c1,$feature,$level,$material,$change);
     $stmt->execute();
 }else{
-    $sql="update cake set cName = ? ,price = ? ,kind = ? ,cSize = ?  ,feature = ? ,level = ? ,material = ?  where cName = ?";
+    $sql="update cake set cName = ? ,price = ? ,kind = ? ,cSize = ?  ,feature = ? ,level = ? ,material = ?  where cid = ?";
     $stmt=$mysqli->prepare($sql);
     $stmt->bind_param('ssssssss',$cName,$price,$kind,$cSize,$feature,$level,$material,$change);
     $stmt->execute();

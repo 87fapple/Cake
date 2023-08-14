@@ -113,9 +113,11 @@ $result = $stmt->get_result();
                     // echo "<pre/>";
                     // var_dump($row);
                     if ($row['remove'] === 0) {
-                        $a = '<button class="btn">取消預約</button>';
+                        $a = '<button class="btn" value="' . $row["oToken"] . '">取消預約</button>';
+                        $b = '<input class="getOid" type="button" value="修改" data-oToken="' . $row["oToken"] . '">';
                     } else {
                         $a = '<span>已取消</span>';
+                        $b = '<span>已取消</span>';
                     }
                     echo
                     '<tr class="mainTable">
@@ -126,8 +128,8 @@ $result = $stmt->get_result();
                         <td>' . ($row['people'] - $row['companion']) . '人</td>
                         <td>' . $row['companion'] . '人</td>
                         <td>' . $row['people'] . '人</td>
-                        <td class="td-btn" >' . $a . '</td>
-                        <td><input class="getOid" type="button" value="修改" data-oToken="' . $row["oToken"] . '"></td>
+                        <td class="td-btn">' . $a . '</td>
+                        <td>' . $b . '</td>
                     </tr>';
                 }
                 ?>
@@ -178,13 +180,25 @@ $result = $stmt->get_result();
         btn.forEach(function(item) {
             console.log(item);
             item.addEventListener("click", function(e) {
+                const oVToken = e.target.getAttribute("value");
                 layer.alert('手做蛋糕DIY', {
                     title: ['確定要取消預約嗎?', 'font-size:18px;'],
                     time: 0,
                     btn: ["確定", "在考慮一下"],
                     yes: function(index) {
-                        e.target.parentNode.innerHTML = '<span>已取消</span>'
-                        layer.close(index);
+                        fetch(`./php/reserve/removeOrders.php?oToken=${oVToken}`)
+                            .then(function (response) {
+                                return response.text();
+                            })
+                            .then(function (data) {
+                                console.log(data);
+                                if(data === 'success'){
+                                    e.target.parentNode.innerHTML = '<span>已取消</span>'
+                                    layer.close(index);
+                                }else{
+                                    alert("取消失敗");
+                                }
+                            })
                     },
                 });
             })
