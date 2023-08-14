@@ -233,31 +233,6 @@ $row =$result->fetch_assoc();
 </body>
 
 <script>
-    // const checked = document.getElementById("checked");
-
-    // checked.onchange = function (e){
-    //     const cName = e.target.value;
-    //     const data = {cName};
-    //     fetch(
-    //         `change_search.php?cName=${cName}`
-    //     )
-    //     .then(function(response){
-    //         return response.json();
-    //     })
-    //     .then(function(data){
-    //       console.log(data);
-    //        Name.value = data[0].cName;
-    //        price.value = data[0].price;
-    //        cSize.value = data[0].cSize
-    //        kind.value = data[0].kind;
-    //        feature.value = data[0].feature;
-    //        level.value = data[0].level;
-    //        material.value = data[0].material;       
-    //          img1.src=data[0].cImg1;       
-    //          img2.src=data[0].cImg2;
-           
-    //     })
-    // }
      //第一張圖片預覽
      $("#cImg1").on("change", function (e) {
       const file = this.files[0]; //將上傳檔案轉換為base64字串

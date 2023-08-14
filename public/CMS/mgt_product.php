@@ -143,9 +143,9 @@ $result = $stmt->get_result();
                 <?php
                 while ($row = $result->fetch_assoc()) {
                     if ($row['remove'] == 0) {
-                        $remove = '<a>下架</a>';
+                        $remove = '<a  onclick="remove('. $row['cid'].','.$row['remove'].')">上架中</a>';
                     } else {
-                        $remove = '<a>上架</a>';
+                        $remove = '<a style="background-color: #b3b3b3;" onclick="remove('. $row['cid'].','.$row['remove'].')">下架中</a>';
                     }
                     echo
                     '<tr>
@@ -158,7 +158,8 @@ $result = $stmt->get_result();
                         '<td align="right" width="100px" />
                             <a href="change_product.php?cid=' . $row['cid'] . '" )">修改</a>
                             ' . $remove . '
-                            <a style="background-color:red;color:white" onclick="delet(' . $row['cid'] . ')">刪除</a>
+                            <a style="background-color:red;color:white" 
+                            onclick="delet(' . $row['cid'] . ')">刪除</a>
                         </tr>';
                 }
                 ?>
@@ -186,5 +187,11 @@ $result = $stmt->get_result();
                 });
             }
         });
+    }
+
+    function remove(cid,remove){
+        this.cid = cid;
+        this.remove=remove;
+        location.replace("remove.php?cid="+cid+"&remove="+remove);
     }
 </script>
