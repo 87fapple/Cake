@@ -10,12 +10,12 @@ body {
 .productBlock {
     display: flex;
     justify-content: center;
-    height: 450px;
-    background-color: #fff;
+    height: 400px;
     margin: 0 auto;
 }
 
 .productContent {
+    background-color: #fff;
     width: 400px;
     height: 95%;
     margin: 0 24px;
@@ -44,7 +44,6 @@ body {
 
 .productContent a {
     position: relative;
-    top: 10%;
     left: 60%;
 }
 
@@ -58,14 +57,10 @@ body {
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
-    position: relative;
-    left: 45%;
-    margin-top: 20%;
+    
 }
 
-.bookingBtn>a {
-   
-}
+
 
 .bookingBtn:hover {
     cursor: pointer;
@@ -185,7 +180,7 @@ body {
         width: 400px;
     }
 
-    .productContent {}
+
 }
 
 
@@ -229,23 +224,22 @@ body {
 
 #expInput:hover {
     background-color: #ffbf00;
-} 
+}
 
 .eachEXP {
-    border-radius: 10px;
+    border-radius: 10px 70px 10px 10px;
     background-color: #d8d8d8;
-    padding: 17px;
+    padding: 10px;
     margin: 10px;
     /* background-image: url(../../image/EXPBG.png); */
 }
 
 .eachEXP>h3 {
     border-radius: 40px;
-    padding: 1.5rem;
+    padding: 1rem;
     width: 15rem;
     text-align: center;
-    margin:1.5rem 1rem 0 1rem;
-    margin-top: 1.5rem;
+    margin: 0.5rem 1rem 0 1rem;
     background-color: #ffa237;
     border: 7px solid #d8d8d8;
     position: relative;
@@ -255,8 +249,8 @@ body {
 .eachEXP>pre {
     /* background-color: #ffbc6f; */
     padding: 1.5rem;
-    padding-bottom: 1.5rem ;
-    padding-top: 2rem;
+    padding-bottom: 1.5rem;
+    padding-top: 3rem;
     margin: 0 2rem 0.5rem 2rem;
     border-radius: 10px;
     width: 80%;
@@ -264,9 +258,9 @@ body {
     letter-spacing: 0.5px;
     line-height: 1.5;
     white-space: pre-line;
-    background-color: #ffd817;
+    background-color: #ffe042;
     position: relative;
-    top: -1rem;
+    top: -1.5rem;
     z-index: 0;
 }
 
@@ -292,18 +286,24 @@ body {
     border: 1px solid #ccc;
     background-color: #ffc37f;
     border-radius: 10px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
 }
 
 /* Style the buttons inside the tab */
 .tab button {
     background-color: inherit;
-    float: left;
-    border: none;
+    /* float: left; */
+    border: 1px solid #ffc37f;
+
     outline: none;
     cursor: pointer;
-    padding: 14px 16px;
+    padding: 14px 5rem;
     transition: 0.3s;
-    font-size: 17px;
+    font-size: 22px;
+
+
 }
 
 /* Change background color of buttons on hover */
@@ -313,7 +313,11 @@ body {
 
 /* Create an active/current tablink class */
 .tab button.active {
-    background-color: rgb(255, 234, 6)237;
+    background-color: #ff9f31;
+}
+
+.tablinks {
+    font-weight: bold;
 }
 
 /* Style the tab content */
@@ -324,8 +328,7 @@ body {
     border-top: none;
     position: relative;
     border-radius: 10px;
-    margin: 0
-    
+    margin: 0;
 }
 
 
@@ -354,4 +357,9 @@ body {
     .text {
         font-size: 11px
     }
+}
+
+
+#checkLogin {
+    text-align: center;
 }
