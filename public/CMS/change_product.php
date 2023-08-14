@@ -1,6 +1,6 @@
-<?php $title = 'CMS Add Product'; ?>
+<?php $title = 'CMS Modify Product'; ?>
 <?php $metaTags = 'tag1 tag2'; ?>
-<?php $currentPage = '新增品項'; ?>
+<?php $currentPage = '修改品項'; ?>
 <?php include_once(__DIR__ . '/head.php'); ?>
 <?php require_once(__DIR__ . '/navbar.php'); ?>
 <?php 
@@ -28,13 +28,9 @@ $row =$result->fetch_assoc();
 <!-- jQuery -->
 <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-
-<script src="
-https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.all.min.js
-"></script>
-<link href="
-https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.min.css
-" rel="stylesheet">
+<!-- sweetalert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.all.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.min.css" rel="stylesheet">
 
 
 <style>

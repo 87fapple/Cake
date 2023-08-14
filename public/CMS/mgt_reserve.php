@@ -93,20 +93,22 @@ $mysqli->close();
         cursor: pointer;
     }
 
-    .order-table tbody tr td button {
+    .order-table tbody tr td a {
+        text-decoration: none;
+        color: #111;
         background-color: #ffa237;
         border: 1px solid #ffa237;
         border-radius: 6px;
         padding: 4px 12px;
     }
 
-    .order-table tbody tr td button:hover {
+    .order-table tbody tr td a:hover {
         background-color: #ffcb53;
         border: 1px solid #ffcb53;
         cursor: pointer;
     }
 
-    .order-table tbody tr td button:last-child {
+    .order-table tbody tr td a:last-child {
         margin-left: 16px;
     }
 </style>
@@ -141,7 +143,7 @@ $mysqli->close();
                             '<td />' . $order['people'] .
                             '<td />' . $order['companion'] .
                             '<td align="right" width="100px" />
-                            <a href="../reserve.php?oToken=' . $order['oToken'] . '" )">修改</a>
+                                <a href="change_reserve.php?oToken=' . $order['oToken'] . '" )">修改</a>
                             </tr>';
                     }
                 }
