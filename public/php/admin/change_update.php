@@ -51,7 +51,7 @@ if( isset($cImg1) and isset($cImg2)){
 
 header("refresh:2;url=../../CMS/mgt_product.php"); 
 ?>
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -80,4 +80,4 @@ layer.alert('已修改成功，將自動跳轉', {icon: 6,
   }
 });
 </script>
-</html>
+</html> -->

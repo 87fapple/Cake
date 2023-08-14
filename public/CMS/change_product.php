@@ -1,7 +1,7 @@
 <?php $title = 'CMS Add Product'; ?>
 <?php $metaTags = 'tag1 tag2'; ?>
 <?php $currentPage = '新增品項'; ?>
-<?php require_once(__DIR__ . '/head.php'); ?>
+<?php include_once(__DIR__ . '/head.php'); ?>
 <?php require_once(__DIR__ . '/navbar.php'); ?>
 <?php 
 require('../php/db2.php');
@@ -28,6 +28,14 @@ $row =$result->fetch_assoc();
 <!-- jQuery -->
 <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+<script src="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.all.min.js
+"></script>
+<link href="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.min.css
+" rel="stylesheet">
+
 
 <style>
     .container {
@@ -117,8 +125,8 @@ $row =$result->fetch_assoc();
     }
 
     .box form div input[type="submit"]:hover {
-        border: 2px solid #fff5d6c4;
-        background-color: #fff5d6c4;
+        border: 2px solid #ffbf00;
+        background-color: #ffbf00;
     }
 
     #img1:after,
@@ -145,7 +153,8 @@ $row =$result->fetch_assoc();
     <div class="container box" id="changeForm">
         <h2>修改產品資訊</h2>
 
-        <form action="../php/admin/change_update.php" method="post" enctype="multipart/form-data">
+        <form id="change_form" method="post" enctype="multipart/form-data">
+        <!-- action="../php/admin/change_update.php"  -->
             <div class="mid_Box">
                 <input type="hidden" name="change_cName" value="<?= $row['cid'] ?>">
                 <div class="input_Box">
@@ -212,14 +221,14 @@ $row =$result->fetch_assoc();
             <div class="mid_Box">
                 <label for="cImg1">上傳產品照片</label>
                 <div class="img_Box">
-                    <input accept="image/*" type="file" id="cImg1" name="cImg1" />
                     <img id="img1" src="../<?= $row['cImg1']?>" style="max-width: 160px; max-height:123px " alt="未上傳圖片" />
-                    <span></span>
+                    <input accept="image/*" type="file" id="cImg1" name="cImg1" />
+                    <!-- <span></span> -->
                 </div>
                 <div class="img_Box">
-                    <input type="file" id="cImg2" name="cImg2" />
                     <img id="img2" src="../<?= $row['cImg2']?>" style="max-width: 160px; max-height:130px" alt="未上傳圖片" />
-                    <span></span>
+                    <input type="file" id="cImg2" name="cImg2" />
+                    <!-- <span></span> -->
                 </div>
             </div>
 
@@ -258,4 +267,29 @@ $row =$result->fetch_assoc();
       fr.readAsDataURL(file);
       console.log('ok');
     });
+
+    $(document).ready(function(){
+        $("#change_form").on("submit", function(e){
+        e.preventDefault();
+        dataString = jQuery('form#change_form').serialize();
+        jQuery.ajax({
+            type: "POST",
+            url: "/Cake/public/php/admin/change_update.php",
+            data: dataString,
+            success:  function(data)
+            { 
+                Swal.fire({
+                    title: "修改成功",
+                    text: "3秒後自動跳轉產品頁面",
+                    icon: "success",
+                    confirmButtonText: "回到上一頁",
+                }).then( () => {
+                    window.location = "mgt_product.php"
+                }).then(setTimeout(() => {
+                    window.location = "mgt_product.php"
+                }, 3000))
+            }
+      }); 
+  });
+});
 </script>

@@ -125,13 +125,7 @@ $cakeDetail = $result->fetch_assoc();
             <span class="bar"></span>
         </div>
         <div class="navbarLink">
-            <ul>
-                <li><a href="../public/menu.php">產品介紹</a></li>
-                <li><a href="../public/locations.html">分店資訊</a></li>
-                <li><a href="../public/reserve.php">預約課程</a></li>
-                <li><a href="../public/Q&A.html">常見問題</a></li>
-                <li><a href="../public/login.html">登入會員</a></li>
-            </ul>
+            <ul id="login_check" name="login_check"></ul>
         </div>
     </nav>
 
@@ -176,7 +170,7 @@ $cakeDetail = $result->fetch_assoc();
                         <?php echo $cakeDetail['price']; ?>元
                     </li>
                 </ul>
-                <a href="../public/reserve.html" class="bookingBtn" style="position: relative;">預約</a>
+                <a href="../public/reserve.php" class="bookingBtn" style="position: relative;">預約</a>
             </div>
         </div>
 
@@ -272,6 +266,7 @@ $cakeDetail = $result->fetch_assoc();
     </footer>
 
 </body>
+<script src="../resources/js/login.js"></script>
 <script src="../resources/js/navbar.js"></script>
 <script src="../resources/js/topBtn.js"></script>
 <script src="../resources/js/Carousel.js"></script>
