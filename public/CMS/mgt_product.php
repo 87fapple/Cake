@@ -4,7 +4,8 @@
 <?php require_once(__DIR__ . '/head.php'); ?>
 <?php require_once(__DIR__ . '/navbar.php'); ?>
 
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
     .container {
@@ -121,9 +122,11 @@ $result = $stmt->get_result();
 <body>
     <div class="container">
         <div class="title">
-            <h2 style=""><center />產品總覽</h2>
+            <h2 style="">
+                <center />產品總覽
+            </h2>
             <a href="add_product.php">新增品項</a>
-        </div>  
+        </div>
         <table class="order-table">
             <thead>
                 <tr>
@@ -138,22 +141,36 @@ $result = $stmt->get_result();
             </thead>
             <tbody>
                 <?php
-                    while ($row = $result->fetch_assoc()) {
-                        echo
-                        '<tr>
-                            <td />'.$row['cid'].
-                            '<td />'.$row['cName'].
-                            '<td />'.$row['price'].
-                            '<td />'.$row['kind'].
-                            '<td />'.$row['cSize']. 
-                            '<td />'.$row['level']. 
-                            '<td align="right" width="100px" />
-                            <a href="change_product.php">修改</a>
-                            <a>刪除</a>
+                while ($row = $result->fetch_assoc()) {
+                    echo
+                    '<tr>
+                            <td />' . $row['cid'] .
+                        '<td />' . $row['cName'] .
+                        '<td />' . $row['price'] .
+                        '<td />' . $row['kind'] .
+                        '<td />' . $row['cSize'] .
+                        '<td />' . $row['level'] .
+                        '<td align="right" width="100px" />
+                            <a href="change_product.php?cid=' . $row['cid'] . '" )">修改</a>
+                            <a  onclick="delet(' . $row['cid'] . ')">刪除</a>
                         </tr>';
-                    }
+                }
                 ?>
             </tbody>
         </table>
     </div>
 </body>
+<script src="//unpkg.com/layui@2.7.6/dist/layui.js"></script>
+<script>
+    function delet(cid) {
+        this.cid = cid;
+        layer.open({
+            content: '確定要刪除嗎',
+            btn: ['確定', '取消'],
+            yes: function(index, layero) {
+                //按钮【按钮一】的回调
+                location.replace("../php/admin/delete.php?cid=" + cid);
+            }
+        });
+    }
+</script>

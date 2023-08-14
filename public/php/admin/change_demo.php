@@ -156,7 +156,7 @@
             id="price"
             name="price"
             placeholder="請輸入價格"
-            value=""
+            value="<?php $row['cid'] ?>"
           />
           <br />
         </div>
