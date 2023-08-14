@@ -17,6 +17,7 @@
             $urls = array(
                 '首頁' => '/Cake/public/CMS/home.php',
                 '首頁管理' => '/Cake/public/CMS/mgt_home.php',
+                '產品管理' => '/Cake/public/CMS/mgt_product.php',
                 '預約管理' => '/Cake/public/CMS/mgt_reserve.php',
                 // …
             );
