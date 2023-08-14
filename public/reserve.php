@@ -7,9 +7,13 @@ if ($token !== 'undefined') {
 
 $oInfo = [];
 if (isset($_GET['oToken'])) {
-    DB::select("select s.sid,s.location, o.people, o.reserveTime, o.reserveDate, o.oToken from orders o INNER JOIN store s on s.sid = o.sid where oToken = ?", function ($rows) use (&$oInfo) {
+    DB::select("select s.sid,s.location, o.people, o.reserveTime, o.reserveDate, o.oToken, o.remove from orders o INNER JOIN store s on s.sid = o.sid where oToken = ?", function ($rows) use (&$oInfo) {
+        var_dump($rows[0]);
         if (count($rows) === 0) {
             header('Location: /Cake/public/error.php?error_code=1');
+            die();
+        } elseif ($rows[0]["remove"] === 1) {
+            header('Location: /Cake/public/error.php?error_code=2');
             die();
         } else {
             $oInfo[] = $rows[0];

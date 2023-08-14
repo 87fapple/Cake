@@ -11,6 +11,9 @@ switch ($error_code) {
     case 1:
         $error_msg = "存在非正常oToken，請聯絡相關負責人";
         break;
+    case 2:
+        $error_msg = "此訂單已經取消";
+        break;
 }
 
 ?>
@@ -26,7 +29,8 @@ switch ($error_code) {
     <link rel="stylesheet" href="../resources/css/footer2.css">
     <link rel="stylesheet" href="../resources/css/topBtn.css">
     <link rel="stylesheet" href="../resources/css/reserve1.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
 </head>
 
@@ -55,7 +59,9 @@ switch ($error_code) {
     <h3>錯誤</h3>
     <div class="container">
         <h2>錯誤</h2>
-        <div style="text-align:center"><?= $error_msg; ?></div>
+        <div style="text-align:center">
+            <?= $error_msg; ?>
+        </div>
     </div>
 
     <!-- Footer -->

@@ -162,7 +162,15 @@ $cakeDetail = $result->fetch_assoc();
                         <?php echo $cakeDetail['cSize']; ?>
                     </li>
                     <li>難度：
-                        <?php echo $cakeDetail['level']; ?>
+                        <?php
+                            if($cakeDetail['level'] == 1){
+                                echo '★小朋友都會';
+                            }else if($cakeDetail['level'] == 2){
+                                echo '★★適合大人初學者';
+                            }else if($cakeDetail['level'] == 3){
+                                echo '★★★有烘焙經驗比較好';
+                            } 
+                        ?>
                     </li>
                     <li>價格：
                         <?php echo $cakeDetail['price']; ?>元
