@@ -144,7 +144,7 @@ $result = $stmt->get_result();
                 while ($row = $result->fetch_assoc()) {
                     echo
                     '<tr>
-                            <td />' . $row['cid'] .
+                        <td />' . $row['cid'] .
                         '<td />' . $row['cName'] .
                         '<td />' . $row['price'] .
                         '<td />' . $row['kind'] .
@@ -152,7 +152,7 @@ $result = $stmt->get_result();
                         '<td />' . $row['level'] .
                         '<td align="right" width="100px" />
                             <a href="change_product.php?cid=' . $row['cid'] . '" )">修改</a>
-                            <a  onclick="delet(' . $row['cid'] . ')">刪除</a>
+                            <a onclick="delet(' . $row['cid'] . ')">刪除</a>
                         </tr>';
                 }
                 ?>
@@ -165,6 +165,7 @@ $result = $stmt->get_result();
     function delet(cid) {
         this.cid = cid;
         layer.open({
+            title: '注意',
             content: '確定要刪除嗎',
             btn: ['確定', '取消'],
             yes: function(index, layero) {
