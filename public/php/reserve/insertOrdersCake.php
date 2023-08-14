@@ -42,6 +42,7 @@ for ($x = 0; $x < $makeNum; $x++) {
 
 if ($checkNum > $makeNum) {
     echo ("選取品項總份數超過製作份數!!");
+    die();
 } elseif ($checkNum < $makeNum) {
     $sceneNum = $makeNum - $checkNum;
     $nameNumArr[0] = $sceneNum;
