@@ -17,17 +17,10 @@ $feature = $_REQUEST['feature'];
 $material = $_REQUEST['material'];
 $cImg1 = $_FILES['cImg1']['tmp_name'];
 $cImg2 = $_FILES['cImg2']['tmp_name'];
-// $c1=new Image($cImg1);
-// $c1->resize(400,400,'fill');
-// list($c1) = $photo->getImageSrc('thumb');
-
-// $c1 = file_get_contents($c1);
-// $c1 = base64_encode($c1);
-// $c2 = file_get_contents($c2);
 
 if ($_FILES["cImg1"]["error"] > 0 or $_FILES["cImg2"]["error"] > 0) {
-    echo "Return Code: " . $_FILES["cImg1"]["error"] . "<br />";
-    echo "Return Code: " . $_FILES["cImg2"]["error"] . "<br />";
+    // echo "Return Code: " . $_FILES["cImg1"]["error"] . "<br />";
+    // echo "Return Code: " . $_FILES["cImg2"]["error"] . "<br />";
     echo "圖片錯誤,3秒後自動跳轉";
 } else {
     move_uploaded_file($cImg1,"../../../image/cake_add/".$_FILES["cImg1"]["name"]);
@@ -40,13 +33,11 @@ if ($_FILES["cImg1"]["error"] > 0 or $_FILES["cImg2"]["error"] > 0) {
 }
 
 
-$sql="insert into cake(cName,price,kind,cSize,cImg1,cImg2,feature,level,material)
-value(?,?,?,?,?,?,?,?,?)";
-$stmt=$mysqli->prepare($sql);
-$stmt->bind_param('sssssssss',$cName,$price,$kind,$cSize,$c1,$c2,$feature,$level,$material);
-// $stmt->send_long_data(4, $c1);
-// $stmt->send_long_data(5, $c2);
-$stmt->execute();
+// $sql="insert into cake(cName,price,kind,cSize,cImg1,cImg2,feature,level,material)
+// value(?,?,?,?,?,?,?,?,?)";
+// $stmt=$mysqli->prepare($sql);
+// $stmt->bind_param('sssssssss',$cName,$price,$kind,$cSize,$c1,$c2,$feature,$level,$material);
+// $stmt->execute();
 
 
 // DB::insert('insert into cake(cName,price,kind,cSize,cImg1,cImg2,feature,level,material)
