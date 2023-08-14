@@ -87,20 +87,22 @@
         cursor: pointer;
     }
 
-    .order-table tbody tr td button {
+    .order-table tbody tr td a {
         background-color: #ffa237;
         border: 1px solid #ffa237;
         border-radius: 6px;
+        text-decoration: none;
+        color: #111;
         padding: 4px 12px;
     }
 
-    .order-table tbody tr td button:hover {
+    .order-table tbody tr td a:hover {
         background-color: #ffcb53;
         border: 1px solid #ffcb53;
         cursor: pointer;
     }
 
-    .order-table tbody tr td button:last-child {
+    .order-table tbody tr td a:last-child {
         margin-left: 16px;
     }
 </style>
@@ -146,8 +148,8 @@ $result = $stmt->get_result();
                             '<td />'.$row['cSize']. 
                             '<td />'.$row['level']. 
                             '<td align="right" width="100px" />
-                                <button />修改
-                                <button />刪除
+                            <a href="change_product.php">修改</a>
+                            <a>刪除</a>
                         </tr>';
                     }
                 ?>

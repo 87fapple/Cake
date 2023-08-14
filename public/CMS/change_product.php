@@ -15,7 +15,6 @@
 <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
-
 <style>
     .container {
         width: calc(100% - 200px);
@@ -129,7 +128,7 @@
 
 <body>
     <div class="container box" id="changeForm">
-        <h2>新增產品資訊</h2>
+        <h2>修改產品資訊</h2>
 
         <form action="../php/admin/add.php" method="post" enctype="multipart/form-data">
             <div class="mid_Box">
@@ -200,40 +199,62 @@
 
             <div style="width: 100%;">
                 <center>
-                    <input type="submit" value="確定新增" id="checked" />
+                    <input type="submit" value="確定修改" id="checked" />
                 </center>
             </div>
         </form>
     </div>
 </body>
 
-
 <script>
-  //第一張圖片預覽
-  $("#cImg1").on("change", function (e) {
-    const file = this.files[0]; //將上傳檔案轉換為base64字串
+    const Name = document.getElementById("cName");
 
-    const fr = new FileReader(); //建立FileReader物件
-    fr.onload = function (e) {
-      $("#img1").attr("src", e.target.result); //读取的结果放入圖片
-    };
-    // 使用 readAsDataURL 將圖片轉成 Base64
-    fr.readAsDataURL(file);
-    console.log('ok');
+    change_cName.onchange = function (e){
+        const cName = e.target.value;
+        const data = {cName};
+        fetch(
+            `change_search.php?cName=${cName}`
+        )
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(data){
+          console.log(data);
+           Name.value = data[0].cName;
+           price.value = data[0].price;
+           cSize.value = data[0].cSize
+           kind.value = data[0].kind;
+           feature.value = data[0].feature;
+           level.value = data[0].level;
+           material.value = data[0].material;       
+             img1.src=data[0].cImg1;       
+             img2.src=data[0].cImg2;
+           
+        })
+    }
+     //第一張圖片預覽
+     $("#cImg1").on("change", function (e) {
+      const file = this.files[0]; //將上傳檔案轉換為base64字串
 
-    
-  });
+      const fr = new FileReader(); //建立FileReader物件
+      fr.onload = function (e) {
+        $("#img1").attr("src", e.target.result); //读取的结果放入圖片
+      };
+      // 使用 readAsDataURL 將圖片轉成 Base64
+      fr.readAsDataURL(file);
+      console.log('ok');
+    });
 
-  //第二張圖片預覽
-  $("#cImg2").on("change", function (e) {
-    const file = this.files[0]; //將上傳檔案轉換為base64字串
+    //第二張圖片預覽
+    $("#cImg2").on("change", function (e) {
+      const file = this.files[0]; //將上傳檔案轉換為base64字串
 
-    const fr = new FileReader(); //建立FileReader物件
-    fr.onload = function (e) {
-      $("#img2").attr("src", e.target.result); //读取的结果放入圖片
-    };
-    // 使用 readAsDataURL 將圖片轉成 Base64
-    fr.readAsDataURL(file);
-    console.log('ok');
-  });
+      const fr = new FileReader(); //建立FileReader物件
+      fr.onload = function (e) {
+        $("#img2").attr("src", e.target.result); //读取的结果放入圖片
+      };
+      // 使用 readAsDataURL 將圖片轉成 Base64
+      fr.readAsDataURL(file);
+      console.log('ok');
+    });
 </script>
