@@ -113,7 +113,9 @@ $mysqli->close();
 
 <body>
     <div class="container">
-        <center><h2>預約總覽</h2></center>
+        <center>
+            <h2>預約總覽</h2>
+        </center>
         <table class="order-table">
             <thead>
                 <tr>
@@ -128,22 +130,22 @@ $mysqli->close();
                 </tr>
             </thead>
             <tbody>
-                    <?php
-                        foreach ($ordersByOid as $oid => $orders) {
-                            echo '<tr /><td />'.$oid.'</td>';
-                            foreach ($orders as $order) {
-                                echo '<td />'.$order['uName'].
-                                    '<td />'.$order['location'].
-                                    '<td />'.$order['reserveTime'].
-                                    '<td />'.$order['reserveDate'].
-                                    '<td />'.$order['people'].
-                                    '<td />'.$order['companion'].
-                                    '<td align="right" width="100px" />
-                                        <button />修改
-                                        <button />取消';
-                            }
-                        }
-                    ?> 
+                <?php
+                foreach ($ordersByOid as $oid => $orders) {
+                    echo '<tr /><td />' . $oid . '</td>';
+                    foreach ($orders as $order) {
+                        echo '<td />' . $order['uName'] .
+                            '<td />' . $order['location'] .
+                            '<td />' . $order['reserveTime'] .
+                            '<td />' . $order['reserveDate'] .
+                            '<td />' . $order['people'] .
+                            '<td />' . $order['companion'] .
+                            '<td align="right" width="100px" />
+                            <a href="../reserve.php?oToken=' . $order['oToken'] . '" )">修改</a>
+                            </tr>';
+                    }
+                }
+                ?>
             </tbody>
         </table>
     </div>
