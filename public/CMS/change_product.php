@@ -10,7 +10,7 @@ require('../php/db2.php');
 
 $cid = $_GET['cid'];
 echo $cid;
-$sql = "select cName,price,kind,cSize,feature,level,material, cImg1,cImg2 from cake where cid = ?";
+$sql = "select cid,cName,price,kind,cSize,feature,level,material, cImg1,cImg2 from cake where cid = ?";
 $stmt = $mysqli->prepare($sql);
 $stmt->bind_param('s', $cid);
 $stmt->execute();
@@ -147,7 +147,7 @@ $row =$result->fetch_assoc();
 
         <form action="../php/admin/change_update.php" method="post" enctype="multipart/form-data">
             <div class="mid_Box">
-
+                <input type="hidden" name="change_cName" value="<?= $row['cid'] ?>">
                 <div class="input_Box">
                     <label for="pname">產品名稱</label>
                     <input type="text" id="cname" name="cname" placeholder="請輸入產品名稱"value="<?= $row['cName'] ?>" required />

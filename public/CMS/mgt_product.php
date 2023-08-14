@@ -111,7 +111,7 @@
 <?php
 require('../php/db2.php');
 
-$sql = "select * from cake";
+$sql = "select * from cake where not cName='現場選擇品項'";
 
 $stmt = $mysqli->prepare($sql);
 $stmt->execute();
