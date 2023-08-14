@@ -13,7 +13,7 @@
   <link rel="stylesheet" type="text/css"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  
+
 </head>
 
 <body>
@@ -32,7 +32,7 @@
     </div>
     <div class="navbarLink">
       <ul id="login_check" name="login_check"></ul>
-  </div>
+    </div>
   </nav>
 
   <!-- Main  -->
@@ -87,7 +87,7 @@
           <div class="flip-card">
             <div class="flip-card-inner">
               <div class="flip-card-front">
-                <img src="../image/menuImg/menuInfo1.jpg" />
+                <img id="expimg1" />
               </div>
               <div class="flip-card-back" id="exp1"></div>
             </div>
@@ -95,7 +95,7 @@
           <div class="flip-card">
             <div class="flip-card-inner">
               <div class="flip-card-front">
-                <img src="../image/menuImg/menuInfo1.jpg" />
+                <img id="expimg2" />
               </div>
               <div class="flip-card-back" id="exp2"></div>
             </div>
@@ -103,7 +103,7 @@
           <div class="flip-card">
             <div class="flip-card-inner">
               <div class="flip-card-front">
-                <img src="../image/menuImg/menuInfo1.jpg" />
+                <img id="expimg3" />
               </div>
               <div class="flip-card-back" id="exp3"></div>
             </div>
@@ -216,8 +216,12 @@
         document.getElementById("exp1").innerHTML = html1;
         document.getElementById("exp2").innerHTML = html2;
         document.getElementById("exp3").innerHTML = html3;
+        document.getElementById("expimg1").src = data[0].cImg1;
+        document.getElementById("expimg2").src = data[1].cImg1;
+        document.getElementById("expimg3").src = data[2].cImg1;
       }
     };
+    
     xhr.open("GET", "././php/mainpage/random.php", true);
     xhr.send();
   }
@@ -284,29 +288,30 @@
       },
     });
   });
+
 </script>
 
 <!--block fade in -->
 <script>
-  $(document).ready(function() {
+  $(document).ready(function () {
     /* For each element with the class 'fadeIn' */
-    $('.fadeIn').each(function() {
+    $('.fadeIn').each(function () {
       var element = $(this);
       element.css('opacity', 0); // 設定初始透明度為 0
-  
-      $(window).scroll(function() {
+
+      $(window).scroll(function () {
         var bottom_of_element = element.offset().top + element.outerHeight();
         var bottom_of_window = $(window).scrollTop() + $(window).height();
         var top_of_element = element.offset().top;
-  
+
         /* If the top of the object enters the window, fade it in */
         if (bottom_of_window > top_of_element) {
-          element.animate({'opacity':'1'}, 700);
+          element.animate({ 'opacity': '1' }, 700);
         }
       });
     });
   });
-  </script>
+</script>
 
 <script src="../resources/js/login.js"></script>
 <script src="../resources/js/navbar.js"></script>
