@@ -56,10 +56,11 @@ var_dump($oInfo);
     <link rel="stylesheet" href="../resources/css/reserve2.css">
     <link rel="stylesheet" href="../resources/css/footer2.css">
     <link rel="stylesheet" href="../resources/css/topBtn.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
     <script>
-        $(function() {
+        $(function () {
             const cInfoSid = <?= $cInfo[0]["sid"] ?>;
             $("#hidden").hide();
             let data;
@@ -77,14 +78,14 @@ var_dump($oInfo);
                 var view1 = '<option style="display: none;">請選擇製作份數</option>';
             <?php } ?>
             var numList = [];
-            for (var i = Math.round(people / 2); i <= people; i++) {
-                view1 += `
+        for (var i = Math.round(people / 2); i <= people; i++) {
+            view1 += `
                             <option value=${i}>${i}份</option>
                         `;
-            }
-            document.getElementById("makeNum").innerHTML = view1;
+        }
+        document.getElementById("makeNum").innerHTML = view1;
 
-            var mNum = $("#makeNum option:selected").val();
+        var mNum = $("#makeNum option:selected").val();
             <?php if (isset($oInfo) && !empty($oInfo)) { ?>
                 var optionsCid = <?php echo json_encode(array_column($oInfo, 'cid')); ?>;
                 var optionsName = <?php echo json_encode(array_column($oInfo, 'cName')); ?>;
@@ -98,30 +99,31 @@ var_dump($oInfo);
                 $("#addnewdiv").hide();
 
                 for (let a = 1; a < mNum; a++) {
-                    if (typeof(optionsName[a]) === 'undefined') {
+                    if (typeof (optionsName[a], optionsCid[a]) === 'undefined') {
+                        optionsCid[a] = '';
                         optionsName[a] = '';
                     }
                     view4 += `
-                    <div id="newbase">
-                        <div id="newdiv${a}" class="newdivArea">
-                            <label for="newCakeName${a}">選擇產品</label>
-                                <select id="newCakeName${a}" name="newCakeName${a}" class="newSelect">
-                                <?php if (isset($oInfo) && !empty($oInfo)) { ?>
-                                    <option style="display: none;" value="${optionsCid[a]}">${optionsName[a]}</option>
-                                <?php } else { ?>
-                                    <option style="display: none;" value="">請選擇產品</option>
-                                <?php } ?>
-                                    <optgroup label="蛋糕" id="newCake${a}">
-                                    <optgroup label="點心" id="newDessert${a}">
-                                </select>
-                                <br>
-                            <label for="newNum${a}">選擇份數</label>
-                                <select id="newNum${a}" name="newNum${a}" class="newSelect"></select>
-                                <br>
-                                <input type="button" id="hideNewDiv${a}" value="移除" onClick="hideNewDivs(${a})" class="removeBtn"/>
-                        </div>
-                    </div>
-                    `;
+                            <div id="newbase">
+                                <div id="newdiv${a}" class="newdivArea">
+                                    <label for="newCakeName${a}">選擇產品</label>
+                                        <select id="newCakeName${a}" name="newCakeName${a}" class="newSelect">
+                                        <?php if (isset($oInfo) && !empty($oInfo)) { ?>
+                                                <option style="display: none;" value="${optionsCid[a]}">${optionsName[a]}</option>
+                                        <?php } else { ?>
+                                                <option style="display: none;" value="">請選擇產品</option>
+                                        <?php } ?>
+                                            <optgroup label="蛋糕" id="newCake${a}">
+                                            <optgroup label="點心" id="newDessert${a}">
+                                        </select>
+                                        <br>
+                                    <label for="newNum${a}">選擇份數</label>
+                                        <select id="newNum${a}" name="newNum${a}" class="newSelect"></select>
+                                        <br>
+                                        <input type="button" id="hideNewDiv${a}" value="移除" onClick="hideNewDivs(${a})" class="removeBtn"/>
+                                </div>
+                            </div>
+                            `;
                 }
                 $("#newChoose").html(view4);
                 $("#companion").val(people - mNum);
@@ -131,14 +133,17 @@ var_dump($oInfo);
                                     <optgroup label="點心" id="dessert">`;
                 let viewBaseN = `<option style="display: none;" value="">請選擇數量</option>`;
             <?php } ?>
+            // console.log(viewBaseC, viewBaseN);
             document.getElementById("cakeName").innerHTML = viewBaseC;
             document.getElementById("num").innerHTML = viewBaseN;
 
-            for (let i = 1; i < optionsNum.length; i++) {
-                universalNums(i);
-            }
+            <?php if (isset($oInfo) && !empty($oInfo)) { ?>
+                for (let i = 1; i < mNum ; i++) {
+                    universalNums(i);
+                }
+            <?php } ?>
 
-            $("#makeNum").on('change', function(e) {
+            $("#makeNum").on('change', function (e) {
                 let mNum = $("#makeNum option:selected").val();
                 let people = $("#people").val();
                 let view4 = '';
@@ -146,20 +151,24 @@ var_dump($oInfo);
                 newNameFilled = false;
                 currentDivIndex = 0;
 
-                for (let i = 0; i < mNum; i++) {
-                    universalNums(i);
-                }
-
                 for (let a = 1; a < mNum; a++) {
+
+                <?php if (isset($oInfo) && !empty($oInfo)) { ?>
+                        if (typeof (optionsName[a], optionsCid[a]) === 'undefined') {
+                                optionsCid[a] = '';
+                                optionsName[a] = '';
+                            }
+                <?php } ?>
+
                     view4 += `
                     <div id="newbase">
                         <div id="newdiv${a}" style="display:none" class="newdivArea">
                             <label for="newCakeName${a}">選擇產品</label>
                                 <select id="newCakeName${a}" name="newCakeName${a}" class="newSelect">
                                 <?php if (isset($oInfo) && !empty($oInfo)) { ?>
-                                    <option style="display: none;" value="${optionsCid[a]}">${optionsName[a]}</option>
+                                        <option style="display: none;" value="${optionsCid[a]}">${optionsName[a]}</option>
                                 <?php } else { ?>
-                                    <option style="display: none;" value="">請選擇產品</option>
+                                        <option style="display: none;" value="">請選擇產品</option>
                                 <?php } ?>
                                     <optgroup label="蛋糕" id="newCake${a}">
                                     <optgroup label="點心" id="newDessert${a}">
@@ -175,7 +184,13 @@ var_dump($oInfo);
                 }
                 $("#newChoose").html(view4);
 
+
+                for (let i = 1; i < mNum; i++) {
+                    universalNums(i);
+                }
+
                 if (mNum == 1) {
+                    universalNums(0);
                     $("#addnewdiv").hide();
                 } else {
                     $("#addnewdiv").show();
@@ -185,133 +200,124 @@ var_dump($oInfo);
                 $("#hidden").show();
             })
 
-            fetch(`./php/reserve/storeToCake_sql.php?indexInfo=${cInfoSid}`)
-                .then(function(response) {
-                    return response.json();
-                })
-                .then(function(responseData) {
-                    data = responseData;
-                    universalOptions();
-                })
+        fetch(`./php/reserve/storeToCake_sql.php?indexInfo=${cInfoSid}`)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (responseData) {
+                data = responseData;
+                universalOptions();
+            })
 
-            document.getElementById("addnewdiv").onclick = function(e) {
-                nextNewNumber();
+        document.getElementById("addnewdiv").onclick = function (e) {
+            nextNewNumber();
+        }
+
+        function nextNewNumber() {
+            var mNum = parseInt($("#makeNum option:selected").val(), 10);
+            const newDivs = $("[id^='newdiv']");
+            
+            // console.log(currentDivIndex,mNum);
+            if (currentDivIndex < mNum) {
+                $(newDivs[currentDivIndex]).show();
+                currentDivIndex += 1;
+                universalOptions(currentDivIndex);
+                universalNums(currentDivIndex);
             }
-
-            function nextNewNumber() {
-                var mNum = $("#makeNum option:selected").val();
-                const newDivs = $("[id^='newdiv']");
-
-                if (currentDivIndex < mNum) {
-                    $(newDivs[currentDivIndex]).show();
-                    currentDivIndex += 1;
-                    universalOptions();
-                    universalNums();
-
+            if (currentDivIndex == mNum - 1) {
+                $("#addnewdiv").hide();
+                currentDivIndex += 2;
+            } else if (currentDivIndex > mNum) {
+                let hideNewDivIndex = [];
+                for (let i = 0; i < mNum; i++) {
+                    if ($(newDivs[i]).is(':hidden')) {
+                        hideNewDivIndex.push(i);
+                    }
                 }
-                if (currentDivIndex == mNum - 1) {
+                $(newDivs[hideNewDivIndex.shift()]).show();
+
+                if (hideNewDivIndex.length === 0) {
                     $("#addnewdiv").hide();
-                    currentDivIndex += 2;
-                } else if (currentDivIndex > mNum) {
-                    let hideNewDivIndex = [];
-                    for (let i = 0; i < mNum; i++) {
-                        if ($(newDivs[i]).is(':hidden')) {
-                            hideNewDivIndex.push(i);
-                        }
-                    }
-                    $(newDivs[hideNewDivIndex.shift()]).show();
+                }
+            }
+        }
 
-                    if (hideNewDivIndex.length === 0) {
-                        $("#addnewdiv").hide();
-                    }
+        function universalOptions() {
+            var mNum = $("#makeNum option:selected").val();
+
+            let cakeView = '';
+            let dessertView = '';
+
+            data.forEach(function (e) {
+                switch (e.kind) {
+                    case '蛋糕':
+                        cakeView += `
+                                <option value="${e.cid}">${e.cName}</option>
+                            `;
+                        break;
+                    case '點心':
+                        dessertView += `
+                                <option value="${e.cid}">${e.cName}</option>
+                            `;
+                        break;
+                }
+            });
+
+            function fillOptions(eleId, options) {
+                const element = document.getElementById(eleId);
+                if (element) {
+                    element.innerHTML = options;
                 }
             }
 
-            function universalOptions() {
-                var mNum = $("#makeNum option:selected").val();
-
-                let cakeView = '';
-                let dessertView = '';
-
-                data.forEach(function(e) {
-                    switch (e.kind) {
-                        case '蛋糕':
-                            cakeView += `
-                                <option value="${e.cid}">${e.cName}</option>
-                            `;
-                            break;
-                        case '點心':
-                            dessertView += `
-                                <option value="${e.cid}">${e.cName}</option>
-                            `;
-                            break;
-                    }
-                });
-
-                function fillOptions(eleId, options) {
-                    const element = document.getElementById(eleId);
-                    if (element) {
-                        element.innerHTML = options;
-                    }
-                }
-
-                if (!nameFilled) {
-                    fillOptions("cake", cakeView);
-                    fillOptions("dessert", dessertView);
-                    nameFilled = true;
-                }
-
-                if (!newNameFilled) {
-                    for (let x = 0; x < mNum; x++) {
-                        fillOptions("newCake" + x, cakeView);
-                        fillOptions("newDessert" + x, dessertView);
-                        newNameFilled = true;
-                    }
-                }
+            if (!nameFilled) {
+                fillOptions("cake", cakeView);
+                fillOptions("dessert", dessertView);
+                nameFilled = true;
             }
 
-            function universalNums(e) {
-                var mNum = $("#makeNum option:selected").val();
-                let viewB = '';
+            if (!newNameFilled) {
+                for (let x = 0; x < mNum; x++) {
+                    fillOptions("newCake" + x, cakeView);
+                    fillOptions("newDessert" + x, dessertView);
+                    newNameFilled = true;
+                }
+            }
+        }
+
+        function universalNums(e) {
+            var mNum = $("#makeNum option:selected").val();
 
                 <?php if (isset($oInfo) && !empty($oInfo)) { ?>
-                    if (typeof(optionsNum[e]) === 'undefined') {
+                    let viewB = `<option style="display: none;" value="${optionsNum[0]}">${optionsNum[0]}份</option>`;
+                    if (typeof (optionsNum[e]) === 'undefined') {
                         optionsNum[e] = "";
                     }
                     let view2 = `<option style="display: none;" value="${optionsNum[e]}">${optionsNum[e]}份</option>`;
-
                 <?php } else { ?>
                     let viewB = `<option style="display: none;" value="">品項數量</option>`;
                     let view2 = `<option style="display: none;" value="">品項數量</option>`;
                 <?php } ?>
 
                 for (let i = 1; i <= mNum; i++) {
-                    viewB += `
+                viewB += `
                         <option value=${i}>${i}份</option>
                     `;
-                    view2 += `
+                view2 += `
                         <option value=${i}>${i}份</option>
                     `;
                 }
 
-                const numElement = document.getElementById("num");
-                if (numElement) {
-                    numElement.innerHTML = viewB;
-                }
-
-                if (e === '') {
-                    const newNumElement = document.getElementById("newNum" + e);
-                    newNumElement.innerHTML = view2;
-                } else {
-                    for (let x = 0; x < mNum; x++) {
-                        const newNumElement = document.getElementById("newNum" + x);
-                        if (newNumElement) {
-                            newNumElement.innerHTML = view2;
-                        }
-                    }
-                }
-
+            const numElement = document.getElementById("num");
+            if (numElement) {
+                numElement.innerHTML = viewB;
             }
+
+            if(e !== 0){
+                const newNumElement = document.getElementById("newNum" + e);
+                newNumElement.innerHTML = view2;
+            }
+        }
         });
 
         function hideNewDivs(num) {
@@ -319,10 +325,10 @@ var_dump($oInfo);
             $("#addnewdiv").show();
         }
 
-        window.onload = function(e) {
+        window.onload = function (e) {
             let isSubmitting = false;
             const submitBtn = document.getElementById('submitBtn');
-            submitBtn.onclick = function(e) {
+            submitBtn.onclick = function (e) {
                 e.preventDefault();
 
                 if (isSubmitting) {
@@ -367,13 +373,13 @@ var_dump($oInfo);
                     return;
                 } else {
                     fetch('./php/reserve/insertOrdersCake.php', {
-                            method: "POST",
-                            body: formData
-                        })
-                        .then(function(response) {
+                        method: "POST",
+                        body: formData
+                    })
+                        .then(function (response) {
                             return response.text();
                         })
-                        .then(function(data) {
+                        .then(function (data) {
                             if (data == "reserveTotal.php") {
                                 isSubmitting = true;
                                 $("#submitButton").disabled = true;
