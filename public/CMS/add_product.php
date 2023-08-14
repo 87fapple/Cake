@@ -15,6 +15,13 @@
 <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
+<script src="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.all.min.js
+"></script>
+<link href="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.min.css
+" rel="stylesheet">
+
 
 <style>
     .container {
@@ -93,10 +100,15 @@
         z-index: 3;
     }
 
+    .img_Box img {
+      width: 200px;
+      height: 140px; 
+    }
+
 
     .box form div input[type="submit"] {
         width: 80px;
-        margin-top: 16px;
+        margin-top: 52px;
         padding: 4px;
         border: 2px solid #ffa237;
         border-radius: 6px;
@@ -104,8 +116,8 @@
     }
 
     .box form div input[type="submit"]:hover {
-        border: 2px solid #fff5d6c4;
-        background-color: #fff5d6c4;
+        border: 2px solid #ffbf00;
+        background-color: #ffbf00;
     }
 
     .img_Box span:after{
@@ -130,8 +142,8 @@
 <body>
     <div class="container box" id="changeForm">
         <h2>新增產品資訊</h2>
-
-        <form action="../php/admin/add.php" method="post" enctype="multipart/form-data">
+        <form id="add_form" method="post" enctype="multipart/form-data">
+          <!-- action="../php/admin/add.php" -->
             <div class="mid_Box">
 
                 <div class="input_Box">
@@ -141,7 +153,7 @@
 
                 <div class="input_Box">
                     <label for="price">產品價格</label>
-                    <input type="number" id="price" name="price" step="10" placeholder="請輸入價格" required />
+                    <input type="number" id="price" name="price" step="1" placeholder="請輸入價格" required />
                 </div>
 
                 <div class="input_Box">
@@ -185,16 +197,16 @@
             </div>
 
             <div class="mid_Box">
-                <label for="cImg1">上傳產品照片</label>
-                <div class="img_Box">
+              <div class="img_Box">
+                    <label for="cImg1">上傳產品照片</label>
+                    <img id="img1" src="../../image/defaultImg.jpeg" alt="未上傳圖片" />
                     <input accept="image/*" type="file" id="cImg1" name="cImg1" />
-                    <img id="img1" src="" style="max-width: 160px" alt="未上傳圖片" />
-                    <span></span>
+                    <!-- <span></span> -->
                 </div>
                 <div class="img_Box">
+                    <img id="img2" src="../../image/defaultImg.jpeg" alt="未上傳圖片" />
                     <input type="file" id="cImg2" name="cImg2" />
-                    <img id="img2" src="" style="max-width: 160px" alt="未上傳圖片" />
-                    <span></span>
+                    <!-- <span></span> -->
                 </div>
             </div>
 
@@ -204,7 +216,7 @@
                 </center>
             </div>
         </form>
-    </div>
+      </div>
 </body>
 
 
@@ -236,4 +248,37 @@
     fr.readAsDataURL(file);
     console.log('ok');
   });
+
+$(document).ready(function(){
+  $("#add_form").on("submit", function(e){
+      e.preventDefault();
+      dataString = jQuery('form#add_form').serialize();
+      jQuery.ajax({
+          type: "POST",
+          url: "/Cake/public/php/admin/add.php",
+          data: dataString,
+          success:  function(data)
+          { 
+            Swal.fire({
+              title: "修改成功",
+              text: "3秒後自動跳轉產品頁面",
+              icon: "success",
+              confirmButtonText: "回到上一頁",
+            }).then( () => {
+                window.location = "mgt_product.php"
+            }).then(setTimeout(() => {
+                window.location = "mgt_product.php"
+            }, 3000))
+          },
+          error:  function(data)
+          { 
+            Swal.fire(
+              "上傳失敗", //標題 
+              "請重新上傳", //訊息內容(可省略)
+              "error" //圖示 success/info/warning/error/question
+            )
+          }
+      }); 
+  });
+});
 </script>
