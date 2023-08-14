@@ -15,10 +15,10 @@ $cImg2 = $_FILES['cImg2']['tmp_name'];
 
 if( isset($cImg1) and isset($cImg2)){
     move_uploaded_file($cImg1,"../../../image/cake_add/".$_FILES["cImg1"]["name"]);
-    $c1 = "../../../image/cake_add/".$_FILES["cImg1"]["name"];
+    $c1 = "../image/cake_add/".$_FILES["cImg1"]["name"];
     // echo $c1 ."<br/>";
     move_uploaded_file($cImg2,"../../../image/cake_add/".$_FILES["cImg2"]["name"]);
-    $c2 = "../../../image/cake_add/".$_FILES["cImg2"]["name"];
+    $c2 = "../image/cake_add/".$_FILES["cImg2"]["name"];
     // echo $c2;
 
     $sql="update cake set cName = ? ,price = ? ,kind = ? ,cSize = ? ,cImg1 = ? ,cImg2 = ? ,feature = ? ,level = ? ,material = ?  where cid = ?";
@@ -27,7 +27,7 @@ if( isset($cImg1) and isset($cImg2)){
     $stmt->execute();
 }if(!isset($cImg1) and isset($cImg2)){
     move_uploaded_file($cImg2,"../../../image/cake_add/".$_FILES["cImg2"]["name"]);
-    $c2 = "../../../image/cake_add/".$_FILES["cImg2"]["name"];
+    $c2 = "../image/cake_add/".$_FILES["cImg2"]["name"];
     // echo $c2;
     $sql="update cake set cName = ? ,price = ? ,kind = ? ,cSize = ?  ,cImg2 = ? ,feature = ? ,level = ? ,material = ?  where cid = ?";
     $stmt=$mysqli->prepare($sql);
@@ -35,7 +35,7 @@ if( isset($cImg1) and isset($cImg2)){
     $stmt->execute();
 }if(isset($cImg1) and !isset($cImg2)){
     move_uploaded_file($cImg1,"../../../image/cake_add/".$_FILES["cImg1"]["name"]);
-    $c1 = "../../../image/cake_add/".$_FILES["cImg1"]["name"];
+    $c1 = "../image/cake_add/".$_FILES["cImg1"]["name"];
     echo $c1 ."<br/>";
 
     $sql="update cake set cName = ? ,price = ? ,kind = ? ,cSize = ? ,cImg1 = ?  ,feature = ? ,level = ? ,material = ?  where cid = ?";

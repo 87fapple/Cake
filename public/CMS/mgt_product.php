@@ -122,7 +122,7 @@ $result = $stmt->get_result();
 <body>
     <div class="container">
         <div class="title">
-            <h2 style="">
+            <h2>
                 <center />產品總覽
             </h2>
             <a href="add_product.php">新增品項</a>
@@ -142,9 +142,14 @@ $result = $stmt->get_result();
             <tbody>
                 <?php
                 while ($row = $result->fetch_assoc()) {
+                    if ($row['remove'] == 0) {
+                        $remove = '<a>下架</a>';
+                    } else {
+                        $remove = '<a>上架</a>';
+                    }
                     echo
                     '<tr>
-                            <td />' . $row['cid'] .
+                         <td />' . $row['cid'] .
                         '<td />' . $row['cName'] .
                         '<td />' . $row['price'] .
                         '<td />' . $row['kind'] .
@@ -152,7 +157,8 @@ $result = $stmt->get_result();
                         '<td />' . $row['level'] .
                         '<td align="right" width="100px" />
                             <a href="change_product.php?cid=' . $row['cid'] . '" )">修改</a>
-                            <a  onclick="delet(' . $row['cid'] . ')">刪除</a>
+                            ' . $remove . '
+                            <a style="background-color:red;color:white" onclick="delet(' . $row['cid'] . ')">刪除</a>
                         </tr>';
                 }
                 ?>
@@ -165,11 +171,19 @@ $result = $stmt->get_result();
     function delet(cid) {
         this.cid = cid;
         layer.open({
-            content: '確定要刪除嗎',
+            title: '警告',
+            content: '刪除後就無法回復',
             btn: ['確定', '取消'],
             yes: function(index, layero) {
-                //按钮【按钮一】的回调
-                location.replace("../php/admin/delete.php?cid=" + cid);
+                layer.open({
+                    title: '這是最後一次警告',
+                    content: '確定要刪除嗎?',
+                    btn: ['確定', '取消'],
+                    yes: function(index, layero) {
+                        //按钮【按钮一】的回调
+                        location.replace("../php/admin/delete.php?cid=" + cid);
+                    }
+                });
             }
         });
     }
