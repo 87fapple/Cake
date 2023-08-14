@@ -1,8 +1,8 @@
 <?php
 require('../db2.php');
 
-$sql = "SELECT e.*, u.uName FROM exp AS e
-JOIN userinfo AS u ON e.uid = u.uid
+$sql = "SELECT e.*, u.uName, c.cImg1 FROM exp AS e
+JOIN userinfo AS u ON e.uid = u.uid JOIN cake AS c ON e.cid = c.cid
 ORDER BY RAND() LIMIT 3";
 $stmt = $mysqli->prepare($sql);
 $stmt->execute();
