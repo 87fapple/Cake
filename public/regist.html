@@ -54,6 +54,9 @@
               type="text"
               placeholder="請輸入電子信箱"
               name="email"
+              onfocus="re()"
+              id="email"
+              value=""
               required
             />
             <span style="color: red">*</span>
@@ -62,6 +65,8 @@
               type="text"
               placeholder="請輸入會員暱稱"
               name="uname"
+              id="uname"
+              value=""
               required
             />
             <span style="color: red">*</span>
@@ -70,6 +75,8 @@
               type="phone"
               placeholder="請輸入手機號碼"
               name="phone"
+              id="phone"
+              value=""
               required
             />
             <span style="color: red">*</span>
@@ -89,6 +96,7 @@
               placeholder="請再次輸入密碼"
               name="pwd2"
               id="pwd2"
+              value=""
               required
             />
             <span id="check"></span>
@@ -99,7 +107,14 @@
             </p>
           </div>
 
-          <button id="submit" type="submit" class="signupbtn" onclick="checkpwd()">註冊</button>
+          <button
+            id="submit"
+            type="submit"
+            class="signupbtn"
+            onclick="checkpwd()"
+          >
+            註冊
+          </button>
         </div>
       </form>
     </div>
@@ -138,7 +153,6 @@
   <script src="../resources/js/topBtn.js"></script>
   <script src="../resources/js/navbar.js"></script>
   <script>
-    
     function checkpwd() {
       const pwd1 = document.getElementById("pwd1").value;
       const pwd2 = document.getElementById("pwd2").value;
@@ -148,10 +162,23 @@
       if (pwd1 === pwd2) {
         console.log("成功");
       } else {
-        check.innerHTML = "<span style='*color:red'>密碼不相同</span>";
-        console.log('失敗');
+        check.innerHTML = "<span style='color:red'>***密碼不相同***</span>";
+        console.log("失敗");
         event.preventDefault();
       }
+    }
+
+    function re() {
+      const email = document.getElementById("email");
+      const uname = document.getElementById("uname");
+      const phone = document.getElementById("phone");
+      const pwd1 = document.getElementById("pwd1");
+      const pwd2 = document.getElementById("pwd2");
+      email.value = "cakeprojectphpd05@gmail.com";
+      uname.value = "王曉明";
+      phone.value = "0912345678";
+      pwd1.value = "aaaaaaaa";
+      pwd2.value = "aaaaaaaa";
     }
   </script>
 </html>
