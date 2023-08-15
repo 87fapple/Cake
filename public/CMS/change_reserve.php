@@ -6,10 +6,16 @@
 
 <?php session_start(); ?>
 <?php
-$token = isset($_COOKIE['token']) ? $_COOKIE['token'] : 'undefined';
-if ($token !== 'undefined') {
-    require('../php/DB.php');
-}
+// if (!$_COOKIE['token']) {
+//     header('Location: /Cake/public/login.html');
+//     die();
+// }
+// if (!$_COOKIE["oToken"]) {
+//     header('Location: /Cake/public/history.php');
+//     die();
+// }
+
+require('../php/DB.php');
 
 $oInfo = [];
 if (isset($_GET['oToken'])) {
@@ -29,9 +35,6 @@ if (isset($_GET['oToken'])) {
 // var_dump($oInfo[0]);
 ?>
 
-<!DOCTYPE html>
-<html>
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,7 +44,7 @@ if (isset($_GET['oToken'])) {
     <!-- <link rel="stylesheet" href="jqueryui/style.css"> -->
 
 
-    <link rel="stylesheet" href="../resources/css/reserve1.css">
+    <link rel="stylesheet" href="../../resources/css/reserve1.css">
 
 
     <link rel="stylesheet" type="text/css"
@@ -92,9 +95,9 @@ if (isset($_GET['oToken'])) {
                     $("#selectedDate").val(formattedDate);
 
                     <?php if (isset($oInfo[0]["oToken"])) { ?>
-                        fetch(`../php/reserve/storeToTime.php?sid=${optsLocalVal}&fDate=${fromdate}&peopleNum=${optsPersonVal}&checkedoToken=<?= $oInfo[0]["oToken"]; ?>`)
+                        fetch(`storeToTime.php?sid=${optsLocalVal}&fDate=${fromdate}&peopleNum=${optsPersonVal}&checkedoToken=<?= $oInfo[0]["oToken"]; ?>`)
                     <?php } else { ?>
-                        fetch(`../php/reserve/storeToTime.php?sid=${optsLocalVal}&fDate=${fromdate}&peopleNum=${optsPersonVal}`)
+                        fetch(`/storeToTime.php?sid=${optsLocalVal}&fDate=${fromdate}&peopleNum=${optsPersonVal}`)
                     <?php } ?>
                         .then(function (response) {
                             return response.json();
@@ -121,7 +124,7 @@ if (isset($_GET['oToken'])) {
                         })
                 });
 
-                fetch('../php/reserve/store_sql.php')
+                fetch('store_sql.php')
                     .then(function (response) {
                         return response.json();
                     })
@@ -145,7 +148,7 @@ if (isset($_GET['oToken'])) {
                         $("#selectedDate").val($.datepicker.formatDate("yy-mm-dd", defaultDate));
                     }
 
-                    fetch('../php/reserve/createOrder.php', {
+                    fetch('createOrder.php', {
                         method: "POST",
                         body: new FormData(ordersForm)
                     })
@@ -237,5 +240,4 @@ if (isset($_GET['oToken'])) {
             </div>
         </form>
     </div>
-
 </body>
