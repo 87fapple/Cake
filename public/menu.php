@@ -200,8 +200,8 @@ $result = $stmt->get_result();
                     <div class="menuInfoContent" id="menuInfoContent">
                         <ul class="menuInfo" id="menuInfo">
                             <li class="titleName">${cake.cName}</li>
-                            <li class="scdName">難度${level}</li>
-                            <li class="scdName">$${cake.price}</li>
+                            <li class="scdName">難度 ${level}</li>
+                            <li class="scdName">$ ${cake.price}</li>
                         </ul>
                     </div>
                 </div>
