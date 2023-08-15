@@ -5,14 +5,14 @@ require_once('../db2.php');
 $kind = $_REQUEST['kind'];
 
 $sql = '';
-if($kind == '全部') {
+if($kind == '') {
     $sql = "SELECT * FROM cake";
 } else {
     $sql = "SELECT * FROM cake WHERE kind = ?";
 }
 
 $stmt = $mysqli->prepare($sql);
-if($kind != '全部') {
+if($kind != '') {
     $stmt->bind_param('s', $kind);
 }
 

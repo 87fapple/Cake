@@ -6,7 +6,7 @@ $kind = $_REQUEST['kind'];
 
 // 根据排序方式参数和种类参数生成不同的排序SQL语句
 if ($sortType === 'priceAsc') {
-    if ($kind !== '' &&  $kind !== '全部') {
+    if ($kind !== '' ) {
         // 如果种类参数不为空，则按种类和价格升序排序
         $sql = "SELECT * FROM cake WHERE kind = ? ORDER BY price ASC";
     } else {
@@ -14,7 +14,7 @@ if ($sortType === 'priceAsc') {
         $sql = 'SELECT * FROM cake ORDER BY price ASC';
     }
 } else if ($sortType === 'priceDesc') {
-    if ($kind !== '' && $kind !== '全部') {
+    if ($kind !== '' ) {
         // 如果种类参数不为空，则按种类和价格降序排序
         $sql = "SELECT * FROM cake WHERE kind = ? ORDER BY price DESC";
     } else {
@@ -22,7 +22,7 @@ if ($sortType === 'priceAsc') {
         $sql = 'SELECT * FROM cake ORDER BY price DESC';
     }
 } else if ($sortType === 'levelAsc') {
-    if ($kind !== '' && $kind !== '全部') {
+    if ($kind !== '' ) {
         // 如果种类参数不为空，则按种类和難度降序排序
         $sql = "SELECT * FROM cake WHERE kind = ? ORDER BY level ASC";
     } else {
@@ -30,7 +30,7 @@ if ($sortType === 'priceAsc') {
         $sql = 'SELECT * FROM cake ORDER BY level DESC';
     }
 } else if ($sortType === 'levelDesc') {
-    if ($kind !== '' && $kind !== '全部') {
+    if ($kind !== '' ) {
         // 如果种类参数不为空，则按种类和難度降序排序
         $sql = "SELECT * FROM cake WHERE kind = ? ORDER BY level DESC";
     } else {

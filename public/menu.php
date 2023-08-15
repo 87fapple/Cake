@@ -50,7 +50,7 @@ $result = $stmt->get_result();
             <div class="kindBlock">
                 <div><b>選擇種類：</b></div>
                 <label class="container">全品項
-                    <input type="radio" checked="checked" name="radio" id="cake" onclick="kindFilter('全部')">
+                    <input type="radio" checked="checked" name="radio" id="cake" onclick="kindFilter('')">
                     <span class="checkmark"></span>
                 </label>
                 <label class="container">蛋糕
@@ -189,7 +189,7 @@ $result = $stmt->get_result();
                 level = '★★★';
             }
 
-            if (cake.cid === 0) {
+            if (cake.cid == 0) {
                 return;
             }
 
