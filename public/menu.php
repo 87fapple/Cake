@@ -2,9 +2,7 @@
 require_once('php/db2.php');
 
 $sql = 'select * from cake';
-// $result = $mysqli->query($sql);
 $stmt = $mysqli->prepare($sql);
-// $stmt->bind_param('s', $token);
 $stmt->execute();
 $result = $stmt->get_result();
 ?>
@@ -57,20 +55,26 @@ $result = $stmt->get_result();
         <div class="kindNavbar" id="kindNavbar">
             <div class="kindBlock">
                 <div><b>選擇種類：</b></div> 
+                <label class="container">全品項
+                    <input type="radio" checked="checked" name="radio" id="cake" onclick="kindFilter('全部')">   
+                    <span class="checkmark"></span>
+                </label>
                 <label class="container">蛋糕
-                    <input type="radio" checked="checked" name="radio" id="cake" onclick="kindCake()">   
+                    <input type="radio" name="radio" id="cake" onclick="kindFilter('蛋糕')">   
                     <span class="checkmark"></span>
                 </label>
                 <label class="container">點心
-                    <input type="radio" name="radio" id="cookie" onclick="kindCookie()">
+                    <input type="radio" name="radio" id="cookie" onclick="kindFilter('點心')">
                     <span class="checkmark"></span>
                 </label>
             </div>
             <div class="dropdown">
                 <button class="dropbtn">排序方式</button>
                 <div class="dropdown-content">
-                    <a herf="javascript:void(0);" onclick="priceSort('asc')">價格：由低到高</a>
-                    <a herf="javascript:void(0);" onclick="priceSort('desc')">價格：由高到低</a>
+                    <a herf="javascript:void(0);" onclick="cakeSort('priceAsc')">價格：由低到高</a>
+                    <a herf="javascript:void(0);" onclick="cakeSort('priceDesc')">價格：由高到低</a>
+                    <a herf="javascript:void(0);" onclick="cakeSort('levelAsc')">難度：由低到高</a>
+                    <a herf="javascript:void(0);" onclick="cakeSort('levelDesc')">難度：由高到低</a>
                 </div>
             </div>
         </div>
@@ -136,25 +140,11 @@ $result = $stmt->get_result();
         </div>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // 在這裡放你的 JavaScript 程式碼，包括綁定點擊事件
-            // 例如：綁定點擊事件到已生成的 menuInfoDiv
-            const menuInfoDivs = document.querySelectorAll('.menuInfoDiv');
-            menuInfoDivs.forEach(div => {
-                const cakeId = div.getAttribute('data-cakeid');
-                div.addEventListener('click', function () {
-                    showProductDetail(cakeId);
-                });
-            });
-        });
-    </script>
 </body>
 <script src="../resources/js/navbar.js"></script>
 <script src="../resources/js/topBtn.js"></script>
     
 <script>
-
 // 在此添加全局变量来记录客人点击的种类
 let selectedKind = '';
 
@@ -170,18 +160,10 @@ function kindFilter(kind) {
         .catch(error => console.error('請求失敗：', error));
 }
 
-function kindCake() {
-    kindFilter('蛋糕');
-}
-
-function kindCookie() {
-    kindFilter('點心');
-}
-
 // 接收排序方式参数，價格排序ajax 3.0 
-function priceSort(sortType) {
+function cakeSort(sortType) {
     // 增加種類參數
-    fetch(`php/menu/pricesort.php?sortType=${sortType}&kind=${selectedKind}`)
+    fetch(`php/menu/cakesort.php?sortType=${sortType}&kind=${selectedKind}`)
         .then(response => response.json())
         .then(sortedCakes => {
             renderCakes(sortedCakes);
@@ -194,9 +176,13 @@ function renderCakes(cakes) {
     var menuBlock2 = document.querySelector('.menuBlock2');
     menuBlock2.innerHTML = '';
 
+    if (cake.cid === 0) {
+            return;
+    }
+    
     cakes.forEach(cake => {
         menuBlock2.innerHTML += `
-        // <div class="backgroundDiv">
+         <div class="backgroundDiv">
             <div class="menuInfoDiv" id="menuInfo" data-cakeid="${cake.cid}" > <!-- 添加data-cakeid屬性 -->
                 <a href="javascript:void(0);" onclick="showProductDetail(${cake.cid})"><img src="${cake.cImg1}"></a> 
                 <div class="menuInfoContent" id="menuInfoContent">
@@ -207,7 +193,7 @@ function renderCakes(cakes) {
                     </ul>
                 </div>
             </div>
-            // </div>
+             </div>
         `;
     });
 }

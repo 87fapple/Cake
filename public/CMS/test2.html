@@ -6,8 +6,13 @@
     <title>Display and Upload Images</title>
   </head>
   <body>
-    <form id="imageForm" data-bid="99">
+    <button onclick="loadImagesWithAjax(1)">顯示圖片1</button>
+    <button onclick="loadImagesWithAjax(2)">顯示圖片2</button>
+    <button onclick="loadImagesWithAjax(3)">顯示圖片3</button>
+    <button onclick="loadImagesWithAjax(4)">顯示圖片4</button>
+    <form id="imageForm" data-bid="">
       <!-- 初始載入頁面時的表單內容 -->
+
       <input type="file" name="file1" onchange="updateImagePreview(1)" />
       <img src="" alt="" />
       <input type="file" name="file2" onchange="updateImagePreview(2)" />
@@ -63,7 +68,7 @@
         const formData = new FormData(form);
         const xhr = new XMLHttpRequest();
         let bid = form.dataset.bid;
-        xhr.open("POST", `./php/mainpage/uptest.php?bid=${bid}`, true);
+        xhr.open("POST", `./php/mainpage/upload.php?bid=${bid}`, true);
         console.log(bid);
         xhr.onreadystatechange = function () {
           if (xhr.readyState === XMLHttpRequest.DONE) {

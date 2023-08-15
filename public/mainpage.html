@@ -1,311 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mainpage</title>
 
-    <link rel="stylesheet" href="../resources/css/Narbar.css" />
-    <link rel="stylesheet" href="../resources/css/mainpage.css" />
-    <link rel="stylesheet" href="../resources/css/footer2.css" />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-    />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-      .slider-container {
-        width: 80%;
-        margin: auto;
-        overflow: hidden;
-      }
-      .slider {
-        display: flex;
-        transition: transform 0.5s ease-in-out;
-      }
-      .slider img {
-        width: 100%;
-        height: auto;
-      }
-    </style>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mainpage</title>
 
-  <body>
-    <!-- Back-to-Top Button -->
-    <button onclick="topFunction()" class="topBtn" id="topBtn"></button>
+  <link rel="stylesheet" href="../resources/css/Narbar.css" />
+  <link rel="stylesheet" href="../resources/css/mainpage.css" />
+  <link rel="stylesheet" href="../resources/css/footer2.css" />
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+</head>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-      <div class="navbarTitle">
-        <a href="../public/mainpage.html"
-          ><img src="../image/icon-noBorder-whiteFont.png"
-        /></a>
-      </div>
-      <div class="hambuger">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </div>
-      <div class="navbarLink">
-        <ul>
-          <li><a href="../public/menu.php">產品介紹</a></li>
-          <li><a href="../public/locations.html">分店資訊</a></li>
-          <li><a href="../public/reserve.php">預約課程</a></li>
-          <li><a href="../public/Q&A.html">常見問題</a></li>
-          <li><a href="../public/login.html">登入會員</a></li>
-        </ul>
-      </div>
-    </nav>
+<body>
+  <!-- Back-to-Top Button -->
+  <button onclick="topFunction()" class="topBtn" id="topBtn"></button>
 
-    <!-- Main  -->
-    <main class="mainContainer">
-      <!-- Main1 -->
-      <div class="slider"></div>
-      <!-- Main2 -->
-      <div class="mainBlock2">
-        <div class="infoBlock">
-          <div class="info">
-            <div class="infoTitle">
-              <h1>近期推薦</h1>
-            </div>
-            <div class="infoContent">
-              <p id="bodytxt"></p>
-            </div>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbarTitle">
+      <a href="../public/mainpage.html"><img src="../image/icon-noBorder-whiteFont.png" /></a>
+    </div>
+    <div class="hambuger">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+    <div class="navbarLink">
+      <ul>
+        <li><a href="../public/menu.php">產品介紹</a></li>
+        <li><a href="../public/locations.html">分店資訊</a></li>
+        <li><a href="../public/reserve.php">預約課程</a></li>
+        <li><a href="../public/Q&A.html">常見問題</a></li>
+        <li><a href="../public/login.html">登入會員</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main  -->
+  <main class="mainContainer">
+    <!-- Main1 -->
+    <div class="slider"></div>
+    <!-- Main2 -->
+    <div class="mainBlock2">
+      <div class="infoBlock">
+        <div class="info">
+          <div class="infoTitle">
+            <h1>近期推薦</h1>
           </div>
-          <div class="infoImg">
-            <img id="bodyimg" />
+          <div class="infoContent fadeIn">
+            <pre id="bodytxt"></pre>
           </div>
         </div>
-      </div>
-
-      <!-- Main3 -->
-      <div class="mainBlock3">
-        <div class="mainImg3">
-          <img src="../image/mainImg/mainImg3.jpg" />
-        </div>
-        <div class="specialBlock">
-          <div class="specialTitle">
-            <h1>關於我們</h1>
-          </div>
-          <div class="specialContent">
-            <pre>
-                        關於關於
-                    </pre
-            >
-          </div>
+        <div class="infoImg fadeIn">
+          <img id="bodyimg" />
         </div>
       </div>
+    </div>
 
-      <!-- Main4 -->
-      <div class="mainBlock4">
-        <div class="expSharing">
-          <div class="expTitle">
-            <h1>心得分享</h1>
-          </div>
-          <div class="expBlock">
-            <div class="flip-card">
-              <div class="flip-card-inner">
-                <div class="flip-card-front">
-                  <img src="../image/menuImg/menuInfo1.jpg" />
-                </div>
-                <div class="flip-card-back" id="exp1"></div>
+    <!-- Main3 -->
+    <div class="mainBlock3">
+      <div class="mainImg3">
+        <video loop autoplay muted>
+          <source src="https://video.wixstatic.com/video/11062b_4f577e2b176447eb8e43b5866671896c/720p/mp4/file.mp4"
+            type="video/mp4">
+      </div>
+      <div class="specialBlock fadeIn">
+        <div class="specialTitle fadeIn">
+          <h1>關於我們</h1>
+        </div>
+        <div class="specialContent fadeIn">
+          <pre>
+              　　浣熊聰明、可愛又愛乾淨，是個家喻戶曉的人氣動物。而在墨西哥地區，浣熊的名字更有著「將一切掌握在手中」的意思。
+
+  　　Raccoon DIY烘焙教室，希望喜愛烘焙的大家，能夠實際「將烘焙掌握在手中」，透過DIY課程，製作出充滿成就感的甜點。
+                    </pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main4 -->
+    <div class="mainBlock4 fadeIn">
+      <div class="expSharing">
+        <div class="expTitle">
+          <h1>心得分享</h1>
+        </div>
+        <div class="expBlock">
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img src="../image/menuImg/menuInfo1.jpg" />
               </div>
+              <div class="flip-card-back" id="exp1"></div>
             </div>
-            <div class="flip-card">
-              <div class="flip-card-inner">
-                <div class="flip-card-front">
-                  <img src="../image/menuImg/menuInfo1.jpg" />
-                </div>
-                <div class="flip-card-back" id="exp2"></div>
+          </div>
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img src="../image/menuImg/menuInfo1.jpg" />
               </div>
+              <div class="flip-card-back" id="exp2"></div>
             </div>
-            <div class="flip-card">
-              <div class="flip-card-inner">
-                <div class="flip-card-front">
-                  <img src="../image/menuImg/menuInfo1.jpg" />
-                </div>
-                <div class="flip-card-back" id="exp3"></div>
+          </div>
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <img src="../image/menuImg/menuInfo1.jpg" />
               </div>
+              <div class="flip-card-back" id="exp3"></div>
             </div>
           </div>
         </div>
       </div>
-    </main>
+    </div>
+  </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footerContainer">
-        <div class="footerRow">
-          <div class="footerCol">
-            <h4>DIY蛋糕</h4>
-            <ul>
-              <li><a href="">關於我們</a></li>
-              <li><a href="">常見問題</a></li>
-            </ul>
-          </div>
-          <div class="footerCol">
-            <h4>服務內容</h4>
-            <ul>
-              <li><a href="">立即預約</a></li>
-              <li><a href="">產品介紹</a></li>
-            </ul>
-          </div>
-          <div class="footerCol">
-            <h4>聯絡我們</h4>
-            <div class="socialLinks">
-              <a href=""><i class="fab fa-facebook-f"></i></a>
-              <a href=""><i class="fab fa-twitter"></i></a>
-              <a href=""><i class="fab fa-instagram"></i></a>
-              <a href=""><i class="fab fa-line"></i></a>
-            </div>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footerContainer">
+      <div class="footerRow">
+        <div class="footerCol">
+          <h4>DIY蛋糕</h4>
+          <ul>
+            <li><a href="">關於我們</a></li>
+            <li><a href="">常見問題</a></li>
+          </ul>
+        </div>
+        <div class="footerCol">
+          <h4>服務內容</h4>
+          <ul>
+            <li><a href="">立即預約</a></li>
+            <li><a href="">產品介紹</a></li>
+          </ul>
+        </div>
+        <div class="footerCol">
+          <h4>聯絡我們</h4>
+          <div class="socialLinks">
+            <a href=""><i class="fab fa-facebook-f"></i></a>
+            <a href=""><i class="fab fa-twitter"></i></a>
+            <a href=""><i class="fab fa-instagram"></i></a>
+            <a href=""><i class="fab fa-line"></i></a>
           </div>
         </div>
       </div>
-    </footer>
-  </body>
-  <script>
-    function loadRandomData(targetId, phpFile) {
-      var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          var data = JSON.parse(xhr.responseText);
+    </div>
+  </footer>
+</body>
+<script>
+  function loadRandomData(targetId, phpFile) {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        var data = JSON.parse(xhr.responseText);
 
-          var html =
-            "<h1>" +
-            data[0].uName +
-            "</h1>" +
-            "<p>" +
-            data[0].eText +
-            "</p>" +
-            "<p>" +
-            data[0].eDate +
-            "</p>";
+        var html =
+          "<h2>" +
+          data[0].uName +
+          "</h2>" +
+          "<p>" +
+          data[0].eText +
+          "</p>" +
+          "<p>" +
+          data[0].eDate +
+          "</p>";
 
-          document.getElementById(targetId).innerHTML = html;
+        document.getElementById(targetId).innerHTML = html;
+      }
+    };
+    xhr.open("GET", "././php/mainpage/random.php", true);
+    xhr.send();
+  }
+
+  function loadAllRandomData() {
+    loadRandomData("exp1", "././php/mainpage/random.php");
+    loadRandomData("exp2", "././php/mainpage/random.php");
+    loadRandomData("exp3", "././php/mainpage/random.php");
+  }
+  function loadUniqueData() {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        var data = JSON.parse(xhr.responseText);
+
+        var html1 =
+          "<h2>" +
+          data[0].uName +
+          "</h2>" +
+          "<p>" +
+          data[0].eText +
+          "</p>" +
+          "<p>" +
+          data[0].eDate +
+          "</p>";
+
+        var html2 =
+          "<h2>" +
+          data[1].uName +
+          "</h2>" +
+          "<p>" +
+          data[1].eText +
+          "</p>" +
+          "<p>" +
+          data[1].eDate +
+          "</p>";
+
+        var html3 =
+          "<h2>" +
+          data[2].uName +
+          "</h2>" +
+          "<p>" +
+          data[2].eText +
+          "</p>" +
+          "<p>" +
+          data[2].eDate +
+          "</p>";
+
+        document.getElementById("exp1").innerHTML = html1;
+        document.getElementById("exp2").innerHTML = html2;
+        document.getElementById("exp3").innerHTML = html3;
+      }
+    };
+    xhr.open("GET", "././php/mainpage/random.php", true);
+    xhr.send();
+  }
+
+  loadUniqueData();
+</script>
+
+<script>
+  const slider = document.querySelector(".slider");
+  const sliderWidth = slider.offsetWidth;
+  let currentImageIndex = 0;
+  let images = [];
+
+  function showImage(index) {
+    slider.innerHTML = ""; // 清空 slider 中的內容
+    const imgElement = document.createElement("img");
+    imgElement.src = `data:image/jpeg;base64,${images[index]}`;
+    slider.appendChild(imgElement);
+  }
+
+  function nextImage() {
+    currentImageIndex = (currentImageIndex + 1) % images.length;
+    showImage(currentImageIndex);
+  }
+
+  function fetchImages() {
+    // 使用 AJAX 取得 PHP 回傳的圖片資料
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          // 解析回傳的 JSON 資料
+          images = JSON.parse(xhr.responseText);
+
+          // 顯示第一張圖片
+          showImage(currentImageIndex);
+
+          setInterval(nextImage, 3000); // Change image every 3 seconds
+        } else {
+          console.error("Failed to fetch images");
         }
-      };
-      xhr.open("GET", "././php/mainpage/random.php", true);
-      xhr.send();
-    }
+      }
+    };
 
-    function loadAllRandomData() {
-      loadRandomData("exp1", "././php/mainpage/random.php");
-      loadRandomData("exp2", "././php/mainpage/random.php");
-      loadRandomData("exp3", "././php/mainpage/random.php");
-    }
-    function loadUniqueData() {
-      var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          var data = JSON.parse(xhr.responseText);
+    xhr.open("GET", "./php/mainpage/getcimg.php", true);
+    xhr.send();
+  }
 
-          var html1 =
-            "<h1>" +
-            data[0].uName +
-            "</h1>" +
-            "<p>" +
-            data[0].eText +
-            "</p>" +
-            "<p>" +
-            data[0].eDate +
-            "</p>";
+  // 執行 AJAX 請求來取得圖片資料
+  fetchImages();
+</script>
+<script>
+  $(document).ready(function () {
+    $.ajax({
+      url: "./php/mainpage/getfimg.php",
+      type: "GET",
+      dataType: "json",
+      success: function (data) {
+        // 將 Base64 編碼的圖片數據解碼並設置圖片的 src 屬性
+        $("#bodyimg").attr("src", "data:image/jpeg;base64," + data.image);
 
-          var html2 =
-            "<h1>" +
-            data[1].uName +
-            "</h1>" +
-            "<p>" +
-            data[1].eText +
-            "</p>" +
-            "<p>" +
-            data[1].eDate +
-            "</p>";
+        // 設置文字內容
+        $("#bodytxt").text(data.text);
+      },
+    });
+  });
+</script>
 
-          var html3 =
-            "<h1>" +
-            data[2].uName +
-            "</h1>" +
-            "<p>" +
-            data[2].eText +
-            "</p>" +
-            "<p>" +
-            data[2].eDate +
-            "</p>";
-
-          document.getElementById("exp1").innerHTML = html1;
-          document.getElementById("exp2").innerHTML = html2;
-          document.getElementById("exp3").innerHTML = html3;
+<!--block fade in -->
+<script>
+  $(document).ready(function() {
+    /* For each element with the class 'fadeIn' */
+    $('.fadeIn').each(function() {
+      var element = $(this);
+      element.css('opacity', 0); // 設定初始透明度為 0
+  
+      $(window).scroll(function() {
+        var bottom_of_element = element.offset().top + element.outerHeight();
+        var bottom_of_window = $(window).scrollTop() + $(window).height();
+        var top_of_element = element.offset().top;
+  
+        /* If the top of the object enters the window, fade it in */
+        if (bottom_of_window > top_of_element) {
+          element.animate({'opacity':'1'}, 700);
         }
-      };
-      xhr.open("GET", "././php/mainpage/random.php", true);
-      xhr.send();
-    }
-
-    loadUniqueData();
-  </script>
-
-  <script>
-    const slider = document.querySelector(".slider");
-    const sliderWidth = slider.offsetWidth;
-    let currentImageIndex = 0;
-    let images = [];
-
-    function showImage(index) {
-      slider.innerHTML = ""; // 清空 slider 中的內容
-      const imgElement = document.createElement("img");
-      imgElement.src = `data:image/jpeg;base64,${images[index]}`;
-      slider.appendChild(imgElement);
-    }
-
-    function nextImage() {
-      currentImageIndex = (currentImageIndex + 1) % images.length;
-      showImage(currentImageIndex);
-    }
-
-    function fetchImages() {
-      // 使用 AJAX 取得 PHP 回傳的圖片資料
-      const xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-          if (xhr.status === 200) {
-            // 解析回傳的 JSON 資料
-            images = JSON.parse(xhr.responseText);
-
-            // 顯示第一張圖片
-            showImage(currentImageIndex);
-
-            setInterval(nextImage, 3000); // Change image every 3 seconds
-          } else {
-            console.error("Failed to fetch images");
-          }
-        }
-      };
-
-      xhr.open("GET", "./php/mainpage/getcimg.php", true);
-      xhr.send();
-    }
-
-    // 執行 AJAX 請求來取得圖片資料
-    fetchImages();
-  </script>
-  <script>
-    $(document).ready(function () {
-      $.ajax({
-        url: "./php/mainpage/getfimg.php",
-        type: "GET",
-        dataType: "json",
-        success: function (data) {
-          // 將 Base64 編碼的圖片數據解碼並設置圖片的 src 屬性
-          $("#bodyimg").attr("src", "data:image/jpeg;base64," + data.image);
-
-          // 設置文字內容
-          $("#bodytxt").text(data.text);
-        },
       });
     });
+  });
   </script>
-  <script src="../resources/js/navbar.js"></script>
-  <script src="../resources/js/topBtn.js"></script>
+
+<script src="../resources/js/navbar.js"></script>
+<script src="../resources/js/topBtn.js"></script>
+
 </html>

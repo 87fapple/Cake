@@ -44,12 +44,13 @@
 
     <div id="id01" class="modal">
 
-        <form class="modal-content-scd" action="php/sign/logincheck.php" method="post">
+        <form class="modal-content-scd" action="php/forget/repwd.php" method="post">
             <h2>忘記密碼</h2>
 
             <div class="container">
                 <label for="newpwd">新密碼</label>
-                <input type="password" id="newpwd" name="newpwd" placeholder="更改密碼">
+                <input type="hidden" value="">
+                <input type="password" id="pwd" name="pwd" placeholder="更改密碼">
                 <br>
                 <label for="cfrpwd">確認密碼</label>
                 <input type="password" id="cfrpwd" name="cfrpwd" placeholder="再次輸入密碼">

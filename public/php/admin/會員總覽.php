@@ -8,7 +8,7 @@
 
 require('../db2.php');
 
-$sql = "select * from cake";
+$sql = "select * from userinfo where not uName = '管理員'";
 
 $stmt = $mysqli->prepare($sql);
 $stmt->execute();
@@ -57,19 +57,17 @@ $result = $stmt->get_result();
 
     <div id="">
         <div id="">
-            <h2>預約總覽</h2>
+            <h2>會員約總覽</h2>
         </div>
 
         <br>
         <br>
         <table>
             <tr class="mainTable">
-                <th>蛋糕編號</th>
+                <th>會員編號</th>
                 <th>名稱</th>
-                <th>價格</th>
-                <th >種類</th>
-                <th>尺寸</th>
-                <th>難度</th>
+                <th>信箱</th>
+                <th>電話</th>
                 <th>修改</th>
             </tr>
 
@@ -77,13 +75,11 @@ $result = $stmt->get_result();
             while ($row = $result->fetch_assoc()) {
                 echo
                 '<tr class="mainTable">
-                        <td>' . $row['cid'] . '</td>
-                        <td>' . $row['cName'] . '</td>
-                        <td>' . $row['price'] . '</td>
-                        <td >' . $row['kind'] . '</td>
-                        <td>' . $row['cSize'] . '</td>
-                        <td>' . $row['level'] . '</td>
-                        <td id="button"><button>修改訂單</button></td>
+                        <td>' . $row['uid'] . '</td>
+                        <td>' . $row['uName'] . '</td>
+                        <td>' . $row['email'] . '</td>
+                        <td >' . $row['phone'] . '</td>
+                        <td id="button"><button>修改資料</button></td>
                     </tr>';
             }
             ?>
