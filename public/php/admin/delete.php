@@ -24,9 +24,11 @@ header("refresh:2;url=../../CMS/mgt_product.php");
 <script>
     //显示自动关闭倒计秒数
 
-layer.alert('刪除成功，將自動跳轉', {icon: 6,
-  time: 2*1000
-  ,success: function(layero, index){
+layer.alert('刪除成功，將自動跳轉', {
+  icon: 6,
+  btn: ['確定'],
+  time: 2*1000,
+  success: function(layero, index){
     var timeNum = this.time/1000, setText = function(start){
       layer.title((start ? timeNum : --timeNum) + ' 秒後跳轉', index);
     };
