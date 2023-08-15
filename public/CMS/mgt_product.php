@@ -104,7 +104,7 @@
     }
 
     .order-table tbody tr td a:last-child {
-        margin-left: 16px;
+        margin-left: 8px;
     }
 </style>
 
@@ -173,14 +173,14 @@ $result = $stmt->get_result();
         this.cid = cid;
         layer.open({
             title: '警告',
-            content: '刪除後就無法回復',
+            content: '刪除後資料就無法復原',
             btn: ['確定', '取消'],
-            yes: function(index, layero) {
+            yes: function(index) {
                 layer.open({
                     title: '這是最後一次警告',
                     content: '確定要刪除嗎?',
                     btn: ['確定', '取消'],
-                    yes: function(index, layero) {
+                    yes: function(index) {
                         //按钮【按钮一】的回调
                         location.replace("../php/admin/delete.php?cid=" + cid);
                     }
