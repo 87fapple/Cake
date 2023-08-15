@@ -3,7 +3,7 @@ require_once('../php/db2.php');
 
 $bid = $_REQUEST['bid'];
 
-$sql = "SELECT Img1, Img2, Img3, Img4, bodyImg, body FROM binfo WHERE bid = ?";
+$sql = "SELECT Img1, Img2, Img3, Img4, Img5, body FROM binfo WHERE bid = ?";
 $stmt = $mysqli->prepare($sql);
 $stmt->bind_param('s', $bid);
 $stmt->execute();
@@ -18,7 +18,7 @@ while ($row = $result->fetch_assoc()) {
     $imageData2 = base64_encode($row['Img2']);
     $imageData3 = base64_encode($row['Img3']);
     $imageData4 = base64_encode($row['Img4']);
-    $imageData5 = base64_encode($row['bodyImg']);
+    $imageData5 = base64_encode($row['Img5']);
     $imageData6 = base64_encode($row['body']);
 
     // 將三個圖片欄位的資料存入陣列中

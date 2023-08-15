@@ -51,7 +51,7 @@
           </div>
         </div>
         <div class="infoImg fadeIn">
-          <img id="bodyimg" />
+          <img id="Img5" />
         </div>
       </div>
     </div>
@@ -281,7 +281,7 @@
       dataType: "json",
       success: function (data) {
         // 將 Base64 編碼的圖片數據解碼並設置圖片的 src 屬性
-        $("#bodyimg").attr("src", "data:image/jpeg;base64," + data.image);
+        $("#Img5").attr("src", "data:image/jpeg;base64," + data.image);
 
         // 設置文字內容
         $("#bodytxt").text(data.text);
