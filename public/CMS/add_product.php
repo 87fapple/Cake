@@ -9,7 +9,8 @@
 <!-- <link rel="stylesheet" href="./CMS_css/add_product.css"/> -->
 
 <!-- icon引用 -->
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
+<link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
 <script src="https://kit.fontawesome.com/6c4c2bf9f6.js" crossorigin="anonymous"></script>
 <!-- jQuery -->
 <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -101,8 +102,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.min.css
     }
 
     .img_Box img {
-      width: 200px;
-      height: 140px; 
+        width: 200px;
+        height: 140px;
     }
 
 
@@ -120,7 +121,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.min.css
         background-color: #ffbf00;
     }
 
-    .img_Box span:after{
+    .img_Box span:after {
         content: "\f1c5" "為上傳圖片";
 
         font-size: 16px;
@@ -143,12 +144,12 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.min.css
     <div class="container box" id="changeForm">
         <h2>新增產品資訊</h2>
         <form id="add_form" method="post" enctype="multipart/form-data">
-          <!-- action="../php/admin/add.php" -->
+            <!-- action="../php/admin/add.php" -->
             <div class="mid_Box">
 
                 <div class="input_Box">
                     <label for="pname">產品名稱</label>
-                    <input type="text" id="pname" name="pname" placeholder="請輸入產品名稱" required />
+                    <input type="text" id="pname" name="pname" placeholder="請輸入產品名稱" required onfocus="re()" />
                 </div>
 
                 <div class="input_Box">
@@ -197,7 +198,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.min.css
             </div>
 
             <div class="mid_Box">
-              <div class="img_Box">
+                <div class="img_Box">
                     <label for="cImg1">上傳產品照片</label>
                     <img id="img1" src="../../image/defaultImg.jpeg" alt="未上傳圖片" />
                     <input accept="image/*" type="file" id="cImg1" name="cImg1" />
@@ -205,7 +206,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.min.css
                 </div>
                 <div class="img_Box">
                     <img id="img2" src="../../image/defaultImg.jpeg" alt="未上傳圖片" />
-                    <input type="file" id="cImg2" name="cImg2" />
+                    <input accept="image/*" type="file" id="cImg2" name="cImg2" />
                     <!-- <span></span> -->
                 </div>
             </div>
@@ -216,69 +217,104 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.min.css
                 </center>
             </div>
         </form>
-      </div>
+    </div>
 </body>
 
 
 <script>
-  //第一張圖片預覽
-  $("#cImg1").on("change", function (e) {
-    const file = this.files[0]; //將上傳檔案轉換為base64字串
+    //第一張圖片預覽
+    $("#cImg1").on("change", function (e) {
+        const file = this.files[0]; //將上傳檔案轉換為base64字串
 
-    const fr = new FileReader(); //建立FileReader物件
-    fr.onload = function (e) {
-      $("#img1").attr("src", e.target.result); //读取的结果放入圖片
-    };
-    // 使用 readAsDataURL 將圖片轉成 Base64
-    fr.readAsDataURL(file);
-    console.log('ok');
+        const fr = new FileReader(); //建立FileReader物件
+        fr.onload = function (e) {
+            $("#img1").attr("src", e.target.result); //读取的结果放入圖片
+        };
+        // 使用 readAsDataURL 將圖片轉成 Base64
+        fr.readAsDataURL(file);
+        console.log('ok');
 
-    
-  });
 
-  //第二張圖片預覽
-  $("#cImg2").on("change", function (e) {
-    const file = this.files[0]; //將上傳檔案轉換為base64字串
+    });
 
-    const fr = new FileReader(); //建立FileReader物件
-    fr.onload = function (e) {
-      $("#img2").attr("src", e.target.result); //读取的结果放入圖片
-    };
-    // 使用 readAsDataURL 將圖片轉成 Base64
-    fr.readAsDataURL(file);
-    console.log('ok');
-  });
+    //第二張圖片預覽
+    $("#cImg2").on("change", function (e) {
+        const file = this.files[0]; //將上傳檔案轉換為base64字串
 
-$(document).ready(function(){
-  $("#add_form").on("submit", function(e){
-      e.preventDefault();
-      dataString = jQuery('form#add_form').serialize();
-      jQuery.ajax({
-          type: "POST",
-          url: "/Cake/public/php/admin/add.php",
-          data: dataString,
-          success:  function(data)
-          { 
-            Swal.fire({
-              title: "修改成功",
-              text: "3秒後自動跳轉產品頁面",
-              icon: "success",
-              confirmButtonText: "回到上一頁",
-            }).then( () => {
-                window.location = "mgt_product.php"
-            }).then(setTimeout(() => {
-                window.location = "mgt_product.php"
-            }, 3000))
-          },
-          error:  function(data)
-          { 
-            Swal.fire(
-              "上傳失敗", //標題 
-              "請重新上傳", //訊息內容(可省略)
-              "error" //圖示 success/info/warning/error/question
-            )
-          }
-      }); 
-  });
-});
+        const fr = new FileReader(); //建立FileReader物件
+        fr.onload = function (e) {
+            $("#img2").attr("src", e.target.result); //读取的结果放入圖片
+        };
+        // 使用 readAsDataURL 將圖片轉成 Base64
+        fr.readAsDataURL(file);
+        console.log('ok');
+    });
+
+    $(document).ready(function () {
+        $("#add_form").on("submit", function (e) {
+            e.preventDefault();
+            dataString = jQuery('form#add_form').serialize();
+
+            fetch(`/Cake/public/php/admin/add.php`, {
+                method: "POST",
+                body: new FormData(add_form)
+            }).then(function (response) {
+                return response.text();
+            })
+                .then(function (data) {
+                    console.log(data);
+                    Swal.fire({
+                        title: "修改成功",
+                        text: "3秒後自動跳轉產品頁面",
+                        icon: "success",
+                        confirmButtonText: "回到上一頁",
+                    }).then(() => {
+                        window.location = "mgt_product.php"
+                    }).then(setTimeout(() => {
+                        window.location = "mgt_product.php"
+                    }, 3000))
+                })
+        // if(typeof(data) !== 'undefined'){
+        //     reloadPage();
+        // }
+    })
+        //   jQuery.ajax({
+        //       type: "POST",
+        //       url: "/Cake/public/php/admin/add.php",
+        //       data: dataString,
+        //       success:  function(data)
+        //       {
+        //         console.log(data);
+        //         // Swal.fire({
+        //         //   title: "修改成功",
+        //         //   text: "3秒後自動跳轉產品頁面",
+        //         //   icon: "success",
+        //         //   confirmButtonText: "回到上一頁",
+        //         // }).then( () => {
+        //         //     window.location = "mgt_product.php"
+        //         // }).then(setTimeout(() => {
+        //         //     window.location = "mgt_product.php"
+        //         // }, 3000))
+        //       },
+        //       error:  function(data)
+        //       { 
+        //         Swal.fire(
+        //           "上傳失敗", //標題 
+        //           "請重新上傳", //訊息內容(可省略)
+        //           "error" //圖示 success/info/warning/error/question
+        //         )
+        //       }
+        //   }); 
+    });
+
+    function re() {
+        const pname = document.getElementById("pname");
+        const price = document.getElementById("price");
+        const feature = document.getElementById("feature");
+        const material = document.getElementById("material");
+        pname.value = "cakeprojectphpd05@gmail.com";
+        price.value = "1";
+        feature.value = "0912345678";
+        material.value = "material";
+    }
 </script>
