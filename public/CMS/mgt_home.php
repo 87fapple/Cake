@@ -200,22 +200,38 @@
   }
 
   function submitForm() {
-    const formData = new FormData(form);
-    const xhr = new XMLHttpRequest();
-    let bid = form.dataset.bid;
-    xhr.open("POST", `../php/mainpage/upload.php?bid=${bid}`, true);
-    console.log(bid);
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === XMLHttpRequest.DONE) {
-        if (xhr.status === 200) {
-          console.log("Upload successful");
-        } else {
-          console.error("Error:", xhr.status, xhr.statusText);
-        }
+      // 獲取文字內容
+      let textArea = form.querySelector("textarea[name='body']");
+      let text = textArea.value;
+      // 檢查文字開頭的空格數
+      let leadingSpaces = text.match(/^\s*/)[0].length;
+      // 補足或修剪空格至4個
+      if (leadingSpaces < 4) {
+        text = " ".repeat(4 - leadingSpaces) + text;
+      } else if (leadingSpaces > 4) {
+        text = "    " + text.trimStart();
       }
-    };
-    xhr.send(formData);
-  }
+      textArea.value = text; // 更新文本框內容
+      const formData = new FormData(form);
+      const xhr = new XMLHttpRequest();
+      let bid = form.dataset.bid;
+      xhr.open("POST", `../php/mainpage/upload.php?bid=${bid}`, true);
+      console.log(bid);
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            console.log("Upload successful");
+            // 在成功上傳後的5秒內執行頁面刷新
+            setTimeout(function () {
+              location.reload(); // 刷新頁面
+            }, 5000); // 5000毫秒，即5秒
+          } else {
+            console.error("Error:", xhr.status, xhr.statusText);
+          }
+        }
+      };
+      xhr.send(formData);
+    }
 
   // 新的 changeFormContent 函式，直接將修改加入到您的原始 <script> 區塊中
   function changeFormContent(bid) {
