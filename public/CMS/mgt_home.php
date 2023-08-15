@@ -4,6 +4,15 @@
 <?php require_once(__DIR__ . '/head.php'); ?>
 <?php require_once(__DIR__ . '/navbar.php'); ?>
 
+
+<!-- jQuery -->
+<script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.all.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.min.css" rel="stylesheet">
+
+
 <style>
   .container {
     width: calc(100% - 200px);
@@ -107,7 +116,8 @@
 <body>
   <div class="container box">
     <h2>選擇首頁輪播圖群組</h2>
-    <form class="groupForm" action="/Cake/public/php/mainpage/changeact.php" method="post">
+    <form class="groupForm" id="select_form"  method="post">
+    <!-- action="/Cake/public/php/mainpage/changeact.php" -->
       <label><input type="radio" name="bid" value="1" />春</label>  
       <label><input type="radio" name="bid" value="2" />夏</label>
       <label><input type="radio" name="bid" value="3" />秋</label>
@@ -221,12 +231,36 @@
         if (xhr.readyState === XMLHttpRequest.DONE) {
           if (xhr.status === 200) {
             console.log("Upload successful");
-            // 在成功上傳後的5秒內執行頁面刷新
-            setTimeout(function () {
-              location.reload(); // 刷新頁面
-            }, 5000); // 5000毫秒，即5秒
+
+            function upload_Success()
+            { 
+              Swal.fire({
+                title: "上傳成功",
+                icon: "success",
+                confirmButtonText: "OK",
+              }).then( () => {
+                  window.location = "mgt_home.php"
+              }).then(setTimeout(() => {
+                  window.location = "mgt_home.php"
+              }, 3000))
+            }
+            upload_Success();
+
+            // // 在成功上傳後的5秒內執行頁面刷新
+            // setTimeout(function () {
+            //   location.reload(); // 刷新頁面
+            // }, 5000); // 5000毫秒，即5秒
           } else {
             console.error("Error:", xhr.status, xhr.statusText);
+            function upload_Error()
+            { 
+              Swal.fire(
+                "上傳失敗", //標題 
+                "請重新上傳", //訊息內容(可省略)
+                "error" //圖示 success/info/warning/error/question
+              )
+            }
+            upload_Error();
           }
         }
       };
@@ -247,4 +281,36 @@
 
     loadImagesWithAjax(bid);
   }
+
+  $(document).ready(function(){
+  $("#select_form").on("submit", function(e){
+      e.preventDefault();
+      dataString = jQuery('form#select_form').serialize();
+      jQuery.ajax({
+          type: "POST",
+          url: "/Cake/public/php/mainpage/changeact.php",
+          data: dataString,
+          success:  function(data)
+          { 
+            Swal.fire({
+              title: "設定成功",
+              icon: "success",
+              confirmButtonText: "OK",
+            }).then( () => {
+                window.location = "mgt_home.php"
+            }).then(setTimeout(() => {
+                window.location = "mgt_home.php"
+            }, 3000))
+          },
+          error:  function(data)
+          { 
+            Swal.fire(
+              "上傳失敗", //標題 
+              "請重新上傳", //訊息內容(可省略)
+              "error" //圖示 success/info/warning/error/question
+            )
+          }
+      }); 
+  });
+});
 </script>
