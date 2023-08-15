@@ -9,7 +9,7 @@
 require_once('../php/db2.php');
 
 $sql = "SELECT o.*, u.uName,s.location FROM orders AS o
-JOIN userinfo AS u  ON o.uid = u.uid JOIN store s ON o.sid = s.sid";
+LEFT JOIN userinfo AS u  ON o.uid = u.uid LEFT JOIN store s ON o.sid = s.sid";
 $stmt = $mysqli->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();

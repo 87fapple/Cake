@@ -84,3 +84,37 @@ BEGIN
 END $$
 
 DELIMITER ;
+
+admin版本
+DROP PROCEDURE IF EXISTS createOrder2;
+DELIMITER $$
+
+CREATE PROCEDURE createOrder2(userId INT, storeId INT, rTime VARCHAR(20), rDate VARCHAR(20), pNum INT, checkedoToken VARCHAR(40))
+BEGIN
+    DECLARE orderToken varchar(40) DEFAULT uuid();
+    DECLARE x INT DEFAULT 0;
+    DECLARE y INT DEFAULT 0;
+    DECLARE z INT DEFAULT 0;
+
+    START TRANSACTION;
+        SELECT person INTO y FROM store WHERE sid = storeId;
+    
+    	SELECT SUM(people) INTO x FROM orders WHERE sid = storeId AND reserveTime = rTime AND reserveDate = rDate AND oToken <> checkedoToken for update;
+
+        IF (COALESCE(x, 0) + pNum <= y) THEN
+            IF checkedoToken <> "0" THEN 
+                UPDATE orders SET sid = storeId, reserveTime = rTime, reserveDate = rDate, people = pNum WHERE oToken = checkedoToken;
+                SELECT 'change_reserveProduct.php' as result, checkedoToken as orderToken;
+                commit;
+            ELSE
+                insert into orders (uid, sid, reserveTime, reserveDate, people, oToken) values (userId, storeId, rTime, rDate, pNum, orderToken);
+                SELECT 'change_reserveProduct.php' as result, orderToken as orderToken;
+        	    commit;
+            END IF;
+        ELSE
+            SELECT concat('日期:<',rDate,'>時段:<',rTime,'>剩餘人數不足') AS result;
+        	ROLLBACK;
+        END IF;
+END $$
+
+DELIMITER ;

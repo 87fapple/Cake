@@ -1,8 +1,10 @@
 <?php $title = 'CMS Modify Product'; ?>
 <?php $metaTags = 'tag1 tag2'; ?>
 <?php $currentPage = '修改訂單'; ?>
-<?php #include_once(__DIR__ . '/head.php'); ?>
-<?php #require_once(__DIR__ . '/navbar.php'); ?>
+<?php #include_once(__DIR__ . '/head.php'); 
+?>
+<?php #require_once(__DIR__ . '/navbar.php'); 
+?>
 
 <?php session_start(); ?>
 <?php
@@ -11,9 +13,12 @@ if ($token !== 'undefined') {
     require('../php/DB.php');
 }
 
-$oInfo = [];
-if (isset($_GET['oToken'])) {
-    DB::select("select s.sid,s.location, o.people, o.reserveTime, o.reserveDate, o.oToken, o.remove from orders o INNER JOIN store s on s.sid = o.sid where oToken = ?", function ($rows) use (&$oInfo) {
+if (!isset($_GET['oToken']) && trim($_GET['oToken']) === "") {
+    header('Location: mgt_reserve.php');
+    die();
+} else {
+    $oInfo = [];
+    DB::select("select s.sid,s.location, o.uid, o.reserveTime, o.reserveDate, o.people, o.oToken, o.remove from orders o INNER JOIN store s on s.sid = o.sid where oToken = ?", function ($rows) use (&$oInfo) {
         var_dump($rows[0]);
         if (count($rows) === 0) {
             header('Location: /Cake/public/error.php?error_code=1');
@@ -26,6 +31,7 @@ if (isset($_GET['oToken'])) {
         }
     }, [$_GET['oToken']]);
 }
+
 // var_dump($oInfo[0]);
 ?>
 
@@ -44,19 +50,26 @@ if (isset($_GET['oToken'])) {
     <link rel="stylesheet" href="../resources/css/reserve1.css">
 
 
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
 
     <script>
+<<<<<<< Updated upstream
         $(function () {
             const token = "<?= $token; ?>";
+=======
+        $(function() {
+            const currentDate = new Date();
+            currentDate.setDate(currentDate.getDate() + 1);
+            const nextDate = currentDate;
+>>>>>>> Stashed changes
 
             if (token === 'undefined') {
                 $("#checkLogin").show();
                 $(".scd-container").hide();
             } else {
 
+<<<<<<< Updated upstream
                 $("#checkLogin").hide();
                 $(".scd-container").show();
                 const currentDate = new Date();
@@ -105,6 +118,50 @@ if (isset($_GET['oToken'])) {
                             data.forEach(function (e2) {
                                 if (typeof (e2.sequel) !== 'undefined') {
                                     viewTime += `
+=======
+            $("#datepicker").datepicker({
+                minDate: nextDate,
+                dateFormat: 'yy-mm-dd',
+                defaultDate: year !== null ? new Date(year, month, day) : null,
+            });
+            
+            $("#datepicker").on("change", function(e) {
+                e.preventDefault();
+                getStoreTime();
+            });
+
+            $("#location").on("change", function(e) {
+                e.preventDefault();
+                getStoreTime();
+            });
+
+            $("#person").on("change", function(e) {
+                e.preventDefault();
+                getStoreTime();
+            });
+
+            function getStoreTime() {
+                var optionsLocation = $("#location").val();
+                var optionsPerson = $("#person").val();
+                const selectedDay = $("#datepicker").datepicker("getDate");
+                const formattedDate = $.datepicker.formatDate('yy-mm-dd', selectedDay);
+                $("#selectedDate").val(formattedDate);
+
+                <?php if (isset($oInfo[0]["oToken"])) { ?>
+                    fetch(`storeToTime.php?sid=${optionsLocation}&fDate=${formattedDate}&peopleNum=${optionsPerson}&checkedoToken=<?= $oInfo[0]["oToken"]; ?>`)
+                <?php } else { ?>
+                    fetch(`/storeToTime.php?sid=${optionsLocation}&fDate=${formattedDate}&peopleNum=${optionsPerson}`)
+                <?php } ?>
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(data) {
+                        console.log(data);
+                        let viewTime = '';
+                        data.forEach(function(e2) {
+                            if (typeof(e2.sequel) !== 'undefined') {
+                                viewTime += `
+>>>>>>> Stashed changes
                                     <label>
                                         <input type="radio" name="timeOption" value="${e2.sequel}"  style="background-color: #ffb12b; color: black;">
                                         <span class="radio-button" style="background-color: #ffb12b; color: black;">${e2.sequel}</span>
@@ -119,6 +176,7 @@ if (isset($_GET['oToken'])) {
                             })
                             document.getElementById("timezone").innerHTML = viewTime
                         })
+<<<<<<< Updated upstream
                 });
 
                 fetch('../php/reserve/store_sql.php')
@@ -163,6 +221,54 @@ if (isset($_GET['oToken'])) {
                             } else {
                                 let view = '';
                                 view += `
+=======
+                        document.getElementById("timezone").innerHTML = viewTime
+                    })
+            }
+
+            fetch('store_sql.php')
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(data) {
+                    <?php if (isset($oInfo[0]["sid"]) && isset($oInfo[0]["location"])) { ?>
+                        let view = `<option style="display: none;" value="<?= $oInfo[0]["sid"]; ?>"><?= $oInfo[0]["location"]; ?></option>`;
+                    <?php } else { ?>
+                        let view = '<option style="display: none;">請選擇分店</option>';
+                    <?php } ?>
+                    data.forEach(function(e2) {
+                        view += `
+                                <option value="${e2.sid}">${e2.location}</option>
+                            `
+                    })
+                    document.getElementById("location").innerHTML = view
+                })
+
+            submitBtn.onclick = function(e) {
+                if ($("#selectedDate").val() === "") {
+                    const defaultDate = $("#datepicker").datepicker("option", "defaultDate");
+                    $("#selectedDate").val($.datepicker.formatDate("yy-mm-dd", defaultDate));
+                }
+
+                fetch('createOrder.php', {
+                        method: "POST",
+                        body: new FormData(ordersForm)
+                    })
+                    .then(function(response) {
+                        return response.text();
+                    })
+                    .then(function(data) {
+                        console.log(data);
+                        if (data == "change_reserveProduct.php") {
+                            <?php if (isset($oInfo[0]["oToken"])) { ?>
+                                location.href = data + '?checkedoToken=<?= $oInfo[0]["oToken"] ?>';
+                            <?php } else { ?>
+                                location.href = data;
+                            <?php } ?>
+                        } else {
+                            let view = '';
+                            view += `
+>>>>>>> Stashed changes
                                         <div>${data}</div>
                                 `;
                                 document.getElementById("test").innerHTML = view
@@ -175,14 +281,14 @@ if (isset($_GET['oToken'])) {
 </head>
 
 <body>
-    <h3>預約</h3>
+    <h3>編輯訂單</h3>
     <div class="container">
         <form id="ordersForm">
-            <h2>預約</h2>
-            <div id="checkLogin">請先
+            <h2>編輯店家、人數以及日期和時間</h2>
+            <!-- <div id="checkLogin">請先
                 <a href="./login.html">登入</a>
                 後才能預約
-            </div>
+            </div> -->
 
             <div class="scd-container">
                 <label for="location">預約分店：</label>
@@ -214,8 +320,7 @@ if (isset($_GET['oToken'])) {
                         <div id="timezone">
                             <?php if (isset($oInfo[0]["reserveTime"])) { ?>
                                 <label>
-                                    <input type="radio" name="timeOption" value="<?= $oInfo[0]["reserveTime"]; ?>"
-                                        style="background-color: #ffb12b; color: black;" checked>
+                                    <input type="radio" name="timeOption" value="<?= $oInfo[0]["reserveTime"]; ?>" style="background-color: #ffb12b; color: black;" checked>
                                     <span class="radio-button" style="background-color: #ffb12b; color: black;">
                                         <?= $oInfo[0]["reserveTime"]; ?>
                                     </span>
@@ -230,6 +335,10 @@ if (isset($_GET['oToken'])) {
                 </div>
                 <?php if (isset($oInfo[0]["oToken"])) { ?>
                     <input type="hidden" name="checkedoToken" value="<?= $oInfo[0]["oToken"]; ?>">
+                <?php } ?>
+
+                <?php if (isset($oInfo[0]["uid"])) { ?>
+                    <input type="hidden" name="userId" value="<?= $oInfo[0]["uid"]; ?>">
                 <?php } ?>
                 <br>
                 <input type="button" value="確認預約" id="submitBtn" class="submitBtn">
