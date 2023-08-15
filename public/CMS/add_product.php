@@ -312,9 +312,9 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.min.css
         const price = document.getElementById("price");
         const feature = document.getElementById("feature");
         const material = document.getElementById("material");
-        pname.value = "cakeprojectphpd05@gmail.com";
-        price.value = "1";
-        feature.value = "0912345678";
-        material.value = "material";
+        pname.value = "栗子蛋糕捲";
+        price.value = "550";
+        feature.value = "軟綿的香草蜂蜜蛋糕，以巴迪西克林母鮮奶油及進口法國栗子(丁)為內餡，絕佳的口感組合，清爽不膩！";
+        material.value = "蛋\n麵粉\n糖\n牛奶\n沙拉油\n蜂蜜\n動物鮮奶油\n栗子角";
     }
 </script>
