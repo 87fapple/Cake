@@ -4,17 +4,12 @@
 session_destroy();
 setcookie('oToken', '',time() -1, "/");
 
-if (!$_COOKIE['token']) {
-    header('Location: /Cake/public/login.html');
-    die();
-}
-if (!$_COOKIE["oToken"]) {
-    header('Location: /Cake/public/history.php');
-    die();
-}
+// if (!$_COOKIE["oToken"]) {
+//     header('Location: /Cake/public/history.php');
+//     die();
+// }
 require('../php/DB.php');
 
-$token = $_COOKIE['token'];
 $oInfo = [];
 $oListInfo = [];
 
@@ -54,11 +49,11 @@ var_dump($oListInfo);
     <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
     <!-- <link rel="stylesheet" href="jqueryui/style.css"> -->
 
-    <link rel="stylesheet" href="../resources/css/navbar.css">
+    <!-- <link rel="stylesheet" href="../resources/css/navbar.css">
     <link rel="stylesheet" href="../resources/css/reserve1.css">
     <link rel="stylesheet" href="../resources/css/reserve2.css">
     <link rel="stylesheet" href="../resources/css/footer2.css">
-    <link rel="stylesheet" href="../resources/css/topBtn.css">
+    <link rel="stylesheet" href="../resources/css/topBtn.css"> -->
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
@@ -115,7 +110,7 @@ var_dump($oListInfo);
             <br>
             <textarea name="cakeName" readonly="readonly"><?= $oListInfo[0]["orderItem"] ?></textarea>
             <br>
-            <p Align="Center">如需修改訂單請至會員區<a href="./history.php">預約紀錄</a>修改</p>
+            <p Align="Center">回到<a href="mgt_reserve.php">預約管理</a>修改</p>
         </div>
     </div>
 

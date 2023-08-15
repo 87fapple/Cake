@@ -2,7 +2,6 @@
 <?php
 require('../php/DB.php');
 
-$token = $_COOKIE['token'];
 $cInfo = [];
 
 $oToken = $_COOKIE["oToken"];
@@ -186,7 +185,7 @@ var_dump($oInfo);
                 $("#hidden").show();
             })
 
-        fetch(`../php/reserve/storeToCake_sql.php?indexInfo=${cInfoSid}`)
+        fetch(`storeToCake_sql.php?indexInfo=${cInfoSid}`)
             .then(function (response) {
                 return response.json();
             })
@@ -358,7 +357,7 @@ var_dump($oInfo);
                     alert("請選擇產品和份數");
                     return;
                 } else {
-                    fetch('../php/reserve/insertOrdersCake.php', {
+                    fetch('insertOrdersCake.php', {
                         method: "POST",
                         body: formData
                     })
