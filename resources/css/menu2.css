@@ -67,6 +67,7 @@ body {
     height: 200px;
     background-color: #ffa237;
     border-radius: 8px;
+    /* border: #ea993e 9px solid; */
     margin: 24px 2px 160px;
     position: relative;
     left: 0;
@@ -76,7 +77,7 @@ body {
 }
 
 .menuInfoDiv:hover {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8); */
 }
 
 .menuInfoDiv a {
@@ -97,7 +98,7 @@ body {
 }
 
 .menuInfoContent {
-    background-color: #ffbc6f;
+    /* background-color: #ffbc6f; */
     border-radius: 0 0 8px 8px;
     color: #885500;
     width: 100%;
@@ -117,16 +118,6 @@ body {
     font-size: 20px;
 } */
 
-.titleName {
-    font-size: 25px;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    color: black;
-    list-style: none;
-    text-align: center;
-    padding: 10px 0;
-    text-decoration: underline;
-}
 
 .scdName {
     list-style: none;
@@ -139,10 +130,11 @@ body {
 
 .backgroundDiv {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.6);
-    height: 341px;
-    width: 230px;
+    height: 339px;
+    width: 225px;
     border-radius: 8px;
-    background-color: #ffead5;
+    background-color: #ffbc6f;
+    border: 3px solid #ea993e;
     margin: 1.5rem;
 }
 
@@ -303,7 +295,7 @@ body {
     list-style: none;
     text-align: center;
     padding: 10px 0;
-    text-decoration: underline;
+    background-color: #ffebd5;
 }
 
 .scdName {
@@ -311,6 +303,4 @@ body {
     text-align: center;
     padding: 4px 0;
     font-size: 20px;
-
-
 }

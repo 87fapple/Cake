@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["fileToUpload"])) {
         $imagePaths = implode(",", $uploadedFiles);
 
         // 存入資料庫
-        $query = "INSERT INTO your_table_name (bid, body, Img1, Img2, Img3, Img4, bodyImg) 
+        $query = "INSERT INTO your_table_name (bid, body, Img1, Img2, Img3, Img4, Img5) 
                   VALUES ('$bid', '$description', '$imagePaths', '$imagePaths', '$imagePaths', '$imagePaths', '$imagePaths')";
 
         echo "所有檔案已成功上傳並存入資料庫。";
