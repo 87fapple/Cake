@@ -22,7 +22,7 @@ if (isset($_COOKIE["oToken"])) {
     $oToken = $_COOKIE["oToken"];
 }
 
-DB::select("select u.uName, s.location, o.people, (o.people - o.companion) as makenum, o.companion from orders o INNER JOIN userinfo u ON u.uid = o.uid INNER JOIN store s on s.sid = o.sid where oToken = ?", function ($rows) use (&$oInfo) {
+DB::select("select u.uName, s.location, o.reserveTime, o.reserveDate, o.people, (o.people - o.companion) as makenum, o.companion from orders o INNER JOIN userinfo u ON u.uid = o.uid INNER JOIN store s on s.sid = o.sid where oToken = ?", function ($rows) use (&$oInfo) {
     $oInfo[] = $rows[0];
 }, [$oToken]);
 
@@ -103,7 +103,7 @@ var_dump($oListInfo);
     <div class="container">
         <h2>訂單已成立</h2>
         <div class="scd-container">
-            <p>訂單資訊</p>
+            <p>以下是您的訂單資訊</p>
             <hr>
             <label for="name"><b>訂購人姓名：</b></label>
             <br>
@@ -113,6 +113,18 @@ var_dump($oListInfo);
             <br>
             <input type="text" value="<?= $oInfo[0]["location"] ?>" name="location" readonly="readonly" class="modal1">
             <br>
+            <div class="column-container">
+                <div class="column">
+                    <label for="dateT"><b>日期：</b></label>
+                    <input type="text" value="<?= $oInfo[0]["reserveDate"] ?>" name="reserveDate" readonly="readonly"
+                        class="modal1">
+                </div>
+                <div class="column">
+                    <label for="dateT"><b>時間：</b></label>
+                    <input type="text" value="<?= $oInfo[0]["reserveTime"] ?>" name="reserveTime" readonly="readonly"
+                        class="modal1">
+                </div>
+            </div>
             <div class="column-container">
                 <div class="column">
                     <label for="people"><b>總人數：</b></label>

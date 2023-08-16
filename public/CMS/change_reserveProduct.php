@@ -1,17 +1,7 @@
 <?php session_start(); ?>
 <?php
-if (!$_COOKIE['token']) {
-    header('Location: /Cake/public/login.html');
-    die();
-}
-if (!$_COOKIE["oToken"]) {
-    header('Location: /Cake/public/history.php');
-    die();
-}
-
 require('../php/DB.php');
 
-$token = $_COOKIE['token'];
 $cInfo = [];
 
 $oToken = $_COOKIE["oToken"];
@@ -50,12 +40,8 @@ var_dump($oInfo);
     <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
     <!-- <link rel="stylesheet" href="jqueryui/style.css"> -->
+    <link rel="stylesheet" href="../../resources/css/reserve1.css">
 
-    <link rel="stylesheet" href="../resources/css/navbar.css">
-    <link rel="stylesheet" href="../resources/css/reserve1.css">
-    <link rel="stylesheet" href="../resources/css/reserve2.css">
-    <link rel="stylesheet" href="../resources/css/footer2.css">
-    <link rel="stylesheet" href="../resources/css/topBtn.css">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
@@ -200,7 +186,7 @@ var_dump($oInfo);
                 $("#hidden").show();
             })
 
-        fetch(`../php/reserve/storeToCake_sql.php?indexInfo=${cInfoSid}`)
+        fetch(`storeToCake_sql.php?indexInfo=${cInfoSid}`)
             .then(function (response) {
                 return response.json();
             })
@@ -372,7 +358,7 @@ var_dump($oInfo);
                     alert("請選擇產品和份數");
                     return;
                 } else {
-                    fetch('../php/reserve/insertOrdersCake.php', {
+                    fetch('insertOrdersCake.php', {
                         method: "POST",
                         body: formData
                     })
@@ -401,26 +387,6 @@ var_dump($oInfo);
 </head>
 
 <body>
-    <!-- Back-to-Top Button
-    <button onclick="topFunction()" class="topBtn" id="topBtn"></button> -->
-
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="navbarTitle">
-            <a href="../public/mainpage.html">
-                <img src="../image/icon-noBorder-whiteFont.png">
-            </a>
-        </div>
-        <div class="hambuger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
-        <div class="navbarLink">
-            <ul id="login_check" name="login_check"></ul>
-        </div>
-    </nav>
-
     <h3>預約</h3>
     <div class="container">
         <?php if (isset($oInfo)) { ?>
@@ -473,40 +439,6 @@ var_dump($oInfo);
     </div>
 
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footerContainer">
-            <div class="footerRow">
-                <div class="footerCol">
-                    <h4>DIY蛋糕</h4>
-                    <ul>
-                        <li><a href="">關於我們</a></li>
-                        <li><a href="">常見問題</a></li>
-                    </ul>
-                </div>
-                <div class="footerCol">
-                    <h4>服務內容</h4>
-                    <ul>
-                        <li><a href="">立即預約</a></li>
-                        <li><a href="">產品介紹</a></li>
-                    </ul>
-                </div>
-                <div class="footerCol">
-                    <h4>聯絡我們</h4>
-                    <div class="socialLinks">
-                        <a href=""><i class="fab fa-facebook-f"></i></a>
-                        <a href=""><i class="fab fa-twitter"></i></a>
-                        <a href=""><i class="fab fa-instagram"></i></a>
-                        <a href=""><i class="fab fa-line"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
 
 </body>
-<!-- <script src="../resources/js/topBtn.js"></script> -->
-<script src="../resources/js/login.js"></script>
-<script src="../resources/js/navbar.js"></script>
-
 </html>

@@ -50,7 +50,7 @@ $result = $stmt->get_result();
             <div class="kindBlock">
                 <div><b>選擇種類：</b></div>
                 <label class="container">全品項
-                    <input type="radio" checked="checked" name="radio" id="cake" onclick="kindFilter('全部')">
+                    <input type="radio" checked="checked" name="radio" id="cake" onclick="kindFilter('')">
                     <span class="checkmark"></span>
                 </label>
                 <label class="container">蛋糕
@@ -179,10 +179,6 @@ $result = $stmt->get_result();
         var menuBlock2 = document.querySelector('.menuBlock2');
         menuBlock2.innerHTML = '';
 
-        if (cake.cid === 0) {
-            return;
-        }
-
         cakes.forEach(cake => {
             level = '';
             if (cake.level === 1) {
@@ -192,20 +188,25 @@ $result = $stmt->get_result();
             } if (cake.level === 3) {
                 level = '★★★';
             }
+
+            if (cake.cid == 0) {
+                return;
+            }
+
             menuBlock2.innerHTML += `
-         <div class="backgroundDiv">
-            <div class="menuInfoDiv" id="menuInfo" data-cakeid="${cake.cid}" > <!-- 添加data-cakeid屬性 -->
-                <a href="javascript:void(0);" onclick="showProductDetail(${cake.cid})"><img src="${cake.cImg1}"></a> 
-                <div class="menuInfoContent" id="menuInfoContent">
-                    <ul class="menuInfo" id="menuInfo">
-                        <li class="titleName">${cake.cName}</li>
-                        <li class="scdName">難度${level}</li>
-                        <li class="scdName">$${cake.price}</li>
-                    </ul>
+            <div class="backgroundDiv">
+                <div class="menuInfoDiv" id="menuInfo" data-cakeid="${cake.cid}" > <!-- 添加data-cakeid屬性 -->
+                    <a href="javascript:void(0);" onclick="showProductDetail(${cake.cid})"><img src="${cake.cImg1}"></a> 
+                    <div class="menuInfoContent" id="menuInfoContent">
+                        <ul class="menuInfo" id="menuInfo">
+                            <li class="titleName">${cake.cName}</li>
+                            <li class="scdName">難度 ${level}</li>
+                            <li class="scdName">$ ${cake.price}</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
              </div>
-        `;
+            `;
         });
     }
 

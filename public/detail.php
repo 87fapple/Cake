@@ -272,7 +272,7 @@ $cakeDetail = $result->fetch_assoc();
 <script src="../resources/js/Carousel.js"></script>
 
 <script>
- function openCity(evt, cityName) {
+        function openCity(evt, cityName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tabcontent");
             for (i = 0; i < tabcontent.length; i++) {

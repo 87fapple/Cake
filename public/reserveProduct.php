@@ -425,7 +425,7 @@ var_dump($oInfo);
     <h3>預約</h3>
     <div class="container">
         <?php if (isset($oInfo)) { ?>
-            <h2>重新選擇品項</h2>
+            <h2>選擇品項</h2>
         <?php } else { ?>
             <h2>選擇品項</h2>
         <?php } ?>
