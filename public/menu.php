@@ -1,7 +1,7 @@
 <?php
 require_once('php/db2.php');
 
-$sql = 'select * from cake';
+$sql = "select * from cake where remove = '0'";
 $stmt = $mysqli->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -153,7 +153,7 @@ $result = $stmt->get_result();
 
     // 蛋糕種類篩選 3.0
     function kindFilter(kind) {
-        fetch(`php/menu/kindfilter.php?kind=${kind}`)
+        fetch(`php/menu/kindfilter.php?kind=${kind}&remove=0`)
             .then(response => response.json())
             .then(sortedCakes => {
                 // 更新全局变量的值
@@ -166,7 +166,7 @@ $result = $stmt->get_result();
     // 接收排序方式参数，價格排序ajax 3.0 
     function cakeSort(sortType) {
         // 增加種類參數
-        fetch(`php/menu/cakesort.php?sortType=${sortType}&kind=${selectedKind}`)
+        fetch(`php/menu/cakesort.php?sortType=${sortType}&kind=${selectedKind}&remove=0`)
             .then(response => response.json())
             .then(sortedCakes => {
                 renderCakes(sortedCakes);

@@ -3,43 +3,44 @@ require_once('../db2.php');
 
 $sortType = $_REQUEST['sortType'];
 $kind = $_REQUEST['kind'];
+$remove = $_REQUEST['remove'];
 
 // 根据排序方式参数和种类参数生成不同的排序SQL语句
 if ($sortType === 'priceAsc') {
     if ($kind !== '' ) {
         // 如果种类参数不为空，则按种类和价格升序排序
-        $sql = "SELECT * FROM cake WHERE kind = ? ORDER BY price ASC";
+        $sql = "SELECT * FROM cake WHERE kind = ? and remove = '0' ORDER BY price ASC";
     } else {
         // 否则，只按价格升序排序
-        $sql = 'SELECT * FROM cake ORDER BY price ASC';
+        $sql = "SELECT * FROM cake where and remove = '0' ORDER BY price ASC";
     }
 } else if ($sortType === 'priceDesc') {
     if ($kind !== '' ) {
         // 如果种类参数不为空，则按种类和价格降序排序
-        $sql = "SELECT * FROM cake WHERE kind = ? ORDER BY price DESC";
+        $sql = "SELECT * FROM cake WHERE kind = ? and remove = '0' ORDER BY price DESC";
     } else {
         // 否则，只按价格降序排序
-        $sql = 'SELECT * FROM cake ORDER BY price DESC';
+        $sql = "SELECT * FROM cake where and remove = '0' ORDER BY price DESC";
     }
 } else if ($sortType === 'levelAsc') {
     if ($kind !== '' ) {
         // 如果种类参数不为空，则按种类和難度降序排序
-        $sql = "SELECT * FROM cake WHERE kind = ? ORDER BY level ASC";
+        $sql = "SELECT * FROM cake WHERE kind = ? and remove = '0' ORDER BY level ASC";
     } else {
         // 否则，只按難度降序排序
-        $sql = 'SELECT * FROM cake ORDER BY level DESC';
+        $sql = "SELECT * FROM cake where and remove = '0' ORDER BY level DESC";
     }
 } else if ($sortType === 'levelDesc') {
     if ($kind !== '' ) {
         // 如果种类参数不为空，则按种类和難度降序排序
-        $sql = "SELECT * FROM cake WHERE kind = ? ORDER BY level DESC";
+        $sql = "SELECT * FROM cake WHERE kind = ? and remove = '0' ORDER BY level DESC";
     } else {
         // 否则，只按難度降序排序
-        $sql = 'SELECT * FROM cake ORDER BY level ASC';
+        $sql = "SELECT * FROM cake and remove = '0' ORDER BY level ASC";
     }
 } else {
     // 默认按价格升序排序
-    $sql = 'SELECT * FROM cake ORDER BY price ASC';
+    $sql = "SELECT * FROM cake where and remove = '0' ORDER BY price ASC";
 }
 
 // 參數綁定

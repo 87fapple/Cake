@@ -136,7 +136,10 @@ $result = $stmt->get_result();
                         <td>' . $row['uName'] . '</td>
                         <td>' . $row['email'] . '</td>
                         <td>' . $row['phone'] . '</td>
-                        <td align="right"><a>修改資料</a></td>
+                        <td align="right" ><a href="change_member.php?uid='.$row['uid'] .'">修改資料</a>
+                        <a style="background-color:red;color:white" 
+                            >刪除</a>
+                        </td>
                         </tr>';
                     }
                 ?>
