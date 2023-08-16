@@ -43,7 +43,7 @@
         border: 1px solid #ffcb53;
     }
 
-    .order-table {
+    .main_table {
         border-collapse: collapse;
         margin: 12px 5% 80px;
         font-size: 14px;
@@ -54,41 +54,41 @@
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     }
 
-    .order-table thead tr {
+    .main_table thead tr {
         background-color: #885500;
         color: #ffffff;
         font-size: 16px;
         text-align: left;
     }
 
-    .order-table th,
-    .order-table td {
+    .main_table th,
+    .main_table td {
         padding: 12px 15px;
     }
 
-    .order-table tbody tr {
+    .main_table tbody tr {
         border-bottom: 1px solid #dddddd;
     }
 
-    .order-table tbody tr:nth-of-type(even) {
+    .main_table tbody tr:nth-of-type(even) {
         background-color: #f3f3f3;
     }
 
-    .order-table tbody tr:last-of-type {
+    .main_table tbody tr:last-of-type {
         border-bottom: 2px solid #ffa237;
     }
 
-    .order-table tbody tr.active-row {
+    .main_table tbody tr.active-row {
         font-weight: bold;
         color: #009879;
     }
 
-    .order-table tbody tr:hover {
+    .main_table tbody tr:hover {
         background-color: #e8e8e8;
         cursor: pointer;
     }
 
-    .order-table tbody tr td a {
+    .main_table tbody tr td a {
         background-color: #ffa237;
         border: 1px solid #ffa237;
         border-radius: 6px;
@@ -97,13 +97,13 @@
         padding: 4px 12px;
     }
 
-    .order-table tbody tr td a:hover {
+    .main_table tbody tr td a:hover {
         background-color: #ffcb53;
         border: 1px solid #ffcb53;
         cursor: pointer;
     }
 
-    .order-table tbody tr td a:last-child {
+    .main_table tbody tr td a:last-child {
         margin-left: 8px;
     }
 </style>
@@ -122,12 +122,10 @@ $result = $stmt->get_result();
 <body>
     <div class="container">
         <div class="title">
-            <h2>
-                <center />產品總覽
-            </h2>
+            <h2>產品總覽</h2>
             <a href="add_product.php">新增品項</a>
         </div>
-        <table class="order-table">
+        <table class="main_table">
             <thead>
                 <tr>
                     <th />編號

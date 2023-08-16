@@ -1,7 +1,7 @@
 <?php session_start(); ?>
 <?php
 
-session_destroy();
+// session_destroy();
 setcookie('oToken', '',time() -1, "/");
 
 // if (!$_COOKIE["oToken"]) {
