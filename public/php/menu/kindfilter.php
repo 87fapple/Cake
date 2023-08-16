@@ -3,12 +3,13 @@ require_once('../db2.php');
 
 // 获取从前端传递过来的查询种类参数
 $kind = $_REQUEST['kind'];
+$remove = $_REQUEST['remove'];
 
 $sql = '';
 if($kind == '') {
-    $sql = "SELECT * FROM cake";
+    $sql = "SELECT * FROM cake where remove = '0'";
 } else {
-    $sql = "SELECT * FROM cake WHERE kind = ?";
+    $sql = "SELECT * FROM cake WHERE kind = ? and remove = '0'";
 }
 
 $stmt = $mysqli->prepare($sql);
