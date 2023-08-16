@@ -37,7 +37,7 @@ if (isset($_GET['checkedoToken'])) {
     }, [$checkoToken]);
 }
 
-var_dump($oInfo);
+// var_dump($oInfo);
 ?>
 
 <!DOCTYPE html>
@@ -70,30 +70,36 @@ var_dump($oInfo);
             let currentDivIndex = 0;
 
             var people = $("#people").val();
+
             <?php if (isset($oInfo) && !empty($oInfo)) { ?>
-                const cInfoMNum = <?= $cInfo[0]["people"] - $cInfo[0]["companion"] ?>;
+                let cInfoMNum = <?= $cInfo[0]["people"] - $cInfo[0]["companion"]; ?>;
+                if (cInfoMNum <= 0) {
+                    cInfoMNum = 1;
+                }
                 var view1 = `<option value=${cInfoMNum} style="display: none;">${cInfoMNum}份</option>`;
                 $("#hidden").show();
             <?php } else { ?>
-                var view1 = '<option style="display: none;">請選擇製作份數</option>';
+                            var view1 = '<option style="display: none;">請選擇製作份數</option>';
             <?php } ?>
+            $("#companion").val(people - mNum);
+
             var numList = [];
-        for (var i = Math.round(people / 2); i <= people; i++) {
-            view1 += `
-                            <option value=${i}>${i}份</option>
-                        `;
-        }
+            for (var i = Math.round(people / 2); i <= people; i++) {
+                view1 += `
+                        <option value=${i}>${i}份</option>
+                            `;
+            }
         document.getElementById("makeNum").innerHTML = view1;
 
         var mNum = $("#makeNum option:selected").val();
             <?php if (isset($oInfo) && !empty($oInfo)) { ?>
-                var optionsCid = <?php echo json_encode(array_column($oInfo, 'cid')); ?>;
+                            var optionsCid = <?php echo json_encode(array_column($oInfo, 'cid')); ?>;
                 var optionsName = <?php echo json_encode(array_column($oInfo, 'cName')); ?>;
                 var optionsNum = <?php echo json_encode(array_column($oInfo, 'num')); ?>;
 
                 let viewBaseC = `<option style="display: none;" value="${optionsCid[0]}">${optionsName[0]}</option>
-                                    <optgroup label="蛋糕" id="cake">
-                                    <optgroup label="點心" id="dessert">`;
+                                                <optgroup label="蛋糕" id="cake">
+                                                <optgroup label="點心" id="dessert">`;
                 let viewBaseN = `<option style="display: none;" value="${optionsNum[0]}">${optionsNum[0]}份</option>`;
                 let view4 = '';
                 $("#addnewdiv").hide();
@@ -104,41 +110,41 @@ var_dump($oInfo);
                         optionsName[a] = '';
                     }
                     view4 += `
-                            <div id="newbase">
-                                <div id="newdiv${a}" class="newdivArea">
-                                    <label for="newCakeName${a}">選擇產品</label>
-                                        <select id="newCakeName${a}" name="newCakeName${a}" class="newSelect">
-                                        <?php if (isset($oInfo) && !empty($oInfo)) { ?>
-                                                <option style="display: none;" value="${optionsCid[a]}">${optionsName[a]}</option>
-                                        <?php } else { ?>
-                                                <option style="display: none;" value="">請選擇產品</option>
-                                        <?php } ?>
-                                            <optgroup label="蛋糕" id="newCake${a}">
-                                            <optgroup label="點心" id="newDessert${a}">
-                                        </select>
-                                        <br>
-                                    <label for="newNum${a}">選擇份數</label>
-                                        <select id="newNum${a}" name="newNum${a}" class="newSelect"></select>
-                                        <br>
-                                        <input type="button" id="hideNewDiv${a}" value="移除" onClick="hideNewDivs(${a})" class="removeBtn"/>
-                                </div>
-                            </div>
-                            `;
+                                        <div id="newbase">
+                                            <div id="newdiv${a}" class="newdivArea">
+                                                <label for="newCakeName${a}">選擇產品</label>
+                                                    <select id="newCakeName${a}" name="newCakeName${a}" class="newSelect">
+                                                    <?php if (isset($oInfo) && !empty($oInfo)) { ?>
+                                                                        <option style="display: none;" value="${optionsCid[a]}">${optionsName[a]}</option>
+                                                    <?php } else { ?>
+                                                                        <option style="display: none;" value="">請選擇產品</option>
+                                                    <?php } ?>
+                                                        <optgroup label="蛋糕" id="newCake${a}">
+                                                        <optgroup label="點心" id="newDessert${a}">
+                                                    </select>
+                                                    <br>
+                                                <label for="newNum${a}">選擇份數</label>
+                                                    <select id="newNum${a}" name="newNum${a}" class="newSelect"></select>
+                                                    <br>
+                                                    <input type="button" id="hideNewDiv${a}" value="移除" onClick="hideNewDivs(${a})" class="removeBtn"/>
+                                            </div>
+                                        </div>
+                                        `;
                 }
                 $("#newChoose").html(view4);
                 $("#companion").val(people - mNum);
             <?php } else { ?>
                 let viewBaseC = `<option style="display: none;" value="">請選擇產品</option>
-                                    <optgroup label="蛋糕" id="cake">
-                                    <optgroup label="點心" id="dessert">`;
+                                                <optgroup label="蛋糕" id="cake">
+                                                <optgroup label="點心" id="dessert">`;
                 let viewBaseN = `<option style="display: none;" value="">請選擇數量</option>`;
             <?php } ?>
             // console.log(viewBaseC, viewBaseN);
             document.getElementById("cakeName").innerHTML = viewBaseC;
-            document.getElementById("num").innerHTML = viewBaseN;
+        document.getElementById("num").innerHTML = viewBaseN;
 
             <?php if (isset($oInfo) && !empty($oInfo)) { ?>
-                for (let i = 1; i < mNum ; i++) {
+                            for (let i = 1; i < mNum; i++) {
                     universalNums(i);
                 }
             <?php } ?>
@@ -154,21 +160,21 @@ var_dump($oInfo);
                 for (let a = 1; a < mNum; a++) {
 
                 <?php if (isset($oInfo) && !empty($oInfo)) { ?>
-                        if (typeof (optionsName[a], optionsCid[a]) === 'undefined') {
+                                    if (typeof (optionsName[a], optionsCid[a]) === 'undefined') {
                                 optionsCid[a] = '';
                                 optionsName[a] = '';
                             }
                 <?php } ?>
 
-                    view4 += `
+                        view4 += `
                     <div id="newbase">
                         <div id="newdiv${a}" style="display:none" class="newdivArea">
                             <label for="newCakeName${a}">選擇產品</label>
                                 <select id="newCakeName${a}" name="newCakeName${a}" class="newSelect">
                                 <?php if (isset($oInfo) && !empty($oInfo)) { ?>
-                                        <option style="display: none;" value="${optionsCid[a]}">${optionsName[a]}</option>
+                                                    <option style="display: none;" value="${optionsCid[a]}">${optionsName[a]}</option>
                                 <?php } else { ?>
-                                        <option style="display: none;" value="">請選擇產品</option>
+                                                    <option style="display: none;" value="">請選擇產品</option>
                                 <?php } ?>
                                     <optgroup label="蛋糕" id="newCake${a}">
                                     <optgroup label="點心" id="newDessert${a}">
@@ -216,7 +222,7 @@ var_dump($oInfo);
         function nextNewNumber() {
             var mNum = parseInt($("#makeNum option:selected").val(), 10);
             const newDivs = $("[id^='newdiv']");
-            
+
             // console.log(currentDivIndex,mNum);
             if (currentDivIndex < mNum) {
                 $(newDivs[currentDivIndex]).show();
@@ -306,14 +312,14 @@ var_dump($oInfo);
                 view2 += `
                         <option value=${i}>${i}份</option>
                     `;
-                }
+            }
 
             const numElement = document.getElementById("num");
             if (numElement) {
                 numElement.innerHTML = viewB;
             }
 
-            if(e !== 0){
+            if (e !== 0) {
                 const newNumElement = document.getElementById("newNum" + e);
                 newNumElement.innerHTML = view2;
             }
