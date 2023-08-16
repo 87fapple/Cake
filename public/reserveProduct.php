@@ -78,10 +78,10 @@ if (isset($_GET['checkedoToken'])) {
                 }
                 var view1 = `<option value=${cInfoMNum} style="display: none;">${cInfoMNum}份</option>`;
                 $("#hidden").show();
+                $("#companion").val(people - mNum);
             <?php } else { ?>
                             var view1 = '<option style="display: none;">請選擇製作份數</option>';
             <?php } ?>
-            $("#companion").val(people - mNum);
 
             var numList = [];
             for (var i = Math.round(people / 2); i <= people; i++) {

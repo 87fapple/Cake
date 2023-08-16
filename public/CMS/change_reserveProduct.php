@@ -57,7 +57,10 @@ if (isset($_GET['checkedoToken'])) {
 
         var people = $("#people").val();
         <?php if (isset($oInfo) && !empty($oInfo)) { ?>
-            const cInfoMNum = <?= $cInfo[0]["people"] - $cInfo[0]["companion"] ?>;
+            let cInfoMNum = <?= $cInfo[0]["people"] - $cInfo[0]["companion"] ?>;
+            if (cInfoMNum <= 0) {
+                    cInfoMNum = 1;
+                }
             var view1 = `<option value=${cInfoMNum} style="display: none;">${cInfoMNum}份</option>`;
             $("#hidden").show();
         <?php } else { ?>
