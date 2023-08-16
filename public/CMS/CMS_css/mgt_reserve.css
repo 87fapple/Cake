@@ -1,0 +1,203 @@
+/* * {
+    box-sizing: border-box;
+} */
+
+input[type=text],
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+/* .container {
+    border-radius: 20px;
+    background-color: #fff5d6c4;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    font-weight: bold;
+} */
+
+#timeselect {
+    display: flex;
+    width: 100%;
+}
+
+#datezone {
+    position: static;
+    margin-left: 5rem;
+}
+
+
+
+#timeselectzone {
+    width: 10rem;
+    position: relative;
+    margin-left: 5rem;
+    width: 100%;
+}
+
+
+
+#timeselectzone>button {
+    margin: 1rem;
+    width: 5rem;
+    height: 3rem;
+    font-size: large;
+
+}
+
+#submitBtn {
+    background-color: #ffb12b;
+    color: rgb(0, 0, 0);
+    font-size: large;
+    padding: 1rem;
+    margin-left: 25%;
+    margin-right: 25%;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    opacity: 0.9;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 20px;
+}
+
+.submitBtn:hover {
+    background-color: #ffea00;
+}
+
+.scd-container {
+    padding: 1rem;
+}
+
+
+/* 新增區段 */
+input[type="radio"] {
+    display: none;
+}
+
+
+.radio-button {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+
+    cursor: pointer;
+    margin: 10px;
+    background-color: #ffb12b;
+}
+
+.radio-button-base {
+    background-color: #ffb12b !important;
+    display: inline-block;
+    padding: 10px 20px;
+    color: #000000 !important;
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+
+    cursor: pointer;
+    margin: 10px;
+
+}
+
+
+input[type="radio"]:checked+span {
+    background-color: #ffea00 !important;
+}
+
+#checkLogin {
+    text-align: center;
+
+}
+
+
+/* reserveProduct版面 */
+.newdivArea {
+    margin: 5px;
+    width: 220px;
+    padding: 10px;
+}
+
+#newbase {
+    display: flex;
+}
+
+#newChoose {
+    display: flex;
+
+}
+
+#addnewdiv {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 10px;
+    background-color: #ffb12b;
+}
+
+#addnewdiv:hover {
+    background-color: #ffd52b;
+}
+
+input[type="button"]:checked {
+    background-color: #ffea00 !important;
+}
+
+#companion {
+    background-color: #cbcbcb5e;
+}
+
+.removeBtn {
+    background-color: #ffd52b;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 5px;
+    font-size: 0.9rem;
+}
+
+.removeBtn:hover {
+    background-color: rgb(255, 255, 81);
+}
+
+.newSelect {
+    width: 130px;
+}
+
+
+#submitBtn2 {
+    display: inline-block;
+    padding: 10px 20px;
+    width: 70%;
+    color: #000000;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px 6rem;
+    background-color: #ffb12b;
+    font-weight: bold;
+    font-size: larger;
+}
+
+#submitBtn2:hover {
+    background-color: #ffd52b;
+}
