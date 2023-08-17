@@ -40,12 +40,52 @@ for ($x = 0; $x < $makeNum; $x++) {
     }
 }
 
+$checkVal = [];
+$storeName = "";
+DB::select("select stc.cid, s.location from store s join orders o on o.sid = s.sid left join storetocake stc on stc.sid = s.sid where o.oid = ?", function ($rows) use (&$checkVal, &$storeName) {
+    // var_dump($rows);
+    $checkVal[] = $rows;
+    $storeName = $rows[0]['location'];
+}, [$oid]);
+
+$checkInfo = [];
+foreach ($checkVal[0] as $checkKey => $checkVal) {
+    $checkInfo[] = $checkVal["cid"];
+}
+
+$cakeInfo = [];
+DB::select("select cid, cName from cake", function ($rows) use (&$cakeInfo) {
+    $cakeInfo[] = $rows;
+});
+
+$getCKInfo = [];
+foreach ($cakeInfo[0] as $ckInfoKey => $ckInfoVal) {
+    $getCKInfo[$ckInfoVal["cid"]] = $ckInfoVal["cName"];
+}
+
+$notfound = [];
+foreach ($nameNumArr as $key => $value) {
+    if (!in_array($key, $checkInfo)) {
+        $notfound[] = $getCKInfo[$key];
+    }
+}
+
+if(!empty($notfound)){
+    $notfoundArray = implode('、', $notfound);
+    echo "<span style='color:blue;'>{$storeName}</span>不支持<span style='color:red;'>{$notfoundArray}</span>品項，請重新選擇其他支持品項，謝謝!";
+    die();
+}
+
 if ($checkNum > $makeNum) {
     echo ("選取品項總份數超過製作份數!!");
     die();
 } elseif ($checkNum < $makeNum) {
     $sceneNum = $makeNum - $checkNum;
-    $nameNumArr[0] = $sceneNum;
+    if (isset($nameNumArr[0])) {
+        $nameNumArr[0] += $sceneNum;
+    } else {
+        $nameNumArr[0] = $sceneNum;
+    }
 }
 
 DB::update("update orders set companion = ? where oid = ?", [$companion, $oid]);

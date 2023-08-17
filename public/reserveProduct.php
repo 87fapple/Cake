@@ -50,6 +50,7 @@ if (isset($_GET['checkedoToken'])) {
     <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
     <!-- <link rel="stylesheet" href="jqueryui/style.css"> -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <link rel="stylesheet" href="../resources/css/navbar.css">
     <link rel="stylesheet" href="../resources/css/reserve1.css">
@@ -80,26 +81,26 @@ if (isset($_GET['checkedoToken'])) {
                 $("#hidden").show();
                 $("#companion").val(people - mNum);
             <?php } else { ?>
-                            var view1 = '<option style="display: none;">請選擇製作份數</option>';
+                                            var view1 = '<option style="display: none;">請選擇製作份數</option>';
             <?php } ?>
 
             var numList = [];
-            for (var i = Math.round(people / 2); i <= people; i++) {
-                view1 += `
+        for (var i = Math.round(people / 2); i <= people; i++) {
+            view1 += `
                         <option value=${i}>${i}份</option>
                             `;
-            }
+        }
         document.getElementById("makeNum").innerHTML = view1;
 
         var mNum = $("#makeNum option:selected").val();
             <?php if (isset($oInfo) && !empty($oInfo)) { ?>
-                            var optionsCid = <?php echo json_encode(array_column($oInfo, 'cid')); ?>;
+                                            var optionsCid = <?php echo json_encode(array_column($oInfo, 'cid')); ?>;
                 var optionsName = <?php echo json_encode(array_column($oInfo, 'cName')); ?>;
                 var optionsNum = <?php echo json_encode(array_column($oInfo, 'num')); ?>;
 
                 let viewBaseC = `<option style="display: none;" value="${optionsCid[0]}">${optionsName[0]}</option>
-                                                <optgroup label="蛋糕" id="cake">
-                                                <optgroup label="點心" id="dessert">`;
+                                                                <optgroup label="蛋糕" id="cake">
+                                                                <optgroup label="點心" id="dessert">`;
                 let viewBaseN = `<option style="display: none;" value="${optionsNum[0]}">${optionsNum[0]}份</option>`;
                 let view4 = '';
                 $("#addnewdiv").hide();
@@ -110,33 +111,33 @@ if (isset($_GET['checkedoToken'])) {
                         optionsName[a] = '';
                     }
                     view4 += `
-                                        <div id="newbase">
-                                            <div id="newdiv${a}" class="newdivArea">
-                                                <label for="newCakeName${a}">選擇產品</label>
-                                                    <select id="newCakeName${a}" name="newCakeName${a}" class="newSelect">
-                                                    <?php if (isset($oInfo) && !empty($oInfo)) { ?>
-                                                                        <option style="display: none;" value="${optionsCid[a]}">${optionsName[a]}</option>
-                                                    <?php } else { ?>
-                                                                        <option style="display: none;" value="">請選擇產品</option>
-                                                    <?php } ?>
-                                                        <optgroup label="蛋糕" id="newCake${a}">
-                                                        <optgroup label="點心" id="newDessert${a}">
-                                                    </select>
-                                                    <br>
-                                                <label for="newNum${a}">選擇份數</label>
-                                                    <select id="newNum${a}" name="newNum${a}" class="newSelect"></select>
-                                                    <br>
-                                                    <input type="button" id="hideNewDiv${a}" value="移除" onClick="hideNewDivs(${a})" class="removeBtn"/>
-                                            </div>
-                                        </div>
-                                        `;
+                    <div id="newbase">
+                        <div id="newdiv${a}" class="newdivArea">
+                            <label for="newCakeName${a}">選擇產品</label>
+                                <select id="newCakeName${a}" name="newCakeName${a}" class="newSelect">
+                                <?php if (isset($oInfo) && !empty($oInfo)) { ?>
+                                                                    <option style="display: none;" value="${optionsCid[a]}">${optionsName[a]}</option>
+                                <?php } else { ?>
+                                                                    <option style="display: none;" value="">請選擇產品</option>
+                                <?php } ?>
+                                    <optgroup label="蛋糕" id="newCake${a}">
+                                    <optgroup label="點心" id="newDessert${a}">
+                                </select>
+                                <br>
+                            <label for="newNum${a}">選擇份數</label>
+                                <select id="newNum${a}" name="newNum${a}" class="newSelect"></select>
+                                <br>
+                                <input type="button" id="hideNewDiv${a}" value="移除" onClick="hideNewDivs(${a})" class="removeBtn"/>
+                        </div>
+                    </div>
+                    `;
                 }
                 $("#newChoose").html(view4);
                 $("#companion").val(people - mNum);
             <?php } else { ?>
                 let viewBaseC = `<option style="display: none;" value="">請選擇產品</option>
-                                                <optgroup label="蛋糕" id="cake">
-                                                <optgroup label="點心" id="dessert">`;
+                                    <optgroup label="蛋糕" id="cake">
+                                    <optgroup label="點心" id="dessert">`;
                 let viewBaseN = `<option style="display: none;" value="">請選擇數量</option>`;
             <?php } ?>
             // console.log(viewBaseC, viewBaseN);
@@ -144,7 +145,7 @@ if (isset($_GET['checkedoToken'])) {
         document.getElementById("num").innerHTML = viewBaseN;
 
             <?php if (isset($oInfo) && !empty($oInfo)) { ?>
-                            for (let i = 1; i < mNum; i++) {
+                                            for (let i = 1; i < mNum; i++) {
                     universalNums(i);
                 }
             <?php } ?>
@@ -160,7 +161,7 @@ if (isset($_GET['checkedoToken'])) {
                 for (let a = 1; a < mNum; a++) {
 
                 <?php if (isset($oInfo) && !empty($oInfo)) { ?>
-                                    if (typeof (optionsName[a], optionsCid[a]) === 'undefined') {
+                if (typeof (optionsName[a], optionsCid[a]) === 'undefined') {
                                 optionsCid[a] = '';
                                 optionsName[a] = '';
                             }
@@ -172,9 +173,9 @@ if (isset($_GET['checkedoToken'])) {
                             <label for="newCakeName${a}">選擇產品</label>
                                 <select id="newCakeName${a}" name="newCakeName${a}" class="newSelect">
                                 <?php if (isset($oInfo) && !empty($oInfo)) { ?>
-                                                    <option style="display: none;" value="${optionsCid[a]}">${optionsName[a]}</option>
+                                                                    <option style="display: none;" value="${optionsCid[a]}">${optionsName[a]}</option>
                                 <?php } else { ?>
-                                                    <option style="display: none;" value="">請選擇產品</option>
+                                                                    <option style="display: none;" value="">請選擇產品</option>
                                 <?php } ?>
                                     <optgroup label="蛋糕" id="newCake${a}">
                                     <optgroup label="點心" id="newDessert${a}">
@@ -360,6 +361,13 @@ if (isset($_GET['checkedoToken'])) {
                 const ckNum = $("#num option:selected").val();
 
                 const newDivs = $("[id^='newdiv']");
+
+                function error(data) {
+                    Swal.fire({
+                        icon: 'error',
+                        html: data,
+                    })
+                }
                 for (let i = 0; i < newDivs.length; i++) {
                     if (!$(newDivs[i]).is(':hidden')) {
                         const newCakeName = $(newDivs[i]).find("[id^='newCakeName']").val();
@@ -368,14 +376,16 @@ if (isset($_GET['checkedoToken'])) {
                         // console.log(newNum);
 
                         if (!newCakeName || !newNum) {
-                            alert("請選擇新建的產品和份數");
+                            data = "請選擇新建的產品和份數";
+                            error(data);
                             return;
                         }
                     }
                 }
 
                 if (!ckCakeName || !ckNum) {
-                    alert("請選擇產品和份數");
+                    data = "請選擇產品和份數";
+                    error(data);
                     return;
                 } else {
                     fetch('./php/reserve/insertOrdersCake.php', {
@@ -391,11 +401,7 @@ if (isset($_GET['checkedoToken'])) {
                                 $("#submitButton").disabled = true;
                                 location.href = data;
                             } else {
-                                let view = '';
-                                view += `
-                                    <div>${data}</div>
-                                `;
-                                document.getElementById("test").innerHTML = view
+                                error(data);
                             }
                         })
                 }
