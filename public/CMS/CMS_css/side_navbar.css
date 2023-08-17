@@ -49,24 +49,21 @@
 
  .sidebar ul li span {
    color: #eee;
+   vertical-align: bottom;
  }
 
- .sidebar ul li a {
+ .sidebar ul li .nav_a {
    color: #eee;
    display: inline-block;
    font-size: large;
    text-decoration: none;
  }
 
- .sidebar ul li a .fas {
-   width: 24px;
- }
-
  .sidebar ul li:hover {
    background-color: #ffa237;
  }
 
- .sidebar ul li:hover a {
+ .sidebar ul li:hover .nav_a {
    color: #111;
    text-decoration: underline;
    cursor: pointer;
