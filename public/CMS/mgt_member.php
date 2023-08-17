@@ -110,6 +110,29 @@ $result = $stmt->get_result();
         border: 1px solid #ffcb53;
         cursor: pointer;
     }
+
+    .arrow {
+        border: solid #eee;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        margin-bottom: 2px;
+        margin-left: 4px;
+        padding: 3px;
+    }
+
+    .arrUp {
+        transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+    }
+
+    .arrDown {
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+    }
+
+    .main_table thead tr th:hover{
+        cursor: pointer;
+    }
 </style>
 
 <body>
@@ -117,33 +140,103 @@ $result = $stmt->get_result();
         <div class="title">
             <h2>會員總覽</h2>
         </div>
-        <table class="main_table">
+        <table class="main_table" id="myTable">
             <thead>
-                <tr >
-                    <th />編號
-                    <th />名稱
-                    <th />信箱
-                    <th />電話
+                <tr>
+                    <th onclick="sortTable(0);sortBtn(this);">
+                        編號<span id="arror" class="arrow arrUp"></span>
+                    </th>
+                    <th onclick="sortTable(1);sortBtn(this);">
+                        名稱<span id="arror" class="arrow arrUp"></span>
+                    </th>
+                    <th onclick="sortTable(2);sortBtn(this);">
+                        信箱<span id="arror" class="arrow arrUp"></span>
+                    </th>
+                    <th onclick="sortTable(3);sortBtn(this);">
+                        電話<span id="arror" class="arrow arrUp"></span>
+                    </th>
                     <th />
                 </tr>
             </thead>
             <tbody>
                 <?php
-                    while ($row = $result->fetch_assoc()) {
-                        echo
-                        '<tr">
+                while ($row = $result->fetch_assoc()) {
+                    echo
+                    '<tr">
                         <td>' . $row['uid'] . '</td>
                         <td>' . $row['uName'] . '</td>
                         <td>' . $row['email'] . '</td>
                         <td>' . $row['phone'] . '</td>
-                        <td align="right" ><a href="change_member.php?uid='.$row['uid'] .'">修改資料</a>
+                        <td align="right" ><a href="change_member.php?uid=' . $row['uid'] . '">修改資料</a>
                         <a style="background-color:red;color:white" 
                             >刪除</a>
                         </td>
                         </tr>';
-                    }
+                }
                 ?>
             </tbody>
         </table>
     </div>
 </body>
+
+<script>
+    function sortTable(n) {
+        var table, rows, switching, arror, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("myTable");
+        switching = true;
+        // Set the sorting direction to ascending:
+        dir = "asc";
+        /* Make a loop that will continue until
+        no switching has been done: */
+        while (switching) {
+            // Start by saying: no switching is done:
+            switching = false;
+            rows = table.rows;
+            /* Loop through all table rows (except the
+            first, which contains table headers): */
+            for (i = 1; i < (rows.length - 1); i++) {
+                // Start by saying there should be no switching:
+                shouldSwitch = false;
+                /* Get the two elements you want to compare,
+                one from current row and one from the next: */
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                /* Check if the two rows should switch place,
+                based on the direction, asc or desc: */
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        // If so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        // If so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                /* If a switch has been marked, make the switch
+                and mark that a switch has been done: */
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+
+                // Each time a switch is done, increase this count by 1:
+                switchcount++;
+            } else {
+                /* If no switching has been done AND the direction is "asc",
+                set the direction to "desc" and run the while loop again. */
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+
+    function sortBtn(obj) {
+        obj.querySelector("span[id='arror']").classList.toggle("arrDown");
+    }
+</script>

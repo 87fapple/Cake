@@ -4,8 +4,9 @@
 <?php require_once(__DIR__ . '/head.php'); ?>
 <?php require_once(__DIR__ . '/navbar.php'); ?>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <style>
     .container {
@@ -106,6 +107,29 @@
     .main_table tbody tr td a:last-child {
         margin-left: 8px;
     }
+
+    .arrow {
+        border: solid #eee;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        margin-bottom: 2px;
+        margin-left: 4px;
+        padding: 3px;
+    }
+
+    .arrUp {
+        transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+    }
+
+    .arrDown {
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+    }
+
+    .main_table thead tr th:hover {
+        cursor: pointer;
+    }
 </style>
 
 <?php
@@ -125,29 +149,41 @@ $result = $stmt->get_result();
             <h2>產品總覽</h2>
             <a href="add_product.php">新增品項</a>
         </div>
-        <table class="main_table">
+        <table class="main_table" id="myTable">
             <thead>
                 <tr>
-                    <th />編號<input type="button" />
-                    <th />品名
-                    <th />種類
-                    <th />價格<input type="button" />
-                    <th />尺寸
-                    <th />難度<input type="button" />
-                    <th />
+                    <th onclick="sortTable(0);sortBtn(this);">
+                        編號<span id="arror" class="arrow arrUp"></span>
+                    </th>
+                    <th onclick="sortTable(1);sortBtn(this);">
+                        品名<span id="arror" class="arrow arrUp"></span>
+                    </th>
+                    <th onclick="sortTable(2);sortBtn(this);">
+                        價格<span id="arror" class="arrow arrUp"></span>
+                    </th>
+                    <th onclick="sortTable(3);sortBtn(this);">
+                        種類<span id="arror" class="arrow arrUp"></span>
+                    </th>
+                    <th onclick="sortTable(4);sortBtn(this);">
+                        尺吋<span id="arror" class="arrow arrUp"></span>
+                    </th>
+                    <th onclick="sortTable(5);sortBtn(this);">
+                        難度<span id="arror" class="arrow arrUp"></span>
+                    </th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 while ($row = $result->fetch_assoc()) {
                     if ($row['remove'] == 0) {
-                        $remove = '<a  onclick="remove('. $row['cid'].','.$row['remove'].')">上架中</a>';
+                        $remove = '<a onclick="remove(' . $row['cid'] . ',' . $row['remove'] . ')">上架中</a>';
                     } else {
-                        $remove = '<a style="background-color: #b3b3b3;" onclick="remove('. $row['cid'].','.$row['remove'].')">下架中</a>';
+                        $remove = '<a style="background-color: #b3b3b3;" onclick="remove(' . $row['cid'] . ',' . $row['remove'] . ')">下架中</a>';
                     }
                     echo
                     '<tr>
-                         <td />' . $row['cid'] .
+                    <td />' . $row['cid'] .
                         '<td />' . $row['cName'] .
                         '<td />' . $row['price'] .
                         '<td />' . $row['kind'] .
@@ -158,13 +194,14 @@ $result = $stmt->get_result();
                             ' . $remove . '
                             <a style="background-color:red;color:white" 
                             onclick="delet(' . $row['cid'] . ')">刪除</a>
-                    </tr>';
+                            </tr>';
                 }
                 ?>
             </tbody>
         </table>
     </div>
 </body>
+
 <script src="//unpkg.com/layui@2.7.6/dist/layui.js"></script>
 <script>
     function delet(cid) {
@@ -187,9 +224,70 @@ $result = $stmt->get_result();
         });
     }
 
-    function remove(cid,remove){
+    function remove(cid, remove) {
         this.cid = cid;
-        this.remove=remove;
-        location.replace("remove.php?cid="+cid+"&remove="+remove);
+        this.remove = remove;
+        location.replace("remove.php?cid=" + cid + "&remove=" + remove);
+    }
+
+    function sortTable(n) {
+        var table, rows, switching, arror, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("myTable");
+        switching = true;
+        // Set the sorting direction to ascending:
+        dir = "asc";
+        /* Make a loop that will continue until
+        no switching has been done: */
+        while (switching) {
+            // Start by saying: no switching is done:
+            switching = false;
+            rows = table.rows;
+            /* Loop through all table rows (except the
+            first, which contains table headers): */
+            for (i = 1; i < (rows.length - 1); i++) {
+                // Start by saying there should be no switching:
+                shouldSwitch = false;
+                /* Get the two elements you want to compare,
+                one from current row and one from the next: */
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                /* Check if the two rows should switch place,
+                based on the direction, asc or desc: */
+
+                if (dir == "asc") {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        // If so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else if (dir == "desc") {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        // If so, mark as a switch and break the loop:
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                /* If a switch has been marked, make the switch
+                and mark that a switch has been done: */
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+
+                // Each time a switch is done, increase this count by 1:
+                switchcount++;
+            } else {
+                /* If no switching has been done AND the direction is "asc",
+                set the direction to "desc" and run the while loop again. */
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+
+    function sortBtn(obj) {
+        obj.querySelector("span[id='arror']").classList.toggle("arrDown");
     }
 </script>
