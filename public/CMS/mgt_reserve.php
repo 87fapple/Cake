@@ -1,6 +1,7 @@
 <?php $title = 'CMS Reserve Management'; ?>
 <?php $metaTags = 'tag1 tag2'; ?>
 <?php $currentPage = '預約總覽'; ?>
+<?php $currentIcon = 'receipt_long'; ?>
 <?php require_once(__DIR__ . '/head.php'); ?>
 <?php require_once(__DIR__ . '/navbar.php'); ?>
 
@@ -128,7 +129,7 @@ $mysqli->close();
         <table class="main_table">
             <thead>
                 <tr>
-                    <th />訂單編號
+                    <th />編號
                     <th />預約人
                     <th />地點
                     <th />預約日期

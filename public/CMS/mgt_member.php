@@ -136,7 +136,7 @@ $result = $stmt->get_result();
                         <td>' . $row['uName'] . '</td>
                         <td>' . $row['email'] . '</td>
                         <td>' . $row['phone'] . '</td>
-                        <td align="right"><a>修改資料</a></td>
+                        <td align="right"><a>修改</a></td>
                         </tr>';
                     }
                 ?>

@@ -128,12 +128,12 @@ $result = $stmt->get_result();
         <table class="main_table">
             <thead>
                 <tr>
-                    <th />編號
+                    <th />編號<input type="button" />
                     <th />品名
                     <th />種類
-                    <th />價格
+                    <th />價格<input type="button" />
                     <th />尺寸
-                    <th />難度
+                    <th />難度<input type="button" />
                     <th />
                 </tr>
             </thead>
@@ -158,7 +158,7 @@ $result = $stmt->get_result();
                             ' . $remove . '
                             <a style="background-color:red;color:white" 
                             onclick="delet(' . $row['cid'] . ')">刪除</a>
-                        </tr>';
+                    </tr>';
                 }
                 ?>
             </tbody>
