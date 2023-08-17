@@ -46,8 +46,9 @@
                 
                 echo 
                     "<li>
+                        <a href='".$url."' class='nav_a'>
                         <span class='material-symbols-outlined'>".$icon."</span>
-                        <a href='".$url."' class='nav_a'>".$name."</a>
+                        ".$name."</a>
                     </li>";
             }
         ?>
