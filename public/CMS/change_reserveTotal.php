@@ -107,11 +107,11 @@ var_dump($oListInfo);
 
 <body>
     <div class="container box">
-        <h2>訂單已修改完成</h2>
+        <h2>預約已修改完成</h2>
         <div class="scd-container">
-            <p>訂單資訊</p>
+            <p>預約資訊</p>
             <hr>
-            <label for="name"><b>訂購人姓名：</b></label>
+            <label for="name"><b>預約人姓名：</b></label>
             <br>
             <input type="text" value="<?= $oInfo[0]["uName"] ?>" name="name" readonly="readonly" class="modal1">
             <br>

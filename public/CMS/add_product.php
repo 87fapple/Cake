@@ -272,7 +272,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.min.css
                         window.location = "mgt_product.php"
                     }).then(setTimeout(() => {
                         window.location = "mgt_product.php"
-                    }, 3000))
+                    }, 5000))
                 })
         // if(typeof(data) !== 'undefined'){
         //     reloadPage();

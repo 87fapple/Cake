@@ -136,7 +136,7 @@ $result = $stmt->get_result();
 </style>
 
 <body>
-    <div class="container">
+    <div class="container box">
         <div class="title">
             <h2>會員總覽</h2>
         </div>
@@ -167,7 +167,7 @@ $result = $stmt->get_result();
                         <td>' . $row['uName'] . '</td>
                         <td>' . $row['email'] . '</td>
                         <td>' . $row['phone'] . '</td>
-                        <td align="right" ><a href="change_member.php?uid=' . $row['uid'] . '">修改資料</a>
+                        <td align="right" ><a href="change_member.php?uid=' . $row['uid'] . '">修改</a>
                         <a style="background-color:red;color:white" 
                             >刪除</a>
                         </td>

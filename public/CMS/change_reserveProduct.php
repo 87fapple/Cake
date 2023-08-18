@@ -42,11 +42,10 @@ if (isset($_GET['checkedoToken'])) {
 <!-- <link rel="stylesheet" href="jqueryui/style.css"> -->
 <link rel="stylesheet" href="./CMS_css/mgt_reserve.css">
 
-<link rel="stylesheet" type="text/css"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
 <script>
-    $(function () {
+    $(function() {
         const cInfoSid = <?= $cInfo[0]["sid"] ?>;
         $("#hidden").hide();
         let data;
@@ -59,22 +58,22 @@ if (isset($_GET['checkedoToken'])) {
         <?php if (isset($oInfo) && !empty($oInfo)) { ?>
             let cInfoMNum = <?= $cInfo[0]["people"] - $cInfo[0]["companion"] ?>;
             if (cInfoMNum <= 0) {
-                    cInfoMNum = 1;
-                }
+                cInfoMNum = 1;
+            }
             var view1 = `<option value=${cInfoMNum} style="display: none;">${cInfoMNum}份</option>`;
             $("#hidden").show();
         <?php } else { ?>
             var view1 = '<option style="display: none;">請選擇製作份數</option>';
         <?php } ?>
         var numList = [];
-    for (var i = Math.round(people / 2); i <= people; i++) {
-        view1 += `
+        for (var i = Math.round(people / 2); i <= people; i++) {
+            view1 += `
                         <option value=${i}>${i}份</option>
                     `;
-    }
-    document.getElementById("makeNum").innerHTML = view1;
+        }
+        document.getElementById("makeNum").innerHTML = view1;
 
-    var mNum = $("#makeNum option:selected").val();
+        var mNum = $("#makeNum option:selected").val();
         <?php if (isset($oInfo) && !empty($oInfo)) { ?>
             var optionsCid = <?php echo json_encode(array_column($oInfo, 'cid')); ?>;
             var optionsName = <?php echo json_encode(array_column($oInfo, 'cName')); ?>;
@@ -88,7 +87,7 @@ if (isset($_GET['checkedoToken'])) {
             $("#addnewdiv").hide();
 
             for (let a = 1; a < mNum; a++) {
-                if (typeof (optionsName[a], optionsCid[a]) === 'undefined') {
+                if (typeof(optionsName[a], optionsCid[a]) === 'undefined') {
                     optionsCid[a] = '';
                     optionsName[a] = '';
                 }
@@ -127,12 +126,12 @@ if (isset($_GET['checkedoToken'])) {
         document.getElementById("num").innerHTML = viewBaseN;
 
         <?php if (isset($oInfo) && !empty($oInfo)) { ?>
-            for (let i = 1; i < mNum ; i++) {
+            for (let i = 1; i < mNum; i++) {
                 universalNums(i);
             }
         <?php } ?>
 
-        $("#makeNum").on('change', function (e) {
+        $("#makeNum").on('change', function(e) {
             let mNum = $("#makeNum option:selected").val();
             let people = $("#people").val();
             let view4 = '';
@@ -142,12 +141,12 @@ if (isset($_GET['checkedoToken'])) {
 
             for (let a = 1; a < mNum; a++) {
 
-            <?php if (isset($oInfo) && !empty($oInfo)) { ?>
-                    if (typeof (optionsName[a], optionsCid[a]) === 'undefined') {
-                            optionsCid[a] = '';
-                            optionsName[a] = '';
-                        }
-            <?php } ?>
+                <?php if (isset($oInfo) && !empty($oInfo)) { ?>
+                    if (typeof(optionsName[a], optionsCid[a]) === 'undefined') {
+                        optionsCid[a] = '';
+                        optionsName[a] = '';
+                    }
+                <?php } ?>
 
                 view4 += `
                 <div id="newbase">
@@ -189,97 +188,97 @@ if (isset($_GET['checkedoToken'])) {
             $("#hidden").show();
         })
 
-    fetch(`storeToCake_sql.php?indexInfo=${cInfoSid}`)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (responseData) {
-            data = responseData;
-            universalOptions();
-        })
+        fetch(`storeToCake_sql.php?indexInfo=${cInfoSid}`)
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(responseData) {
+                data = responseData;
+                universalOptions();
+            })
 
-    document.getElementById("addnewdiv").onclick = function (e) {
-        nextNewNumber();
-    }
-
-    function nextNewNumber() {
-        var mNum = parseInt($("#makeNum option:selected").val(), 10);
-        const newDivs = $("[id^='newdiv']");
-        
-        // console.log(currentDivIndex,mNum);
-        if (currentDivIndex < mNum) {
-            $(newDivs[currentDivIndex]).show();
-            currentDivIndex += 1;
-            universalOptions(currentDivIndex);
-            universalNums(currentDivIndex);
+        document.getElementById("addnewdiv").onclick = function(e) {
+            nextNewNumber();
         }
-        if (currentDivIndex == mNum - 1) {
-            $("#addnewdiv").hide();
-            currentDivIndex += 2;
-        } else if (currentDivIndex > mNum) {
-            let hideNewDivIndex = [];
-            for (let i = 0; i < mNum; i++) {
-                if ($(newDivs[i]).is(':hidden')) {
-                    hideNewDivIndex.push(i);
+
+        function nextNewNumber() {
+            var mNum = parseInt($("#makeNum option:selected").val(), 10);
+            const newDivs = $("[id^='newdiv']");
+
+            // console.log(currentDivIndex,mNum);
+            if (currentDivIndex < mNum) {
+                $(newDivs[currentDivIndex]).show();
+                currentDivIndex += 1;
+                universalOptions(currentDivIndex);
+                universalNums(currentDivIndex);
+            }
+            if (currentDivIndex == mNum - 1) {
+                $("#addnewdiv").hide();
+                currentDivIndex += 2;
+            } else if (currentDivIndex > mNum) {
+                let hideNewDivIndex = [];
+                for (let i = 0; i < mNum; i++) {
+                    if ($(newDivs[i]).is(':hidden')) {
+                        hideNewDivIndex.push(i);
+                    }
+                }
+                $(newDivs[hideNewDivIndex.shift()]).show();
+
+                if (hideNewDivIndex.length === 0) {
+                    $("#addnewdiv").hide();
                 }
             }
-            $(newDivs[hideNewDivIndex.shift()]).show();
-
-            if (hideNewDivIndex.length === 0) {
-                $("#addnewdiv").hide();
-            }
         }
-    }
 
-    function universalOptions() {
-        var mNum = $("#makeNum option:selected").val();
+        function universalOptions() {
+            var mNum = $("#makeNum option:selected").val();
 
-        let cakeView = '';
-        let dessertView = '';
+            let cakeView = '';
+            let dessertView = '';
 
-        data.forEach(function (e) {
-            switch (e.kind) {
-                case '蛋糕':
-                    cakeView += `
+            data.forEach(function(e) {
+                switch (e.kind) {
+                    case '蛋糕':
+                        cakeView += `
                             <option value="${e.cid}">${e.cName}</option>
                         `;
-                    break;
-                case '點心':
-                    dessertView += `
+                        break;
+                    case '點心':
+                        dessertView += `
                             <option value="${e.cid}">${e.cName}</option>
                         `;
-                    break;
-            }
-        });
+                        break;
+                }
+            });
 
-        function fillOptions(eleId, options) {
-            const element = document.getElementById(eleId);
-            if (element) {
-                element.innerHTML = options;
+            function fillOptions(eleId, options) {
+                const element = document.getElementById(eleId);
+                if (element) {
+                    element.innerHTML = options;
+                }
+            }
+
+            if (!nameFilled) {
+                fillOptions("cake", cakeView);
+                fillOptions("dessert", dessertView);
+                nameFilled = true;
+            }
+
+            if (!newNameFilled) {
+                for (let x = 0; x < mNum; x++) {
+                    fillOptions("newCake" + x, cakeView);
+                    fillOptions("newDessert" + x, dessertView);
+                    newNameFilled = true;
+                }
             }
         }
 
-        if (!nameFilled) {
-            fillOptions("cake", cakeView);
-            fillOptions("dessert", dessertView);
-            nameFilled = true;
-        }
-
-        if (!newNameFilled) {
-            for (let x = 0; x < mNum; x++) {
-                fillOptions("newCake" + x, cakeView);
-                fillOptions("newDessert" + x, dessertView);
-                newNameFilled = true;
-            }
-        }
-    }
-
-    function universalNums(e) {
-        var mNum = $("#makeNum option:selected").val();
+        function universalNums(e) {
+            var mNum = $("#makeNum option:selected").val();
 
             <?php if (isset($oInfo) && !empty($oInfo)) { ?>
                 let viewB = `<option style="display: none;" value="${optionsNum[0]}">${optionsNum[0]}份</option>`;
-                if (typeof (optionsNum[e]) === 'undefined') {
+                if (typeof(optionsNum[e]) === 'undefined') {
                     optionsNum[e] = "";
                 }
                 let view2 = `<option style="display: none;" value="${optionsNum[e]}">${optionsNum[e]}份</option>`;
@@ -289,24 +288,24 @@ if (isset($_GET['checkedoToken'])) {
             <?php } ?>
 
             for (let i = 1; i <= mNum; i++) {
-            viewB += `
+                viewB += `
                     <option value=${i}>${i}份</option>
                 `;
-            view2 += `
+                view2 += `
                     <option value=${i}>${i}份</option>
                 `;
             }
 
-        const numElement = document.getElementById("num");
-        if (numElement) {
-            numElement.innerHTML = viewB;
-        }
+            const numElement = document.getElementById("num");
+            if (numElement) {
+                numElement.innerHTML = viewB;
+            }
 
-        if(e !== 0){
-            const newNumElement = document.getElementById("newNum" + e);
-            newNumElement.innerHTML = view2;
+            if (e !== 0) {
+                const newNumElement = document.getElementById("newNum" + e);
+                newNumElement.innerHTML = view2;
+            }
         }
-    }
     });
 
     function hideNewDivs(num) {
@@ -314,10 +313,10 @@ if (isset($_GET['checkedoToken'])) {
         $("#addnewdiv").show();
     }
 
-    window.onload = function (e) {
+    window.onload = function(e) {
         let isSubmitting = false;
         const submitBtn = document.getElementById('submitBtn');
-        submitBtn.onclick = function (e) {
+        submitBtn.onclick = function(e) {
             e.preventDefault();
 
             if (isSubmitting) {
@@ -362,13 +361,13 @@ if (isset($_GET['checkedoToken'])) {
                 return;
             } else {
                 fetch('insertOrdersCake.php', {
-                    method: "POST",
-                    body: formData
-                })
-                    .then(function (response) {
+                        method: "POST",
+                        body: formData
+                    })
+                    .then(function(response) {
                         return response.text();
                     })
-                    .then(function (data) {
+                    .then(function(data) {
                         if (data == "change_reserveTotal.php") {
                             isSubmitting = true;
                             $("#submitButton").disabled = true;
@@ -410,7 +409,7 @@ if (isset($_GET['checkedoToken'])) {
 
 <body>
     <div class="container box">
-        <h2>修改會員訂單內容</h2>
+        <h2>修改會員預約內容</h2>
         <?php if (isset($oInfo)) { ?>
             <h3>重新選擇品項</h3>
         <?php } else { ?>
@@ -445,7 +444,7 @@ if (isset($_GET['checkedoToken'])) {
                     <div id="newChoose"></div>
 
                     <input type="button" id="addnewdiv" value="新增品項">
-                  
+
                     <?php if (isset($checkoToken)) { ?>
                         <input type="hidden" name="checkedoToken" value="<?= $checkoToken; ?>">
                     <?php } ?>
