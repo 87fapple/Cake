@@ -264,7 +264,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.7.22/dist/sweetalert2.min.css
                 .then(function (data) {
                     console.log(data);
                     Swal.fire({
-                        title: "修改成功",
+                        title: "新增成功",
                         text: "3秒後自動跳轉產品頁面",
                         icon: "success",
                         confirmButtonText: "回到上一頁",

@@ -153,7 +153,7 @@ $result = $stmt->get_result();
                         信箱<span id="arror" class="arrow arrUp"></span>
                     </th>
                     <th onclick="sortTable(3);sortBtn(this);">
-                        電話<span id="arror" class="arrow arrUp"></span>
+                        電話
                     </th>
                     <th />
                 </tr>
@@ -168,12 +168,12 @@ $result = $stmt->get_result();
                         <td>' . $row['email'] . '</td>
                         <td>' . $row['phone'] . '</td>
                         <td align="right" ><a href="change_member.php?uid=' . $row['uid'] . '">修改</a>
-                        <a style="background-color:red;color:white" 
-                            >刪除</a>
                         </td>
                         </tr>';
-                }
-                ?>
+                    }
+                    ?>
+                    <!-- <a style="background-color:red;color:white" 
+                        >刪除</a> -->
             </tbody>
         </table>
     </div>

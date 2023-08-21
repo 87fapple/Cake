@@ -192,10 +192,10 @@ $result = $stmt->get_result();
                         '<td align="right" width="100px" />
                             <a href="change_product.php?cid=' . $row['cid'] . '" )">修改</a>
                             ' . $remove . '
-                            <a style="background-color:red;color:white" 
-                            onclick="delet(' . $row['cid'] . ')">刪除</a>
                             </tr>';
-                }
+                        }
+                        // <a style="background-color:red;color:white" 
+                        // onclick="delet(' . $row['cid'] . ')">刪除</a>
                 ?>
             </tbody>
         </table>
